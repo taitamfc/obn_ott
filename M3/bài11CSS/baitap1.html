@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhúng CSS vào trang HTML</title>
+    <style>
+        /* Internal style */
+        .internal-style {
+            color: blue;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="external-style.css">
+</head>
+<body>
+    <h1 style="color: red;">Phần 1: Inline-style</h1>
+    <p style="color: green;">Đây là một đoạn văn bản với màu sắc thay đổi bằng inline-style.</p>
+
+    <h1 class="internal-style">Phần 2: Internal-style</h1>
+    <p class="internal-style">Đây là một đoạn văn bản với màu sắc thay đổi bằng internal-style.</p>
+
+    <h1 class="external-style">Phần 3: External-style</h1>
+    <p class="external-style">Đây là một đoạn văn bản với màu sắc thay đổi bằng external-style.</p>
+</body>
+</html>

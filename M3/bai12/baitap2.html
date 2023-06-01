@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trang web responsive</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .nav li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .sidebar {
+      background-color: #f2f2f2;
+      padding: 20px;
+      float: left;
+      width: 25%;
+    }
+    
+    .main {
+      background-color: #fff;
+      padding: 20px;
+      float: left;
+      width: 50%;
+    }
+    
+    .sidebar, .main {
+      margin-bottom: 20px;
+    }
+    
+    .footer {
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar, .main {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Header</h1>
+    </div>
+    
+    <div class="nav">
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+    
+    <div class="content">
+      <div class="sidebar">
+        <h3>Sidebar</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+      
+      <div class="main">
+        <h2>Main Content</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum, libero nec fermentum pulvinar, ligula lacus malesuada lectus, id volutpat orci urna non turpis. Nunc sagittis, metus sit amet semper tincidunt, metus turpis gravida erat, at eleifend justo lacus ut enim. Praesent porta purus sapien, ac commodo neque cursus id. Pellentesque a ultrices quam.</p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>Footer</p>
+    </div>
+  </div>
+</body>
+</html>

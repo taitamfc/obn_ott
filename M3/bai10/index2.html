@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="public/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="main-wrapper">
+        <!-- @include('includes.nav') -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="images/logo-text.png" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!-- END: @include('includes.nav') -->
+
+        <!-- @include('includes.header') -->
+        <div class="header">
+            <div class="header-content clearfix">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="images/user/1.png" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile   dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="app-profile.html"><i class="icon-user"></i>
+                                                <span>Profile</span></a>
+                                        </li>
+                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- END: @include('includes.header') -->
+
+        <!-- @include('includes.sidebar') -->
+        <div class="nk-sidebar">
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li>
+                        <a href="widgets.html" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-envelope menu-icon"></i>
+                            <span class="nav-text">Quản lý sản phẩm</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./them-moi.html">Thêm mới</a></li>
+                            <li><a href="#">Thùng rác</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END: @include('includes.sidebar') -->
+
+        <div class="content-body">
+            <!-- @yield('content') -->
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <h3 class="page-title text-uppercase">Quản lý sản phẩm</h3>
+                </div>
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-header">
+                                <form action="" method="get">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <a href="./them-moi.html" class="btn btn-primary"> Thêm mới </a>
+                                            <button type="button" class="btn btn-success "> Xuất execl </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="text" placeholder="Nhập ID" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" placeholder="Nhập tên" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col">
+                                            <select class="form-control form-control-sm">
+                                                <option value="">Tất cả danh mục</option>
+                                                <option value="">Cá</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-info"> Tìm </button>
+                                            <button type="button" class="btn btn-secondary "> Đặt lại </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Hình ảnh</th>
+                                                <th>Tên</th>
+                                                <th>Giá</th>
+                                                <th>Ngày cập nhật</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="py-1">
+                                                    <img src="assets/images/faces-clipart/pic-1.png"
+                                                        alt="image">
+                                                </td>
+                                                <td>Herman Beck</td>
+                                                
+                                                <td>$ 77.99</td>
+                                                <td>May 15, 2015</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info">Sửa</a>
+                                                    <button type="button" class="btn btn-danger"> Xóa </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1">
+                                                    <img src="assets/images/faces-clipart/pic-2.png"
+                                                        alt="image">
+                                                </td>
+                                                <td>Messsy Adam</td>
+                                                
+                                                <td>$245.30</td>
+                                                <td>July 1, 2015</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info">Sửa</a>
+                                                    <button type="button" class="btn btn-danger"> Xóa </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1">
+                                                    <img src="assets/images/faces-clipart/pic-3.png"
+                                                        alt="image">
+                                                </td>
+                                                <td>John Richards</td>
+                                                
+                                                <td>$138.00</td>
+                                                <td>Apr 12, 2015</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info">Sửa</a>
+                                                    <button type="button" class="btn btn-danger"> Xóa </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1">
+                                                    <img src="assets/images/faces-clipart/pic-4.png"
+                                                        alt="image">
+                                                </td>
+                                                <td>Peter Meggik</td>
+                                                
+                                                <td>$ 77.99</td>
+                                                <td>May 15, 2015</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info">Sửa</a>
+                                                    <button type="button" class="btn btn-danger"> Xóa </button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <nav class="float-right">
+                                    <ul class="pagination mb-0">
+                                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                  </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: @yield('content') -->
+        </div>
+
+        <!-- @include('includes.footer') -->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a>
+                    2018</p>
+            </div>
+        </div>
+        <!-- END: @include('includes.footer') -->
+    </div>
+
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+
+</body>
+
+</html>

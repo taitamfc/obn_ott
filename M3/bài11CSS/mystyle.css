@@ -1,0 +1,28 @@
+/* h1 {
+    color: navy;
+    margin-left: 20px;
+} */
+/* #first-heading {
+    color: red;
+    margin-left: 20px;
+}
+.second-heading{
+    color: blue;
+    margin-left: 20px;
+} */
+
+ul.a {
+    list-style-type: circle;
+}
+
+ ul.b {
+    list-style-type: square;
+}
+
+/* ol.c {
+    list-style-type: upper-roman;
+}
+
+ol.d {
+    list-style-type: lower-alpha;
+}  */
