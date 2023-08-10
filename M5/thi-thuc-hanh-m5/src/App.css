@@ -1,0 +1,163 @@
+/* App.css */
+/* ... (other styles) */
+
+.header {
+  background-color: #333;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.header a {
+  color: #fff;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  font-size: 14px; /* Reduce the font size of the links */
+}
+
+.header a.active {
+  background-color: #04AA6D;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+
+/* App.css */
+/* ... (other styles) */
+
+.create-button {
+  padding: 4px 8px;
+  border: none;
+  background-color: #04AA6D; /* Green color for Create button */
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.create-button:hover {
+  background-color: #045a3d;
+}
+
+.edit-button {
+  padding: 4px 8px;
+  border: none;
+  background-color: #2E86C1; /* Blue color for Edit button */
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+.edit-button:hover {
+  background-color: #1E638A;
+}
+
+.delete-button {
+  padding: 4px 8px;
+  border: none;
+  background-color: #E74C3C; /* Red color for Delete button */
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.delete-button:hover {
+  background-color: #942E23;
+}
+/* App.css */
+/* ... (other styles) */
+
+.show-button {
+  padding: 4px 8px;
+  border: none;
+  background-color: #FFA500; /* Orange color for Show button */
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.show-button:hover {
+  background-color: #D17E00;
+}
+/* BookDelete.css */
+
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.delete-btn {
+  background-color: #E74C3C;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #942E23;
+}
+
+.back-btn {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: #444;
+}
+/* BookShow.css */
+
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.book-detail {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.book-detail h1 {
+  margin-bottom: 20px;
+}
+
+.book-detail div {
+  margin-bottom: 10px;
+}
+
+.book-detail strong {
+  font-weight: bold;
+}
+
+.back-link {
+  display: block;
+  margin-top: 20px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.back-link:hover {
+  background-color: #f2f2f2;
+}
