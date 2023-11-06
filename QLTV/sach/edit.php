@@ -54,18 +54,36 @@
         header("Location: index.php");
     }
 
+
 ?>
+
+<?php include_once "../includes/header.php" ?>
+
 <div class="container-fluid px-4">
 <form action="" method="post">
-Tên Sách :<input type="text" name="tensach" value ="<?= $row['tensach'];?>"> <br>
-Tên Tác Giả :<input type="text" name="tentacgia" value ="<?= $row['tentacgia'];?>"> <br>
-Ngày Xuất Bản  :<input type="text" name="ngayxuatban" value ="<?= $row['ngayxuatban'];?>"> <br>
-<label  class="form-label">THELOAISACH</label>
+<label  class="form-label">Tên Sách</label>
+    <input type="text" class="form-control" name="tensach" value ="<?= $row['tensach'];?>">
+<br>
+    <label  class="form-label">Tên Tác Giả</label>
+    <input type="text" class="form-control" name="tentacgia" value ="<?= $row['tentacgia'];?>">
+    <br>
+
+    <label  class="form-label">Ngày Xuất Bản</label>
+    <input type="date" class="form-control" name="ngayxuatban" value ="<?= $row['ngayxuatban'];?>">
+<br>
+    <label  class="form-label">Thể Loại Sách</label>
     <select name="loaisach_id" class="form-control">
-    <?php foreach( $loai_sachs as $loai_sach ): ?>
-      <option value="<?php echo $loai_sach['id'];?>"><?php echo $loai_sach['tenloaisach'];?></option>
-      <?php endforeach; ?>
+    <?php foreach( $loai_sachs as $loai_sach ) {?>
+            <option <?=$loai_sach['id'] == $row['loaisach_id'] ? "selected" : " " ?> value="<?=$loai_sach['id'];?>"><?=$loai_sach['tenloaisach'];?></option>
+            <?php }; ?>
+ 
     </select>
-    <input type="submit" value="Thêm">
+    <br>
+
+    <button class="btn btn-success">Cập Nhật Thông Tin</button> 
 </form>
 </div>
+
+
+<?php include_once "../includes/footer.php" ?>
+
