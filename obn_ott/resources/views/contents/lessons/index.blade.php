@@ -1,11 +1,6 @@
 @extends('layouts.master')
 @section('content')
-
-
 <div class="main-content page-content">
-    <!--==================================*
-                   Main Section
-        *====================================-->
     <div class="main-content-inner" style="max-width: 100% !important;">
         <div class="row mb-4">
             <div class="col-md-12 grid-margin">
@@ -19,7 +14,6 @@
                         </div>
                     </div>
                     <div class="buttons">
-
                     </div>
                 </div>
             </div>

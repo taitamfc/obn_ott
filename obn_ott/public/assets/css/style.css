@@ -133,6 +133,46 @@ footer {
   display: block;
 }
 
+
+#grade .grade-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#grade .grade-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#grade ul li {
+    width: 100%;
+    background-color: var(--color-main);
+    padding: 10px 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px
+}
+
+#grade .grade-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#grade .grade-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#grade ul li {
+    width: 100%;
+    background-color: var(--color-main);
+    padding: 10px 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px
+}
 /* ============================ */
 /*            Preloader         */
 /* ============================ */

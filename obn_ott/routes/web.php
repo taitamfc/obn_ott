@@ -21,26 +21,26 @@ Route::get('/class', function () {
     return view('class.index');
 });
 
-Route::get('contents/setting/grades', function () {
-    return view('contents.setting.grade');
-});
-Route::get('contents/setting/subject', function () {
-    return view('contents.setting.subject');
-});
+// Route::get('contents/setting/grades', function () {
+//     return view('contents.setting.grade');
+// });
+// Route::get('contents/setting/subject', function () {
+//     return view('contents.setting.subject');
+// });
 Route::get('contents/setting/couse', function () {
     return view('contents.setting.couse');
 });
-Route::get('/lessons', function () {
-    return view('contents.lessonupload');
-});
+// Route::get('/lessons', function () {
+//     return view('contents.lessonupload');
+// });
 
 Route::get('/lessons/list', function () {
     return view('lessonlists.index');
 });
 
-Route::get('/stores/product', function () {
-    return view('stores.productmanagement');
-});
+// Route::get('/stores/product', function () {
+//     return view('stores.productmanagement');
+// });
 Route::get('/stores/subscription', function () {
     return view('stores.subscriptionmanagement');
 });
@@ -110,3 +110,10 @@ Route::get('/setting/refund-policy', function () {
 Route::get('/setting/FAQ', function () {
     return view('setting.pages.faq');
 });
+
+Route::post('/grades/position',[\App\Http\Controllers\GradeController::class,'position'])->name('grades.position');
+Route::post('/subjects/position',[\App\Http\Controllers\SubjectController::class,'position'])->name('subjects.position');
+Route::resource('stores',\App\Http\Controllers\StoreController::class);
+Route::resource('contents/setting/grades',\App\Http\Controllers\GradeController::class);
+Route::resource('contents/setting/subjects',\App\Http\Controllers\SubjectController::class);
+Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);

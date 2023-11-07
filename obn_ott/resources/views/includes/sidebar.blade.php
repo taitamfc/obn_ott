@@ -24,13 +24,13 @@
 
                             </a>
                             <ul>
-                                <li><a href="/contents/setting/grades">
+                                <li><a href="{{route('grades.index')}}">
                                         <i class="ion-ios-folder-outline"></i>
                                         <span>Grade</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/contents/setting/subject">
+                                    <a href="{{route('subjects.index')}}">
                                         <i class="ti-pencil-alt"></i>
                                         <span>Subject</span>
                                     </a>
@@ -44,7 +44,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/lessons">
+                            <a href="/contents/lessons">
                                 <i class="ti-pencil-alt"></i>
                                 <span>Lesson Upload</span>
                             </a>
@@ -65,7 +65,7 @@
                     </a>
 
                     <ul>
-                        <li> <a href="/stores/product">
+                        <li> <a href="/stores">
                                 <i class="feather ft-home"></i>
                                 <span>Product Management</span>
                             </a></li>
