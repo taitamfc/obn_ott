@@ -2,7 +2,7 @@
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
-        <div class="row mb-4">
+        <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">

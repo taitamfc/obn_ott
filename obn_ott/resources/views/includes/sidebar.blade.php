@@ -36,9 +36,9 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/contents/setting/couse">
+                                    <a href="{{ route('courses.index') }}">
                                         <i class="ti-pencil-alt"></i>
-                                        <span>Couse</span>
+                                        <span>Course</span>
                                     </a>
                                 </li>
                             </ul>
