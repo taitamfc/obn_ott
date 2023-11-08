@@ -85,10 +85,16 @@ class GradeController extends Controller
     {
         try {
             Grade::destroy($id);
-            return redirect()->route('grades.index')->with('success','Xóa course thành công');
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Deleted ' . $id
+            ],200);
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('grades.index')->with('error','Xóa course thất bại');
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Deleted not success ' . $id
+            ],200);
         }
     }
     function position(Request $request){

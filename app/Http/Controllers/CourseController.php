@@ -38,10 +38,16 @@ class CourseController extends Controller
     function destroy($id){
         try {
             Course::destroy($id);
-            return response()->json(['success'=>'delete success'],200);
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Deleted ' . $id
+            ],200);
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('courses.index')->with('error','Có lỗi xảy ra');
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Deleted not success ' . $id
+            ],200);
         }
     }
     function position(Request $request){

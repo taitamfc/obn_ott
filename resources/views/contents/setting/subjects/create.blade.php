@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type='submit'>Save changes</button>
+                        <button class="btn btn-primary" type='submit' id="saveButton">Save changes</button>
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                     </div>
                 </form>
