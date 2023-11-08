@@ -19,13 +19,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 stretched_card mt-mob-4">
+        <div class="col-sm-12 mt-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card_title">Course</h4>
                     <div class="single-table">
                         <div class="table-responsive">
-                            <table class="table table-striped text-center">
+                            <table class="table table-hover progress-table text-center">
                                 <thead class="text-uppercase">
                                     <tr>
                                         <th scope="col">COURSE</th>
@@ -34,34 +34,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($items as $item)
                                     <tr>
-                                        <td>3rd Grade Advanced Math</td>
-                                        <td>$120</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->price }}</td>
                                         <td>
                                             <button><i class="ti-pencil mr-1 btn btn-success"></i></button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>3rd Grade Advanced Math</td>
-                                        <td>$120</td>
-                                        <td>
-                                            <button><i class="ti-pencil mr-1 btn btn-success"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3rd Grade Advanced Math</td>
-                                        <td>$120</td>
-                                        <td>
-                                            <button><i class="ti-pencil mr-1 btn btn-success"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3rd Grade Advanced Math</td>
-                                        <td>$150</td>
-                                        <td>
-                                            <button><i class="ti-pencil mr-1 btn btn-success"></i></button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -41,17 +40,13 @@
         rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
-
 <body>
     <div id="page-container" class="light-sidebar">
         @include('includes.header')
         @include('includes.sidebar')
         @yield('content')
         @include('includes.footer')
-
     </div>
-
-   
     <!-- <script src="{{ asset('assets/vendors/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('assets/js/init/full-calendar.js') }}"></script>
@@ -76,7 +71,6 @@
     <!-- Slick Nav -->
     <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
     <!-- ========== This Page js ========== -->
-
     <!-- start amchart js -->
     <script src="{{ asset('assets/vendors/am-charts/js/ammap.js') }}"></script>
     <script src="{{ asset('assets/vendors/am-charts/js/worldLow.js') }}"></script>
@@ -84,33 +78,23 @@
     <script src="{{ asset('assets/vendors/am-charts/js/light.js') }}"></script>
     <!-- maps js -->
     <script src="{{ asset('assets/js/am-maps.js') }}"></script>
-
     <!--Float Js-->
     <script src="{{ asset('assets/vendors/charts/float-bundle/jquery.flot.js') }}"></script>
     <script src="{{ asset('assets/vendors/charts/float-bundle/jquery.flot.pie.js') }}"></script>
     <script src="{{ asset('assets/vendors/charts/float-bundle/jquery.flot.resize.js') }}"></script>
-
     <!--Chart Js-->
     <script src="{{ asset('assets/vendors/charts/charts-bundle/Chart.bundle.js') }}"></script>
-
     <!--Easy pie chart Js-->
     <script src="{{ asset('assets/vendors/charts/sparkline/easy-pie-chart.js') }}"></script>
-
     <!--Sparkline Js-->
     <script src="{{ asset('assets/vendors/charts/sparkline/sparklines.js') }}"></script>
-
     <!--Apex Chart-->
     <script src="{{ asset('assets/vendors/apex/js/apexcharts.min.js') }}"></script>
-
     <!--Home Script-->
     <script src="{{ asset('assets/js/home.js') }}"></script>
-
     <!-- ========== This Page js ========== -->
-
     <!-- Main Js -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('footer')
-
 </body>
-
 </html>
