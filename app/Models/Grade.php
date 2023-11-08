@@ -18,6 +18,9 @@ class Grade extends Model
         'img',
         'createt_at',
         'updated_at',
-        
     ];
+    public function lesson()
+    {
+        return $this->hasMany(Lesson::class, 'grade_id', 'id');
+    }
 }

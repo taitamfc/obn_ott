@@ -9,4 +9,8 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
+    public function lesson()
+    {
+        return $this->hasMany(Lesson::class, 'course_id', 'id');
+    }
 }
