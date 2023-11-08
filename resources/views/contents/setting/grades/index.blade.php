@@ -40,13 +40,14 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
-							<table class="table table-hover progress-table text-center ">
+							<table class="table table-hover progress-table text-left ">
 								<thead class="text-uppercase">
 									<tr>
 										<th scope="col">ID</th>
 										<th scope="col">Name</th>
+										<th scope="col">Image</th>
 										<th scope="col">Status</th>
-										<th scope="col">Action</th>
+										<th scope="col" class="text-center">Action</th>
 									</tr>
 								</thead>
 								<tbody class="sortable-table ">
@@ -54,11 +55,12 @@
 									<tr class="item draggable" id='item-{{ $item->id}}'>
 										<th scope="row">{{ $item->id }}</th>
 										<td>{{ $item->name }}</td>
-										<td>{{ $item->status }}</td>
+										<td>{!! $item->img_fm !!}</td>	
+										<td>{!! $item->status_fm !!}</td>
 										<td>
 											<ul class="d-flex justify-content-center">
 												<li class="mr-3">
-													<a href="#" class="text-primary">
+													<a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('grades.update',$item->id) }}" class="text-primary show-form-edit">
 														<i class="fa fa-edit"></i>
 													</a>
 												</li>
@@ -81,6 +83,7 @@
 			<!-- Progress Table end -->
 		</div>
 		@include('contents.setting.grades.create')
+		@include('contents.setting.grades.edit')
 	</div>
 </div>
 
@@ -105,7 +108,7 @@
 		});
 
 
-
+		// Xu ly xoa
 		jQuery(".delete-item").click(function (e) {
 			e.preventDefault();
 			var ele = $(this);
@@ -129,11 +132,11 @@
 			}
 		});
 
+		// Xu ly them moi
 		jQuery(".add-item").click(function (e) {
 			let formCreate = jQuery(this).closest('#formCreate');
 			formCreate.find('.input-error').empty();
-			var url = 'grades/';
-			e.preventDefault();
+			var url = formCreate.prop('action');
 			let formData = new FormData($('#formCreate')[0]);
 			jQuery.ajax({
 				headers: {
@@ -151,9 +154,83 @@
 							jQuery('.input-'+key).find('.input-error').html(res.errors[key][0]);
 						}
 					}
+					if(res.success){
+						window.location.reload();
+					}
+
 				}
 			});
 		});
+
+		// Xu ly them moi
+		jQuery(".edit-item").click(function (e) {
+			let formUpdate = jQuery(this).closest('#formUpdate');
+			formUpdate.find('.input-error').empty();
+			var url = formUpdate.prop('action');
+			let formData = new FormData($('#formUpdate')[0]);
+			jQuery.ajax({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				url: url,
+				type: "POST",
+				processData: false,
+				contentType: false,
+				data: formData,
+				success: function (res) {
+					if(res.has_errors) {
+						for (const key in res.errors) {
+							jQuery('.input-'+key).find('.input-error').html(res.errors[key][0]);
+						}
+					}
+					if(res.success){
+						window.location.reload();
+					}
+
+				}
+			});
+		});
+
+		// Xu ly form edit
+		jQuery('.show-form-edit').click(function(){
+			// alert(123)
+			// Hien thi modal
+			jQuery('#modalUpdate').modal('show');
+
+			let formUpdate = jQuery('#formUpdate');
+
+			// Lấy dữ liệu
+			let id = jQuery(this).data('id');
+			let action = jQuery(this).data('action');
+
+			var url = 'grades/'+id;
+			jQuery.ajax({
+				url: url,
+				type: "GET",
+				dataType:'json',
+				success: function (res) {
+					if(res.success){
+						let formData = res.data;
+
+						formUpdate.prop('action',action);
+
+						formUpdate.find('.input-id').val(formData.id);
+						formUpdate.find('.input-name input').val(formData.name);
+
+						if(formData.img){
+							formUpdate.find('.input-img').attr('src',formData.img);
+							formUpdate.find('.input-img').show();
+						}
+						formUpdate.find('.input-status input').prop('checked',false);
+						if(formData.status ){
+							formUpdate.find('.input-status .input-active').prop('checked',true);
+						}else{
+							formUpdate.find('.input-status .input-inactive').prop('checked',true);
+						}
+					}
+				}
+			});
+		})
 	});
 
 </script>

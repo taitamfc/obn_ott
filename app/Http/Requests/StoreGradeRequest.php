@@ -25,14 +25,12 @@ class StoreGradeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => 'required',
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'The name field is required',
-            'image.required' => 'The name image is required',
         ];
     }
 

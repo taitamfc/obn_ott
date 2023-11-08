@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateSubjectRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-
+use App\Http\Resources\SubjectResource;
 class SubjectController extends Controller
 {
     /**
@@ -33,11 +33,7 @@ class SubjectController extends Controller
     function store(StoreSubjectRequest $request){
         $item = new Subject();
         $item->name = $request->name;
-        if ($request->status == 'active') {
-            $item->status = 0;
-        }else {
-            $item->status = 1;
-        }
+        $item->status = $request->status;
         try {
             $fieldName = 'image';
             if ($request->hasFile($fieldName)) {
@@ -48,10 +44,17 @@ class SubjectController extends Controller
                 $item->img = $path.$new_name_img;
             } 
             $item->save();
-            return redirect()->route('subjects.index')->with('success','Thêm thành công');
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Saved ' . $item->id,
+                'data'=> $item
+            ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('subjects.index')->with('error','Có lỗi xảy ra');
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Save not success'
+            ],200);
         }
     }
 
@@ -60,7 +63,8 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $item = Subject::find($id);
+        return new SubjectResource($item);
     }
 
     /**
@@ -74,9 +78,33 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSubjectRequest $request, string $id)
     {
-        //
+        $item = Subject::find($id);
+        $item->name = $request->name;
+        $item->status = $request->status;
+        try {
+            $fieldName = 'image';
+            if ($request->hasFile($fieldName)) {
+                $get_img = $request->file($fieldName);
+                $path = 'storage/subjects/';
+                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
+                $get_img->move($path,$new_name_img);
+                $item->img = $path.$new_name_img;
+            } 
+            $item->save();
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Updated ' . $id,
+                'data'=> $item
+            ],200);
+        } catch (QueryException  $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Update not success ' . $id
+            ],200);
+        }
     }
 
     /**

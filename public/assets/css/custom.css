@@ -1,3 +1,6 @@
 .draggable {
     cursor: move;
 }
+.input-img {
+    width: 150px;
+}

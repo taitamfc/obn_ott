@@ -25,14 +25,14 @@
 						<label for="status" class="col-form-label">Status</label>
 						<div style="display: flex">
 							<div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
-								<input type="radio" checked="" id="active" name="status" class="custom-control-input"
-									value='active'>
-								<label class="custom-control-label" for="active">Active</label>
+								<input type="radio" checked id="c-active" name="status" class="custom-control-input"
+									value='1'>
+								<label class="custom-control-label" for="c-active">Active</label>
 							</div>
 							<div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
-								<input type="radio" checked="" id="inactive" name="status" class="custom-control-input"
-									value='inactive'>
-								<label class="custom-control-label" for="inactive">Inactive</label>
+								<input type="radio" id="c-inactive" name="status" class="custom-control-input"
+									value='0'>
+								<label class="custom-control-label" for="c-inactive">Inactive</label>
 							</div>
 						</div>
 					</div>
