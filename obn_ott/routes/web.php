@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CourseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,27 +20,13 @@ Route::get('/', function () {
 Route::get('/class', function () {
     return view('class.index');
 });
-
-// Route::get('contents/setting/grades', function () {
-//     return view('contents.setting.grade');
-// });
-// Route::get('contents/setting/subject', function () {
-//     return view('contents.setting.subject');
-// });
-Route::get('contents/setting/couse', function () {
-    return view('contents.setting.couse');
-});
-// Route::get('/lessons', function () {
-//     return view('contents.lessonupload');
-// });
+Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
+Route::resource('/courses',CourseController::class);
 
 Route::get('/lessons/list', function () {
     return view('lessonlists.index');
 });
 
-// Route::get('/stores/product', function () {
-//     return view('stores.productmanagement');
-// });
 Route::get('/stores/subscription', function () {
     return view('stores.subscriptionmanagement');
 });
