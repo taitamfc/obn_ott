@@ -20,15 +20,15 @@ class LessonController extends Controller
     use UploadFileTrait;
     public function index(Request $request)
     {
-        $items = Lesson::with('grade','course','subject')->orderBy('position','ASC')->paginate(5);
-        return view('lessonlists.index', compact('items'));
+        $items = Lesson::with('grade','course','subject')->paginate(10);
+        return view('lessons.index', compact('items'));
     }
     public function create()
     {
         $grades = Grade::all();
         $subjects = Subject::all();
         $courses = Course::all();
-        return view('contents.lessons.index',compact('grades','subjects','courses'));
+        return view('lessons.create',compact('grades','subjects','courses'));
     }
     public function store(StoreLessonRequest $request)
     {
@@ -38,6 +38,7 @@ class LessonController extends Controller
         $item->grade_id = $request->grade_id;
         $item->course_id = $request->course_id;
         $item->description = $request->description;
+        $item->status = $request->status;
         if (!empty(Auth::user())) {
             $item->user_id = Auth::user()->id;
         }
@@ -49,19 +50,86 @@ class LessonController extends Controller
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/lessons/image');
             } 
             $item->save();
-            $item->position = $item->id;
-            $item->save();
             return response([
                 'success' => true,
                 'message' => 'Create lesson success',
-                'data' => $item
+                'redirect' => route('lessons.index')
             ],200);
         } catch (QueryException $e) {
             Log::error($e->getMessage());
             return response([
                 'success' => false,
                 'message' => 'Create lesson fail',
-            ],404);
+            ],200);
+        }
+    }
+    function edit($id){
+        try{
+            $item = Lesson::findOrfail($id);
+            $grades = Grade::all();
+            $subjects = Subject::all();
+            $courses = Course::all();
+            return view('lessons.edit',compact('item','grades','subjects','courses'));
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => false,
+                'message' => 'Have problem, Try again late!',
+            ],200);
+        }
+    }
+    function update(UpdateLessonRequest $request,$id){
+        try {
+            $item = Lesson::findOrfail($id);
+            $item->name = $request->name;
+            $item->subject_id = $request->subject_id;
+            $item->grade_id = $request->grade_id;
+            $item->course_id = $request->course_id;
+            $item->description = $request->description;
+            $item->status = $request->status;
+            if (!empty(Auth::user())) {
+                $item->user_id = Auth::user()->id;
+            }
+            if ($request->hasFile('video')) {
+                $item->video_url = $this->uploadFile($request->file('video'), 'uploads/lessons/video');
+            }
+            if ($request->hasFile('image')) {
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/lessons/image');
+            } 
+            $item->save();
+            return response([
+                'success' => true,
+                'message' => 'Update lesson success',
+                'redirect' => route('lessons.index')
+            ],200);
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => false,
+                'message' => 'Have problem, Try again late!',
+            ],200);
+        }
+    }
+    function position(Request $request){
+        try {
+            foreach ($_REQUEST['item'] as $key => $value) {
+                $item = Lesson::findOrfail($value);
+                $item->position = $key;
+                $item->save();
+            }
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return redirect()->route('lessons.index')->with('error','Có lỗi xảy ra');
+        }
+    }
+    public function destroy(string $id)
+    {
+        try {
+            Lesson::destroy($id);
+            return redirect()->route('lessons.index')->with('success','Xóa lesson thành công');
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return redirect()->route('lessons.index')->with('error','Xóa lesson thất bại');
         }
     }
 }

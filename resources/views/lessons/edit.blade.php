@@ -33,9 +33,10 @@
             <div id="lesson">
                 <div class="card">
                     <div class="card-body">
-                        <form id="createLesson" action="{{ route('lessons.store') }}" method="post"
+                        <form id="updateLesson" action="{{ route('lessons.update',$item->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row p-3">
                                 <div class="col-sm-4 line border-right">
                                     <div class="lesson-header">
@@ -58,9 +59,10 @@
                                                 </a></li>
                                         </ul>
                                         <div class="button">
-                                            <a href="{{ route('lesson.index') }}"
+                                            <a href="{{ route('lessons.index') }}"
                                                 class="btn btn-secondary w-100 mb-2">Cancel</a>
-                                            <button type="button" class='btn btn-primary w-100 add-item'>Submit</button>
+                                            <button type="button"
+                                                class='btn btn-primary w-100 update-item'>Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +131,21 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="" class="col-form-label">Status
+                                                            <span>*</span></label>
+                                                        <div class="form-floating input-status">
+                                                            <select name="status" id="status" class="form-control">
+                                                                <option selected>Open this select status</option>
+                                                                <option value='0'>Active
+                                                                </option>
+                                                                <option value='1'>Inactive
+                                                                </option>
+                                                            </select>
+                                                            <div class="input-error text-danger">@error('status')
+                                                                {{ $message }} @enderror</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="" class="col-form-label">Description
                                                             <span>*</span></label>
                                                         <textarea name="description" id="description" cols="30" rows="5"
@@ -174,19 +191,17 @@
 
     </div>
 </div>
-</div>
-</div>
 @endsection
 
 @section('footer')
 <script>
 jQuery(document).ready(function() {
-    jQuery(".add-item").click(function(e) {
+    jQuery(".update-item").click(function(e) {
         e.preventDefault();
-        let formCreate = jQuery(this).closest('#createLesson');
-        formCreate.find('.input-error').empty();
-        var url = formCreate.prop('action');
-        let formData = new FormData($('#createLesson')[0]);
+        let formUpdate = jQuery(this).closest('#updateLesson');
+        formUpdate.find('.input-error').empty();
+        var url = formUpdate.prop('action');
+        let formData = new FormData($('#updateLesson')[0]);
         jQuery.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -203,8 +218,8 @@ jQuery(document).ready(function() {
                     jQuery('.input-' + key).find('.input-error').html(res.errors[key][0]);
                 }
             }
-            if (res.success) {
-                window.location.reload();
+            if (res.redirect) {
+                window.location.href = res.redirect;
             }
         });
     });

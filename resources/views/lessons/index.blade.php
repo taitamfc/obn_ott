@@ -1,4 +1,27 @@
 @extends('layouts.master')
+@section('header')
+<style>
+#grade .grade-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#grade .grade-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#grade ul li {
+    width: 100%;
+    background-color: var(--color-main);
+    padding: 10px 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px
+}
+</style>
+@endsection
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
@@ -19,45 +42,12 @@
                 </div>
             </div>
         </div>
-        <div class="" style="padding: 20px">
-            <style>
-            #grade .grade-header {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            #grade .grade-header {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            #grade ul li {
-                width: 100%;
-                background-color: var(--color-main);
-                padding: 10px 10px;
-                color: #fff;
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px
-            }
-
-            .item.dragging {
-                opacity: 0.6;
-            }
-
-            .item.dragging :where(input) {
-                opacity: 0;
-                transform: scale(1.05);
-            }
-            </style>
-        </div>
         <div id="grade">
             <div class="card">
                 <div class="card-body">
                     <div class="grade-header">
                         <button class="btn btn-primary">Course</button>
-                        <button data-toggle="modal" data-target="#create" class="btn  btn-primary">Create
-                            New</button>
+                        <a class="btn btn-primary" href="{{ route('lessons.create') }}">Create New</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +63,9 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">price</th>
+                                        <th scope="col">Grade</th>
+                                        <th scope="col">Subject</th>
+                                        <th scope="col">Course</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -83,12 +75,19 @@
                                     <tr class="item draggable" id='item-{{ $item->id}}'>
                                         <th scope="row">{{ $item->id }}</th>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->price }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        @php
+                                        $gradeName = isset($item->grade->name) ? $item->grade->name : '';
+                                        $subjectName = isset($item->subject->name) ? $item->subject->name : '';
+                                        $courseName = isset($item->course->name) ? $item->course->name : '';
+                                        @endphp
+                                        <td>{{ $gradeName }}</td>
+                                        <td>{{ $subjectName }}</td>
+                                        <td>{{ $courseName }}</td>
+                                        <td>{{ $item->statusDisplay() }}</td>
                                         <td>
                                             <ul class="d-flex justify-content-center">
                                                 <li class="mr-3">
-                                                    <a href="#" class="text-primary">
+                                                    <a href="{{ route('lessons.edit',$item->id) }}" class="text-primary upload-item">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 </li>
@@ -110,7 +109,6 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('contents.setting.subjects.create')
     </div>
 </div>
 
@@ -128,7 +126,7 @@ jQuery(function() {
                 },
                 data: data,
                 type: 'POST',
-                url: "{{ route('courses.position') }}"
+                url: "{{ route('lessons.position') }}"
             })
         }
     });
@@ -138,7 +136,7 @@ $(".delete-item").click(function(e) {
     var ele = $(this);
     var id = ele.data("id");
     if (confirm("Are you sure?")) {
-        var url = 'courses/' + id;
+        var url = 'lessons/' + id;
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -150,7 +148,7 @@ $(".delete-item").click(function(e) {
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
-                ele.closest('.item').remove(); // Xóa phần tử khỏi DOM
+                window.location.reload(); // Xóa phần tử khỏi DOM
             }
         });
     }

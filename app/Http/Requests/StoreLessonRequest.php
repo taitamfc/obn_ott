@@ -28,6 +28,7 @@ class StoreLessonRequest extends FormRequest
             'grade_id' => 'required|numeric',
             'subject_id' => 'required|numeric',
             'course_id' => 'required|numeric',
+            'status' => 'required|numeric',
             'video' => 'required',
         ];
     }
