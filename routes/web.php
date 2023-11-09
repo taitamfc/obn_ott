@@ -37,15 +37,15 @@ Route::get('/videos', function () {
     return view('videoadvertisements.index');
 });
 
-Route::get('/themes/banner', function () {
-    return view('themes.homepagebanner');
-});
-Route::get('/themes/sestion', function () {
-    return view('themes.homepagesections');
-});
-Route::get('/themes/setting', function () {
-    return view('themes.Settings');
-});
+// Route::get('/themes/banner', function () {
+//     return view('themes.homepagebanner');
+// });
+// Route::get('/themes/sestion', function () {
+//     return view('themes.homepagesections');
+// });
+// Route::get('/themes/setting', function () {
+//     return view('themes.Settings');
+// });
 
 Route::get('/reports/user', function () {
     return view('reports.user');
@@ -98,6 +98,8 @@ Route::get('/setting/refund-policy', function () {
 Route::get('/setting/FAQ', function () {
     return view('setting.pages.faq');
 });
+
+Route::resource('banners',\App\Http\Controllers\BannerController::class);
 
 Route::get('/login', function () {
     return view('includes.login');
