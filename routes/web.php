@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LessonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +24,6 @@ Route::get('/', function () {
 Route::get('/class', function () {
     return view('class.index');
 });
-Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
-Route::resource('/courses',CourseController::class);
 
 Route::get('/lessons/list', function () {
     return view('lessonlists.index');
@@ -100,7 +99,6 @@ Route::get('/setting/FAQ', function () {
     return view('setting.pages.faq');
 });
 
-
 Route::get('/login', function () {
     return view('includes.login');
 });
@@ -122,3 +120,11 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);
 });
 });
+// Course 
+Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
+Route::resource('/courses',CourseController::class);
+
+// Lesson
+Route::post('/lessons/position',[LessonController::class,'position'])->name('lessons.position');
+Route::resource('/lessons',LessonController::class);
+

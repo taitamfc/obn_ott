@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class StoreCourseRequest extends FormRequest
 {
     /**
@@ -23,8 +24,24 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => 'required',
-            'status' => 'required|numeric',
+            'price' => 'required',
         ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name field is required',
+            'price.required' => 'The price field is required',
+        ];
+    }
+
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'errors' => $validator->errors(),
+            'success' => false,
+            'has_errors' => true,
+        ], 200));
     }
 }

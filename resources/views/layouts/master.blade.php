@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -33,13 +34,16 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/vendors/data-table/css/responsive.jqueryui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.print.min.css') }}"
         media="print">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @yield('header')
 </head>
+
 <body>
     <div id="page-container" class="light-sidebar">
         @include('includes.header')
@@ -97,4 +101,5 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('footer')
 </body>
+
 </html>

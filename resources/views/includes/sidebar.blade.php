@@ -44,14 +44,14 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/contents/lessons">
+                            <a href="{{ route('lessons.create') }}">
                                 <i class="ti-pencil-alt"></i>
                                 <span>Lesson Upload</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li> <a href="/lessons/list">
+                <li> <a href="{{ route('lessons.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Lesson list</span>
                     </a>
