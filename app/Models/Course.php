@@ -13,6 +13,13 @@ class Course extends Model
     {
         return $this->hasMany(Lesson::class, 'course_id', 'id');
     }
+    function student(){
+        return $this->belongsToMany(Student::class);
+    }
+    public function student_course()
+    {
+        return $this->hasMany(StudentCourse::class, 'course_id', 'id');
+    }
     protected $fillable = [
         'name',
         'price',

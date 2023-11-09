@@ -118,12 +118,12 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('contents/setting/grades',\App\Http\Controllers\GradeController::class);
     Route::resource('contents/setting/subjects',\App\Http\Controllers\SubjectController::class);
     Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);
+    // Course 
+    Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
+    Route::resource('/courses',CourseController::class);
+    
+    // Lesson
+    Route::post('/lessons/position',[LessonController::class,'position'])->name('lessons.position');
+    Route::resource('/lessons',LessonController::class);
 });
 });
-// Course 
-Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
-Route::resource('/courses',CourseController::class);
-
-// Lesson
-Route::post('/lessons/position',[LessonController::class,'position'])->name('lessons.position');
-Route::resource('/lessons',LessonController::class);
