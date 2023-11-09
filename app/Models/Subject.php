@@ -19,9 +19,13 @@ class Subject extends Model
         'createt_at',
         'updated_at',
     ];
+    public function lesson()
+    {
+        return $this->hasMany(Lesson::class, 'subject_id', 'id');
+    }
     const ACTIVE = 1;
     const INACTIVE = 0;
-
+    
     // status_fm 
     function getStatusFmAttribute(){
         if($this->status == self::INACTIVE){
