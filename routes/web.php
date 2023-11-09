@@ -13,8 +13,11 @@ use App\Http\Controllers\CourseController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('homes.index');
+// });
 Route::get('/', function () {
-    return view('homes.index');
+    return view('includes.Login');
 });
 
 Route::get('/class', function () {
@@ -97,9 +100,25 @@ Route::get('/setting/FAQ', function () {
     return view('setting.pages.faq');
 });
 
-Route::post('/grades/position',[\App\Http\Controllers\GradeController::class,'position'])->name('grades.position');
-Route::post('/subjects/position',[\App\Http\Controllers\SubjectController::class,'position'])->name('subjects.position');
-Route::resource('stores',\App\Http\Controllers\StoreController::class);
-Route::resource('contents/setting/grades',\App\Http\Controllers\GradeController::class);
-Route::resource('contents/setting/subjects',\App\Http\Controllers\SubjectController::class);
-Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);
+
+Route::get('/login', function () {
+    return view('includes.login');
+});
+Route::get('/register', function () {
+    return view('includes.register');
+});
+Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
+Route::post('/potsLogin',[App\Http\Controllers\AuthController::class,'potsLogin'])->name('potsLogin');
+Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
+Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
+
+Route::group(['middleware' => 'preventhistory'],function(){
+Route::middleware(['auth'])->group(function(){
+    Route::post('/grades/position',[\App\Http\Controllers\GradeController::class,'position'])->name('grades.position');
+    Route::post('/subjects/position',[\App\Http\Controllers\SubjectController::class,'position'])->name('subjects.position');
+    Route::resource('stores',\App\Http\Controllers\StoreController::class);
+    Route::resource('contents/setting/grades',\App\Http\Controllers\GradeController::class);
+    Route::resource('contents/setting/subjects',\App\Http\Controllers\SubjectController::class);
+    Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);
+});
+});

@@ -226,7 +226,7 @@
                         </div>
                         <a class="dropdown-item" href="profile.html"><i class="ti-user"></i> Profile</a>
                         <span role="separator" class="divider"></span>
-                        <a class="dropdown-item" href="login.html"><i class="ti-power-off"></i>Logout</a>
+                        <a class="dropdown-item" href="/logout"><i class="ti-power-off"></i>Logout</a>
                     </div>
                 </div>
             </li>
