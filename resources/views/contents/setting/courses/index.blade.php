@@ -6,11 +6,11 @@
 			<div class="col-md-12 grid-margin">
 				<div class="d-flex justify-content-between flex-wrap">
 					<div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-						<h5 class="mr-4 mb-0 font-weight-bold">My Subject</h5>
+						<h5 class="mr-4 mb-0 font-weight-bold">My Course</h5>
 						<div class="d-flex align-items-baseline dashboard-breadcrumb">
 							<p class="text-muted mb-0 mr-1 hover-cursor">OTT</p>
 							<i class="mdi mdi-chevron-right mr-1 text-primary"></i>
-							<p class="text-muted mb-0 mr-1 hover-cursor">My Subject</p>
+							<p class="text-muted mb-0 mr-1 hover-cursor">My Course</p>
 						</div>
 					</div>
 					<div class="buttons">
@@ -25,7 +25,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="grade-header">
-							<button class="btn btn-primary float-left">Subject</button>
+							<button class="btn btn-primary float-left">Course</button>
 							<button data-toggle="modal" data-target="#modalCreate" class="btn  btn-primary float-right">Create
 								New</button>
 						</div>
@@ -46,6 +46,7 @@
 										<th scope="col">ID</th>
 										<th scope="col">Name</th>
 										<th scope="col">Image</th>
+										<th scope="col">Price</th>
 										<th scope="col">Status</th>
 										<th scope="col" class="text-center">Action</th>
 									</tr>
@@ -55,12 +56,13 @@
 									<tr class="item draggable" id='item-{{ $item->id}}'>
 										<th scope="row">{{ $item->id }}</th>
 										<td>{{ $item->name }}</td>
-                                        <td>{!! $item->img_fm !!}</td>	
+										<td>{!! $item->img_fm !!}</td>
+										<td>{{ $item->price }}</td>
 										<td>{!! $item->status_fm !!}</td>
 										<td>
 											<ul class="d-flex justify-content-center">
 												<li class="mr-3">
-													<a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('subjects.update',$item->id) }}" class="text-primary show-form-edit">
+													<a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('courses.update',$item->id) }}" class="text-primary show-form-edit">
 														<i class="fa fa-edit"></i>
 													</a>
 												</li>
@@ -82,8 +84,8 @@
 			</div>
 			<!-- Progress Table end -->
 		</div>
-		@include('contents.setting.subjects.create')
-		@include('contents.setting.subjects.edit')
+		@include('contents.setting.courses.create')
+		@include('contents.setting.courses.edit')
 	</div>
 </div>
 
@@ -102,7 +104,7 @@
 					},
 					data: data,
 					type: 'POST',
-					url: "{{ route('subjects.position') }}"
+					url: "{{ route('courses.position') }}"
 				})
 			}
 		});
@@ -114,7 +116,7 @@
 			var ele = $(this);
 			var id = ele.data("id");
 			if (confirm("Are you sure?")) {
-				var url = 'subjects/' + id;
+				var url = 'courses/' + id;
 				jQuery.ajax({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -203,7 +205,7 @@
 			let id = jQuery(this).data('id');
 			let action = jQuery(this).data('action');
 
-			var url = 'subjects/'+id;
+			var url = 'courses/'+id;
 			jQuery.ajax({
 				url: url,
 				type: "GET",
@@ -216,6 +218,7 @@
 
 						formUpdate.find('.input-id').val(formData.id);
 						formUpdate.find('.input-name input').val(formData.name);
+						formUpdate.find('.input-price input').val(formData.price);
 
 						if(formData.img){
 							formUpdate.find('.input-img').attr('src',formData.img);
