@@ -127,4 +127,3 @@ Route::resource('/courses',CourseController::class);
 // Lesson
 Route::post('/lessons/position',[LessonController::class,'position'])->name('lessons.position');
 Route::resource('/lessons',LessonController::class);
-
