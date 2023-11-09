@@ -102,7 +102,7 @@
                                 <i class="feather ft-home"></i>
                                 <span>Homepage Sections</span>
                             </a></li>
-                        <li> <a href="/themes/setting">
+                        <li> <a href="{{route('banners.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Settings</span>
                             </a></li>

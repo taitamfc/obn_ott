@@ -35,15 +35,15 @@ Route::get('/videos', function () {
     return view('videoadvertisements.index');
 });
 
-Route::get('/themes/banner', function () {
-    return view('themes.homepagebanner');
-});
-Route::get('/themes/sestion', function () {
-    return view('themes.homepagesections');
-});
-Route::get('/themes/setting', function () {
-    return view('themes.Settings');
-});
+// Route::get('/themes/banner', function () {
+//     return view('themes.homepagebanner');
+// });
+// Route::get('/themes/sestion', function () {
+//     return view('themes.homepagesections');
+// });
+// Route::get('/themes/setting', function () {
+//     return view('themes.Settings');
+// });
 
 Route::get('/reports/user', function () {
     return view('reports.user');
@@ -103,3 +103,4 @@ Route::resource('stores',\App\Http\Controllers\StoreController::class);
 Route::resource('contents/setting/grades',\App\Http\Controllers\GradeController::class);
 Route::resource('contents/setting/subjects',\App\Http\Controllers\SubjectController::class);
 Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);
+Route::resource('banners',\App\Http\Controllers\BannerController::class);

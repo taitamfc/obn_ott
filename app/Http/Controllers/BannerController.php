@@ -1,24 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Grade;
-use App\Http\Requests\StoreGradeRequest;
-use App\Http\Requests\UpdateGradeRequest;
+use App\Http\Resources\BannerResource;
+use App\Models\Banner;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Resources\GradeResource;
-class GradeController extends Controller
+use App\Http\Requests\StoreBannerRequest;
+use App\Http\Requests\UpdateBannerRequest;
+use App\Traits\UploadFileTrait;
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    use UploadFileTrait;
     function index(Request $request){
-        $items = Grade::orderBy('position','ASC')->get();
-        return view('contents.setting.grades.index',compact('items'));
+        $items = Banner::get();
+        return view('themes.banners.index',compact('items'));
     }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -30,20 +33,19 @@ class GradeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    function store(StoreGradeRequest $request){
-        $item = new Grade();
-        $item->name = $request->name;
+    function store(StoreBannerRequest $request){
+        $item = new Banner();
         $item->status = $request->status;
-       
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->link = $request->link;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/grades/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
+            if ($request->hasFile('image')) {
+                $item->img = $this->uploadFile($request->file('image'), 'banners/images');
             } 
+            if ($request->hasFile('video')) {
+                $item->video_url = $this->uploadFile($request->file('video'), 'banners/videos');
+            }
             $item->save();
             return response()->json([
                 'success'=>true,
@@ -58,15 +60,11 @@ class GradeController extends Controller
             ],200);
         }
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        $item = Grade::find($id);
-        return new GradeResource($item);
-
+        $item = Banner::find($id);
+       
+        return new BannerResource($item);
     }
 
     /**
@@ -80,20 +78,21 @@ class GradeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGradeRequest $request, string $id)
+    public function update(UpdateBannerRequest $request, string $id)
     {
-        $item = Grade::find($id);
+  
+        $item = Banner::find($id);
         $item->name = $request->name;
+        $item->description = $request->description;
         $item->status = $request->status;
+        $item->link = $request->link;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/grades/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
+            if ($request->hasFile('image')) {
+                $item->img = $this->uploadFile($request->file('image'), 'banners/images');
             } 
+            if ($request->hasFile('video')) {
+                $item->video_url = $this->uploadFile($request->file('video'), 'banners/videos');
+            }
             $item->save();
             return response()->json([
                 'success'=>true,
@@ -115,7 +114,7 @@ class GradeController extends Controller
     public function destroy(string $id)
     {
         try {
-            Grade::destroy($id);
+            Banner::destroy($id);
             return response()->json([
                 'success'=>true,
                 'message'=> 'Deleted ' . $id
@@ -126,18 +125,6 @@ class GradeController extends Controller
                 'success'=>false,
                 'message'=> 'Deleted not success ' . $id
             ],200);
-        }
-    }
-    function position(Request $request){
-        try {
-            foreach ($_REQUEST['item'] as $key => $value) {
-                $item = Grade::findOrfail($value);
-                $item->position = $key;
-                $item->save();
-            }
-        } catch (QueryException $e) {
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('grades.index')->with('error','Có lỗi xảy ra');
         }
     }
 }
