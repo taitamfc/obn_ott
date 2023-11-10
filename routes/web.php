@@ -109,7 +109,7 @@ Route::get('/register', function () {
     return view('includes.register');
 });
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
-Route::post('/potsLogin',[App\Http\Controllers\AuthController::class,'potsLogin'])->name('potsLogin');
+Route::post('/postLogin',[App\Http\Controllers\AuthController::class,'postLogin'])->name('postLogin');
 Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
 Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
 

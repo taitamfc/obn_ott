@@ -19,6 +19,7 @@ class Lesson extends Model
         'createt_at',
         'updated_at',
     ];
+    
     public function grade()
     {
         return $this->belongsTo(Grade::class, 'grade_id', 'id');
@@ -27,9 +28,8 @@ class Lesson extends Model
     {
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
-    public function course()
-    {
-        return $this->belongsTo(Course::class, 'course_id', 'id');
+    function course(){
+        return $this->belongsToMany(Course::class,'lesson_course','lesson_id','course_id');
     }
     public function user()
     {
@@ -38,6 +38,10 @@ class Lesson extends Model
     function lesson_student(){
         return $this->hasMany(LessonStudent::class,'lesson_id','id');
     }
+    function lesson_course(){
+        return $this->hasMany(LessonCourse::class,'lesson_id','id');
+    }
+
     function getImgFmAttribute()
     {  
         if ($this->image_url) {
