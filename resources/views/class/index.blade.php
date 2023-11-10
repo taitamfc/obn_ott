@@ -7,9 +7,6 @@ select.form-control:not([size]):not([multiple]) {
 </style>
 @endsection
 @section('content')
-{{  
-    dd($items);
-}}
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
         <div class="row mb-4">
@@ -73,14 +70,19 @@ select.form-control:not([size]):not([multiple]) {
                                         <table class="table table-hover progress-table text-left ">
                                             <thead class="text-uppercase">
                                                 <tr>
-                                                    <th scope="col">ID</th>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Course view count</th>
                                                     <th scope="col">Last view</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach($items as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->total_lessons }}</td>
+                                                    <td>{{ $item->last_view }}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

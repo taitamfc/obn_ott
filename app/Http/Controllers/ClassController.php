@@ -9,14 +9,16 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\LessonStudent;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
     function index(Request $request){
         $courses = Course::where('user_id',Auth::user()->id)->get();
-        $query = LessonStudent::with('student','lesson')->whereHas('course', function ($query){
-            $query->where('user_id', Auth::user()->id);
-        });
+        $query = DB::table('lesson_student')
+        ->join('students', 'students.id', '=', 'lesson_student.student_id')
+        ->select('students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
+        ->groupBy('students.name');
         if ($request->course) {
             $query->where('course_id',$request->course);
         }
