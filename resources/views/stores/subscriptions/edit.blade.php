@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-primary add-item" type='submit'>Save changes</button>
+                                <button class="btn btn-primary add-item" type='button'>Save changes</button>
                             </div>
                         </form>
                     </div>
@@ -143,20 +143,20 @@
 @section('footer')
 <script>
 jQuery(document).ready(function() {
-    // jQuery(".sortable-table").sortable({
-    // 	update: function (event, ui) {
-    // 		var data = $(this).sortable('serialize');
-    // 		// POST to server using $.post or $.ajax
-    // 		jQuery.ajax({
-    // 			headers: {
-    // 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    // 			},
-    // 			data: data,
-    // 			type: 'POST',
-    // 			url: ""
-    // 		})
-    // 	}
-    // });
+    jQuery(".sortable-table").sortable({
+    	update: function (event, ui) {
+    		var data = $(this).sortable('serialize');
+    		// POST to server using $.post or $.ajax
+    		jQuery.ajax({
+    			headers: {
+    				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    			},
+    			data: data,
+    			type: 'POST',
+    			url: ""
+    		})
+    	}
+    });
 
 
     // Xu ly xoa
