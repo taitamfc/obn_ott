@@ -30,9 +30,9 @@ Route::get('/lessons/list', function () {
     return view('lessonlists.index');
 });
 
-Route::get('/stores/subscription', function () {
-    return view('stores.subscriptionmanagement');
-});
+// Route::get('/stores/subscription', function () {
+//     return view('stores.subscriptionmanagement');
+// });
 
 Route::get('/videos', function () {
     return view('videoadvertisements.index');
@@ -133,3 +133,5 @@ Route::resource('/courses', CourseController::class);
 // Lesson
 Route::post('/lessons/position', [LessonController::class, 'position'])->name('lessons.position');
 Route::resource('/lessons', LessonController::class);
+
+Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionController::class);

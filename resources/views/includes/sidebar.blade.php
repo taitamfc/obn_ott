@@ -69,7 +69,7 @@
                                 <i class="feather ft-home"></i>
                                 <span>Product Management</span>
                             </a></li>
-                        <li> <a href="/stores/subscription">
+                        <li> <a href="/store/subscriptions">
                                 <i class="feather ft-home"></i>
                                 <span>Subscription Management</span>
                             </a></li>
