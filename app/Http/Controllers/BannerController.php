@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 use App\Traits\UploadFileTrait;
+use App\Models\Setting;
+
 class BannerController extends Controller
 {
     /**
@@ -18,7 +20,8 @@ class BannerController extends Controller
     use UploadFileTrait;
     function index(Request $request){
         $items = Banner::get();
-        return view('themes.banners.index',compact('items'));
+        $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
+        return view('themes.banners.index',compact('items','settings'));
     }
 
 
