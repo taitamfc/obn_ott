@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ClassController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,5 +126,9 @@ Route::middleware(['auth'])->group(function(){
     // Lesson
     Route::post('/lessons/position',[LessonController::class,'position'])->name('lessons.position');
     Route::resource('/lessons',LessonController::class);
+
+    //Class
+    Route::get('/classes/students',[ClassController::class,'students'])->name('classes.students');
+    Route::resource('/classes',ClassController::class);
 });
 });

@@ -17,4 +17,8 @@ class StudentCourse extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
+    function statusDisplay()
+    {  
+        return isset($this->student->status) ? ($this->student->status==0? '<span class="badge badge-warning">In Active</span>' : '<span class="badge badge-success">Active</span>' ) : '';
+    }
 }

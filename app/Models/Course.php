@@ -20,6 +20,9 @@ class Course extends Model
     {
         return $this->hasMany(StudentCourse::class, 'course_id', 'id');
     }
+    function lesson_student(){
+        return $this->hasMany(LessonStudent::class,'course_id','id');
+    }
     protected $fillable = [
         'name',
         'price',

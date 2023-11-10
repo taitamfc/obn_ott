@@ -35,6 +35,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    function lesson_student(){
+        return $this->hasMany(LessonStudent::class,'lesson_id','id');
+    }
     function getImgFmAttribute()
     {  
         if ($this->image_url) {
@@ -56,6 +59,6 @@ class Lesson extends Model
     }
     function statusDisplay()
     {  
-        return isset($this->status) ? ($this->status==0? 'Active' : 'Inactive' ) : '';
+        return isset($this->status) ? ($this->status==0? '<span class="badge badge-warning">In Active</span>' : '<span class="badge badge-success">Active</span>' ) : '';
     }
 }

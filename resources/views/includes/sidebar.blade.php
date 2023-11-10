@@ -53,7 +53,7 @@
                 </li>
                 <li> <a href="{{ route('lessons.index') }}">
                         <i class="feather ft-home"></i>
-                        <span>Lesson list</span>
+                        <span>Lesson List</span>
                     </a>
                 </li>
                 <li> <a href="/store">
@@ -75,7 +75,7 @@
                             </a></li>
                     </ul>
                 </li>
-                <li> <a href="/class">
+                <li> <a href="{{ route('classes.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Class</span>
                     </a>

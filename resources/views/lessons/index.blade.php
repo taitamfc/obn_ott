@@ -83,11 +83,12 @@
                                         <td>{{ $gradeName }}</td>
                                         <td>{{ $subjectName }}</td>
                                         <td>{{ $courseName }}</td>
-                                        <td>{{ $item->statusDisplay() }}</td>
+                                        <td>{!! $item->statusDisplay() !!}</td>
                                         <td>
                                             <ul class="d-flex justify-content-center">
                                                 <li class="mr-3">
-                                                    <a href="{{ route('lessons.edit',$item->id) }}" class="text-primary upload-item">
+                                                    <a href="{{ route('lessons.edit',$item->id) }}"
+                                                        class="text-primary upload-item">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 </li>
@@ -103,6 +104,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="pagination" style="float:right">
+                                {{ $items->appends(request()->query())->links('pagination::bootstrap-4') }}
+                            </div>
                         </div>
                     </div>
                 </div>
