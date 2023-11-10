@@ -38,15 +38,15 @@ Route::get('/videos', function () {
     return view('videoadvertisements.index');
 });
 
-Route::get('/themes/banner', function () {
-    return view('themes.homepagebanner');
-});
-Route::get('/themes/sestion', function () {
-    return view('themes.homepagesections');
-});
-Route::get('/themes/setting', function () {
-    return view('themes.Settings');
-});
+// Route::get('/themes/banner', function () {
+//     return view('themes.homepagebanner');
+// });
+// Route::get('/themes/sestion', function () {
+//     return view('themes.homepagesections');
+// });
+// Route::get('/themes/setting', function () {
+//     return view('themes.Settings');
+// });
 
 Route::get('/reports/user', function () {
     return view('reports.user');
@@ -100,6 +100,8 @@ Route::get('/setting/FAQ', function () {
     return view('setting.pages.faq');
 });
 
+
+
 Route::get('/login', function () {
     return view('includes.login');
 });
@@ -113,12 +115,15 @@ Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postReg
 
 Route::group(['middleware' => 'preventhistory'],function(){
 Route::middleware(['auth'])->group(function(){
-    Route::post('/grades/position',[\App\Http\Controllers\GradeController::class,'position'])->name('grades.position');
-    Route::post('/subjects/position',[\App\Http\Controllers\SubjectController::class,'position'])->name('subjects.position');
-    Route::resource('stores',\App\Http\Controllers\StoreController::class);
-    Route::resource('contents/setting/grades',\App\Http\Controllers\GradeController::class);
-    Route::resource('contents/setting/subjects',\App\Http\Controllers\SubjectController::class);
-    Route::resource('contents/lessons',\App\Http\Controllers\LessonController::class);
+    Route::post('/grades/position', [\App\Http\Controllers\GradeController::class, 'position'])->name('grades.position');
+    Route::post('/subjects/position', [\App\Http\Controllers\SubjectController::class, 'position'])->name('subjects.position');
+    Route::resource('stores', \App\Http\Controllers\StoreController::class);
+    Route::resource('contents/setting/grades', \App\Http\Controllers\GradeController::class);
+    Route::resource('contents/setting/subjects', \App\Http\Controllers\SubjectController::class);
+    Route::resource('contents/lessons', \App\Http\Controllers\LessonController::class);
+    Route::resource('banners', \App\Http\Controllers\BannerController::class);
+    Route::get('/s', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
+    Route::post('/setting', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
     // Course 
     Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
     Route::resource('/courses',CourseController::class);
