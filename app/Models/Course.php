@@ -37,7 +37,10 @@ class Course extends Model
         'createt_at',
         'updated_at',
     ];
-
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class, 'subscription_course', 'course_id', 'subscription_id');
+    }
     const ACTIVE = 1;
     const INACTIVE = 0;
 

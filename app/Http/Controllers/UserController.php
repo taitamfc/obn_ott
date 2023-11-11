@@ -1,28 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Resources\BannerResource;
-use App\Models\Banner;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Requests\StoreBannerRequest;
-use App\Http\Requests\UpdateBannerRequest;
-use App\Traits\UploadFileTrait;
-use App\Models\Setting;
-
-class BannerController extends Controller
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Group;
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    use UploadFileTrait;
     function index(Request $request){
-        $this->authorize('Banner',Banner::class);
-        $items = Banner::get();
-        $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
-        return view('themes.banners.index',compact('items','settings'));
+        $this->authorize('User',User::class);
+        $groups = Group::all();
+        $items = User::get();
+        return view('accountmanagements.users.index',compact('items','groups'));
     }
 
 
@@ -37,18 +34,19 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    function store(StoreBannerRequest $request){
-        $item = new Banner();
-        $item->status = $request->status;
+    function store(StoreUserRequest $request){
+        $item = new User();
         $item->name = $request->name;
-        $item->description = $request->description;
-        $item->link = $request->link;
+        $item->email = $request->email;
+        $item->password = $request->password;
+        $item->group_id = $request->group_id;
+        $item->parent_id = $request->parent_id;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'banners/images');
+                $item->img = $this->uploadFile($request->file('image'), 'users/images');
             } 
             if ($request->hasFile('video')) {
-                $item->video_url = $this->uploadFile($request->file('video'), 'banners/videos');
+                $item->video_url = $this->uploadFile($request->file('video'), 'users/videos');
             }
             $item->save();
             return response()->json([
@@ -64,11 +62,15 @@ class BannerController extends Controller
             ],200);
         }
     }
+
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
-        $item = Banner::find($id);
+        $item = User::find($id);
        
-        return new BannerResource($item);
+        return new UserResource($item);
     }
 
     /**
@@ -82,16 +84,18 @@ class BannerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBannerRequest $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        $item = Banner::find($id);
+  
+        $item = User::find($id);
         $item->name = $request->name;
-        $item->description = $request->description;
-        $item->status = $request->status;
-        $item->link = $request->link;
+        $item->email = $request->email;
+        $item->password = $request->password;
+        $item->group_id = $request->group_id;
+        $item->parent_id = $request->parent_id;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'banners/images');
+                $item->img = $this->uploadFile($request->file('image'), 'users/images');
             } 
             if ($request->hasFile('video')) {
                 $item->video_url = $this->uploadFile($request->file('video'), 'banners/videos');
@@ -116,18 +120,6 @@ class BannerController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            Banner::destroy($id);
-            return response()->json([
-                'success'=>true,
-                'message'=> 'Deleted ' . $id
-            ],200);
-        } catch (QueryException $e) {
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return response()->json([
-                'success'=>false,
-                'message'=> 'Deleted not success ' . $id
-            ],200);
-        }
+        //
     }
 }
