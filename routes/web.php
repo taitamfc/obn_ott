@@ -30,9 +30,9 @@ Route::get('/lessons/list', function () {
     return view('lessonlists.index');
 });
 
-Route::get('/stores/subscription', function () {
-    return view('stores.subscriptionmanagement');
-});
+// Route::get('/stores/subscription', function () {
+//     return view('stores.subscriptionmanagement');
+// });
 
 Route::get('/videos', function () {
     return view('videoadvertisements.index');
@@ -108,6 +108,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('includes.register');
 });
+
+
+Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionController::class);
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
 Route::post('/potsLogin',[App\Http\Controllers\AuthController::class,'potsLogin'])->name('potsLogin');
 Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
@@ -139,3 +142,4 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::resource('groups', \App\Http\Controllers\GroupController::class);
 
 });
+
