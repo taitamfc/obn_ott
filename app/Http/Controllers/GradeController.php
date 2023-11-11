@@ -18,6 +18,7 @@ class GradeController extends Controller
 {
     use UploadFileTrait;
     function index(Request $request){
+        $this->authorize('Grade',Grade::class);
         $user_id = Auth::id();
         if( $request->ajax() ){
             $items = Grade::where('user_id',$user_id)->orderBy('position','ASC')->paginate(4);

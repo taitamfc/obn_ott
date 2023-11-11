@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Subject;
-use App\Http\Requests\StoreSubjectRequest;
-use App\Http\Requests\UpdateSubjectRequest;
+use App\Models\Subscription;
+use App\Models\Course;
+use App\Http\Requests\StoreSubscriptionRequest;
+use App\Http\Requests\UpdateSubscriptionRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-use App\Http\Resources\SubjectResource;
-class SubjectController extends Controller
+use App\Http\Resources\SubscriptionResource;
+class SubscriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     function index(Request $request){
-        $this->authorize('Subject',Subject::class);
-        $items = Subject::orderBy('position','ASC')->get();
-        return view('contents.setting.subjects.index',compact('items'));
+        $items = Subscription::get();
+        $courses = Course::pluck('name', 'id');
+        return view('stores.subscriptions.index',compact('items','courses'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -31,20 +33,17 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    function store(StoreSubjectRequest $request){
-        $item = new Subject();
+    function store(StoreSubscriptionRequest $request){
+        $item = new Subscription();
         $item->name = $request->name;
+        $item->price = $request->price;
+        $item->duration = $request->duration;
         $item->status = $request->status;
+
+       
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/subjects/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
-            } 
             $item->save();
+            $item->courses()->attach($request->course);
             return response()->json([
                 'success'=>true,
                 'message'=> 'Saved ' . $item->id,
@@ -64,8 +63,10 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
-        $item = Subject::find($id);
-        return new SubjectResource($item);
+        $item = Subscription::find($id);
+       
+        return new SubscriptionResource($item);
+        // return view('stores.subscriptions.index');
     }
 
     /**
@@ -73,37 +74,37 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $items = Subscription::get();
+        $item = Subscription::find($id);
+        $selected_courses = $item->courses->pluck('id')->toArray();
+        $courses = Course::get();
+        return view('stores.subscriptions.edit',compact('items','courses','item','selected_courses'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubjectRequest $request, string $id)
+    public function update(UpdateSubscriptionRequest $request, string $id)
     {
-        $item = Subject::find($id);
+        // dd($request);
+        $item = Subscription::find($id);
         $item->name = $request->name;
+        $item->price = $request->price;
+        $item->duration = $request->duration;
         $item->status = $request->status;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/subjects/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
-            } 
             $item->save();
+            $item->courses()->sync($request->course);
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $id,
+                'message'=> 'Saved ' . $item->id,
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> 'Save not success'
             ],200);
         }
     }
@@ -114,7 +115,7 @@ class SubjectController extends Controller
     public function destroy(string $id)
     {
         try {
-            Subject::destroy($id);
+            Subscription::destroy($id);
             return response()->json([
                 'success'=>true,
                 'message'=> 'Deleted ' . $id
@@ -125,18 +126,6 @@ class SubjectController extends Controller
                 'success'=>false,
                 'message'=> 'Deleted not success ' . $id
             ],200);
-        }
-    }
-    function position(Request $request){
-        try {
-            foreach ($_REQUEST['item'] as $key => $value) {
-                $item = Subject::findOrfail($value);
-                $item->position = $key;
-                $item->save();
-            }
-        } catch (QueryException $e) {
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('subjects.index')->with('error','Có lỗi xảy ra');
         }
     }
 }

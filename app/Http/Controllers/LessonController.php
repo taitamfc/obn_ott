@@ -7,6 +7,7 @@ use App\Models\Lesson;
 use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\Course;
+use App\Models\LessonCourse;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -20,11 +21,13 @@ class LessonController extends Controller
     use UploadFileTrait;
     public function index(Request $request)
     {
+        $this->authorize('Lesson',Lesson::class);
         $items = Lesson::with('grade','course','subject')->paginate(10);
         return view('lessons.index', compact('items'));
     }
     public function create()
     {
+        $this->authorize('Lesson',Lesson::class);
         $grades = Grade::all();
         $subjects = Subject::all();
         $courses = Course::all();
@@ -33,10 +36,10 @@ class LessonController extends Controller
     public function store(StoreLessonRequest $request)
     {
         $item = new Lesson();
+        $lessoncourse = new LessonCourse();
         $item->name = $request->name;
         $item->subject_id = $request->subject_id;
         $item->grade_id = $request->grade_id;
-        $item->course_id = $request->course_id;
         $item->description = $request->description;
         $item->status = $request->status;
         if (!empty(Auth::user())) {
@@ -50,6 +53,9 @@ class LessonController extends Controller
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/lessons/image');
             } 
             $item->save();
+            $lessoncourse->lesson_id = $item->id;
+            $lessoncourse->course_id = $request->course_id;
+            $lessoncourse->save();
             return response([
                 'success' => true,
                 'message' => 'Create lesson success',
@@ -64,6 +70,8 @@ class LessonController extends Controller
         }
     }
     function edit($id){
+
+        $this->authorize('Lesson',Lesson::class);
         try{
             $item = Lesson::findOrfail($id);
             $grades = Grade::all();

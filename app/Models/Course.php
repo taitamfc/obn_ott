@@ -9,19 +9,23 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
-    public function lesson()
-    {
-        return $this->hasMany(Lesson::class, 'course_id', 'id');
-    }
     function student(){
         return $this->belongsToMany(Student::class);
     }
-    public function student_course()
+    public function course_student()
     {
         return $this->hasMany(StudentCourse::class, 'course_id', 'id');
     }
-    function lesson_student(){
+    function lesson_student()
+    {
         return $this->hasMany(LessonStudent::class,'course_id','id');
+    }
+    function course_lesson()
+    {
+        return $this->hasMany(LessonCourse::class,'course_id','id');
+    }
+    function lesson(){
+        return $this->belongsToMany(Lesson::class,'lesson_course','lesson_id','course_id');
     }
     protected $fillable = [
         'name',
@@ -33,7 +37,10 @@ class Course extends Model
         'createt_at',
         'updated_at',
     ];
-
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class, 'subscription_course', 'course_id', 'subscription_id');
+    }
     const ACTIVE = 1;
     const INACTIVE = 0;
 

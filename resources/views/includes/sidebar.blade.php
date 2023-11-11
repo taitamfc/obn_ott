@@ -69,7 +69,7 @@
                                 <i class="feather ft-home"></i>
                                 <span>Product Management</span>
                             </a></li>
-                        <li> <a href="/stores/subscription">
+                        <li> <a href="/store/subscriptions">
                                 <i class="feather ft-home"></i>
                                 <span>Subscription Management</span>
                             </a></li>
@@ -116,17 +116,17 @@
                         </span>
                     </a>
                     <ul>
-                        <li> <a href="/reports/user">
+                        <li> <a href="{{ route('report.users') }}">
                                 <i class="feather ft-home"></i>
                                 <span>User</span>
                             </a>
                         </li>
-                        <li> <a href="/reports/sale">
+                        <li> <a href="{{ route('report.sales') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Sale</span>
                             </a>
                         </li>
-                        <li> <a href="/reports/content">
+                        <li> <a href="{{ route('report.contents') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Content</span>
                             </a>
@@ -153,9 +153,13 @@
                                 <i class="feather ft-home"></i>
                                 <span>Billing</span>
                             </a></li>
-                        <li> <a href="/account/admin">
+                        <li> <a href="{{route('users.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Admin</span>
+                            </a></li>
+                            <li> <a href="{{route('groups.index')}}">
+                                <i class="feather ft-home"></i>
+                                <span>Group</span>
                             </a></li>
                     </ul>
                 </li>
