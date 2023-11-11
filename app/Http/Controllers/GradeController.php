@@ -10,26 +10,18 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\GradeResource;
+use Yajra\Datatables\Datatables;
+
 class GradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     function index(Request $request){
-        $items = Grade::orderBy('position','ASC')->get();
-        return view('contents.setting.grades.index',compact('items'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        if( $request->ajax() ){
+            $items = Grade::orderBy('position','ASC')->paginate(20);
+            return view('contents.setting.grades.ajax-index',compact('items'));
+        }
+        return view('contents.setting.grades.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     function store(StoreGradeRequest $request){
         $item = new Grade();
         $item->name = $request->name;
@@ -59,9 +51,6 @@ class GradeController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $item = Grade::find($id);
@@ -69,17 +58,6 @@ class GradeController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateGradeRequest $request, string $id)
     {
         $item = Grade::find($id);
@@ -109,9 +87,6 @@ class GradeController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         try {
@@ -128,6 +103,7 @@ class GradeController extends Controller
             ],200);
         }
     }
+
     function position(Request $request){
         try {
             foreach ($_REQUEST['item'] as $key => $value) {

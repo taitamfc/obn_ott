@@ -51,17 +51,17 @@
         @yield('content')
         @include('includes.footer')
     </div>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- <script src="{{ asset('assets/vendors/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/init/full-calendar.js') }}"></script>
+    <script src="{{ asset('assets/js/init/full-calendar.js') }}"></script> -->
     <script src="{{ asset('assets/vendors/data-table/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/responsive.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/init/data-table.js') }}"></script> -->
+    <!-- <script src="{{ asset('assets/js/init/data-table.js') }}"></script> -->
     <!-- Jquery Js -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- bootstrap 4 js -->
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>

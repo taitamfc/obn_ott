@@ -40,7 +40,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
-							<table class="table table-hover progress-table text-left ">
+							<table id="grade-table" class="table table-hover progress-table text-left ">
 								<thead class="text-uppercase">
 									<tr>
 										<th scope="col">ID</th>
@@ -50,32 +50,15 @@
 										<th scope="col" class="text-center">Action</th>
 									</tr>
 								</thead>
-								<tbody class="sortable-table ">
-									@foreach($items as $item)
-									<tr class="item draggable" id='item-{{ $item->id}}'>
-										<th scope="row">{{ $item->id }}</th>
-										<td>{{ $item->name }}</td>
-										<td>{!! $item->img_fm !!}</td>	
-										<td>{!! $item->status_fm !!}</td>
-										<td>
-											<ul class="d-flex justify-content-center">
-												<li class="mr-3">
-													<a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('grades.update',$item->id) }}" class="text-primary show-form-edit">
-														<i class="fa fa-edit"></i>
-													</a>
-												</li>
-												<li>
-													<a href="javascript:;" class="text-danger delete-item"
-														data-id="{{ $item->id }}">
-														<i class="ti-trash"></i>
-													</a>
-												</li>
-											</ul>
-										</td>
-									</tr>
-									@endforeach
+								<tbody class="sortable-table grade-table-results">
+									<tr> <td colspan="5" class="text-center">Loading data...</td> </tr>
 								</tbody>
 							</table>
+						</div>
+					</div>
+					<div class="card-footer">
+						<div class="pagination float-right">
+							
 						</div>
 					</div>
 				</div>
@@ -92,24 +75,42 @@
 @section('footer')
 <script>
 	jQuery(document).ready(function() {
-		jQuery(".sortable-table").sortable({
-			update: function (event, ui) {
-				var data = $(this).sortable('serialize');
-				// POST to server using $.post or $.ajax
-				jQuery.ajax({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					},
-					data: data,
-					type: 'POST',
-					url: "{{ route('grades.position') }}"
-				})
-			}
-		});
+		function getGradeTable(){
+			jQuery.ajax({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				type: 'GET',
+				url: "{{ route('grades.index') }}",
+				success: function (res) {
+					jQuery('.grade-table-results').html(res);
+					sortableGrades();
+				}
+			});
+		}
 
+		function sortableGrades(){
+			jQuery(".sortable-table").sortable({
+				update: function (event, ui) {
+					var data = $(this).sortable('serialize');
+					// POST to server using $.post or $.ajax
+					jQuery.ajax({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+						data: data,
+						type: 'POST',
+						url: "{{ route('grades.position') }}"
+					})
+				}
+			});
+		}
+
+		//Xu ly order item
+		getGradeTable();
 
 		// Xu ly xoa
-		jQuery(".delete-item").click(function (e) {
+		jQuery('body').on('click',".delete-item",function (e) {
 			e.preventDefault();
 			var ele = $(this);
 			var id = ele.data("id");
@@ -133,7 +134,7 @@
 		});
 
 		// Xu ly them moi
-		jQuery(".add-item").click(function (e) {
+		jQuery('body').on('click',".add-item",function (e) {
 			let formCreate = jQuery(this).closest('#formCreate');
 			formCreate.find('.input-error').empty();
 			var url = formCreate.prop('action');
@@ -155,15 +156,15 @@
 						}
 					}
 					if(res.success){
-						window.location.reload();
+						getGradeTable();
 					}
 
 				}
 			});
 		});
 
-		// Xu ly them moi
-		jQuery(".edit-item").click(function (e) {
+		// Xu ly cap nhat
+		jQuery('body').on('click',".edit-item",function (e) {
 			let formUpdate = jQuery(this).closest('#formUpdate');
 			formUpdate.find('.input-error').empty();
 			var url = formUpdate.prop('action');
@@ -184,7 +185,10 @@
 						}
 					}
 					if(res.success){
-						window.location.reload();
+						// Disable modal
+						jQuery('#modalUpdate').modal('hide');
+						// Recall items
+						getGradeTable();
 					}
 
 				}
@@ -192,8 +196,7 @@
 		});
 
 		// Xu ly form edit
-		jQuery('.show-form-edit').click(function(){
-			// alert(123)
+		jQuery('body').on('click',".show-form-edit",function (e) {
 			// Hien thi modal
 			jQuery('#modalUpdate').modal('show');
 
@@ -203,9 +206,8 @@
 			let id = jQuery(this).data('id');
 			let action = jQuery(this).data('action');
 
-			var url = 'grades/'+id;
 			jQuery.ajax({
-				url: url,
+				url: action,
 				type: "GET",
 				dataType:'json',
 				success: function (res) {
@@ -232,6 +234,5 @@
 			});
 		})
 	});
-
 </script>
 @endsection
