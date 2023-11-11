@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Grade;
+use App\Models\User;
 use App\Http\Requests\StoreGradeRequest;
 use App\Http\Requests\UpdateGradeRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -17,25 +18,34 @@ use Illuminate\Support\Facades\Auth;
 class GradeController extends Controller
 {
     use UploadFileTrait;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }  
+
     function index(Request $request){
         $this->authorize('Grade',Grade::class);
-        $user_id = Auth::id();
         if( $request->ajax() ){
-            $items = Grade::where('user_id',$user_id)->orderBy('position','ASC')->paginate(4);
+            $items = Grade::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(4);
             return view('contents.setting.grades.ajax-index',compact('items'));
         }
         return view('contents.setting.grades.index');
     }
 
     function store(StoreGradeRequest $request){
-        $user_id = Auth::id();
         $item = new Grade();
-        $item->user_id = $user_id;
+        $item->user_id = $this->user_id;
         $item->name = $request->name;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$user_id.'/grades');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/grades');
             } 
             $item->save();
             return response()->json([
@@ -54,16 +64,14 @@ class GradeController extends Controller
 
     public function show(string $id)
     {
-        $user_id = Auth::id();
-        $item = Grade::where('user_id',$user_id)->find($id);
+        $item = Grade::where('user_id',$this->user_id)->find($id);
         return new GradeResource($item);
 
     }
 
     public function update(UpdateGradeRequest $request, string $id)
     {
-        $user_id = Auth::id();
-        $item = Grade::where('user_id',$user_id)->find($id);
+        $item = Grade::where('user_id',$this->user_id)->find($id);
         $item->name = $request->name;
         $item->status = $request->status;
         try {
@@ -91,9 +99,8 @@ class GradeController extends Controller
 
     public function destroy(string $id)
     {
-        $user_id = Auth::id();
         try {
-            $item =  Grade::where('user_id',$user_id)->find($id);
+            $item =  Grade::where('user_id',$this->user_id)->find($id);
             // Delete old file
             $this->deleteFile([$item->img]);
 
