@@ -27,10 +27,10 @@ class User extends Authenticatable
         'parent_id',
     ];
     // Trong model User
-public function group()
-{
-    return $this->belongsTo(Group::class, 'group_id');
-}
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id');
+    }
 
 
     /**
