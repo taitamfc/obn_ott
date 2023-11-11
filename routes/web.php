@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -135,5 +136,10 @@ Route::middleware(['auth'])->group(function(){
     //Class
     Route::get('/classes/students',[ClassController::class,'students'])->name('classes.students');
     Route::resource('/classes',ClassController::class);
+
+    //Report
+    Route::get('/report/users',[ReportController::class,'users'])->name('report.users');
+    Route::get('/report/sales',[ReportController::class,'sales'])->name('report.sales');
+    Route::get('/report/contents',[ReportController::class,'contents'])->name('report.contents');
 });
 });
