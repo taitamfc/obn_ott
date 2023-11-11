@@ -116,17 +116,17 @@
                         </span>
                     </a>
                     <ul>
-                        <li> <a href="/reports/user">
+                        <li> <a href="{{ route('report.users') }}">
                                 <i class="feather ft-home"></i>
                                 <span>User</span>
                             </a>
                         </li>
-                        <li> <a href="/reports/sale">
+                        <li> <a href="{{ route('report.sales') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Sale</span>
                             </a>
                         </li>
-                        <li> <a href="/reports/content">
+                        <li> <a href="{{ route('report.contents') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Content</span>
                             </a>
