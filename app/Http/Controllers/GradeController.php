@@ -10,126 +10,108 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\GradeResource;
+use Yajra\Datatables\Datatables;
+use App\Traits\UploadFileTrait;
+use Illuminate\Support\Facades\Auth;
+
 class GradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use UploadFileTrait;
     function index(Request $request){
         $this->authorize('Grade',Grade::class);
-
-        $items = Grade::orderBy('position','ASC')->get();
-        return view('contents.setting.grades.index',compact('items'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $user_id = Auth::id();
+        if( $request->ajax() ){
+            $items = Grade::where('user_id',$user_id)->orderBy('position','ASC')->paginate(4);
+            return view('contents.setting.grades.ajax-index',compact('items'));
+        }
+        return view('contents.setting.grades.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     function store(StoreGradeRequest $request){
+        $user_id = Auth::id();
         $item = new Grade();
+        $item->user_id = $user_id;
         $item->name = $request->name;
         $item->status = $request->status;
-       
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/grades/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
+            if ($request->hasFile('image')) {
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$user_id.'/grades');
             } 
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Saved ' . $item->id,
+                'message'=> __('sys.store_item_success'),
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Save not success'
+                'message'=> __('sys.store_item_error'),
             ],200);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        $item = Grade::find($id);
+        $user_id = Auth::id();
+        $item = Grade::where('user_id',$user_id)->find($id);
         return new GradeResource($item);
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateGradeRequest $request, string $id)
     {
-        $item = Grade::find($id);
+        $user_id = Auth::id();
+        $item = Grade::where('user_id',$user_id)->find($id);
         $item->name = $request->name;
         $item->status = $request->status;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/grades/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
-            } 
+            if ($request->hasFile('image')) {
+                // Delete old file
+                $this->deleteFile([$item->img]);
+
+                // Upload new file
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/grades');
+            }
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $id,
+                'message'=> __('sys.update_item_success'),
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> __('sys.update_item_error'),
             ],200);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
+        $user_id = Auth::id();
         try {
-            Grade::destroy($id);
+            $item =  Grade::where('user_id',$user_id)->find($id);
+            // Delete old file
+            $this->deleteFile([$item->img]);
+
+            $item->delete();
+
             return response()->json([
                 'success'=>true,
-                'message'=> 'Deleted ' . $id
+                'message'=> __('sys.destroy_item_success'),
             ],200);
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Deleted not success ' . $id
+                'message'=> __('sys.destroy_item_error'),
             ],200);
         }
     }
+
     function position(Request $request){
         try {
             foreach ($_REQUEST['item'] as $key => $value) {

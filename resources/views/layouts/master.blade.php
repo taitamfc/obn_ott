@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/vendors/data-table/css/responsive.jqueryui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/toastr/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.print.min.css') }}"
         media="print">
@@ -51,17 +52,17 @@
         @yield('content')
         @include('includes.footer')
     </div>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- <script src="{{ asset('assets/vendors/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/init/full-calendar.js') }}"></script>
+    <script src="{{ asset('assets/js/init/full-calendar.js') }}"></script> -->
     <script src="{{ asset('assets/vendors/data-table/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/data-table/js/responsive.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/init/data-table.js') }}"></script> -->
+    <!-- <script src="{{ asset('assets/js/init/data-table.js') }}"></script> -->
     <!-- Jquery Js -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- bootstrap 4 js -->
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
@@ -94,11 +95,13 @@
     <script src="{{ asset('assets/vendors/charts/sparkline/sparklines.js') }}"></script>
     <!--Apex Chart-->
     <script src="{{ asset('assets/vendors/apex/js/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/toastr/js/toastr.min.js') }}"></script>
     <!--Home Script-->
     <script src="{{ asset('assets/js/home.js') }}"></script>
     <!-- ========== This Page js ========== -->
     <!-- Main Js -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @yield('footer')
 </body>
 
