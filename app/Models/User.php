@@ -7,21 +7,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\HasPermissions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasPermissions;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
+        'group_id',
+        'parent_id',
     ];
+    // Trong model User
+public function group()
+{
+    return $this->belongsTo(Group::class, 'group_id');
+}
+
 
     /**
      * The attributes that should be hidden for serialization.

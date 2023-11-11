@@ -113,8 +113,7 @@ Route::post('/potsLogin',[App\Http\Controllers\AuthController::class,'potsLogin'
 Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
 Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
 
-Route::group(['middleware' => 'preventhistory'],function(){
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth','preventhistory'])->group(function(){
     Route::post('/grades/position', [\App\Http\Controllers\GradeController::class, 'position'])->name('grades.position');
     Route::post('/subjects/position', [\App\Http\Controllers\SubjectController::class, 'position'])->name('subjects.position');
     Route::resource('stores', \App\Http\Controllers\StoreController::class);
@@ -135,5 +134,8 @@ Route::middleware(['auth'])->group(function(){
     //Class
     Route::get('/classes/students',[ClassController::class,'students'])->name('classes.students');
     Route::resource('/classes',ClassController::class);
-});
+
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('groups', \App\Http\Controllers\GroupController::class);
+
 });

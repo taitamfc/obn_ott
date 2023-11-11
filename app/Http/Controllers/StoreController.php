@@ -13,6 +13,7 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('Store',Store::class);
         $items = Store::paginate(5);
         return view('stores.productmanagement', compact('items'));
     }

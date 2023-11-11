@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
-use App\Models\Subject;
-use App\Http\Requests\StoreSubjectRequest;
-use App\Http\Requests\UpdateSubjectRequest;
+use App\Models\Group;
+use App\Http\Requests\StoreGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-use App\Http\Resources\SubjectResource;
-class SubjectController extends Controller
+use App\Http\Resources\GroupResource;
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     function index(Request $request){
-        $this->authorize('Subject',Subject::class);
-        $items = Subject::orderBy('position','ASC')->get();
-        return view('contents.setting.subjects.index',compact('items'));
+        $this->authorize('Group',Group::class);
+        $items = Group::get();
+        $roles = Role::get();
+        $selected_roles = [];
+        return view('accountmanagements.groups.index',compact('items','roles','selected_roles'));
+
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -31,20 +36,12 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    function store(StoreSubjectRequest $request){
-        $item = new Subject();
+    function store(StoreGroupRequest $request){
+        $item = new Group();
         $item->name = $request->name;
-        $item->status = $request->status;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/subjects/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
-            } 
             $item->save();
+            $item->roles()->attach($request->role_ids);
             return response()->json([
                 'success'=>true,
                 'message'=> 'Saved ' . $item->id,
@@ -58,14 +55,10 @@ class SubjectController extends Controller
             ],200);
         }
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        $item = Subject::find($id);
-        return new SubjectResource($item);
+        $item = Group::find($id);
+        return new GroupResource($item);
     }
 
     /**
@@ -73,27 +66,24 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $items = Group::get();
+        $item = Group::find($id);
+        $selected_roles = $item->roles->pluck('id')->toArray();
+        $roles = Role::get();
+        return view('accountmanagements.groups.edit',compact('items','roles','item','selected_roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubjectRequest $request, string $id)
+    public function update(UpdateGroupRequest $request, string $id)
     {
-        $item = Subject::find($id);
+  
+        $item = Group::find($id);
         $item->name = $request->name;
-        $item->status = $request->status;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/subjects/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
-            } 
             $item->save();
+            $item->roles()->sync($request->role_ids);
             return response()->json([
                 'success'=>true,
                 'message'=> 'Updated ' . $id,
@@ -114,7 +104,7 @@ class SubjectController extends Controller
     public function destroy(string $id)
     {
         try {
-            Subject::destroy($id);
+            Group::destroy($id);
             return response()->json([
                 'success'=>true,
                 'message'=> 'Deleted ' . $id
@@ -125,18 +115,6 @@ class SubjectController extends Controller
                 'success'=>false,
                 'message'=> 'Deleted not success ' . $id
             ],200);
-        }
-    }
-    function position(Request $request){
-        try {
-            foreach ($_REQUEST['item'] as $key => $value) {
-                $item = Subject::findOrfail($value);
-                $item->position = $key;
-                $item->save();
-            }
-        } catch (QueryException $e) {
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('subjects.index')->with('error','Có lỗi xảy ra');
         }
     }
 }
