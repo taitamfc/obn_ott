@@ -19,48 +19,25 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-body">
 						<div class="grade-header">
 							<button class="btn btn-primary float-left">Grade</button>
-							<button data-toggle="modal" data-target="#modalCreate" class="btn  btn-primary float-right">Create
-								New</button>
+							<button data-toggle="modal" data-target="#modalCreate" class="btn  btn-primary float-right">
+								{{ __('sys.add_new') }}
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<!-- Progress Table start -->
 			<div class="col-12 mt-4">
-				<div class="card">
-					<div class="card-body">
-						<div class="table-responsive">
-							<table id="grade-table" class="table table-hover progress-table text-left ">
-								<thead class="text-uppercase">
-									<tr>
-										<th scope="col">ID</th>
-										<th scope="col">Name</th>
-										<th scope="col">Image</th>
-										<th scope="col">Status</th>
-										<th scope="col" class="text-center">Action</th>
-									</tr>
-								</thead>
-								<tbody class="sortable-table grade-table-results">
-									<tr> <td colspan="5" class="text-center">Loading data...</td> </tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="card-footer">
-						<div class="pagination float-right">
-							
-						</div>
-					</div>
+				<div class="card grade-table-results">
+					<div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
 				</div>
 			</div>
 			<!-- Progress Table end -->
@@ -74,62 +51,28 @@
 
 @section('footer')
 <script>
+	var indexUrl = "{{ route('grades.index') }}";
+	var positionUrl = "{{ route('grades.position') }}";
+	var params = <?= json_encode(request()->query()); ?>;
+	var wrapperResults = '.grade-table-results';
 	jQuery(document).ready(function() {
-		function getGradeTable(){
-			jQuery.ajax({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				},
-				type: 'GET',
-				url: "{{ route('grades.index') }}",
-				success: function (res) {
-					jQuery('.grade-table-results').html(res);
-					sortableGrades();
-				}
-			});
-		}
+		// Get all items
+		getAjaxTable(indexUrl,wrapperResults,positionUrl,params);
 
-		function sortableGrades(){
-			jQuery(".sortable-table").sortable({
-				update: function (event, ui) {
-					var data = $(this).sortable('serialize');
-					// POST to server using $.post or $.ajax
-					jQuery.ajax({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						},
-						data: data,
-						type: 'POST',
-						url: "{{ route('grades.position') }}"
-					})
-				}
-			});
-		}
+		// Handle pagination
+		jQuery('body').on('click',".page-link",function (e) {
+			e.preventDefault();
+			let url = jQuery(this).attr('href');
+			getAjaxTable(url,wrapperResults,positionUrl);
+		});
 
-		//Xu ly order item
-		getGradeTable();
-
-		// Xu ly xoa
+		// Handle Delete
 		jQuery('body').on('click',".delete-item",function (e) {
 			e.preventDefault();
 			var ele = $(this);
-			var id = ele.data("id");
+			let action = ele.data('action');
 			if (confirm("Are you sure?")) {
-				var url = 'grades/' + id;
-				jQuery.ajax({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					},
-					url: url,
-					type: "POST",
-					data: {
-						_method: 'DELETE',
-						_token: '{{ csrf_token() }}',
-					},
-					success: function (response) {
-						ele.closest('.item').remove(); // Xóa phần tử khỏi DOM
-					}
-				});
+				handleDelete(action,ele);
 			}
 		});
 
@@ -154,9 +97,17 @@
 							console.log(key);
 							jQuery('.input-'+key).find('.input-error').html(res.errors[key][0]);
 						}
+						showAlertError('Form validated fail!');
 					}
 					if(res.success){
-						getGradeTable();
+						// Delete all values
+						$('#formCreate')[0].reset();
+
+						showAlertSuccess(res.message);
+						// Disable modal
+						jQuery('#modalCreate').modal('hide');
+						// Recall items
+						getAjaxTable(indexUrl,wrapperResults,positionUrl,params);
 					}
 
 				}
@@ -183,12 +134,14 @@
 						for (const key in res.errors) {
 							jQuery('.input-'+key).find('.input-error').html(res.errors[key][0]);
 						}
+						showAlertError('Form validated fail!');
 					}
 					if(res.success){
+						showAlertSuccess(res.message);
 						// Disable modal
 						jQuery('#modalUpdate').modal('hide');
 						// Recall items
-						getGradeTable();
+						getAjaxTable(indexUrl,wrapperResults,positionUrl,params);
 					}
 
 				}
