@@ -16,6 +16,7 @@ class SubjectController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
+        $this->authorize('Subject',Subject::class);
         $items = Subject::orderBy('position','ASC')->get();
         return view('contents.setting.subjects.index',compact('items'));
     }

@@ -17,6 +17,7 @@ class GroupController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
+        $this->authorize('Group',Group::class);
         $items = Group::get();
         $roles = Role::get();
         $selected_roles = [];

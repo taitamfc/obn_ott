@@ -16,6 +16,8 @@ class GradeController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
+        $this->authorize('Grade',Grade::class);
+
         $items = Grade::orderBy('position','ASC')->get();
         return view('contents.setting.grades.index',compact('items'));
     }

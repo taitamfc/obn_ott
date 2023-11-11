@@ -157,6 +157,10 @@
                                 <i class="feather ft-home"></i>
                                 <span>Admin</span>
                             </a></li>
+                            <li> <a href="{{route('groups.index')}}">
+                                <i class="feather ft-home"></i>
+                                <span>Group</span>
+                            </a></li>
                     </ul>
                 </li>
                 <li> <a href="/setting">

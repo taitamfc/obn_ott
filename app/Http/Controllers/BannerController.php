@@ -19,6 +19,7 @@ class BannerController extends Controller
      */
     use UploadFileTrait;
     function index(Request $request){
+        $this->authorize('Banner',Banner::class);
         $items = Banner::get();
         $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
         return view('themes.banners.index',compact('items','settings'));
@@ -83,7 +84,6 @@ class BannerController extends Controller
      */
     public function update(UpdateBannerRequest $request, string $id)
     {
-  
         $item = Banner::find($id);
         $item->name = $request->name;
         $item->description = $request->description;

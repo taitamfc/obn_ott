@@ -20,11 +20,13 @@ class LessonController extends Controller
     use UploadFileTrait;
     public function index(Request $request)
     {
+        $this->authorize('Lesson',Lesson::class);
         $items = Lesson::with('grade','course','subject')->paginate(10);
         return view('lessons.index', compact('items'));
     }
     public function create()
     {
+        $this->authorize('Lesson',Lesson::class);
         $grades = Grade::all();
         $subjects = Subject::all();
         $courses = Course::all();
@@ -64,6 +66,8 @@ class LessonController extends Controller
         }
     }
     function edit($id){
+
+        $this->authorize('Lesson',Lesson::class);
         try{
             $item = Lesson::findOrfail($id);
             $grades = Grade::all();

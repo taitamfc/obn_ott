@@ -16,6 +16,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
+        $this->authorize('User',User::class);
         $groups = Group::all();
         $items = User::get();
         return view('accountmanagements.users.index',compact('items','groups'));
