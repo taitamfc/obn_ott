@@ -153,7 +153,7 @@
                                 <i class="feather ft-home"></i>
                                 <span>Billing</span>
                             </a></li>
-                        <li> <a href="/account/admin">
+                        <li> <a href="{{route('users.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Admin</span>
                             </a></li>

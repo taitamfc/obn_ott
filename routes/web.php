@@ -135,5 +135,8 @@ Route::middleware(['auth'])->group(function(){
     //Class
     Route::get('/classes/students',[ClassController::class,'students'])->name('classes.students');
     Route::resource('/classes',ClassController::class);
+
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+
 });
 });

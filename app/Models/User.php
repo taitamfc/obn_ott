@@ -17,11 +17,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
+        'group_id',
+        'parent_id',
     ];
+    // Trong model User
+public function group()
+{
+    return $this->belongsTo(Group::class, 'group_id');
+}
+
 
     /**
      * The attributes that should be hidden for serialization.
