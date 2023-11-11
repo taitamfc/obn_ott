@@ -15,11 +15,15 @@ class Group extends Model
         'created_at',
         'updated_at',
     ];
-public function users()
-{
-    return $this->hasMany(User::class, 'group_id');
-}
+    public function users()
+    {
+        return $this->hasMany(User::class, 'group_id');
+    }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'role_id');
+    }
     const ACTIVE = 1;
     const INACTIVE = 0;
 }

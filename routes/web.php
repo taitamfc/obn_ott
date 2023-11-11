@@ -137,6 +137,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/classes',ClassController::class);
 
     Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('groups', \App\Http\Controllers\GroupController::class);
 
 });
 });
