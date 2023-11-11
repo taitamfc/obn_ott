@@ -16,7 +16,7 @@ class Grade extends Model
         'position',
         'status',
         'img',
-        'createt_at',
+        'created_at',
         'updated_at',
     ];
     public function lesson()

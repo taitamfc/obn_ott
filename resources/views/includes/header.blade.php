@@ -220,8 +220,8 @@
                                 <img src="../assets/images/user.jpg" alt="User Image">
                             </div>
                             <div class="user_bio text-center">
-                                <p class="name font-weight-bold mb-0">Monica Jhonson</p>
-                                <p class="email text-muted mb-3"><a class="pl-3 pr-3" href="monica@jhon.co.uk">monica@jhon.co.uk</a></p>
+                                <p class="name font-weight-bold mb-0">{{ Auth::user()->name }}</p>
+                                <p class="email text-muted mb-3"><a class="pl-3 pr-3" href="{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></p>
                             </div>
                         </div>
                         <a class="dropdown-item" href="profile.html"><i class="ti-user"></i> Profile</a>

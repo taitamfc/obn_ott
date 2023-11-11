@@ -53,7 +53,7 @@
                 </li>
                 <li> <a href="{{ route('lessons.index') }}">
                         <i class="feather ft-home"></i>
-                        <span>Lesson list</span>
+                        <span>Lesson List</span>
                     </a>
                 </li>
                 <li> <a href="/store">
@@ -75,7 +75,7 @@
                             </a></li>
                     </ul>
                 </li>
-                <li> <a href="/class">
+                <li> <a href="{{ route('classes.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Class</span>
                     </a>
@@ -153,9 +153,13 @@
                                 <i class="feather ft-home"></i>
                                 <span>Billing</span>
                             </a></li>
-                        <li> <a href="/account/admin">
+                        <li> <a href="{{route('users.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Admin</span>
+                            </a></li>
+                            <li> <a href="{{route('groups.index')}}">
+                                <i class="feather ft-home"></i>
+                                <span>Group</span>
                             </a></li>
                     </ul>
                 </li>

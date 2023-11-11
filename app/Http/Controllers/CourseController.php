@@ -13,6 +13,7 @@ use App\Http\Resources\CourseResource;
 class CourseController extends Controller
 {
     function index(Request $request){
+        $this->authorize('Course',Course::class);
         $items = Course::orderBy('position','ASC')->get();
         return view('contents.setting.courses.index',compact('items'));
     }

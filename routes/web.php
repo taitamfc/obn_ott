@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
-
+use App\Http\Controllers\ClassController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,30 +108,38 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('includes.register');
 });
-Route::get('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login');
-Route::post('/potsLogin', [App\Http\Controllers\AuthController::class, 'potsLogin'])->name('potsLogin');
-Route::get('/logout', [App\Http\Controllers\AuthController::class, 'Logout'])->name('logout');
-Route::post('/postRegister', [App\Http\Controllers\AuthController::class, 'postRegister'])->name('register');
 
-Route::group(['middleware' => 'preventhistory'], function () {
-    Route::middleware(['auth'])->group(function () {
-        Route::post('/grades/position', [\App\Http\Controllers\GradeController::class, 'position'])->name('grades.position');
-        Route::post('/subjects/position', [\App\Http\Controllers\SubjectController::class, 'position'])->name('subjects.position');
-        Route::resource('stores', \App\Http\Controllers\StoreController::class);
-        Route::resource('contents/setting/grades', \App\Http\Controllers\GradeController::class);
-        Route::resource('contents/setting/subjects', \App\Http\Controllers\SubjectController::class);
-        Route::resource('contents/lessons', \App\Http\Controllers\LessonController::class);
-        Route::resource('banners', \App\Http\Controllers\BannerController::class);
-        Route::get('/s', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
-        Route::post('/setting', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update'); 
-    });
-});
-// Course 
-Route::post('/course/position', [CourseController::class, 'position'])->name('courses.position');
-Route::resource('/courses', CourseController::class);
-
-// Lesson
-Route::post('/lessons/position', [LessonController::class, 'position'])->name('lessons.position');
-Route::resource('/lessons', LessonController::class);
 
 Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionController::class);
+Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
+Route::post('/potsLogin',[App\Http\Controllers\AuthController::class,'potsLogin'])->name('potsLogin');
+Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
+Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
+
+Route::middleware(['auth','preventhistory'])->group(function(){
+    Route::post('/grades/position', [\App\Http\Controllers\GradeController::class, 'position'])->name('grades.position');
+    Route::post('/subjects/position', [\App\Http\Controllers\SubjectController::class, 'position'])->name('subjects.position');
+    Route::resource('stores', \App\Http\Controllers\StoreController::class);
+    Route::resource('contents/setting/grades', \App\Http\Controllers\GradeController::class);
+    Route::resource('contents/setting/subjects', \App\Http\Controllers\SubjectController::class);
+    Route::resource('contents/lessons', \App\Http\Controllers\LessonController::class);
+    Route::resource('banners', \App\Http\Controllers\BannerController::class);
+    Route::get('/s', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
+    Route::post('/setting', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
+    // Course 
+    Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
+    Route::resource('/courses',CourseController::class);
+    
+    // Lesson
+    Route::post('/lessons/position',[LessonController::class,'position'])->name('lessons.position');
+    Route::resource('/lessons',LessonController::class);
+
+    //Class
+    Route::get('/classes/students',[ClassController::class,'students'])->name('classes.students');
+    Route::resource('/classes',ClassController::class);
+
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('groups', \App\Http\Controllers\GroupController::class);
+
+});
+
