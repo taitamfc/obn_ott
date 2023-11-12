@@ -29,14 +29,13 @@ class ClassController extends Controller
     function students(Request $request){
         try {
             $query = StudentCourse::where('user_id',Auth::user()->id)->with('student','course');
-        if ($request->searchName) {
-            $query->whereHas('student', function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->searchName . '%');
-            });
-            $items = $query->get();
-        }
-        $items = $query->paginate(5);
-        return view('class.student',compact('items'));
+            if ($request->searchName) {
+                $query->whereHas('student', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->searchName . '%');
+                });
+            }
+            $items = $query->paginate(5);
+            return view('class.student',compact('items'));
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
