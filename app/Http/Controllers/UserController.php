@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreBankUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Group;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
@@ -90,9 +92,10 @@ class UserController extends Controller
         $item = User::find($id);
         $item->name = $request->name;
         $item->email = $request->email;
-        $item->password = $request->password;
-        $item->group_id = $request->group_id;
-        $item->parent_id = $request->parent_id;
+        $item->password = isset($request->password)?$request->password:$item->password;
+        $item->phone = isset($request->phone)?$request->phone:$item->phone;
+        $item->group_id = isset($request->group_id)?$request->group_id:$item->group_id;
+        $item->parent_id = isset($request->parent_id)?$request->parent_id:$item->parent_id;
         try {
             if ($request->hasFile('image')) {
                 $item->img = $this->uploadFile($request->file('image'), 'users/images');
@@ -120,6 +123,23 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            User::destroy($id);
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Deleted ' . $id
+            ],200);
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Deleted not success ' . $id
+            ],200);
+        }
+    }
+
+    function account(Request $request){
+        $item = User::findOrfail(auth::user()->id);
+        return view('accountmanagements.accountmanage.index',compact('item'));
     }
 }

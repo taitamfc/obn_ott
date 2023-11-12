@@ -141,7 +141,7 @@
                         </span>
                     </a>
                     <ul>
-                        <li> <a href="/account/management">
+                    <li> <a href="{{ route('account.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Account Management</span>
                             </a></li>
@@ -149,7 +149,7 @@
                                 <i class="feather ft-home"></i>
                                 <span>Plan</span>
                             </a></li>
-                        <li> <a href="/account/billing">
+                        <li> <a href="{{ route('userbank.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Billing</span>
                             </a></li>

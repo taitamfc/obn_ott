@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
-class StoreUserRequest extends FormRequest
+class StoreUserBankRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,24 +24,20 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => [
-                'required',
-                Rule::unique('users', 'email'), // Kiểm tra tính duy nhất trong bảng 'users' cho trường 'email'
-            ],
-            
-            'password' => 'required',
+            'bank_number' => 'required',
+            'bank_owner' => 'required',
+            'bank_name' => 'required',
+            'address' => 'required',
            
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'The name field is required',
-            'email.required' => 'The email field is required',
-            'group_id.required' => 'The group field is required',
-            'password.required' => 'The password field is required',
-            'parent_id.required' => 'The parent field is required',
+            'bank_number.required' => 'The bank number field is required',
+            'bank_owner.required' => 'The bank owner field is required',
+            'bank_name.required' => 'The bank name field is required',
+            'address.required' => 'The address field is required',
         ];
     }
 

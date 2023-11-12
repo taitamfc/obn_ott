@@ -25,8 +25,8 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'group_id' => 'required',
-            'parent_id' => 'required',
+            // 'group_id' => 'required',
+            // 'parent_id' => 'required',
         ];
     }
     public function messages()
@@ -34,8 +34,8 @@ class UpdateUserRequest extends FormRequest
         return [
             'name.required' => 'The name field is required',
             'email.required' => 'The email field is required',
-            'group_id.required' => 'The group field is required',
-            'parent_id.required' => 'The parent field is required',
+            // 'group_id.required' => 'The group field is required',
+            // 'parent_id.required' => 'The parent field is required',
         ];
     }
 

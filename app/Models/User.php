@@ -31,7 +31,10 @@ public function group()
 {
     return $this->belongsTo(Group::class, 'group_id');
 }
-
+public function userBanks()
+{
+    return $this->hasMany(UserBank::class, 'user_id');
+}
 
     /**
      * The attributes that should be hidden for serialization.
