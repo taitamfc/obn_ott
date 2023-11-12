@@ -168,8 +168,8 @@ class UserController extends Controller
             $item->plan_id = $id;
             $item->user_id = Auth::user()->id;
             $current_plan_date = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->value('expiration_date');
-            $current_plan_date = Carbon::parse($current_plan_date);
             if (!empty($current_plan_date)) {
+                $current_plan_date = Carbon::parse($current_plan_date);
                 $item->is_current = 0;
                 $item->created_at = $current_plan_date;
                 $item->expiration_date = $current_plan_date->addMonths($duration);
