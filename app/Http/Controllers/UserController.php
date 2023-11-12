@@ -163,7 +163,7 @@ class UserController extends Controller
         try {
             $id = $_REQUEST['data'];
             $currentDateTime = Carbon::now();
-            $duration = Plan::findOrfail($id)->value('duration');
+            $plan = Plan::findOrfail($id);
             $item = new PlanUser();
             $item->plan_id = $id;
             $item->user_id = Auth::user()->id;
@@ -172,11 +172,11 @@ class UserController extends Controller
                 $current_plan_date = Carbon::parse($current_plan_date);
                 $item->is_current = 0;
                 $item->created_at = $current_plan_date;
-                $item->expiration_date = $current_plan_date->addMonths($duration);
+                $item->expiration_date = $current_plan_date->addMonths($plan->duration);
             }else {
                 $item->is_current = 1;
                 $item->created_at = $currentDateTime;
-                $item->expiration_date = $currentDateTime->addMonths($duration);
+                $item->expiration_date = $currentDateTime->addMonths($plan->duration);
             }
             $item->save();
             return response([
