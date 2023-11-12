@@ -109,7 +109,12 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('includes.register');
 });
-
+// Route::get('/billings', function () {
+//     return view('accountmanagements.billings.index');
+// })->name('billings');
+// Route::get('/billings/create', function () {
+//     return view('accountmanagements.billings.create');
+// });
 
 Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionController::class);
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
@@ -153,5 +158,9 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::get('/reports/sales',[ReportController::class,'sales'])->name('report.sales');
     Route::get('/reports/contents',[ReportController::class,'contents'])->name('report.contents');
 
-    
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('groups', \App\Http\Controllers\GroupController::class);
+    Route::get('/accountmanage/account', [\App\Http\Controllers\UserController::class, 'account'])->name('account.index');
+   
+    Route::resource('userbank', \App\Http\Controllers\UserBankController::class);
 });
