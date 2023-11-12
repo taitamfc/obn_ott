@@ -66,7 +66,6 @@ class GradeController extends Controller
     {
         $item = Grade::where('user_id',$this->user_id)->find($id);
         return new GradeResource($item);
-
     }
 
     public function update(UpdateGradeRequest $request, string $id)

@@ -145,7 +145,7 @@
                                 <i class="feather ft-home"></i>
                                 <span>Account Management</span>
                             </a></li>
-                        <li> <a href="/account/plan">
+                        <li> <a href="{{route('users.plans')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Plan</span>
                             </a></li>
