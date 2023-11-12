@@ -62,4 +62,10 @@ public function userBanks()
     function student(){
         return $this->belongsToMany(Student::class,'student_course','student_id','user_id');
     }
+    function plan(){
+        return $this->belongsToMany(Plan::class,'plan_user','plan_id','user_id');
+    }
+    function user_plan(){
+        return $this->hasMany(PlanUser::class,'user_id','id');
+    }
 }

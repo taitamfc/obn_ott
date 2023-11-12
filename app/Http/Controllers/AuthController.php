@@ -19,7 +19,7 @@ class AuthController extends Controller
             return view('includes.login');
         }
      }
-     public function potsLogin(StoreLoginRequest $request){
+     public function postLogin(StoreLoginRequest $request){
         // dd($request);
         $dataUser = $request->only('email','password');
         if(Auth::attempt($dataUser)){

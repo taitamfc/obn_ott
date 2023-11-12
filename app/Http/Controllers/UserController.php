@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreBankUserRequest;
 use App\Models\User;
+use App\Models\PlanUser;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -12,6 +14,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 class UserController extends Controller
 {
     /**
@@ -141,5 +145,56 @@ class UserController extends Controller
     function account(Request $request){
         $item = User::findOrfail(auth::user()->id);
         return view('accountmanagements.accountmanage.index',compact('item'));
+    }
+    function plan(){
+        $items = Plan::paginate(3);
+        $current_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->first();
+        $next_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',0)->first();
+        return view('accountmanagements.plans.plan',compact('items','current_plan','next_plan'));
+    }
+    function addPlan(String $id){
+        $item = Plan::findOrfail($id);
+        $current_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->value('expiration_date');
+        return view('accountmanagements.plans.buyPlan',compact('item','current_plan'));
+    }
+    function storePlans(Request $request){
+        $count = PlanUser::where('user_id', Auth::user()->id)->count();
+        if ($count<=1) {
+        try {
+            $id = $_REQUEST['data'];
+            $currentDateTime = Carbon::now();
+            $duration = Plan::findOrfail($id)->value('duration');
+            $item = new PlanUser();
+            $item->plan_id = $id;
+            $item->user_id = Auth::user()->id;
+            $current_plan_date = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->value('expiration_date');
+            $current_plan_date = Carbon::parse($current_plan_date);
+            if (!empty($current_plan_date)) {
+                $item->is_current = 0;
+                $item->created_at = $current_plan_date;
+                $item->expiration_date = $current_plan_date->addMonths($duration);
+            }else {
+                $item->is_current = 1;
+                $item->created_at = $currentDateTime;
+                $item->expiration_date = $currentDateTime->addMonths($duration);
+            }
+            $item->save();
+            return response([
+                'success' => true,
+                'message' => 'Buy plan success',
+                'redirect' => route('users.plans')
+            ],200);
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => false,
+                'message' => 'Buy plan fail',
+            ],200);
+        }
+        }
+        return response([
+            'success' => false,
+            'message' => 'Buy plan fail',
+        ],200);
     }
 }
