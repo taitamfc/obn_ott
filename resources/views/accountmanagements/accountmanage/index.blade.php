@@ -75,39 +75,39 @@
                     </div>
                 </div>
 
-                <!-- <div class="card mt-4">
-            <div class="card-header">
-                <div class="col-sm-6">
-                    <h4>Current Plan</h4>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="https://ott.rrtech247.com/studio/account/plan/change">Edit</a>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="billing_info">
-                    <div class="row">
-                        <div class=" col-sm-12">
-                            <div class="col-sm-4">
-                                <h4>PLan B</h4>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <div class="col-sm-6">
+                            <h4>Current Plan</h4>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <a href="https://ott.rrtech247.com/studio/account/plan/change">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="billing_info">
+                            <div class="row">
+                                <div class=" col-sm-12">
+                                    <div class="col-sm-4">
+                                        <h4>PLan B</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input name="dates" type="text" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>Phone Number</h4>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <input name="dates" type="text" />
-                            </div>
-                            <div class="col-sm-4">
-                                <h4>Phone Number</h4>
-                            </div>
+                        </div>
+                        <div class="plan">
+
+                        </div>
+                        <div class="method">
+
                         </div>
                     </div>
                 </div>
-                <div class="plan">
-
-                </div>
-                <div class="method">
-
-                </div>
-            </div>
-        </div> -->
 
                 <div class="card mt-4">
                     <div class="card-header d-flex justify">
