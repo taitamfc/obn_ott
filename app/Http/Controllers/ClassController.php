@@ -46,7 +46,20 @@ class ClassController extends Controller
     }
 
     function show(String $id){
-        $items = LessonStudent::with('lesson','course')->where('student_id',$id)->paginate(5);
+        $lessonHistory = LessonStudent::with('lesson','course')->where('student_id',$id)->paginate(5);
+        $transactionHistory = DB::table('transactions')
+        ->join('courses', 'courses.id', '=', 'transactions.course_id')
+        ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
+        ->where('transactions.user_id', '=', Auth::user()->id)
+        ->where('student_id', '=',$id)
+        ->groupBy('course_id', 'date')
+        ->get();;
+        $informationStudent = Student::findOrfail($id);
+        $items = [
+            'lessonHistory' => $lessonHistory,
+            'transactionHistory' =>$transactionHistory,
+            'informationStudent' => $informationStudent
+        ];
         return view('class.show',compact('items'));
     }
 
