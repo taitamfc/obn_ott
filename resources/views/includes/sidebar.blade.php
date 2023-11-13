@@ -65,7 +65,7 @@
                     </a>
 
                     <ul>
-                        <li> <a href="/stores">
+                        <li> <a href="{{ route('courses.products') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Product Management</span>
                             </a></li>

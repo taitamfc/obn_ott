@@ -71,16 +71,16 @@ select.form-control:not([size]):not([multiple]) {
                                             <thead class="text-uppercase">
                                                 <tr>
                                                     <th scope="col">Name</th>
-                                                    <th scope="col">Course view count</th>
-                                                    <th scope="col">Last view</th>
+                                                    <th scope="col" class='text-center'>Course view count</th>
+                                                    <th scope="col" class='text-center'>Last view</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach($items as $item)
                                                 <tr>
                                                     <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->total_lessons }}</td>
-                                                    <td>{{ $item->last_view }}</td>
+                                                    <td class='text-center'>{{ $item->total_lessons }}</td>
+                                                    <td class='text-center'>{{ $item->last_view }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

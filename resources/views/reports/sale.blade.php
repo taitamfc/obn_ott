@@ -1,4 +1,17 @@
 @extends('layouts.master')
+@section('header')
+<link rel="stylesheet" href="{{ asset('assets/vendors/charts/morris-bundle/morris.css') }}">
+<style>
+#report_user .card-header {
+    display: flex;
+    justify-content: space-between
+}
+
+#report_user .card-footer a {
+    margin: 0 10px;
+}
+</style>
+@endsection
 @section('content')
 <div class="main-content page-content">
     <!--==================================*
@@ -20,27 +33,16 @@
             </div>
         </div>
         <div class="" style="padding: 20px">
-            <style>
-            #report_user .card-header {
-                display: flex;
-                justify-content: space-between
-            }
-
-            #report_user .card-footer a {
-                margin: 0 10px;
-            }
-            </style>
             <div id="report_user">
                 <div class="card">
                     <div class="card-header">
                         <h2>Sales</h2>
                         <a href="#">Export to Excel</a>
                     </div>
-                    <!-- <div class="card-body">
-                        <div class="chart_container">
-                            <canvas id="bar_chart"></canvas>
-                        </div>
-                    </div> -->
+                    <div class="card-body">
+                        <!-- <h4 class="card_title">Bar Chart</h4> -->
+                        <div id="morris_bar"></div>
+                    </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center">
                             <form action="" method='get' class='mr-2'>
@@ -77,13 +79,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($items as $item)
+                                <!-- converse json encode to decode display -->
+                                @foreach(json_decode($items) as $item)
                                 <tr>
                                     <td>{{ $item->time }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->sold }}</td>
                                     <td>{{ $item->price }}</td>
                                 </tr>
+                                <!-- end display -->
                                 @endforeach
                             </tbody>
                         </table>
@@ -92,15 +96,31 @@
             </div>
         </div>
     </div>
-    <!--==================================*
-                   End Main Section
-        *====================================-->
 </div>
 @endsection
 
 @section('footer')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
+var items = {!!$items!!};
+
+// data of chart 
+function createData(items) {
+    var data = [];
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        data[i] = {
+            x: 'Time : ' + item.time,
+            y: item.sold,
+        };
+    }
+    results = {
+        data : data,
+        Y : 'Sold '
+    }
+    return results;
+}
+// end chart
 $(document).ready(function() {
     $('#dataTable').DataTable({
         paging: false,
@@ -127,4 +147,7 @@ $(document).ready(function() {
     });
 });
 </script>
+<script src="{{ asset('assets/vendors/charts/morris-bundle/raphael.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/charts/morris-bundle/morris.js') }}"></script>
+<script src="{{ asset('assets/js/init/morris-js.js') }}"></script>
 @endsection
