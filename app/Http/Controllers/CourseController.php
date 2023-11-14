@@ -24,15 +24,15 @@ class CourseController extends Controller
             $this->user_id = Auth::id();
             return $next($request);
         });
-
+    }
     function index(Request $request){
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
-        $items = Course::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(4);
-        return view('contents.setting.courses.ajax-index',compact('items'));
+            $items = Course::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(4);
+            return view('contents.setting.courses.ajax-index',compact('items'));
+        }   
+        return view('contents.setting.courses.index');
     }
-    return view('contents.setting.courses.index');
-}
 
     function store(StoreCourseRequest $request){
         $item = new Course();
