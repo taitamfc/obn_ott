@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Database\QueryException;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -22,38 +24,37 @@ class CourseController extends Controller
             $this->user_id = Auth::id();
             return $next($request);
         });
-    }
 
     function index(Request $request){
         $this->authorize('Course',Course::class);
-        $items = Course::orderBy('position','ASC')->get();
-        return view('contents.setting.courses.index',compact('items'));
+        if( $request->ajax() ){
+        $items = Course::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(4);
+        return view('contents.setting.courses.ajax-index',compact('items'));
     }
+    return view('contents.setting.courses.index');
+}
+
     function store(StoreCourseRequest $request){
         $item = new Course();
+        $item->user_id = $this->user_id;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->status = $request->status;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/courses/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
+            if ($request->hasFile('image')) {
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
             } 
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Saved ' . $item->id,
+                'message'=> __('sys.store_item_success'),
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Save not success'
+                'message'=> __('sys.store_item_error'),
             ],200);
         }
     }
@@ -62,51 +63,56 @@ class CourseController extends Controller
     {
         $item = Course::findOrfail($id);
         return new CourseResource($item);
-
     }
+
 
     public function update(UpdateCourseRequest $request, string $id)
     {
-        $item = Course::find($id);
+        $item = Course::where('user_id',$this->user_id)->find($id);
         $item->name = $request->name;
         $item->price = $request->price;
         $item->status = $request->status;
         try {
-            $fieldName = 'image';
-            if ($request->hasFile($fieldName)) {
-                $get_img = $request->file($fieldName);
-                $path = 'storage/courses/';
-                $new_name_img = rand(1,100).$get_img->getClientOriginalName();
-                $get_img->move($path,$new_name_img);
-                $item->img = $path.$new_name_img;
-            } 
+            if ($request->hasFile('image')) {
+                // Delete old file
+                $this->deleteFile([$item->img]);
+
+                // Upload new file
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+            }
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $id,
+                'message'=> __('sys.update_item_success'),
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> __('sys.update_item_error'),
             ],200);
         }
     }
 
-    function destroy($id){
+    public function destroy(string $id)
+    {
         try {
-            Course::destroy($id);
+            $item =  Course::where('user_id',$this->user_id)->find($id);
+            // Delete old file
+            $this->deleteFile([$item->img]);
+
+            $item->delete();
+
             return response()->json([
                 'success'=>true,
-                'message'=> 'Deleted ' . $id
+                'message'=> __('sys.destroy_item_success'),
             ],200);
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Deleted not success ' . $id
+                'message'=> __('sys.destroy_item_error'),
             ],200);
         }
     }

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\PlanUser;
 use App\Models\Plan;
 use App\Models\UserBank;
+use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -19,17 +20,28 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
+    use UploadFileTrait;
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }  
     /**
      * Display a listing of the resource.
      */
     function index(Request $request){
         $this->authorize('User',User::class);
         $groups = Group::all();
-        $items = User::get();
-        return view('accountmanagements.users.index',compact('items','groups'));
-    }
-
-
+        if( $request->ajax() ){
+            $items = User::paginate(4);
+            return view('accountmanagements.users.ajax-index',compact('items','groups'));
+        }
+    return view('accountmanagements.users.index',compact('groups'));
+}
     /**
      * Show the form for creating a new resource.
      */
@@ -50,22 +62,19 @@ class UserController extends Controller
         $item->parent_id = $request->parent_id;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'users/images');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             } 
-            if ($request->hasFile('video')) {
-                $item->video_url = $this->uploadFile($request->file('video'), 'users/videos');
-            }
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Saved ' . $item->id,
+                'message'=> __('sys.store_item_success'),
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Save not success'
+                'message'=> __('sys.store_item_error'),
             ],200);
         }
     }
@@ -75,8 +84,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $item = User::find($id);
-       
+        $item = User::findOrfail($id);
         return new UserResource($item);
     }
 
@@ -93,8 +101,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-  
-        $item = User::find($id);
+        $item = User::findOrfail($id);
         $item->name = $request->name;
         $item->email = $request->email;
         $item->password = isset($request->password)?$request->password:$item->password;
@@ -103,22 +110,23 @@ class UserController extends Controller
         $item->parent_id = isset($request->parent_id)?$request->parent_id:$item->parent_id;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'users/images');
-            } 
-            if ($request->hasFile('video')) {
-                $item->video_url = $this->uploadFile($request->file('video'), 'banners/videos');
+                // Delete old file
+                $this->deleteFile([$item->img]);
+
+                // Upload new file
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             }
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $id,
+                'message'=> __('sys.update_item_success'),
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> __('sys.update_item_error'),
             ],200);
         }
     }
@@ -129,18 +137,23 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
-            User::destroy($id);
-            return response()->json([
-                'success'=>true,
-                'message'=> 'Deleted ' . $id
-            ],200);
-        } catch (QueryException $e) {
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return response()->json([
-                'success'=>false,
-                'message'=> 'Deleted not success ' . $id
-            ],200);
-        }
+            $item =  User::find($id);
+                // Delete old file
+                $this->deleteFile([$item->img]);
+
+                $item->delete();
+    
+                return response()->json([
+                    'success'=>true,
+                    'message'=> __('sys.destroy_item_success'),
+                ],200);
+            } catch (QueryException $e) {
+                Log::error('Bug occurred: ' . $e->getMessage());
+                return response()->json([
+                    'success'=>false,
+                    'message'=> __('sys.destroy_item_error'),
+                ],200);
+            }
     }
 
     function account(Request $request){
