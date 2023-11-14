@@ -127,4 +127,25 @@ class CourseController extends Controller
             Log::error('Bug occurred: ' . $e->getMessage());
         }
     }
+    function products(){
+        $items = Course::paginate(5);
+        return view('stores.productmanagement.index',compact('items'));
+    }
+    function editProduct(Request $request){
+        try {  
+            $item = Course::findOrfail($request->id);
+            $item->price = $request->price;
+            $item->save();
+            return response()->json([
+                'success'=>true,
+                'message'=> 'Updated ' . $request->id,
+            ],200);
+        } catch (QueryException  $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Update not success ' . $id
+            ],200);
+        }
+    }
 }

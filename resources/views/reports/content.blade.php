@@ -1,4 +1,17 @@
 @extends('layouts.master')
+@section('header')
+<link rel="stylesheet" href="{{ asset('assets/vendors/charts/morris-bundle/morris.css') }}">
+<style>
+#report_user .card-header {
+    display: flex;
+    justify-content: space-between
+}
+
+#report_user .card-footer a {
+    margin: 0 10px;
+}
+</style>
+@endsection
 @section('content')
 <div class="main-content page-content">
     <!--==================================*
@@ -36,11 +49,10 @@
                         <h2>Contents</h2>
                         <a href="#">Export to Excel</a>
                     </div>
-                    <!-- <div class="card-body">
-                        <div class="chart_container">
-                            <canvas id="bar_chart"></canvas>
-                        </div>
-                    </div> -->
+                    <div class="card-body">
+                        <!-- <h4 class="card_title">Bar Chart</h4> -->
+                        <div id="morris_bar"></div>
+                    </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center">
                             <form action="" method='get' class='mr-2'>
@@ -77,7 +89,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($items as $item)
+                                <!-- converse json encode to decode display -->
+                                @foreach(json_decode($items) as $item)
                                 <tr>
                                     <td>{{ $item->time }}</td>
                                     <td>{{ $item->lessonName }}</td>
@@ -85,11 +98,9 @@
                                     <td>{{ $item->view_count }}</td>
                                 </tr>
                                 @endforeach
+                                <!-- end display -->
                             </tbody>
                         </table>
-                        <div class="pagination" style="float:right">
-                            {{ $items->appends(request()->query())->links('pagination::bootstrap-4') }}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -104,6 +115,26 @@
 @section('footer')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
+var items = {!!$items!!};
+
+// data of chart 
+function createData(items) {
+    var data = [];
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        data[i] = {
+            x: 'Time :' + item.time,
+            y: item.view_count
+        };
+    }
+    results = {
+        data : data,
+        Y : 'View lesson'
+    }
+    return results;
+}
+// end chart
+
 $(document).ready(function() {
     $('#dataTable').DataTable({
         paging: false,
@@ -130,4 +161,7 @@ $(document).ready(function() {
     });
 });
 </script>
+<script src="{{ asset('assets/vendors/charts/morris-bundle/raphael.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/charts/morris-bundle/morris.js') }}"></script>
+<script src="{{ asset('assets/js/init/morris-js.js') }}"></script>
 @endsection

@@ -27,7 +27,8 @@ class ReportController extends Controller
             $query->select(DB::raw('DATE(created_at) AS time'), DB::raw('COUNT(student_id) AS student_count'))
             ->groupBy(DB::raw('DATE(created_at)'));
         }
-        $items = $query->get();
+        $items = $query->orderBy('time','ASC')->get();
+        $items = json_encode($items);
         return view('reports.user',compact('items'));
     }
     function sales(Request $request){
@@ -50,7 +51,8 @@ class ReportController extends Controller
             $query->select(DB::raw('DATE(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
             ->groupBy(DB::raw('DATE(transactions.created_at)'), 'transactions.course_id', 'courses.name');
         }
-        $items = $query->get();
+        $items = $query->orderBy('time','ASC')->get();
+        $items = json_encode($items);
         return view('reports.sale',compact('items'));
     }
     function contents(Request $request){
@@ -74,7 +76,8 @@ class ReportController extends Controller
             $query->select(DB::raw('DATE(lesson_student.last_view) AS time'), 'lessons.name AS lessonName', 'courses.name AS courseName', DB::raw('COUNT(*) AS view_count'))
             ->groupBy(DB::raw('DATE(lesson_student.last_view)'), 'lessons.id', 'lessons.name', 'courses.name');
         }
-        $items = $query->paginate(5);
+        $items = $query->orderBy('time','ASC')->get();
+        $items = json_encode($items);
         return view('reports.content',compact('items'));
     }
 }

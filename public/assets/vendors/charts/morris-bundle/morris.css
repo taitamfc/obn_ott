@@ -4,7 +4,7 @@
 }
 
 .morris-hover.morris-default-style {
-    border-radius: 2px;
+    /* border-radius: 2px; */
     color: #444;
     background: #e6e6f2;
     font-size: 14px;
@@ -13,7 +13,7 @@
 }
 
 .morris-hover.morris-default-style .morris-hover-row-label {
-    border-bottom: 1px solid #e6e6f2;
+    border: 1px solid #e6e6f2;
     padding: 8px;
 }
 

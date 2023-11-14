@@ -172,7 +172,6 @@ jQuery(document).ready(function() {
 
                     formUpdate.prop('action', action);
 
-
                     formUpdate.find('.input-id').val(formData.id);
                     formUpdate.find('.input-name input').val(formData.name);
                     formUpdate.find('.input-price input').val(formData.price);

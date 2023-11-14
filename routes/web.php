@@ -142,7 +142,9 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     //
     
     // Course 
-    Route::post('/course/position',[CourseController::class,'position'])->name('courses.position');
+    Route::post('/courses/position',[CourseController::class,'position'])->name('courses.position');
+    Route::get('/courses/products',[CourseController::class,'products'])->name('courses.products');
+    Route::post('/courses/editProduct',[CourseController::class,'editProduct'])->name('courses.editProduct');
     Route::resource('/courses',CourseController::class);
     
     // Lesson

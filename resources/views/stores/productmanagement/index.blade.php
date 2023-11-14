@@ -13,9 +13,6 @@
                             <p class="text-muted mb-0 mr-1 hover-cursor">My Product Management</p>
                         </div>
                     </div>
-                    <div class="buttons">
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -30,16 +27,21 @@
                                     <tr>
                                         <th scope="col">COURSE</th>
                                         <th scope="col">PRICE </th>
-                                        <th scope="col">action</th>
+                                        <th scope="col">ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($items as $item)
                                     <tr>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->price }}</td>
+                                        <td>${{ $item->price }}</td>
                                         <td>
-                                            <button><i class="ti-pencil mr-1 btn btn-success"></i></button>
+                                            <button data-toggle="modal" data-target="#modalUpdate"
+                                                data-id="{{ $item->id }}"
+                                                data-action="{{ route('courses.editProduct') }}"
+                                                class='btn btn-success show-form-edit'>
+                                                <i class="ti-pencil mr-1"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -50,6 +52,7 @@
                 </div>
             </div>
         </div>
+        @include('stores.productmanagement.edit')
     </div>
 </div>
 @endsection
