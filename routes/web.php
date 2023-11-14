@@ -16,107 +16,6 @@ use App\Http\Controllers\PaypalController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('homes.index');
-// });
-Route::get('/', function () {
-    return view('includes.Login');
-});
-
-Route::get('/class', function () {
-    return view('class.index');
-});
-
-Route::get('/lessons/list', function () {
-    return view('lessonlists.index');
-});
-
-// Route::get('/stores/subscription', function () {
-//     return view('stores.subscriptionmanagement');
-// });
-
-Route::get('/videos', function () {
-    return view('videoadvertisements.index');
-});
-
-// Route::get('/themes/banner', function () {
-//     return view('themes.homepagebanner');
-// });
-// Route::get('/themes/sestion', function () {
-//     return view('themes.homepagesections');
-// });
-// Route::get('/themes/setting', function () {
-//     return view('themes.Settings');
-// });
-
-Route::get('/reports/user', function () {
-    return view('reports.user');
-});
-Route::get('/reports/sale', function () {
-    return view('reports.sale');
-});
-Route::get('/reports/content', function () {
-    return view('reports.content');
-});
-
-Route::get('/account/management', function () {
-    return view('accountmanagements.accountmanagement');
-});
-Route::get('/account/admin', function () {
-    return view('accountmanagements.admin');
-});
-Route::get('/account/billing', function () {
-    return view('accountmanagements.billing');
-});
-Route::get('/account/plan', function () {
-    return view('accountmanagements.plan');
-});
-
-Route::get('/setting/logo', function () {
-    return view('setting.logo');
-});
-Route::get('/setting/popup', function () {
-    return view('setting.popup');
-});
-Route::get('/setting/notice', function () {
-    return view('setting.notice');
-});
-Route::get('/setting/cusstomer', function () {
-    return view('setting.cusstomerinquiry');
-});
-
-Route::get('/setting/term', function () {
-    return view('setting.pages.term');
-});
-
-Route::get('/setting/privacy-policy', function () {
-    return view('setting.pages.privacypolicy');
-});
-
-Route::get('/setting/refund-policy', function () {
-    return view('setting.pages.refundpolicy');
-});
-
-Route::get('/setting/FAQ', function () {
-    return view('setting.pages.faq');
-});
-
-
-
-Route::get('/login', function () {
-    return view('includes.login');
-});
-Route::get('/register', function () {
-    return view('includes.register');
-});
-// Route::get('/billings', function () {
-//     return view('accountmanagements.billings.index');
-// })->name('billings');
-// Route::get('/billings/create', function () {
-//     return view('accountmanagements.billings.create');
-// });
-
 Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionController::class);
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
 Route::post('/postLogin',[App\Http\Controllers\AuthController::class,'postLogin'])->name('postLogin');
@@ -124,6 +23,9 @@ Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->nam
 Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
 
 Route::middleware(['auth','preventhistory'])->group(function(){
+    //Admin home
+    Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('home');
+
     //Plan
     Route::get('/users/plans',[\App\Http\Controllers\UserController::class,'plan'])->name('users.plans');
     Route::get('/users/addPlans/{id}',[\App\Http\Controllers\UserController::class,'addPlan'])->name('users.addPlans');
@@ -136,8 +38,6 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::resource('contents/setting/subjects', \App\Http\Controllers\SubjectController::class);
     Route::resource('contents/lessons', \App\Http\Controllers\LessonController::class);
     Route::resource('banners', \App\Http\Controllers\BannerController::class);
-    Route::get('/s', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
-    Route::post('/setting', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('groups', \App\Http\Controllers\GroupController::class);
     //
@@ -166,4 +66,17 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::get('/account', [\App\Http\Controllers\UserController::class, 'account'])->name('account.index');
    
     Route::resource('userbank', \App\Http\Controllers\UserBankController::class);
+
+    // Setting
+    Route::post('/setting', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
+    Route::get('setting', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
+    Route::get('setting/logo',[\App\Http\Controllers\SettingController::class,'logo'])->name('settings.logo');
+    Route::get('setting/pages',[\App\Http\Controllers\SettingController::class,'pages'])->name('settings.pages');
+    Route::get('setting/pages/term',[\App\Http\Controllers\SettingController::class,'pageTerm'])->name('settings.pages.term');
+    Route::get('setting/pages/privacy-policy',[\App\Http\Controllers\SettingController::class,'pagePrivacyPolicy'])->name('settings.pages.privacy-policy');
+    Route::get('setting/pages/refund-policy',[\App\Http\Controllers\SettingController::class,'pageRefundPolicy'])->name('settings.pages.refund-policy');
+    Route::get('setting/pages/faq',[\App\Http\Controllers\SettingController::class,'pageFaq'])->name('settings.pages.faq');
+    Route::get('setting/popup',[\App\Http\Controllers\SettingController::class,'popup'])->name('settings.popup');
+    Route::get('setting/notice',[\App\Http\Controllers\SettingController::class,'notice'])->name('settings.notice');
+    Route::get('setting/customer-inquiry',[\App\Http\Controllers\SettingController::class,'customerInquiry'])->name('settings.customer-inquiry');
 });

@@ -43,7 +43,7 @@ class LessonController extends Controller
         $item->description = $request->description;
         $item->status = $request->status;
         if (!empty(Auth::user())) {
-            $item->user_id = Auth::user()->id;
+            $item->user_id = $this->user_id;
         }
         try {
             if ($request->hasFile('video')) {
@@ -96,7 +96,7 @@ class LessonController extends Controller
             $item->description = $request->description;
             $item->status = $request->status;
             if (!empty(Auth::user())) {
-                $item->user_id = Auth::user()->id;
+                $item->user_id = $this->user_id;
             }
             if ($request->hasFile('video')) {
                 $item->video_url = $this->uploadFile($request->file('video'), 'uploads/lessons/video');

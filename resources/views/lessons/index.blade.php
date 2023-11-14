@@ -1,27 +1,4 @@
 @extends('layouts.master')
-@section('header')
-<style>
-#grade .grade-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-#grade .grade-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-#grade ul li {
-    width: 100%;
-    background-color: var(--color-main);
-    padding: 10px 10px;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px
-}
-</style>
-@endsection
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">

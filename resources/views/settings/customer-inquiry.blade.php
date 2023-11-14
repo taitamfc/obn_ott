@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                Terms
+                Inquiry
             </div>
         </div>
     </div>

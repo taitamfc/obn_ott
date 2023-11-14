@@ -21,23 +21,18 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
     use UploadFileTrait;
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }  
     /**
      * Display a listing of the resource.
      */
     function index(Request $request){
         $this->authorize('User',User::class);
-        $groups = Group::all();
+        $groups = Group::where('user_id',$this->user_id)->get();
+        if( !count($groups) ){
+            // If not, get groups for system
+            $groups = Group::where('user_id',0)->get();
+        }
         if( $request->ajax() ){
-            $items = User::paginate(4);
+            $items = User::where('parent_id',$this->user_id)->paginate(20);
             return view('accountmanagements.users.ajax-index',compact('items','groups'));
         }
     return view('accountmanagements.users.index',compact('groups'));
@@ -59,7 +54,7 @@ class UserController extends Controller
         $item->email = $request->email;
         $item->password = $request->password;
         $item->group_id = $request->group_id;
-        $item->parent_id = $request->parent_id;
+        $item->parent_id = $this->user_id;
         try {
             if ($request->hasFile('image')) {
                 $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
@@ -84,7 +79,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $item = User::findOrfail($id);
+        $item = User::where('parent_id',$this->user_id)->findOrfail($id);
         return new UserResource($item);
     }
 
@@ -101,13 +96,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $item = User::findOrfail($id);
+        $item = User::where('parent_id',$this->user_id)->findOrfail($id);
         $item->name = $request->name;
         $item->email = $request->email;
         $item->password = isset($request->password)?$request->password:$item->password;
         $item->phone = isset($request->phone)?$request->phone:$item->phone;
         $item->group_id = isset($request->group_id)?$request->group_id:$item->group_id;
-        $item->parent_id = isset($request->parent_id)?$request->parent_id:$item->parent_id;
+        $item->parent_id = $this->user_id;
         try {
             if ($request->hasFile('image')) {
                 // Delete old file
@@ -157,24 +152,24 @@ class UserController extends Controller
     }
 
     function account(Request $request){
-        $item = User::findOrfail(auth::user()->id);
-        $bankOwner = UserBank::where('user_id',Auth::user()->id)->first();
-        $current_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->with('user','plan')->first();
+        $item = User::findOrfail($this->user_id);
+        $bankOwner = UserBank::where('user_id',$this->user_id)->first();
+        $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->with('user','plan')->first();
         return view('accountmanagements.accountmanage.index',compact('item','bankOwner','current_plan'));
     }
     function plan(){
         $items = Plan::paginate(3);
-        $current_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->first();
-        $next_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',0)->first();
+        $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->first();
+        $next_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',0)->first();
         return view('accountmanagements.plans.plan',compact('items','current_plan','next_plan'));
     }
     function addPlan(String $id){
         $item = Plan::findOrfail($id);
-        $current_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->value('expiration_date');
+        $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->value('expiration_date');
         return view('accountmanagements.plans.buyPlan',compact('item','current_plan'));
     }
     function storePlans(Request $request){
-        $count = PlanUser::where('user_id', Auth::user()->id)->count();
+        $count = PlanUser::where('user_id', $this->user_id)->count();
         if ($count<=1) {
         try {
             $id = $_REQUEST['data'];
@@ -182,8 +177,8 @@ class UserController extends Controller
             $plan = Plan::findOrfail($id);
             $item = new PlanUser();
             $item->plan_id = $id;
-            $item->user_id = Auth::user()->id;
-            $current_plan_date = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->value('expiration_date');
+            $item->user_id = $this->user_id;
+            $current_plan_date = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->value('expiration_date');
             if (!empty($current_plan_date)) {
                 $current_plan_date = Carbon::parse($current_plan_date);
                 $item->is_current = 0;

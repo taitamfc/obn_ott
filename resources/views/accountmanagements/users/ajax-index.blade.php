@@ -1,3 +1,4 @@
+@if( count($items) )
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-hover progress-table text-left ">
@@ -44,3 +45,6 @@
 <div class="card-footer">
     {{ $items->appends(request()->query())->links() }}
 </div>
+@else
+<div class="text-center pt-5 pb-5">{{ __('sys.no_data') }}</div>
+@endif
