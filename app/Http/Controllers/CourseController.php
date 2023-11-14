@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
-    use UploadFileTrait;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,7 +24,7 @@ class CourseController extends Controller
             $this->user_id = Auth::id();
             return $next($request);
         });
-    }  
+
     function index(Request $request){
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
@@ -61,7 +61,7 @@ class CourseController extends Controller
 
     public function show(string $id)
     {
-        $item = Course::where('user_id',$this->user_id)->find($id);
+        $item = Course::findOrfail($id);
         return new CourseResource($item);
     }
 
@@ -127,24 +127,29 @@ class CourseController extends Controller
             Log::error('Bug occurred: ' . $e->getMessage());
         }
     }
-    function products(){
-        $items = Course::paginate(5);
-        return view('stores.productmanagement.index',compact('items'));
+    function products(Request $request){
+        $this->authorize('Course',Course::class);
+        if( $request->ajax() ){
+            $items = Course::paginate(5);
+            return view('stores.productmanagement.ajax-index',compact('items'));
+        }
+        return view('stores.productmanagement.index');
     }
     function editProduct(Request $request){
+        $this->authorize('Course',Grade::class);
         try {  
-            $item = Course::findOrfail($request->id);
+            $item = Course::where('user_id',$this->user_id)->findOrfail($request->id);
             $item->price = $request->price;
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $request->id,
+                'message'=> __('sys.update_item_success'),
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> _('sys.update_item_error')
             ],200);
         }
     }

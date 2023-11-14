@@ -47,8 +47,13 @@
                                 </div>
                                 <div class=" col-sm-6">
                                     <div class="col-sm-4">
-                                        <img src="https://ott.rrtech247.com/public/assets/studio/images/Paypal-logo.png"
-                                            alt="">
+                                        <form action="" method="post">
+                                            @csrf
+                                            <button type='submit'>
+                                                <img src="https://ott.rrtech247.com/public/assets/studio/images/Paypal-logo.png"
+                                                    alt="">
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
