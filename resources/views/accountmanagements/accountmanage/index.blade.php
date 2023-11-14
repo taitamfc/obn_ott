@@ -1,9 +1,18 @@
 @extends('layouts.master')
+@section('header')
+<style>
+.table td,
+.table th {
+    border: 1 px solid;
+}
+
+.card-header {
+    border: none;
+}
+</style>
+@endsection
 @section('content')
 <div class="main-content page-content">
-    <!--==================================*
-                   Main Section
-        *====================================-->
     <div class="main-content-inner" style="max-width: 100% !important;">
         <div class="row mb-4">
             <div class="col-md-12 grid-margin">
@@ -15,9 +24,6 @@
                             <i class="mdi mdi-chevron-right mr-1 text-primary"></i>
                             <p class="text-muted mb-0 mr-1 hover-cursor">Account Management</p>
                         </div>
-                    </div>
-                    <div class="buttons">
-
                     </div>
                 </div>
             </div>
@@ -39,7 +45,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body ml-4">
                         <div class="billing_info">
                             <div class="row">
                                 <table class="table table-hover progress-table text-left ">
@@ -66,66 +72,101 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="plan">
-
-                        </div>
-                        <div class="method">
-
-                        </div>
                     </div>
                 </div>
-
                 <div class="card mt-4">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify">
                         <div class="col-sm-6">
                             <h4>Current Plan</h4>
                         </div>
                         <div class="col-sm-6 text-right">
-                            <a href="https://ott.rrtech247.com/studio/account/plan/change">Edit</a>
+                            <a href="{{ route('users.plans') }}"><i class="fa fa-edit"></i></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body ml-4">
                         <div class="billing_info">
                             <div class="row">
-                                <div class=" col-sm-12">
-                                    <div class="col-sm-4">
-                                        <h4>PLan B</h4>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input name="dates" type="text" />
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <h4>Phone Number</h4>
-                                    </div>
-                                </div>
+                                <table class="table table-hover progress-table text-left ">
+                                    <thead class="text-uppercase">
+                                        <tr>
+                                            <th class='col-sm-3'>
+                                                Name
+                                            </th>
+                                            <th class='col-sm-3'>
+                                                Price
+                                            </th>
+                                            <th class='col-sm-3'>
+                                                Start date
+                                            </th>
+                                            <th class='col-sm-3'>
+                                                Expiration date
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $current_plan->plan->name }}</td>
+                                            <td>{{ $current_plan->plan->price }}</td>
+                                            <td>{{ $current_plan->created_at }}</td>
+                                            <td>{{ $current_plan->expiration_date }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="plan">
 
-                        </div>
-                        <div class="method">
-
-                        </div>
                     </div>
                 </div>
-
                 <div class="card mt-4">
                     <div class="card-header d-flex justify">
                         <div class="col-sm-6">
                             <h4>Current Account Information</h4>
                         </div>
                         <div class="col-sm-6 text-right" style="float:right">
-                            <a href="{{ route('userbank.index') }}">Edit</a>
+                            <a href="{{ route('userbank.index') }}"><i class="fa fa-edit"></i></a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body ml-4">
                         <div class="billing_info">
+                            @if(!empty($bankOwner))
                             <div class="row">
+                                <table class="table table-hover progress-table text-left ">
+                                    <thead class="text-uppercase">
+                                        <tr>
+                                            <th class='col-sm-3'>
+                                                Name
+                                            </th>
+                                            <th class='col-sm-3'>
+                                                Bank
+                                            </th>
+                                            <th class='col-sm-3'>
+                                                Bank Number
+                                            </th>
+                                            <th class='col-sm-3'>
+                                                Address
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $bankOwner->bank_owner }}</td>
+                                            <td>{{ $bankOwner->bank_name }}</td>
+                                            <td>{{ $bankOwner->bank_number }}</td>
+                                            <td>{{ $bankOwner->address }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            @else
+                            <div class="row" onclick="window.location.href='{{ route('userbank.index') }}'">
                                 <div class=" col-sm-6">
                                     <div class="col-sm-4">
-                                        <img src="https://image.vietstock.vn/2018/08/08/visa-mastercard-amex-discover-icon.png"
-                                            alt="">
+                                        <a href="" data-toggle="modal" data-target="#modalCreate">
+                                            <img src="https://image.vietstock.vn/2018/08/08/visa-mastercard-amex-discover-icon.png"
+                                                alt="">
+                                        </a>
                                     </div>
+
                                 </div>
                                 <div class=" col-sm-6">
                                     <div class="col-sm-4">
@@ -134,68 +175,13 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-
-            <div class="modal fade" id="modalUpdate" style="display: none;" aria-hidden="true">
-                <form id="formUpdate" action="{{ route('users.update', $item->id)}}" method="post"
-                    enctype="multipart/form-data">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="id" id="input-id">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Update</h5>
-                                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="form-group input-name">
-                                    <label for="name" class="col-form-label">Name</label>
-                                    <input class="form-control" type="text" value='{{ $item->name }}' id="name"
-                                        name='name'>
-                                    <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
-                                </div>
-
-                                <div class="form-group input-email">
-                                    <label for="email" class="col-form-label">Email</label>
-                                    <input class="form-control" type="text" value='{{ $item->email }}' id="email"
-                                        name='email'>
-                                    <div class="input-error text-danger">@error('email') {{ $message }} @enderror</div>
-                                </div>
-
-                                <div class="form-group input-phone">
-                                    <label for="phone" class="col-form-label">Phone</label>
-                                    <input class="form-control" type="text" value='{{ $item->phone }}' id="phone"
-                                        name='phone'>
-                                    <div class="input-error text-danger">@error('phone') {{ $message }} @enderror</div>
-                                </div>
-
-                                <div class="form-group input-password">
-                                    <label for="password" class="col-form-label">Password</label>
-                                    <input class="form-control" type="password" id="password" name='password'>
-                                    <div class="input-error text-danger">@error('password') {{ $message }} @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary edit-item" type='button'>Save changes</button>
-                                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-    <!--==================================*
-                   End Main Section
-        *====================================-->
 </div>
 @endsection
 
@@ -218,7 +204,7 @@ jQuery(document).ready(function() {
     });
 
 
-    // Xu ly xoa
+    // Delete item
     jQuery(".delete-item").click(function(e) {
         e.preventDefault();
         var ele = $(this);
@@ -242,7 +228,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    // Xu ly them moi
+    // Add new account
     jQuery(".add-item").click(function(e) {
         let formCreate = jQuery(this).closest('#formCreate');
         formCreate.find('.input-error').empty();
@@ -274,7 +260,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly them moi
+    // Update account
     jQuery(".edit-item").click(function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
         formUpdate.find('.input-error').empty();
@@ -305,7 +291,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly form edit
+    // show form edit with value default
     jQuery('.show-form-edit').click(function() {
         // alert(123)
         // Hien thi modal

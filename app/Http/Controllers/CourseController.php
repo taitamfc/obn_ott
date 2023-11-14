@@ -10,8 +10,20 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Http\Resources\CourseResource;
+use Illuminate\Support\Facades\Auth;
+
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }
+
     function index(Request $request){
         $this->authorize('Course',Course::class);
         $items = Course::orderBy('position','ASC')->get();
@@ -109,9 +121,13 @@ class CourseController extends Controller
             Log::error('Bug occurred: ' . $e->getMessage());
         }
     }
-    function products(){
-        $items = Course::paginate(5);
-        return view('stores.productmanagement.index',compact('items'));
+    function products(Request $request){
+        $this->authorize('Course',Course::class);
+        if( $request->ajax() ){
+            $items = Course::paginate(5);
+            return view('stores.productmanagement.ajax-index',compact('items'));
+        }
+        return view('stores.productmanagement.index');
     }
     function editProduct(Request $request){
         try {  

@@ -5,6 +5,7 @@ use App\Http\Requests\StoreBankUserRequest;
 use App\Models\User;
 use App\Models\PlanUser;
 use App\Models\Plan;
+use App\Models\UserBank;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -144,7 +145,9 @@ class UserController extends Controller
 
     function account(Request $request){
         $item = User::findOrfail(auth::user()->id);
-        return view('accountmanagements.accountmanage.index',compact('item'));
+        $bankOwner = UserBank::where('user_id',Auth::user()->id)->first();
+        $current_plan = PlanUser::where('user_id',Auth::user()->id)->where('is_current',1)->with('user','plan')->first();
+        return view('accountmanagements.accountmanage.index',compact('item','bankOwner','current_plan'));
     }
     function plan(){
         $items = Plan::paginate(3);
