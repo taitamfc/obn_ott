@@ -60,7 +60,7 @@ class CourseController extends Controller
 
     public function show(string $id)
     {
-        $item = Course::find($id);
+        $item = Course::findOrfail($id);
         return new CourseResource($item);
 
     }
@@ -130,19 +130,20 @@ class CourseController extends Controller
         return view('stores.productmanagement.index');
     }
     function editProduct(Request $request){
+        $this->authorize('Course',Grade::class);
         try {  
-            $item = Course::findOrfail($request->id);
+            $item = Course::where('user_id',$this->user_id)->findOrfail($request->id);
             $item->price = $request->price;
             $item->save();
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $request->id,
+                'message'=> __('sys.update_item_success'),
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> _('sys.update_item_error')
             ],200);
         }
     }
