@@ -34,8 +34,7 @@
                         <select class="form-control" id="group_id" name='group_id'>
                             <option value="" selected disabled>Select Account Type</option>
                             @foreach($groups as $group)
-                            <option value="{{ $group->id }}" @if($item->group_id == $group->id) selected
-                                @endif>{{ $group->name }}</option>
+                            <option value="{{ $group->id }}" >{{ $group->name }}</option>
                             @endforeach
                         </select>
                         <div class="input-error text-danger">@error('group_id') {{ $message }} @enderror</div>
