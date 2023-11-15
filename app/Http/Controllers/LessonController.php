@@ -161,10 +161,17 @@ class LessonController extends Controller
     {
         try {
             Lesson::where('user_id',Auth::id())->delete();
-            return redirect()->route('lessons.index')->with('success',__('sys.destroy_item_success'));
+            return response([
+                'success' => true,
+                'message' => __('sys.destroy_item_success'),
+                'redirect' => route('lessons.index')
+            ],200);
         } catch (QueryException $e) {
+            return response([
+                'success' => false,
+                'message' => __('sys.destroy_item_error'),
+            ],200);
             Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('lessons.index')->with('error',__('sys.destroy_item_error'));
         }
     }
 }
