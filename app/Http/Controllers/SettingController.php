@@ -40,8 +40,8 @@ class SettingController extends Controller
         return view('settings.logo'); 
     }
     public function pageTerm(){ return view('settings.pages.terms'); }
-    public function pagePrivacyPolicy(){ return view('settings.pages.privacyPolicy'); }
-    public function pageRefundPolicy(){ return view('settings.pages.refundPolicy'); }
+    public function pagePrivacyPolicy(){ return view('settings.pages.privacy-policy'); }
+    public function pageRefundPolicy(){ return view('settings.pages.refund-policy'); }
     public function pageFaq(){ return view('settings.pages.faq'); }
     public function popup(){ return view('settings.popup'); }
     public function notice(){ return view('settings.notice'); }
