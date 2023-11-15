@@ -15,12 +15,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }
     function index(Request $request){
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
             $items = Course::where('user_id',Auth::id())->orderBy('position','ASC')->paginate(20);
             return view('contents.setting.courses.ajax-index',compact('items'));
-        }
+        } 
         return view('contents.setting.courses.index');
     }
 
