@@ -4,11 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Banner extends Model
 {
     use HasFactory;
     protected $table = 'banners';
+
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    }
+
     protected $fillable = [
         'name',
         'description',
@@ -20,8 +29,6 @@ class Banner extends Model
         'createt_at',
         'updated_at',
     ];
-    const ACTIVE = 1;
-    const INACTIVE = 0;
 
     // status_fm 
     function getStatusFmAttribute(){

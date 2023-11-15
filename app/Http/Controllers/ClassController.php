@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ClassController extends Controller
 {
     function index(Request $request){
-        $courses = Course::where('user_id',$this->user_id)->get();
+        $courses = Course::where('user_id',Auth::id())->get();
         $query = DB::table('lesson_student')
         ->join('students', 'students.id', '=', 'lesson_student.student_id')
         ->select('students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
@@ -28,7 +28,7 @@ class ClassController extends Controller
 
     function students(Request $request){
         try {
-            $query = StudentCourse::where('user_id',$this->user_id)->with('student','course');
+            $query = StudentCourse::where('user_id',Auth::id())->with('student','course');
             if ($request->searchName) {
                 $query->whereHas('student', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' . $request->searchName . '%');
@@ -50,7 +50,7 @@ class ClassController extends Controller
         $transactionHistory = DB::table('transactions')
         ->join('courses', 'courses.id', '=', 'transactions.course_id')
         ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
-        ->where('transactions.user_id', '=', $this->user_id)
+        ->where('transactions.user_id', '=', Auth::id())
         ->where('student_id', '=',$id)
         ->groupBy('course_id', 'date')
         ->get();;

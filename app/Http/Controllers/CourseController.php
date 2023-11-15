@@ -15,11 +15,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
-
     function index(Request $request){
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
-            $items = Course::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(4);
+            $items = Course::where('user_id',Auth::id())->orderBy('position','ASC')->paginate(20);
             return view('contents.setting.courses.ajax-index',compact('items'));
         }
         return view('contents.setting.courses.index');
@@ -27,13 +26,13 @@ class CourseController extends Controller
 
     function store(StoreCourseRequest $request){
         $item = new Course();
-        $item->user_id = $this->user_id;
+        $item->user_id = Auth::id();
         $item->name = $request->name;
         $item->price = $request->price;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/courses');
             } 
             $item->save();
             return response()->json([
@@ -52,14 +51,14 @@ class CourseController extends Controller
 
     public function show(string $id)
     {
-        $item = Course::findOrfail($id);
+        $item = Course::where('user_id',Auth::id())->findOrfail($id);
         return new CourseResource($item);
     }
 
 
     public function update(UpdateCourseRequest $request, string $id)
     {
-        $item = Course::where('user_id',$this->user_id)->find($id);
+        $item = Course::where('user_id',Auth::id())->find($id);
         $item->name = $request->name;
         $item->price = $request->price;
         $item->status = $request->status;
@@ -69,7 +68,7 @@ class CourseController extends Controller
                 $this->deleteFile([$item->img]);
 
                 // Upload new file
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/courses');
             }
             $item->save();
             return response()->json([
@@ -89,7 +88,7 @@ class CourseController extends Controller
     public function destroy(string $id)
     {
         try {
-            $item =  Course::where('user_id',$this->user_id)->find($id);
+            $item =  Course::where('user_id',Auth::id())->find($id);
             // Delete old file
             $this->deleteFile([$item->img]);
 
@@ -110,7 +109,7 @@ class CourseController extends Controller
     function position(Request $request){
         try {
             foreach ($_REQUEST['item'] as $key => $value) {
-                $item = Course::findOrfail($value);
+                $item = Course::where('user_id',Auth::id())->findOrfail($value);
                 $item->position = $key;
                 $item->save();
             }
@@ -121,7 +120,7 @@ class CourseController extends Controller
     function products(Request $request){
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
-            $items = Course::paginate(5);
+            $items = Course::where('user_id',Auth::id())->paginate(20);
             return view('stores.productmanagement.ajax-index',compact('items'));
         }
         return view('stores.productmanagement.index');
@@ -129,7 +128,7 @@ class CourseController extends Controller
     function editProduct(Request $request){
         $this->authorize('Course',Grade::class);
         try {  
-            $item = Course::where('user_id',$this->user_id)->findOrfail($request->id);
+            $item = Course::where('user_id',Auth::id())->findOrfail($request->id);
             $item->price = $request->price;
             $item->save();
             return response()->json([

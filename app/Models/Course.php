@@ -4,11 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
+    
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    }
+
     function student(){
         return $this->belongsToMany(Student::class);
     }
@@ -41,8 +50,7 @@ class Course extends Model
     {
         return $this->belongsToMany(Subscription::class, 'subscription_course', 'course_id', 'subscription_id');
     }
-    const ACTIVE = 1;
-    const INACTIVE = 0;
+    
 
     // status_fm 
     function getStatusFmAttribute(){

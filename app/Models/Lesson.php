@@ -9,6 +9,10 @@ class Lesson extends Model
 {
     use HasFactory;
     protected $table = 'lessons';
+
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
     protected $fillable = [
         'name',
         'description',
