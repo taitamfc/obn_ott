@@ -25,13 +25,12 @@ $informationStudent = $items['informationStudent'];
                             <p class="text-muted mb-0 mr-1 hover-cursor">My Class</p>
                         </div>
                     </div>
-                    <div class="buttons">
-
+                    <div class="buttons d-flex">
+                        <a class="btn btn-dark mr-1" href="{{ route('classes.students') }}">Back to Students</a>
                     </div>
                 </div>
             </div>
         </div>
-        <a class="btn btn-secondary mt-4 ml-3" href="{{ route('classes.index') }}">Back to list</a>
         <div class="" style="padding: 20px">
             <div class="row">
                 <div class="col-sm-6">

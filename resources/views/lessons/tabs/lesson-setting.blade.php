@@ -64,7 +64,7 @@
 	<div class="col-lg-12">
 		<div class="form-group">
             <label for="" class="col-form-label">Description <span>*</span></label>
-            <textarea name="description" id="description" cols="30" rows="5" class="form-control">{{ $item->description }}</textarea>
+            <textarea name="description" id="description" name='description' cols="30" rows="5" class="form-control">{{ $item->description }}</textarea>
         </div>
     </div>
 </div>

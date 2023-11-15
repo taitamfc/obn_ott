@@ -19,6 +19,7 @@ class GradeController extends Controller
 {
     use UploadFileTrait;
 
+    
     function index(Request $request){
         $this->authorize('Grade',Grade::class);
         if( $request->ajax() ){

@@ -13,29 +13,45 @@ use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }
+
     function index(Request $request){
-        $courses = Course::where('user_id',Auth::id())->get();
-        $query = DB::table('lesson_student')
-        ->join('students', 'students.id', '=', 'lesson_student.student_id')
-        ->select('students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
-        ->groupBy('students.name');
-        if ($request->course) {
-            $query->where('course_id',$request->course);
+        $courses = Course::where('user_id',$this->user_id)->get();
+        if ($request->ajax()) {
+            $query = DB::table('lesson_student')
+            ->join('students', 'students.id', '=', 'lesson_student.student_id')
+            ->select('students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
+            ->groupBy('students.name');
+            if ($request->course) {
+                $query->where('course_id',$request->course);
+            }
+            $items = $query->get();
+            return view('class.ajax-index',compact('courses','items'));
         }
-        $items = $query->get();
-        return view('class.index',compact('courses','items'));
+        return view('class.index',compact('courses'));
     }
 
     function students(Request $request){
         try {
-            $query = StudentCourse::where('user_id',Auth::id())->with('student','course');
-            if ($request->searchName) {
-                $query->whereHas('student', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->searchName . '%');
-                });
+            if ($request->ajax()) {
+                $query = StudentCourse::where('user_id',Auth::id())->with('student','course');
+                if ($request->searchName) {
+                    $query->whereHas('student', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', '%' . $request->searchName . '%');
+                    });
+                }
+                $items = $query->paginate(5);
+                return view('class.students.ajax-index',compact('items'));
             }
-            $items = $query->paginate(5);
-            return view('class.student',compact('items'));
+            return view('class.students.index');
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
@@ -53,14 +69,14 @@ class ClassController extends Controller
         ->where('transactions.user_id', '=', Auth::id())
         ->where('student_id', '=',$id)
         ->groupBy('course_id', 'date')
-        ->get();;
+        ->get();
         $informationStudent = Student::findOrfail($id);
         $items = [
             'lessonHistory' => $lessonHistory,
             'transactionHistory' =>$transactionHistory,
             'informationStudent' => $informationStudent
         ];
-        return view('class.show',compact('items'));
+        return view('class.students.show',compact('items'));
     }
 
     function destroy(String $id){

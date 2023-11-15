@@ -20,6 +20,9 @@ select.form-control:not([size]):not([multiple]) {
                             <p class="text-muted mb-0 mr-1 hover-cursor">My Class</p>
                         </div>
                     </div>
+                    <div class="buttons d-flex">
+                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,31 +66,8 @@ select.form-control:not([size]):not([multiple]) {
                         </div>
                     </div>
                     <div class="col-sm-12 mt-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="single-table">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover progress-table text-left ">
-                                            <thead class="text-uppercase">
-                                                <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col" class='text-center'>Course view count</th>
-                                                    <th scope="col" class='text-center'>Last view</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($items as $item)
-                                                <tr>
-                                                    <td>{{ $item->name }}</td>
-                                                    <td class='text-center'>{{ $item->total_lessons }}</td>
-                                                    <td class='text-center'>{{ $item->last_view }}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card classes-table-results">
+                            <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
                         </div>
                     </div>
                 </div>
@@ -95,4 +75,18 @@ select.form-control:not([size]):not([multiple]) {
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+jQuery(function() {
+    var indexUrl = "{{ route('classes.index') }}";
+    var positionUrl = "";
+    var params = <?= json_encode(request()->query()); ?>;
+    var wrapperResults = '.classes-table-results';
+
+    // Get all items
+    getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+});
+</script>
 @endsection

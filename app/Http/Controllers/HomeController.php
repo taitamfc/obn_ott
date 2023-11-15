@@ -74,7 +74,6 @@ class HomeController extends Controller
             $newUsersCount = $reports->get()->count();
             // Sold course
             $soldCoursesCount = $reports->get()->count();
-            // I know new student and sold course is same so sorry deadline is coming. if u are dev, pls countinue. I will fix after :((
             // Count view lesson
             $viewCounts = $reports->get();
             $totalLessonViews = 0;

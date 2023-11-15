@@ -33,13 +33,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row vertical_tabs">
-                                <div class="col-lg-3 nav flex-column nav-pills" id="v-pills-tab"
-                                    role="tablist" aria-orientation="vertical">
-                                    
+                                <div class="col-lg-3 nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                    aria-orientation="vertical">
+
                                     <a class="nav-link active" id="v-lesson-setting-tab" data-toggle="pill"
                                         href="#v-lesson-setting" role="tab" aria-controls="v-lesson-setting"
                                         aria-selected="true"><i class="fa fa-cog mr-1"></i> Lesson Setting </a>
-                                    
+
                                     <a class="nav-link" id="v-video-setting-tab" data-toggle="pill"
                                         href="#v-video-setting" role="tab" aria-controls="v-video-setting"
                                         aria-selected="false"><i class="fa fa-youtube-play"></i> Video Setting</a>
@@ -57,7 +57,7 @@
                                         aria-labelledby="v-video-setting-tab">
                                         @include('lessons.tabs.video-setting')
                                     </div>
-                                    
+
                                     <div class="tab-pane fade" id="v-image-setting" role="tabpanel"
                                         aria-labelledby="v-image-setting-tab">
                                         @include('lessons.tabs.image-setting')
@@ -78,6 +78,10 @@
 @endsection
 
 @section('footer')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('description');
+</script>
 <script>
 jQuery(document).ready(function() {
     jQuery(".add-item").click(function(e) {
