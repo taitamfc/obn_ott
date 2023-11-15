@@ -35,7 +35,7 @@
                             </li>
                             <li>
                                 <a href="javascript:;" class="btn btn-danger delete-item"
-                                data-id="{{ $item->id }}">
+                                data-id="{{ $item->id }}" data-action="{{ route('lessons.destroy',$item->id) }}">
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>
