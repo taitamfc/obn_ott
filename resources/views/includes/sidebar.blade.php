@@ -2,7 +2,7 @@
     <div class="menu-inner">
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
-                <li> <a href="{{ route('dashboard') }}">
+                <li> <a href="{{ route('home') }}">
                         <i class="feather ft-home"></i>
                         <span>Home</span>
                     </a>
@@ -80,12 +80,12 @@
                         <span>Class</span>
                     </a>
                 </li>
-                <li> <a href="/videos">
+                <li> <a href="#">
                         <i class="feather ft-home"></i>
                         <span>Video Advertisement</span>
                     </a>
                 </li>
-                <li> <a href="/themes">
+                <li> <a href="#">
                         <i class="feather ft-home"></i>
                         <span>Themes</span>
                         <span class="float-right arrow">

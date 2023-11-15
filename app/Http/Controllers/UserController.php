@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     function index(Request $request){
         $this->authorize('User',User::class);
-        $groups = Group::where('user_id',Auth::id())->get();
+        $groups = Group::all();
         if( !count($groups) ){
             // If not, get groups for system
             $groups = Group::where('user_id',0)->get();

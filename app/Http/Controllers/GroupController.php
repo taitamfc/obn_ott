@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\GroupResource;
+use Illuminate\Support\Facades\Auth;
+
 class GroupController extends Controller
 {
     /**
@@ -18,7 +20,7 @@ class GroupController extends Controller
      */
     function index(Request $request){
         $this->authorize('Group',Group::class);
-        $items = Group::where('user_id',Auth::id())->get();
+        $items = Group::all();
         $roles = Role::get();
         $selected_roles = [];
         return view('accountmanagements.groups.index',compact('items','roles','selected_roles'));
@@ -65,8 +67,8 @@ class GroupController extends Controller
      */
     public function edit(string $id)
     {
-        $items = Group::where('user_id',Auth::id())->get();
-        $item = Group::where('user_id',Auth::id())->find($id);
+        $items = Group::get();
+        $item = Group::find($id);
         $selected_roles = $item->roles->pluck('id')->toArray();
         $roles = Role::get();
         return view('accountmanagements.groups.edit',compact('items','roles','item','selected_roles'));

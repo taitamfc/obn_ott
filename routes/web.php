@@ -24,7 +24,7 @@ Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postReg
 
 Route::middleware(['auth','preventhistory'])->group(function(){
     //Home & fullcalender
-    Route::get('/',[HomeController::class,'index'])->name('dashboard');
+    Route::get('/',[HomeController::class,'index'])->name('home');
     Route::post('fullcalendar/create',[HomeController::class,'store']);
     Route::post('fullcalendar/update',[HomeController::class,'update']);
     Route::post('fullcalendar/delete',[HomeController::class,'destroy']);
