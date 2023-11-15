@@ -19,20 +19,10 @@ class GradeController extends Controller
 {
     use UploadFileTrait;
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }  
-
     function index(Request $request){
         $this->authorize('Grade',Grade::class);
         if( $request->ajax() ){
-            $items = Grade::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(4);
+            $items = Grade::where('user_id',Auth::id())->orderBy('position','ASC')->paginate(20);
             return view('contents.setting.grades.ajax-index',compact('items'));
         }
         return view('contents.setting.grades.index');
@@ -40,12 +30,12 @@ class GradeController extends Controller
 
     function store(StoreGradeRequest $request){
         $item = new Grade();
-        $item->user_id = $this->user_id;
+        $item->user_id = Auth::id();
         $item->name = $request->name;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/grades');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/grades');
             } 
             $item->save();
             return response()->json([
@@ -64,13 +54,13 @@ class GradeController extends Controller
 
     public function show(string $id)
     {
-        $item = Grade::where('user_id',$this->user_id)->find($id);
+        $item = Grade::where('user_id',Auth::id())->find($id);
         return new GradeResource($item);
     }
 
     public function update(UpdateGradeRequest $request, string $id)
     {
-        $item = Grade::where('user_id',$this->user_id)->find($id);
+        $item = Grade::where('user_id',Auth::id())->find($id);
         $item->name = $request->name;
         $item->status = $request->status;
         try {
@@ -79,7 +69,7 @@ class GradeController extends Controller
                 $this->deleteFile([$item->img]);
 
                 // Upload new file
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/grades');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/grades');
             }
             $item->save();
             return response()->json([
@@ -99,7 +89,7 @@ class GradeController extends Controller
     public function destroy(string $id)
     {
         try {
-            $item =  Grade::where('user_id',$this->user_id)->find($id);
+            $item =  Grade::where('user_id',Auth::id())->find($id);
             // Delete old file
             $this->deleteFile([$item->img]);
 

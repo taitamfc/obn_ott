@@ -4,17 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Group extends Model
 {
     use HasFactory;
     protected $table = 'groups';
+
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+    
     protected $fillable = [
         'name',
         'status',
         'created_at',
         'updated_at',
     ];
+
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    }
+
     public function users()
     {
         return $this->hasMany(User::class, 'group_id');
@@ -24,6 +34,4 @@ class Group extends Model
     {
         return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'role_id');
     }
-    const ACTIVE = 1;
-    const INACTIVE = 0;
 }

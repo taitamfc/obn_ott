@@ -18,11 +18,10 @@ class GroupController extends Controller
      */
     function index(Request $request){
         $this->authorize('Group',Group::class);
-        $items = Group::get();
+        $items = Group::where('user_id',Auth::id())->get();
         $roles = Role::get();
         $selected_roles = [];
         return view('accountmanagements.groups.index',compact('items','roles','selected_roles'));
-
     }
 
     /**
@@ -66,8 +65,8 @@ class GroupController extends Controller
      */
     public function edit(string $id)
     {
-        $items = Group::get();
-        $item = Group::find($id);
+        $items = Group::where('user_id',Auth::id())->get();
+        $item = Group::where('user_id',Auth::id())->find($id);
         $selected_roles = $item->roles->pluck('id')->toArray();
         $roles = Role::get();
         return view('accountmanagements.groups.edit',compact('items','roles','item','selected_roles'));

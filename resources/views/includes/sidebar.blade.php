@@ -94,11 +94,11 @@
                     </a>
 
                     <ul>
-                        <li> <a href="/themes/banner">
+                        <li> <a href="#">
                                 <i class="feather ft-home"></i>
                                 <span>Homepage Banner</span>
                             </a></li>
-                        <li> <a href="/themes/sestion">
+                        <li> <a href="#">
                                 <i class="feather ft-home"></i>
                                 <span>Homepage Sections</span>
                             </a></li>
@@ -141,7 +141,7 @@
                         </span>
                     </a>
                     <ul>
-                    <li> <a href="{{ route('account.index')}}">
+                        <li> <a href="{{ route('account.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Account Management</span>
                             </a></li>
@@ -157,13 +157,13 @@
                                 <i class="feather ft-home"></i>
                                 <span>Admin</span>
                             </a></li>
-                            <li> <a href="{{route('groups.index')}}">
+                        <li> <a href="{{route('groups.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Group</span>
                             </a></li>
                     </ul>
                 </li>
-                <li> <a href="/setting">
+                <li> <a href="{{ route('settings.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Setting</span>
                         <span class="float-right arrow">
@@ -171,12 +171,12 @@
                         </span>
                     </a>
                     <ul>
-                        <li> <a href="/setting/logo">
+                        <li> <a href="{{ route('settings.logo') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Logo</span>
                             </a>
                         </li>
-                        <li> <a href="/pages">
+                        <li> <a href="{{ route('settings.pages') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Pages</span>
                                 <span class="float-right arrow">
@@ -184,39 +184,39 @@
                                 </span>
                             </a>
                             <ul>
-                                <li> <a href="/setting/term">
+                                <li> <a href="{{ route('settings.pages.term') }}">
                                         <i class="feather ft-home"></i>
                                         <span>Terms</span>
                                     </a>
                                 </li>
-                                <li> <a href="/setting/privacy-policy">
+                                <li> <a href="{{ route('settings.pages.privacy-policy') }}">
                                         <i class="feather ft-home"></i>
                                         <span>Privacy Policy</span>
                                     </a>
                                 </li>
-                                <li> <a href="/setting/refund-policy">
+                                <li> <a href="{{ route('settings.pages.refund-policy') }}">
                                         <i class="feather ft-home"></i>
                                         <span>Refund Policy</span>
                                     </a>
                                 </li>
-                                <li> <a href="/setting/FAQ">
+                                <li> <a href="{{ route('settings.pages.faq') }}">
                                         <i class="feather ft-home"></i>
                                         <span>FAQ</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li> <a href="/setting/popup">
+                        <li> <a href="{{ route('settings.popup') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Popup</span>
                             </a>
                         </li>
-                        <li> <a href="/setting/notice">
+                        <li> <a href="{{ route('settings.notice') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Notice</span>
                             </a>
                         </li>
-                        <li> <a href="/setting/cusstomer">
+                        <li> <a href="{{ route('settings.customer-inquiry') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Cusstomer Inquiry</span>
                             </a>

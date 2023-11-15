@@ -9,4 +9,7 @@ return [
     'item_not_found' => 'No matching results found',
     'add_new' => 'Add new',
     'loading_data' => 'Loading data...',
+    'no_data' => 'No data',
+    'back' => 'Back',
+    'no_item_found' => 'No item found',
 ];

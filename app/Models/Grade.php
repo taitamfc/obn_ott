@@ -4,11 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Grade extends Model
 {
     use HasFactory;
     protected $table = 'grades';
+    
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
     protected $fillable = [
         'name',
         'description',
@@ -19,13 +24,15 @@ class Grade extends Model
         'created_at',
         'updated_at',
     ];
+
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    }
+
     public function lesson()
     {
         return $this->hasMany(Lesson::class, 'grade_id', 'id');
     }
-
-    const ACTIVE = 1;
-    const INACTIVE = 0;
 
     // status_fm 
     function getStatusFmAttribute(){

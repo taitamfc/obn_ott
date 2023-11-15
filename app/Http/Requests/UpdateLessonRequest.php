@@ -19,7 +19,6 @@ class UpdateLessonRequest extends FormRequest
             'subject_id' => 'required|numeric',
             'course_id' => 'required|numeric',
             'status' => 'required|numeric',
-            'video' => 'required',
         ];
     }
     protected function failedValidation(Validator $validator)

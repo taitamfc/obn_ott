@@ -9,6 +9,10 @@ class Lesson extends Model
 {
     use HasFactory;
     protected $table = 'lessons';
+
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
     protected $fillable = [
         'name',
         'description',
@@ -29,6 +33,9 @@ class Lesson extends Model
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
     function course(){
+        return $this->belongsTo(Course::class);
+    }
+    function courses(){
         return $this->belongsToMany(Course::class,'lesson_course','lesson_id','course_id');
     }
     public function user()

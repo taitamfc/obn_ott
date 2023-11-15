@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Subject extends Model
 {
@@ -19,6 +20,10 @@ class Subject extends Model
         'createt_at',
         'updated_at',
     ];
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    }
+    
     public function lesson()
     {
         return $this->hasMany(Lesson::class, 'subject_id', 'id');

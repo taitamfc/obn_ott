@@ -40,14 +40,6 @@
                         <div class="input-error text-danger">@error('group_id') {{ $message }} @enderror</div>
                     </div>
 
-
-
-                    <div class="form-group input-parent_id">
-                        <label for="parent_id" class="col-form-label">Parent</label>
-                        <input class="form-control" type="text" id="parent_id" name='parent_id'>
-                        <div class="input-error text-danger">@error('parent_id') {{ $message }} @enderror</div>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary edit-item" type='button'>Save changes</button>
