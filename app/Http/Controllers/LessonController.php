@@ -160,7 +160,7 @@ class LessonController extends Controller
     public function destroy(string $id)
     {
         try {
-            Lesson::where('user_id',Auth::id())->destroy($id);
+            Lesson::where('user_id',Auth::id())->delete();
             return redirect()->route('lessons.index')->with('success',__('sys.destroy_item_success'));
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
