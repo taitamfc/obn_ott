@@ -2,7 +2,7 @@
     <div class="menu-inner">
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
-                <li> <a href="/">
+                <li> <a href="{{ route('dashboard') }}">
                         <i class="feather ft-home"></i>
                         <span>Home</span>
                     </a>

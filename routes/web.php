@@ -5,7 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -124,6 +124,14 @@ Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->nam
 Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
 
 Route::middleware(['auth','preventhistory'])->group(function(){
+    
+
+    //Home & fullcalender
+    Route::get('/',[HomeController::class,'index'])->name('dashboard');
+    Route::post('fullcalendar/create',[HomeController::class,'store']);
+    Route::post('fullcalendar/update',[HomeController::class,'update']);
+    Route::post('fullcalendar/delete',[HomeController::class,'destroy']);
+
     //Plan
     Route::get('/users/plans',[\App\Http\Controllers\UserController::class,'plan'])->name('users.plans');
     Route::get('/users/addPlans/{id}',[\App\Http\Controllers\UserController::class,'addPlan'])->name('users.addPlans');

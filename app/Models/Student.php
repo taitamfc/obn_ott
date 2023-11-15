@@ -22,4 +22,7 @@ class Student extends Model
     function lesson_student(){
         return $this->hasMany(LessonStudent::class,'student_id','id');
     }
+    function qas(){
+        return $this->hasMany(QuestionAnswer::class,'student_id','id');
+    }
 }
