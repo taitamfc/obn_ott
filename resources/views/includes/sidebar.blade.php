@@ -8,14 +8,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/content">
+                    <a href="javascript:;">
                         <i class="feather ft-mail"></i>
                         <span>Content</span>
                         <span class="float-right arrow"><i class="ion ion-chevron-down"></i></span>
                     </a>
                     <ul>
                         <li>
-                            <a href="/Setting">
+                            <a href="javascript:;">
                                 <i class="ion-ios-folder-outline"></i>
                                 <span>Setting</span>
                                 <span class="float-right arrow">
@@ -56,7 +56,7 @@
                         <span>Lesson List</span>
                     </a>
                 </li>
-                <li> <a href="/store">
+                <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Store</span>
                         <span class="float-right arrow">
@@ -80,12 +80,12 @@
                         <span>Class</span>
                     </a>
                 </li>
-                <li> <a href="#">
+                <li> <a href="{{ route('videos.video-advertisement') }}">
                         <i class="feather ft-home"></i>
                         <span>Video Advertisement</span>
                     </a>
                 </li>
-                <li> <a href="#">
+                <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Themes</span>
                         <span class="float-right arrow">
@@ -94,11 +94,11 @@
                     </a>
 
                     <ul>
-                        <li> <a href="#">
+                        <li> <a href="{{ route('themes.homepage-banner') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Homepage Banner</span>
                             </a></li>
-                        <li> <a href="#">
+                        <li> <a href="{{ route('themes.homepage-sections') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Homepage Sections</span>
                             </a></li>
@@ -108,7 +108,7 @@
                             </a></li>
                     </ul>
                 </li>
-                <li> <a href="/Report">
+                <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Report</span>
                         <span class="float-right arrow">
@@ -133,7 +133,7 @@
                         </li>
                     </ul>
                 </li>
-                <li> <a href="/account">
+                <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Account Management</span>
                         <span class="float-right arrow">

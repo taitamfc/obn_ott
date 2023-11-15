@@ -6,7 +6,7 @@
 			<div class="col-md-12">
 				<div class="d-flex justify-content-between flex-wrap">
 					<div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-						<h5 class="mr-4 mb-0 font-weight-bold">Notice</h5>
+						<h5 class="mr-4 mb-0 font-weight-bold">Homepage Sections</h5>
 					</div>
 					<div class="buttons d-flex">
 						<a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>

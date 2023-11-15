@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Traits\UploadFileTrait;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
