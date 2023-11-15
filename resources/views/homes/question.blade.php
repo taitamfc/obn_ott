@@ -3,7 +3,15 @@
     <div class="col-12 mt-4">
         <div class="card">
             <div class="card-body col-12">
-                <h4 class="header-title">Q&A Table</h4>
+                <div class="row d-flex justify-content-between">
+                    <h4 class="header-title">Q&A Table</h4>
+                    <form class="input-group input-daterange w-50" method='get' action=''>
+                        <input type="date" class="form-control bg-light w-25" name="fromDate">
+                        <div class="input-group-addon btn btn-light">to</div>
+                        <input type="date" class="form-control bg-light w-25" name="toDate">
+                        <button type='submit' class='btn btn-light'><i class="ti-search"></i>
+                    </form>
+                </div>
                 <div class="table-responsive datatable-primary">
                     <table id="dataTable" class="text-center w-100">
                         <thead class="text-capitalize">
@@ -35,3 +43,10 @@
 <div class="card-footer" style='float:right'>
     {{ $qas->appends(request()->query())->links() }}
 </div>
+<script>
+$(document).ready(function() {
+    $('.input-daterange input').each(function() {
+        $(this).datepicker('clearDates');
+    });
+});
+</script>

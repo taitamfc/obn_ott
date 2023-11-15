@@ -116,7 +116,6 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
 var items = {!!$items!!};
-
 // data of chart 
 function createData(items) {
     var data = [];
@@ -128,8 +127,8 @@ function createData(items) {
         };
     }
     results = {
-        data : data,
-        Y : 'View lesson'
+        data: data,
+        Y: 'View lesson'
     }
     return results;
 }
@@ -143,21 +142,6 @@ $(document).ready(function() {
     });
     $('.input-daterange input').each(function() {
         $(this).datepicker('clearDates');
-    });
-    jQuery("#toDate").on("change", function(e) {
-        let formSearch = jQuery(this).closest('#searchDate');
-        var url = formSearch.prop('action');
-        let formData = new FormData($('#searchDate')[0]);
-        jQuery.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: url,
-            type: "get",
-            processData: false,
-            contentType: false,
-            data: formData,
-        })
     });
 });
 </script>

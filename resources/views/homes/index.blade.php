@@ -51,15 +51,16 @@ jQuery(document).ready(function() {
         info: false
     });
     var SITEURL = "{{url('/')}}";
-    $.ajaxSetup({
+    jQuery.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
+    // Calendar
     var calendar = $('#calendar').fullCalendar({
         editable: true,
-        events: SITEURL + "fullcalendar",
+        events: SITEURL,
         displayEventTime: true,
         editable: true,
         eventRender: function(event, element, view) {
@@ -73,7 +74,6 @@ jQuery(document).ready(function() {
         selectHelper: true,
         select: function(start, end, allDay) {
             var title = prompt('Event Title:');
-
             if (title) {
                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
                 var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
@@ -135,6 +135,14 @@ jQuery(document).ready(function() {
                         }
                     }
                 });
+                calendar.fullCalendar('renderEvent', {
+                        title: title,
+                        start: start,
+                        end: end,
+                        allDay: allDay
+                    },
+                    true
+                );
             }
         }
 
@@ -142,10 +150,7 @@ jQuery(document).ready(function() {
 });
 
 function displayMessage(message) {
-    $(".response").html("<div class='success'>" + message + "</div>");
-    setInterval(function() {
-        $(".success").fadeOut();
-    }, 1000);
+    toastr.success(message, '')
 }
 </script>
 @endsection

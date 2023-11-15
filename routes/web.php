@@ -6,7 +6,6 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FullCalendarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -126,14 +125,12 @@ Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postReg
 
 Route::middleware(['auth','preventhistory'])->group(function(){
     
-    //Home
-    Route::get('/',[HomeController::class,'index'])->name('dashboard');
 
-    //fullcalender
-    Route::get('fullcalendar',[FullCalendarController::class,'index']);
-    Route::post('fullcalendar/create',[FullCalendarController::class,'store']);
-    Route::post('fullcalendar/update',[FullCalendarController::class,'update']);
-    Route::post('fullcalendar/delete',[FullCalendarController::class,'destroy']);
+    //Home & fullcalender
+    Route::get('/',[HomeController::class,'index'])->name('dashboard');
+    Route::post('fullcalendar/create',[HomeController::class,'store']);
+    Route::post('fullcalendar/update',[HomeController::class,'update']);
+    Route::post('fullcalendar/delete',[HomeController::class,'destroy']);
 
     //Plan
     Route::get('/users/plans',[\App\Http\Controllers\UserController::class,'plan'])->name('users.plans');
