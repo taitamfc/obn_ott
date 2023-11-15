@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateLessonRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
@@ -45,28 +46,35 @@ class LessonController extends Controller
         $item->name = $request->name;
         $item->subject_id = $request->subject_id;
         $item->grade_id = $request->grade_id;
+        $item->course_id = $request->course_id;
         $item->description = $request->description;
         $item->status = $request->status;
         $item->user_id = Auth::id();
         try {
+            DB::beginTransaction();
+
             if ($request->hasFile('video')) {
                 $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
             }
             if ($request->hasFile('image')) {
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/lessons/image');
             } 
-            $item->save();
+            
+            if($item->save()){
+                $lessoncourse = new LessonCourse();
+                $lessoncourse->lesson_id = $item->id;
+                $lessoncourse->course_id = $request->course_id;
+                $lessoncourse->save();
+            }
+            DB::commit();
 
-            $lessoncourse = new LessonCourse();
-            $lessoncourse->lesson_id = $item->id;
-            $lessoncourse->course_id = $request->course_id;
-            $lessoncourse->save();
             return response([
                 'success' => true,
                 'message' => __('sys.store_item_success'),
                 'redirect' => route('lessons.index')
             ],200);
         } catch (QueryException $e) {
+            DB::rollback();
             Log::error($e->getMessage());
             return response([
                 'success' => false,
@@ -95,7 +103,9 @@ class LessonController extends Controller
     }
     function update(UpdateLessonRequest $request,$id){
         try {
+            DB::beginTransaction();
             $item = Lesson::findOrfail($id);
+            $old_course_id = $item->course_id;
             $item->name = $request->name;
             $item->subject_id = $request->subject_id;
             $item->grade_id = $request->grade_id;
@@ -112,13 +122,22 @@ class LessonController extends Controller
                 $this->deleteFile([$item->image_url]);
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/lessons/image');
             } 
-            $item->save();
+            if($item->save()){
+                LessonCourse::where('lesson_id',$item->id)->where('course_id',$old_course_id)->delete();
+
+                $lessoncourse = new LessonCourse();
+                $lessoncourse->lesson_id = $item->id;
+                $lessoncourse->course_id = $request->course_id;
+                $lessoncourse->save();
+            }
+            DB::commit();
             return response([
                 'success' => true,
                 'message' => __('sys.update_item_success'),
                 'redirect' => route('lessons.index')
             ],200);
         } catch (QueryException $e) {
+            DB::rollback();
             Log::error($e->getMessage());
             return response([
                 'success' => false,

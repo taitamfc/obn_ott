@@ -1,6 +1,6 @@
 <div class="card-body">
     <div class="table-responsive">
-        <table class="table table-hover progress-table text-center ">
+        <table class="table table-hover progress-table">
             <thead class="text-uppercase">
                 <tr>
                     <th scope="col">ID</th>

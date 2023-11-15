@@ -74,9 +74,9 @@ class SubscriptionController extends Controller
      */
     public function edit(string $id)
     {
-        $items = Subscription::get();
-        $item = Subscription::find($id);
-        $selected_courses = $item->courses->pluck('id')->toArray();
+        $items  = Subscription::get();
+        $item   = Subscription::find($id);
+        $selected_courses = $item->courses ? $item->courses->pluck('id')->toArray() : [];
         $courses = Course::get();
         return view('stores.subscriptions.edit',compact('items','courses','item','selected_courses'));
     }

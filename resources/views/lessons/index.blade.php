@@ -19,13 +19,11 @@
 		</div>
 
         <div class="row">
-			<!-- Progress Table start -->
 			<div class="col-12">
 				<div class="card lesson-table-results">
 					<div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
 				</div>
 			</div>
-			<!-- Progress Table end -->
 		</div>
     </div>
 </div>
