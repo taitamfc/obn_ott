@@ -106,13 +106,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $item = User::where('parent_id',$this->user_id)->findOrfail($id);
+        $item = User::findOrfail($id);
         $item->name = $request->name;
         $item->email = $request->email;
-        $item->password = isset($request->password)?$request->password:$item->password;
+        $item->password = isset($request->password)?bcrypt($request->password):$item->password;
         $item->phone = isset($request->phone)?$request->phone:$item->phone;
         $item->group_id = isset($request->group_id)?$request->group_id:$item->group_id;
-        $item->parent_id = $this->user_id;
+        $item->parent_id = $item->parent_id;
         try {
             if ($request->hasFile('image')) {
                 // Delete old file
@@ -162,10 +162,13 @@ class UserController extends Controller
     }
 
     function account(Request $request){
-        $item = User::findOrfail($this->user_id);
-        $bankOwner = UserBank::where('user_id',$this->user_id)->first();
-        $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->with('user','plan')->first();
-        return view('accountmanagements.accountmanage.index',compact('item','bankOwner','current_plan'));
+        if ($request->ajax()) {
+            $item = User::findOrfail($this->user_id);
+            $bankOwner = UserBank::where('user_id',$this->user_id)->first();
+            $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->with('user','plan')->first();
+            return view('accountmanagements.accountmanage.ajax-index',compact('item','bankOwner','current_plan'));
+        }
+        return view('accountmanagements.accountmanage.index');
     }
     function plan(Request $request){
         if ($request->ajax()) {
@@ -186,6 +189,7 @@ class UserController extends Controller
     }
     function storePlans(Request $request){
         $count = PlanUser::where('user_id', $this->user_id)->count();
+        // User can buy max 2 plans. Current plan and next plan
         if ($count<=1) {
         try {
             $id = $_REQUEST['data'];
@@ -195,11 +199,13 @@ class UserController extends Controller
             $item->plan_id = $id;
             $item->user_id = $this->user_id;
             $current_plan_date = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->value('expiration_date');
+            // if user has current plan
             if (!empty($current_plan_date)) {
                 $current_plan_date = Carbon::parse($current_plan_date);
                 $item->is_current = 0;
                 $item->created_at = $current_plan_date;
                 $item->expiration_date = $current_plan_date->addMonths($plan->duration);
+            // if user don't have plan
             }else {
                 $item->is_current = 1;
                 $item->created_at = $currentDateTime;

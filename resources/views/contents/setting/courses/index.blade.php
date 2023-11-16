@@ -3,20 +3,20 @@
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
         <div class="row mb-4">
-			<div class="col-md-12">
-				<div class="d-flex justify-content-between flex-wrap">
-					<div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-						<h5 class="mr-4 mb-0 font-weight-bold">My Courses</h5>
-					</div>
-					<div class="buttons d-flex">
-						<a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
-						<button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
-							{{ __('sys.add_new') }}
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
+                        <h5 class="mr-4 mb-0 font-weight-bold">My Courses</h5>
+                    </div>
+                    <div class="buttons d-flex">
+                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
+                            {{ __('sys.add_new') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <!-- Progress Table start -->
@@ -81,7 +81,8 @@ jQuery(document).ready(function() {
                     for (const key in res.errors) {
                         console.log(key);
                         jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0]);
+                            0
+                        ]);
                     }
                     showAlertError('Form validated fail!');
                 }
@@ -119,7 +120,8 @@ jQuery(document).ready(function() {
                 if (res.has_errors) {
                     for (const key in res.errors) {
                         jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0]);
+                            0
+                        ]);
                     }
                     showAlertError('Form validated fail!');
                 }
@@ -167,7 +169,7 @@ jQuery(document).ready(function() {
                     formUpdate.find('.input-status input').prop('checked', false);
                     if (formData.status) {
                         formUpdate.find('.input-status .input-active').prop('checked',
-                        true);
+                            true);
                     } else {
                         formUpdate.find('.input-status .input-inactive').prop('checked',
                             true);

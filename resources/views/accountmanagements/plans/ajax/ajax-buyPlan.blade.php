@@ -43,3 +43,35 @@
         </div>
     </div>
 </div>
+<script>
+jQuery(document).ready(function() {
+    jQuery(".add-item").click(function(e) {
+        console.log(123);
+        e.preventDefault();
+        var ele = $(this);
+        var id = ele.data("id");
+        var url = '/users/storePlans/';
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            data: {
+                _token: '{{ csrf_token() }}',
+                data: id
+            },
+            success: function(res) {
+                if (res.redirect) {
+                    displayMessage("Buy Plan Successfully");
+                    window.location.href = res.redirect;
+                }
+            }
+        });
+    });
+});
+
+function displayMessage(message) {
+    toastr.success(message, '')
+}
+</script>

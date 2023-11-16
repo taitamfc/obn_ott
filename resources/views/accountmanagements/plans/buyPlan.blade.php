@@ -16,6 +16,9 @@
                             <p class="text-muted mb-0 mr-1 hover-cursor">Plan</p>
                         </div>
                     </div>
+                    <div class="buttons d-flex">
+                        <a class="btn btn-dark mr-1" href="{{ route('users.plans') }}">{{ __('sys.back') }}</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +42,6 @@
 var url = window.location.href;
 var id = url.split("/").pop();
 var indexUrl = "{{url('/')}}" + "/users/addPlans/" + id;
-console.log(indexUrl);
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.buyPlans-table-results';
@@ -47,30 +49,6 @@ jQuery(document).ready(function() {
 
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
-
-    jQuery(".add-item").click(function(e) {
-        e.preventDefault();
-        var ele = $(this);
-        var id = ele.data("id");
-        var url = '/users/storePlans/';
-        jQuery.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: url,
-            type: "POST",
-            data: {
-                _token: '{{ csrf_token() }}',
-                data: id
-            },
-            success: function(res) {
-                console.log(res);
-                if (res.redirect) {
-                    window.location.href = res.redirect;
-                }
-            }
-        });
-    });
 });
 </script>
 @endsection

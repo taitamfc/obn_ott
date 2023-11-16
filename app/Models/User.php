@@ -45,7 +45,6 @@ public function userBanks()
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *
