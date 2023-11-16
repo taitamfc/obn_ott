@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('content')
 <div class="main-content page-content">
-    <!--==================================*
-                   Main Section
-        *====================================-->
     <div class="main-content-inner" style="max-width: 100% !important;">
         <div class="row mb-4">
             <div class="col-md-12 grid-margin">
@@ -23,7 +20,7 @@
             <div id="plan">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card buyPlans-table-results">
+                        <div class="card plans-table-results">
                             <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
                         </div>
                     </div>
@@ -36,41 +33,14 @@
 
 @section('footer')
 <script>
-var url = window.location.href;
-var id = url.split("/").pop();
-var indexUrl = "{{url('/')}}" + "/users/addPlans/" + id;
-console.log(indexUrl);
-var positionUrl = "";
-var params = <?= json_encode(request()->query()); ?>;
-var wrapperResults = '.buyPlans-table-results';
-jQuery(document).ready(function() {
+jQuery(function() {
+    var indexUrl = "{{ route('users.plans') }}";
+    var positionUrl = "";
+    var params = <?= json_encode(request()->query()); ?>;
+    var wrapperResults = '.plans-table-results';
 
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
-
-    jQuery(".add-item").click(function(e) {
-        e.preventDefault();
-        var ele = $(this);
-        var id = ele.data("id");
-        var url = '/users/storePlans/';
-        jQuery.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: url,
-            type: "POST",
-            data: {
-                _token: '{{ csrf_token() }}',
-                data: id
-            },
-            success: function(res) {
-                console.log(res);
-                if (res.redirect) {
-                    window.location.href = res.redirect;
-                }
-            }
-        });
-    });
 });
 </script>
 @endsection
