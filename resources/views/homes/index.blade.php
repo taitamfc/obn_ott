@@ -6,26 +6,7 @@
 <div class="main-content page-content">
     @include('homes.report')
     <div class="row">
-        <div class="col-lg-3">
-            <div class="card overflow_visible">
-                <div class="card-body">
-                    <h4 class="card_title">Draggable Events</h4>
-                    <!-- the events -->
-                    <div id="external-events">
-                        <div class="external-event bg-success">Lunch</div>
-                        <div class="external-event bg-warning">Go home</div>
-                        <div class="external-event bg-info">Do homework</div>
-                        <div class="external-event bg-primary">Work on UI design</div>
-                        <div class="external-event bg-danger">Sleep tight</div>
-                        <div class="custom-control custom-checkbox primary-checkbox mt-3">
-                            <input type="checkbox" class="custom-control-input" id="drop-remove">
-                            <label class="custom-control-label" for="drop-remove">Remove After Drop</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9 mt-mob-4">
+        <div class="col-lg-12 m-3">
             <div class="container">
                 <div class="response"></div>
                 <div id='calendar' class="bg-white p-3"></div>

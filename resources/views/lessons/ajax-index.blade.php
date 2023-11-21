@@ -17,14 +17,9 @@
                 <tr class="item draggable" id='item-{{ $item->id}}'>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
-                    @php
-                    $gradeName = isset($item->grade->name) ? $item->grade->name : '';
-                    $subjectName = isset($item->subject->name) ? $item->subject->name : '';
-                    $courseName = isset($item->course->name) ? $item->course->name : '';
-                    @endphp
-                    <td>{{ $gradeName }}</td>
-                    <td>{{ $subjectName }}</td>
-                    <td>{{ $courseName }}</td>
+                    <td>{{ $item->getGrade() }}</td>
+                    <td>{{ $item->getSubject() }}</td>
+                    <td>{{ $item->getCourse() }}</td>
                     <td>{!! $item->statusDisplay() !!}</td>
                     <td>
                         <ul class="d-flex justify-content-center">
@@ -34,8 +29,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:;" class="btn btn-danger delete-item"
-                                data-id="{{ $item->id }}">
+                                <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $item->id }}">
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>
@@ -48,5 +42,5 @@
     </div>
 </div>
 <div class="card-footer">
-{{ $items->appends(request()->query())->links() }}
+    {{ $items->appends(request()->query())->links() }}
 </div>

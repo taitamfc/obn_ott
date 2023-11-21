@@ -78,13 +78,10 @@
 @endsection
 
 @section('footer')
-<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('description');
-</script>
 <script>
 jQuery(document).ready(function() {
-    jQuery(".add-item").click(function(e) {
+    // Handle Add
+    jQuery('body').on('click', ".add-item", function(e) {
         e.preventDefault();
         let formCreate = jQuery(this).closest('#createLesson');
         formCreate.find('.input-error').empty();
@@ -100,12 +97,10 @@ jQuery(document).ready(function() {
             contentType: false,
             data: formData,
         }).done(function(res) {
-            console.log(res);
             if (res.has_errors) {
                 for (const key in res.errors) {
-                    jQuery('.input-' + key).find('.input-error').html(res.errors[key][0]);
+                    showAlertError(res.errors[key][0]);
                 }
-                showAlertError('Form validated fail!');
             }
             if (res.redirect) {
                 showAlertSuccess(res.message);

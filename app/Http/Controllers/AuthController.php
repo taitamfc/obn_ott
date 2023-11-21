@@ -18,20 +18,22 @@ class AuthController extends Controller
         } else {
             return view('includes.login');
         }
-     }
-     public function postLogin(StoreLoginRequest $request){
-        // dd($request);
-        $dataUser = $request->only('email','password');
-        if(Auth::attempt($dataUser)){
-        return redirect()->route('grades.index')->with('success', 'Logged in successfully');;
-        }else{
-            return redirect()->route('login')->with('error', 'Account or password is incorrect');;
-        }
-     }
-     public function Logout(Request $request){
+    }
+
+    public function postLogin(StoreLoginRequest $request){
+            $dataUser = $request->only('email','password');
+            if(Auth::attempt($dataUser)){
+                return redirect()->route('grades.index')->with('success', 'Logged in successfully');;
+            }else {
+                return redirect()->route('login')->with('error','Account or password is incorrect');
+            }
+    }
+
+    public function Logout(Request $request){
         Auth::logout();
         return redirect()->route('login');
-     }
+    }
+    
     public function postRegister(StoreRegisterRequest $request){
         try {
             $user = new User();
@@ -44,7 +46,7 @@ class AuthController extends Controller
             return redirect()->route('login');
         } catch (QueryException $e) { 
             Log::error('Bug occurred: ' . $e->getMessage());
-            return view('includes.register')->with('error','Xóa course thất bại');
+            return view('includes.register')->with('error','Register fail');
         }   
     }
 }

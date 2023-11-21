@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+    use UploadFileTrait;
     public function __construct()
     {
         $this->middleware('auth');
@@ -41,7 +42,7 @@ class CourseController extends Controller
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
             } 
             $item->save();
             return response()->json([
@@ -74,10 +75,10 @@ class CourseController extends Controller
         try {
             if ($request->hasFile('image')) {
                 // Delete old file
-                $this->deleteFile([$item->img]);
+                $this->deleteFile([$item->image_url]);
 
                 // Upload new file
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
             }
             $item->save();
             return response()->json([
@@ -99,7 +100,7 @@ class CourseController extends Controller
         try {
             $item =  Course::where('user_id',$this->user_id)->find($id);
             // Delete old file
-            $this->deleteFile([$item->img]);
+            $this->deleteFile([$item->image_url]);
 
             $item->delete();
 
@@ -135,7 +136,7 @@ class CourseController extends Controller
         return view('stores.productmanagement.index');
     }
     function editProduct(Request $request){
-        $this->authorize('Course',Grade::class);
+        $this->authorize('Course',Course::class);
         try {  
             $item = Course::where('user_id',$this->user_id)->findOrfail($request->id);
             $item->price = $request->price;

@@ -34,13 +34,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row vertical_tabs">
-                                <div class="col-lg-3 nav flex-column nav-pills" id="v-pills-tab"
-                                    role="tablist" aria-orientation="vertical">
-                                    
+                                <div class="col-lg-3 nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                    aria-orientation="vertical">
+
                                     <a class="nav-link active" id="v-lesson-setting-tab" data-toggle="pill"
                                         href="#v-lesson-setting" role="tab" aria-controls="v-lesson-setting"
                                         aria-selected="true"><i class="fa fa-cog mr-1"></i> Lesson Setting </a>
-                                    
+
                                     <a class="nav-link" id="v-video-setting-tab" data-toggle="pill"
                                         href="#v-video-setting" role="tab" aria-controls="v-video-setting"
                                         aria-selected="false"><i class="fa fa-youtube-play"></i> Video Setting</a>
@@ -58,7 +58,7 @@
                                         aria-labelledby="v-video-setting-tab">
                                         @include('lessons.tabs.video-setting')
                                     </div>
-                                    
+
                                     <div class="tab-pane fade" id="v-image-setting" role="tabpanel"
                                         aria-labelledby="v-image-setting-tab">
                                         @include('lessons.tabs.image-setting')
@@ -81,7 +81,7 @@
 @section('footer')
 <script>
 jQuery(document).ready(function() {
-    jQuery(".update-item").click(function(e) {
+    jQuery('body').on('click', ".update-item", function(e) {
         e.preventDefault();
         let formUpdate = jQuery(this).closest('#updateLesson');
         formUpdate.find('.input-error').empty();
@@ -99,16 +99,11 @@ jQuery(document).ready(function() {
         }).done(function(res) {
             if (res.has_errors) {
                 for (const key in res.errors) {
-                    console.log(key);
-                    jQuery('.input-' + key).find('.input-error').html(res.errors[key][0]);
+                    showAlertError(res.errors[key][0]);
                 }
-                showAlertError('Form validated fail!');
             }
-            
-            if( res.success ){
+            if (res.success) {
                 showAlertSuccess(res.message);
-            }else{
-                showAlertError(res.message);
             }
             if (res.redirect) {
                 window.location.href = res.redirect;

@@ -80,11 +80,12 @@ jQuery(document).ready(function() {
                 if (res.has_errors) {
                     for (const key in res.errors) {
                         console.log(key);
-                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0
-                        ]);
+                        jQuery('.input-' + key + '-create').find('.input-error').html(res
+                            .errors[key][
+                                0
+                            ]);
                     }
-                    showAlertError('Form validated fail!');
+                    // showAlertError('Form validated fail!');
                 }
                 if (res.success) {
                     // Delete all values
@@ -119,11 +120,12 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.has_errors) {
                     for (const key in res.errors) {
-                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0
-                        ]);
+                        jQuery('.input-' + key + '-update').find('.input-error').html(res
+                            .errors[key][
+                                0
+                            ]);
                     }
-                    showAlertError('Form validated fail!');
+                    // showAlertError('Form validated fail!');
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
@@ -159,12 +161,12 @@ jQuery(document).ready(function() {
                     formUpdate.prop('action', action);
 
                     formUpdate.find('.input-id').val(formData.id);
-                    formUpdate.find('.input-name input').val(formData.name);
-                    formUpdate.find('.input-price input').val(formData.price);
+                    formUpdate.find('.input-name-update input').val(formData.name);
+                    formUpdate.find('.input-price-update input').val(formData.price);
 
                     if (formData.img) {
-                        formUpdate.find('.input-img').attr('src', formData.img);
-                        formUpdate.find('.input-img').show();
+                        formUpdate.find('.input-img-update').attr('src', formData.img);
+                        formUpdate.find('.input-img-update').show();
                     }
                     formUpdate.find('.input-status input').prop('checked', false);
                     if (formData.status) {

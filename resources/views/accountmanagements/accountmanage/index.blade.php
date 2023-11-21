@@ -48,11 +48,66 @@ jQuery(function() {
 
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+    
+    // Update account
+    jQuery('body').on('click', ".edit-item", function(e) {
+        let formUpdate = jQuery(this).closest('#formUpdate');
+        formUpdate.find('.input-error').empty();
+        var url = formUpdate.prop('action');
+        let formData = new FormData($('#formUpdate')[0]);
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(res) {
+                if (res.has_errors) {
+                    for (const key in res.errors) {
+                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
+                            0
+                        ]);
+                    }
+                }
+                showAlertSuccess(res.message);
+                if (res.success) {
+                    window.location.reload();
+                }
+            }
+        });
+    });
 
+    // show form edit with value default
+    jQuery('body').on('click', ".show-form-edit", function(r) {
+        // alert(123)
+        // Hien thi modal
+        jQuery('#modalUpdate').modal('show');
+        let formUpdate = jQuery('#formUpdate');
+        // Lấy dữ liệu
+        let id = jQuery(this).data('id');
+        let action = jQuery(this).data('action');
+        var url = 'users/' + id;
+        jQuery.ajax({
+            url: url,
+            type: "GET",
+            dataType: 'json',
+            success: function(res) {
+                if (res.success) {
+                    let formData = res.data;
+                    formUpdate.prop('action', action);
+                    formUpdate.find('.input-id').val(formData.id);
+                    formUpdate.find('.input-name input').val(formData.name);
+                    formUpdate.find('.input-email input').val(formData.email);
+                    formUpdate.find('.input-phone input').val(formData.phone);
+                    formUpdate.find('.input-password input').val(formData.password);
+
+                }
+            }
+        });
+    });
 });
-
-function displayMessage(message) {
-    toastr.success(message, '')
-}
 </script>
 @endsection
