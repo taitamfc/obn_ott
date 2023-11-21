@@ -20,7 +20,8 @@ Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionControll
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
 Route::post('/postLogin',[App\Http\Controllers\AuthController::class,'postLogin'])->name('postLogin');
 Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
-Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('register');
+Route::get('/register',[App\Http\Controllers\AuthController::class,'register'])->name('register');
+Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('postRegister');
 
 Route::middleware(['auth','preventhistory'])->group(function(){
     //Home & fullcalender

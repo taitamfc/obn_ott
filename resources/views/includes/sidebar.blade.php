@@ -2,11 +2,15 @@
     <div class="menu-inner">
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
+                <!-- Home -->
+                @if (Auth::user()->hasPermission('Home'))
                 <li> <a href="{{ route('home') }}">
                         <i class="feather ft-home"></i>
                         <span>Home</span>
                     </a>
                 </li>
+                @endif
+                <!-- Content -->
                 <li>
                     <a href="javascript:;">
                         <i class="feather ft-mail"></i>
@@ -24,23 +28,29 @@
 
                             </a>
                             <ul>
+                                @if (Auth::user()->hasPermission('Grade'))
                                 <li><a href="{{route('grades.index')}}">
                                         <i class="ion-ios-folder-outline"></i>
                                         <span>Grade</span>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->hasPermission('Subject'))
                                 <li>
                                     <a href="{{route('subjects.index')}}">
                                         <i class="ti-pencil-alt"></i>
                                         <span>Subject</span>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->hasPermission('Course'))
                                 <li>
                                     <a href="{{ route('courses.index') }}">
                                         <i class="ti-pencil-alt"></i>
                                         <span>Course</span>
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
                         <li>
@@ -51,11 +61,16 @@
                         </li>
                     </ul>
                 </li>
+                <!-- Lesson -->
+                @if (Auth::user()->hasPermission('Lesson'))
                 <li> <a href="{{ route('lessons.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Lesson List</span>
                     </a>
                 </li>
+                @endif
+                <!-- Store -->
+                @if (Auth::user()->hasPermission('Store'))
                 <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Store</span>
@@ -65,21 +80,29 @@
                     </a>
 
                     <ul>
+                        @if (Auth::user()->hasPermission('Course'))
                         <li> <a href="{{ route('courses.products') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Product Management</span>
                             </a></li>
+                        @endif
                         <li> <a href="/store/subscriptions">
                                 <i class="feather ft-home"></i>
                                 <span>Subscription Management</span>
                             </a></li>
                     </ul>
                 </li>
+                @endif
+                <!-- Class -->
+                @if (Auth::user()->hasPermission('Class'))
                 <li> <a href="{{ route('classes.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Class</span>
                     </a>
                 </li>
+                @endif
+                <!-- Themes -->
+                @if (Auth::user()->hasPermission('Themes'))
                 <li> <a href="{{ route('videos.video-advertisement') }}">
                         <i class="feather ft-home"></i>
                         <span>Video Advertisement</span>
@@ -92,7 +115,6 @@
                             <i class="ion ion-chevron-down"></i>
                         </span>
                     </a>
-
                     <ul>
                         <li> <a href="{{ route('themes.homepage-banner') }}">
                                 <i class="feather ft-home"></i>
@@ -108,6 +130,9 @@
                             </a></li>
                     </ul>
                 </li>
+                @endif
+                <!-- Report -->
+                @if (Auth::user()->hasPermission('Report'))
                 <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Report</span>
@@ -133,6 +158,9 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                <!-- User -->
+                @if (Auth::user()->hasPermission('User'))
                 <li> <a href="javascript:;">
                         <i class="feather ft-home"></i>
                         <span>Account Management</span>
@@ -157,12 +185,17 @@
                                 <i class="feather ft-home"></i>
                                 <span>Admin</span>
                             </a></li>
+                        <!-- Group -->
+                        @if (Auth::user()->hasPermission('Group'))
                         <li> <a href="{{route('groups.index')}}">
                                 <i class="feather ft-home"></i>
                                 <span>Group</span>
                             </a></li>
+                        @endif
                     </ul>
                 </li>
+                @endif
+                <!-- Setting -->
                 <li> <a href="{{ route('settings.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Setting</span>
@@ -218,15 +251,12 @@
                         </li>
                         <li> <a href="{{ route('settings.customer-inquiry') }}">
                                 <i class="feather ft-home"></i>
-                                <span>Cusstomer Inquiry</span>
+                                <span>Customer Inquiry</span>
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
-            <!--=========================*
-                          End Main Menu
-                *===========================-->
         </div>
         <div class="clearfix"></div>
     </div>

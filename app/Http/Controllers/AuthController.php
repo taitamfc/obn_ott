@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\StoreRegisterRequest;
+use Illuminate\Support\Str;
+
 class AuthController extends Controller
 {
     public function login(){
@@ -33,20 +35,30 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
+    public function register(){
+        if (Auth::check()) {
+            return redirect()->route('grades.index');
+        } else {
+            return view('auth.register');
+        }
+    }
     
+
     public function postRegister(StoreRegisterRequest $request){
         try {
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = $request->password;
+            $user->slug = Str::slug($request->name);
+            $user->group_id = 2;
             $user->save(); 
             $message = "Successfully register";
-            $request->session()->flash('register-true',$message);
-            return redirect()->route('login');
+            return redirect()->route('login')->with('success',$message);
         } catch (QueryException $e) { 
             Log::error('Bug occurred: ' . $e->getMessage());
-            return view('includes.register')->with('error','Register fail');
+            return view('auth.register')->with('error','Register fail');
         }   
     }
 }

@@ -34,7 +34,7 @@
                     <div class="login-left">
                         <h1 class="text-white">OTT Platform</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tellus elit.</p>
-                        <a href="javascript:void(0);" class="btn btn-primary">Learn More</a>
+                        <!-- <a href="javascript:void(0);" class="btn btn-primary">Learn More</a> -->
                     </div>
                 </div>
                 @yield('content')
