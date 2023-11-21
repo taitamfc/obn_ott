@@ -82,4 +82,7 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::get('setting/popup',[\App\Http\Controllers\SettingController::class,'popup'])->name('settings.popup');
     Route::get('setting/notice',[\App\Http\Controllers\SettingController::class,'notice'])->name('settings.notice');
     Route::get('setting/customer-inquiry',[\App\Http\Controllers\SettingController::class,'customerInquiry'])->name('settings.customer-inquiry');
+    Route::get('themes/homepage-banner',[\App\Http\Controllers\ThemeController::class,'homepageBanner'])->name('themes.homepage-banner');
+    Route::get('themes/homepage-sections',[\App\Http\Controllers\ThemeController::class,'homepageSections'])->name('themes.homepage-sections');
+    Route::get('video-advertisement',[\App\Http\Controllers\VideoController::class,'videoAdvertisement'])->name('videos.video-advertisement');
 });
