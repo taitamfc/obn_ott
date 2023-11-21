@@ -23,7 +23,7 @@ class Lesson extends Model
         'createt_at',
         'updated_at',
     ];
-    
+    // Relationship
     public function grade()
     {
         return $this->belongsTo(Grade::class, 'grade_id', 'id');
@@ -33,9 +33,6 @@ class Lesson extends Model
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
     function course(){
-        return $this->belongsTo(Course::class);
-    }
-    function courses(){
         return $this->belongsToMany(Course::class,'lesson_course','lesson_id','course_id');
     }
     public function user()
@@ -49,6 +46,16 @@ class Lesson extends Model
         return $this->hasMany(LessonCourse::class,'lesson_id','id');
     }
 
+    // Feature
+    function getGrade(){
+        return isset($this->grade) ? $this->grade->name : '';
+    }
+    function getSubject(){
+        return isset($this->subject) ? $this->subject->name : '';
+    }
+    function getCourse(){
+        return isset($this->course) ? $this->course->first()->name : '';
+    }
     function getImgFmAttribute()
     {  
         if ($this->image_url) {
@@ -57,6 +64,7 @@ class Lesson extends Model
             return '<img src="'.asset('images/default.jpg').'" alt="">';
         }
     }
+    
     function getVideoFmAttribute()
     {  
         if ($this->video_url) {

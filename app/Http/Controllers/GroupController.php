@@ -19,11 +19,14 @@ class GroupController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
-        $this->authorize('Group',Group::class);
-        $items = Group::all();
-        $roles = Role::get();
-        $selected_roles = [];
-        return view('accountmanagements.groups.index',compact('items','roles','selected_roles'));
+        if ($request->ajax()) {
+            $this->authorize('Group',Group::class);
+            $items = Group::all();
+            $roles = Role::get();
+            $selected_roles = [];
+            return view('accountmanagements.groups.ajax-index',compact('items','roles','selected_roles'));
+        }
+        return view('accountmanagements.groups.index');
     }
 
     /**
@@ -38,6 +41,7 @@ class GroupController extends Controller
      * Store a newly created resource in storage.
      */
     function store(StoreGroupRequest $request){
+        $this->authorize('Group',Group::class);
         $item = new Group();
         $item->name = $request->name;
         try {
@@ -79,7 +83,7 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, string $id)
     {
-  
+        $this->authorize('Group',Group::class);
         $item = Group::find($id);
         $item->name = $request->name;
         try {
@@ -105,6 +109,7 @@ class GroupController extends Controller
     public function destroy(string $id)
     {
         try {
+            $this->authorize('Group',Group::class);
             Group::destroy($id);
             return response()->json([
                 'success'=>true,

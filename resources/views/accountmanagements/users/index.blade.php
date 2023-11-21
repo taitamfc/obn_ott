@@ -14,21 +14,8 @@
                         </div>
                     </div>
                     <div class="buttons">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="grade-header">
-                            <button class="btn btn-primary float-left">User</button>
-                            <button data-toggle="modal" data-target="#modalCreate"
-                                class="btn  btn-primary float-right">{{ __('sys.add_new') }}</button>
-                        </div>
+                        <button data-toggle="modal" data-target="#modalCreate"
+                            class="btn  btn-primary float-right">{{ __('sys.add_new') }}</button>
                     </div>
                 </div>
             </div>
@@ -98,7 +85,8 @@ jQuery(document).ready(function() {
                     for (const key in res.errors) {
                         console.log(key);
                         jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0]);
+                            0
+                        ]);
                     }
                     showAlertError('Form validated fail!');
                 }
@@ -136,7 +124,8 @@ jQuery(document).ready(function() {
                 if (res.has_errors) {
                     for (const key in res.errors) {
                         jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0]);
+                            0
+                        ]);
                     }
                     showAlertError('Form validated fail!');
                 }

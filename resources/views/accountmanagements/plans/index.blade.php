@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('content')
 <div class="main-content page-content">
-    <!--==================================*
-                   Main Section
-        *====================================-->
     <div class="main-content-inner" style="max-width: 100% !important;">
         <div class="row mb-4">
             <div class="col-md-12 grid-margin">
@@ -17,7 +14,7 @@
                         </div>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('users.plans') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +23,7 @@
             <div id="plan">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card buyPlans-table-results">
+                        <div class="card plans-table-results">
                             <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
                         </div>
                     </div>
@@ -39,13 +36,11 @@
 
 @section('footer')
 <script>
-var url = window.location.href;
-var id = url.split("/").pop();
-var indexUrl = "{{url('/')}}" + "/users/addPlans/" + id;
-var positionUrl = "";
-var params = <?= json_encode(request()->query()); ?>;
-var wrapperResults = '.buyPlans-table-results';
-jQuery(document).ready(function() {
+jQuery(function() {
+    var indexUrl = "{{ route('users.plans') }}";
+    var positionUrl = "";
+    var params = <?= json_encode(request()->query()); ?>;
+    var wrapperResults = '.plans-table-results';
 
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);

@@ -9,17 +9,35 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreBannerRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\UploadFileTrait;
 
 class UserBankController extends Controller
 {
+    use UploadFileTrait;
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }
+    
     function index(Request $request){
-        $items = UserBank::get();
-        return view('accountmanagements.billings.index',compact('items'));
+        if($request->ajax()){
+            $items = UserBank::get();
+            return view('accountmanagements.billings.ajax-index',compact('items'));
+        }
+        return view('accountmanagements.billings.index');
     }
 
     function store(StoreUserBankRequest $request){
-        $item = new UserBank();
-        $item->user_id = Auth::id();
+        $item = UserBank::where('user_id', '=', $this->user_id);
+        if (empty($item)) {
+            $item = new UserBank();
+        }
+        $item->user_id = $this->user_id;
         $item->bank_number = $request->bank_number;
         $item->bank_owner = $request->bank_owner;
         $item->bank_name = $request->bank_name;

@@ -10,14 +10,18 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
-    
-    const ACTIVE = 1;
-    const INACTIVE = 0;
+    protected $fillable = [
+        'name',
+        'price',
+        'user_id',
+        'position',
+        'status',
+        'image_url',
+        'createt_at',
+        'updated_at',
+    ];
 
-    public static function getActiveItems(){
-        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
-    }
-
+    // Relationship
     function student(){
         return $this->belongsToMany(Student::class);
     }
@@ -36,21 +40,18 @@ class Course extends Model
     function lesson(){
         return $this->belongsToMany(Lesson::class,'lesson_course','lesson_id','course_id');
     }
-    protected $fillable = [
-        'name',
-        'price',
-        'user_id',
-        'position',
-        'status',
-        'image_url',
-        'createt_at',
-        'updated_at',
-    ];
     public function subscriptions()
     {
         return $this->belongsToMany(Subscription::class, 'subscription_course', 'course_id', 'subscription_id');
     }
     
+    // Feature
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    }
 
     // status_fm 
     function getStatusFmAttribute(){
@@ -63,10 +64,10 @@ class Course extends Model
 
     function getImgFmAttribute()
     {  
-        if ($this->img) {
-            return '<img class="avatar-md" src="'.asset($this->img).'" alt="">';
+        if (!empty($this->image_url)) {
+            return '<img class="avatar-md" src="'.asset($this->image_url).'" alt="">';
         } else {
-            return '<img src="'.asset('images/default.jpg').'" alt="">';
+            return '<img class="avatar-md" src="'.asset('assets/images/default.png').'" alt="">';
         }
     }
 }

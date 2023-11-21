@@ -1,7 +1,12 @@
 @extends('layouts.form')
 @section('content')
 <div class="login-form">
-<form action="{{ route('postLogin') }}" method="POST">
+    <form action="{{ route('postLogin') }}" method="POST">
+        @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+        @endif
         @csrf
         <div class="login-form-body">
             <div class="form-gp">
@@ -9,7 +14,7 @@
                 <input type="email" id="email" name="email" value="{{ old('email') }}">
                 <i class="ti-email"></i>
                 @if ($errors->any())
-                    <p style="color:red">{{ $errors->first('email') }}</p>
+                <p style="color:red">{{ $errors->first('email') }}</p>
                 @endif
             </div>
             <div class="form-gp">
@@ -17,7 +22,7 @@
                 <input type="password" name="password" id="password" value="{{ old('password') }}">
                 <i class="ti-lock"></i>
                 @if ($errors->any())
-                    <p style="color:red">{{ $errors->first('password') }}</p>
+                <p style="color:red">{{ $errors->first('password') }}</p>
                 @endif
             </div>
             <div class="row mb-4 rmber-area">

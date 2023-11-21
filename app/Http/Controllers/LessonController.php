@@ -46,7 +46,6 @@ class LessonController extends Controller
         $item->name = $request->name;
         $item->subject_id = $request->subject_id;
         $item->grade_id = $request->grade_id;
-        $item->course_id = $request->course_id;
         $item->description = $request->description;
         $item->status = $request->status;
         $item->user_id = Auth::id();
@@ -109,7 +108,6 @@ class LessonController extends Controller
             $item->name = $request->name;
             $item->subject_id = $request->subject_id;
             $item->grade_id = $request->grade_id;
-            $item->course_id = $request->course_id;
             $item->description = $request->description;
             $item->status = $request->status;
             $item->user_id = Auth::id();
