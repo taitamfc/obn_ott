@@ -86,3 +86,10 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::get('themes/homepage-sections',[\App\Http\Controllers\ThemeController::class,'homepageSections'])->name('themes.homepage-sections');
     Route::get('video-advertisement',[\App\Http\Controllers\VideoController::class,'videoAdvertisement'])->name('videos.video-advertisement');
 });
+
+// Frontend
+Route::prefix('{site_name}')->middleware(['preventhistory'])->group(function(){
+    Route::get('/',function($site_name){
+        return view('frontend.welcome',compact('site_name'));
+    })->name('home');
+});
