@@ -91,5 +91,5 @@ Route::middleware(['auth','preventhistory'])->group(function(){
 Route::prefix('{site_name}')->middleware(['preventhistory'])->group(function(){
     Route::get('/',function($site_name){
         return view('frontend.welcome',compact('site_name'));
-    })->name('home');
+    })->name('cms');
 });

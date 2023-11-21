@@ -4,9 +4,9 @@
            Logo
 *=========================-->
     <div class="header-area-left">
-        <a href="index.html" class="logo">
+        <a href="{{ route('home') }}" class="logo">
             <span>
-                <img src="{{ asset('assets/images/logo-dark.svg')}}" alt="" height="18">
+            OTT Platform
             </span>
             <i>
                 <img src="{{ asset('assets/images/logo-collapsed.svg')}}" alt="" height="22">
@@ -68,6 +68,7 @@
                                 </div>
                             </div>
                             <a class="dropdown-item" href="{{ route('account.index') }}"><i class="ti-user"></i> Profile</a>
+                            <a class="dropdown-item" href="{{ route('cms',['site_name'=>Auth::user()->slug]) }}"><i class="ti-home"></i> View website</a>
                             <span role="separator" class="divider"></span>
                             <a class="dropdown-item" href="/logout"><i class="ti-power-off"></i>Logout</a>
                         </div>

@@ -16,7 +16,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('grades.index');
         } else {
-            return view('includes.login');
+            return view('auth.login');
         }
     }
 
