@@ -184,11 +184,13 @@ class UserController extends Controller
         }
     }
     function plan(Request $request){
+        $next_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',0)->get();
+        $next_plan_data = $next_plan->pluck('plan_id', 'created_at')->toArray();
+        dd($next_plan_data);
         if ($request->ajax()) {
             $items = Plan::paginate(3);
             $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->first();
-            $next_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',0)->first();
-            return view('accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan'));
+            return view('accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan_data'));
         }
         return view('accountmanagements.plans.index');
     }
@@ -202,45 +204,42 @@ class UserController extends Controller
     }
     function storePlans(Request $request){
         $count = PlanUser::where('user_id', $this->user_id)->count();
-        // User can buy max 2 plans. Current plan and next plan
-        if ($count<=1) {
-            try {
-                $id = $_REQUEST['data'];
-                $currentDateTime = Carbon::now();
-                $plan = Plan::findOrfail($id);
-                $item = new PlanUser();
-                $item->plan_id = $id;
-                $item->user_id = $this->user_id;
-                $current_plan_date = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->value('expiration_date');
-                // if user has current plan
-                if (!empty($current_plan_date)) {
-                    $current_plan_date = Carbon::parse($current_plan_date);
-                    $item->is_current = 0;
-                    $item->created_at = $current_plan_date;
-                    $item->expiration_date = $current_plan_date->addMonths($plan->duration);
-                // if user don't have plan
-                }else {
-                    $item->is_current = 1;
-                    $item->created_at = $currentDateTime;
-                    $item->expiration_date = $currentDateTime->addMonths($plan->duration);
-                }
-                $item->save();
-                return response([
-                    'success' => true,
-                    'message' => __('sys.store_item_success'),
-                    'redirect' => route('users.plans')
-                ],200);
-            } catch (QueryException $e) {
-                Log::error($e->getMessage());
-                return response([
-                    'success' => false,
-                    'message' => __('sys.store_item_error'),
-                ],200);
+        try {
+            $id = $_REQUEST['data'];
+            $currentDateTime = Carbon::now();
+            $plan = Plan::findOrfail($id);
+            $item = new PlanUser();
+            $item->plan_id = $id;
+            $item->user_id = $this->user_id;
+            $current_plan_date = PlanUser::where('user_id',$this->user_id)->latest('created_at')->value('expiration_date');
+            // if user has current plan
+            if (!empty($current_plan_date)) {
+                $current_plan_date = Carbon::parse($current_plan_date);
+                $item->is_current = 0;
+                $item->created_at = $current_plan_date;
+                $item->expiration_date = $current_plan_date->addMonths($plan->duration);
+            // if user don't have plan
+            }else {
+                $item->is_current = 1;
+                $item->created_at = $currentDateTime;
+                $item->expiration_date = $currentDateTime->addMonths($plan->duration);
             }
+            $item->save();
+            return response([
+                'success' => true,
+                'message' => __('sys.store_item_success'),
+                'redirect' => route('users.plans')
+            ],200);
+        } catch (QueryException $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => false,
+                'message' => __('sys.store_item_error'),
+            ],200);
         }
-        return response([
-            'success' => false,
-            'error' =>  'You have max Plans!!'
-        ],200);
+    return response([
+        'success' => false,
+        'error' =>  'You have max Plans!!'
+    ],200);
     }
 }

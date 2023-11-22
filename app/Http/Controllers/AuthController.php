@@ -25,7 +25,7 @@ class AuthController extends Controller
     public function postLogin(StoreLoginRequest $request){
             $dataUser = $request->only('email','password');
             if(Auth::attempt($dataUser)){
-                return redirect()->route('grades.index')->with('success', 'Logged in successfully');;
+                return redirect()->route('home')->with('success', 'Logged in successfully');;
             }else {
                 return redirect()->route('login')->with('error','Account or password is incorrect');
             }
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
     public function register(){
         if (Auth::check()) {
-            return redirect()->route('grades.index');
+            return redirect()->route('home');
         } else {
             return view('auth.register');
         }
