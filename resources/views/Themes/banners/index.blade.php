@@ -92,7 +92,7 @@
                                         <div class="card-body">
                                             <input type="file" class="form-control" name="auth_page_background_image"
                                                 onchange="loadFile(event)">
-                                                <img src="{{ asset($settings['auth_page_background_image']) }}" id="output"
+                                            <img src="{{ asset($settings['auth_page_background_image']) }}" id="output"
                                                 width="150px" />
                                         </div>
 
@@ -264,9 +264,13 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
+
                 }
                 if (res.success) {
-                    window.location.reload();
+                    showAlertSuccess(res.message);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1200);
                 }
 
             }

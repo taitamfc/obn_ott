@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
                     },
                     type: "POST",
                     success: function(data) {
-                        displayMessage("Added Successfully");
+                        showAlertSuccess('Added Success');
                     }
                 });
                 calendar.fullCalendar('renderEvent', {
@@ -96,7 +96,7 @@ jQuery(document).ready(function() {
                 },
                 type: "POST",
                 success: function(response) {
-                    displayMessage("Updated Successfully");
+                    showAlertSuccess('Updated Success');
                 }
             });
         },
@@ -112,7 +112,7 @@ jQuery(document).ready(function() {
                     success: function(response) {
                         if (parseInt(response) > 0) {
                             $('#calendar').fullCalendar('removeEvents', event.id);
-                            displayMessage("Deleted Successfully");
+                            showAlertSuccess('Deleted Success');
                         }
                     }
                 });
@@ -129,9 +129,5 @@ jQuery(document).ready(function() {
 
     });
 });
-
-function displayMessage(message) {
-    toastr.success(message, '')
-}
 </script>
 @endsection
