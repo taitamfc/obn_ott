@@ -119,7 +119,7 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
-                    showAlertError('Has problems, Please try again!');
+                    showAlertError('Has Problems, Please Try Again!');
                 }
                 if (res.success) {
                     // Delete all values
@@ -157,7 +157,7 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
-                    showAlertError('Has problems, please try again!');
+                    showAlertError('Has Problems, Please Try Again!');
                 }
                 if (res.success) {
                     showAlertSuccess('Update Success');

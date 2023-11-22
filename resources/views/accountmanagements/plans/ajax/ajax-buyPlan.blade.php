@@ -46,7 +46,6 @@
 <script>
 jQuery(document).ready(function() {
     jQuery(".add-item").click(function(e) {
-        console.log(123);
         e.preventDefault();
         var ele = $(this);
         var id = ele.data("id");
@@ -63,15 +62,11 @@ jQuery(document).ready(function() {
             },
             success: function(res) {
                 if (res.redirect) {
-                    displayMessage("Buy Plan Successfully");
+                    showAlertSuccess(res.message);
                     window.location.href = res.redirect;
                 }
             }
         });
     });
 });
-
-function displayMessage(message) {
-    toastr.success(message, '')
-}
 </script>

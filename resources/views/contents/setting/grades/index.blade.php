@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
-                    showAlertError('Has problems, Please try again!');
+                    showAlertError('Has Problems, Please Try Again!');
                 }
                 if (res.success) {
                     // Delete all values
@@ -120,7 +120,7 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
-                    showAlertError('Form validated fail!');
+                    showAlertError('Has Problems, Please Try Again!');
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
