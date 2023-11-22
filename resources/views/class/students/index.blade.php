@@ -57,28 +57,15 @@ jQuery(document).ready(function() {
         getAjaxTable(url, wrapperResults, positionUrl);
     });
 
-    $(".delete-item").click(function(e) {
+    // Handle Delete
+    jQuery('body').on('click', ".delete-item", function(e) {
         e.preventDefault();
         var ele = $(this);
-        var id = ele.data("id");
+        let action = ele.data('action');
         if (confirm("Are you sure?")) {
-            var url = '/classes/' + id;
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: url,
-                type: "POST",
-                data: {
-                    _method: 'DELETE',
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function(response) {
-                    window.location.reload(); // Xóa phần tử khỏi DOM
-                }
-            });
+            handleDelete(action, ele);
         }
-    })
+    });
 });
 </script>
 @endsection
