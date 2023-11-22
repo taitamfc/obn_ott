@@ -263,8 +263,8 @@ jQuery(document).ready(function() {
                         jQuery('.input-' + key).find('.input-error').html(res.errors[key][
                             0
                         ]);
+                        showAlertError('Has Problem, Please Try Again');
                     }
-
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
