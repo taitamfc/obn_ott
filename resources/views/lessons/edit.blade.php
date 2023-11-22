@@ -99,14 +99,15 @@ jQuery(document).ready(function() {
         }).done(function(res) {
             if (res.has_errors) {
                 for (const key in res.errors) {
+                    jQuery('.input-' + key).find('.input-error').html(res.errors[key][0]);
                     showAlertError(res.errors[key][0]);
                 }
             }
             if (res.success) {
                 showAlertSuccess(res.message);
-            }
-            if (res.redirect) {
-                window.location.href = res.redirect;
+                setTimeout(() => {
+                    window.location.href = res.redirect;
+                }, 1200);
             }
         });
     });
