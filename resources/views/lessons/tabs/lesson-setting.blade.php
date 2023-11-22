@@ -67,7 +67,7 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group input-description">
-            <label for="" class="col-form-label">Description <span>*</span></label>
+            <label for="" class="col-form-label">Description </label>
             <textarea id="description" name='description' cols="30" rows="5"
                 class="form-control">{{ old('description') ? old('description') : $item->description  }}</textarea>
         </div>

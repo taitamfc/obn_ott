@@ -10,13 +10,13 @@
                 <div class="modal-body">
 
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">Name <span>*</span></label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="role" class="col-form-label">Role</label>
+                        <label for="role" class="col-form-label">Role <span>*</span></label>
                         @foreach ($roles as $role)
                         <div class="custom-control custom-checkbox primary-checkbox">
                             <input name="role_ids[]" value="{{ $role->id }}" type="checkbox" @checked(

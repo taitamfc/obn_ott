@@ -136,7 +136,7 @@ jQuery(document).ready(function() {
     });
 
     // Handle Update
-    jQuery(".edit-item").click(function(e) {
+    jQuery('body').on('click', ".edit-item", function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
         formUpdate.find('.input-error').empty();
         var url = formUpdate.prop('action');

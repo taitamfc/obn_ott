@@ -21,7 +21,7 @@ class GroupController extends Controller
     function index(Request $request){
         if ($request->ajax()) {
             $this->authorize('Group',Group::class);
-            $items = Group::all();
+            $items = Group::orderBy('position','ASC')->get();
             $roles = Role::get();
             $selected_roles = [];
             return view('accountmanagements.groups.ajax-index',compact('items','roles','selected_roles'));
@@ -62,6 +62,7 @@ class GroupController extends Controller
     }
     public function show(string $id)
     {
+        $this->authorize('Group',Group::class);
         $item = Group::find($id);
         return new GroupResource($item);
     }
@@ -91,14 +92,14 @@ class GroupController extends Controller
             $item->roles()->sync($request->role_ids);
             return response()->json([
                 'success'=>true,
-                'message'=> 'Updated ' . $id,
+                'message'=> 'Updated success',
                 'data'=> $item
             ],200);
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Update not success ' . $id
+                'message'=> 'Update not success '
             ],200);
         }
     }
@@ -121,6 +122,22 @@ class GroupController extends Controller
                 'success'=>false,
                 'message'=> 'Deleted not success ' . $id
             ],200);
+        }
+    }
+    function position(Request $request){
+        try {
+            foreach ($_REQUEST['item'] as $key => $value) {
+                $item = Group::findOrfail($value);
+                $item->position = $key;
+                $item->save();
+            }
+            return response()->json([
+                'success'=> true,
+                'message'=> 'Updated position success',
+                'data' => $_REQUEST['item']
+            ],200);
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
         }
     }
 }

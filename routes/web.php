@@ -43,8 +43,10 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::resource('contents/lessons', \App\Http\Controllers\LessonController::class);
     Route::resource('banners', \App\Http\Controllers\BannerController::class);
     Route::resource('users', \App\Http\Controllers\UserController::class);
+    
+    //User
+    Route::post('/groups/position', [\App\Http\Controllers\GroupController::class, 'position'])->name('groups.position');
     Route::resource('groups', \App\Http\Controllers\GroupController::class);
-    //
     
     // Course 
     Route::post('/courses/position',[CourseController::class,'position'])->name('courses.position');
