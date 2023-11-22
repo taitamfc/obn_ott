@@ -1,15 +1,14 @@
-<div class="modal fade" id="modalCreate" style="display: none;" aria-hidden="true">
-    <form id="formCreate" action="{{ route('userbank.store') }}" method="post" enctype="multipart/form-data">
+<div class="modal fade" id="modalUpdate" style="display: none;" aria-hidden="true">
+    <form id="formUpdate" action="" method="post" enctype="multipart/form-data">
         <div class="modal-dialog modal-dialog-centered" role="document">
             @csrf
+            @method('PUT')
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">ENTER NEW CREDIT CARD INFO</h5>
+                    <h5 class="modal-title">UPDATE CREDIT CARD INFO</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
-
-
                     <div class="form-group input-bank_number">
                         <label for="bank_number" class="col-form-label">CREDIT CARD NUMBER</label>
                         <input class="form-control" type="text" id="bank_number" name='bank_number'>
@@ -36,7 +35,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary add-item" type='button'>Save changes</button>
+                    <button class="btn btn-primary edit-item" type='button'>Save changes</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>

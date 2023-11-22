@@ -29,7 +29,7 @@
                             <ul class="d-flex justify-content-center">
                                 <li class="mr-3">
                                     <a href="javascript:;" data-id="{{ $item->id }}"
-                                        data-action="{{ route('userbank.store',$item->id) }}"
+                                        data-action="{{ route('userbank.update',$item->id) }}"
                                         class="btn btn-primary show-form-edit">
                                         <i class="fa fa-edit"></i>
                                     </a>

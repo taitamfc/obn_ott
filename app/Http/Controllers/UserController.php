@@ -90,6 +90,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        $this->authorize('User',User::class);
         $item = User::findOrfail($id);
         return new UserResource($item);
     }
@@ -107,6 +108,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
+        $this->authorize('User',User::class);
         $item = User::findOrfail($id);
         $item->name = $request->name;
         $item->email = $request->email;
@@ -143,31 +145,41 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
+            $this->authorize('User',User::class);
             $item =  User::findOrfail($id);
-                // Delete old file
-                $this->deleteFile([$item->img]);
-                $item->delete();
-                return response()->json([
-                    'success'=>true,
-                    'message'=> __('sys.destroy_item_success'),
-                ],200);
-            } catch (QueryException $e) {
-                Log::error('Bug occurred: ' . $e->getMessage());
-                return response()->json([
-                    'success'=>false,
-                    'message'=> __('sys.destroy_item_error'),
-                ],200);
-            }
+            // Delete old file
+            $this->deleteFile([$item->img]);
+            $item->delete();
+            return response()->json([
+                'success'=>true,
+                'message'=> __('sys.destroy_item_success'),
+            ],200);
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> __('sys.destroy_item_error'),
+            ],200);
+        }
     }
 
     function account(Request $request){
-        if ($request->ajax()) {
-            $item = User::findOrfail($this->user_id);
-            $bankOwner = UserBank::where('user_id',$this->user_id)->first();
-            $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->with('user','plan')->first();
-            return view('accountmanagements.accountmanage.ajax-index',compact('item','bankOwner','current_plan'));
+        try {
+            $this->authorize('User',User::class);
+            if ($request->ajax()) {
+                $item = User::findOrfail($this->user_id);
+                $bankOwner = UserBank::where('user_id',$this->user_id)->first();
+                $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->with('user','plan')->first();
+                return view('accountmanagements.accountmanage.ajax-index',compact('item','bankOwner','current_plan'));
+            }
+            return view('accountmanagements.accountmanage.index');
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> __('sys.destroy_item_error'),
+            ],200);
         }
-        return view('accountmanagements.accountmanage.index');
     }
     function plan(Request $request){
         if ($request->ajax()) {

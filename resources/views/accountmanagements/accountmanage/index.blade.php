@@ -71,13 +71,13 @@ jQuery(function() {
                             0
                         ]);
                     }
-                    showAlertError('Has problems, Please try again!');
+                    showAlertError('Has problems, please try again!');
                 }
                 if (res.success) {}
                 showAlertSuccess('Update success');
                 setTimeout(() => {
                     window.location.reload();
-                }, 1500);
+                }, 1200);
             }
         });
     });

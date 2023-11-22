@@ -64,6 +64,7 @@
             </div>
         </div>
         @include('accountmanagements.billings.create')
+        @include('accountmanagements.billings.edit')
     </div>
 </div>
 @endsection
@@ -96,7 +97,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    Xu ly them moi
+    // Handle Add
     jQuery('body').on('click', ".add-item", function(e) {
         let formCreate = jQuery(this).closest('#formCreate');
         formCreate.find('.input-error').empty();
@@ -134,7 +135,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly them moi
+    // Handle Update
     jQuery(".edit-item").click(function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
         formUpdate.find('.input-error').empty();
@@ -156,38 +157,41 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
+                    showAlertError('Has problems, please try again!');
                 }
                 if (res.success) {
-                    window.location.reload();
+                    showAlertSuccess('Update Success');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1200);
                 }
 
             }
         });
     });
 
-    // Xu ly form edit
-    jQuery('.show-form-edit').click(function() {
-        // alert(123)
+    // Handle Form Edit
+    jQuery('body').on('click', ".show-form-edit", function(e) {
         // Hien thi modal
         jQuery('#modalUpdate').modal('show');
         let formUpdate = jQuery('#formUpdate');
         // Lấy dữ liệu
         let id = jQuery(this).data('id');
         let action = jQuery(this).data('action');
-        var url = 'userbank/' + id;
+        var url = indexUrl + '/' + id;
         jQuery.ajax({
             url: url,
             type: "GET",
             dataType: 'json',
             success: function(res) {
                 if (res.success) {
+                    console.log(res.data);
                     let formData = res.data;
                     formUpdate.prop('action', action);
-                    formUpdate.find('.input-id').val(formData.id);
-                    formUpdate.find('.input-name input').val(formData.name);
-                    formUpdate.find('.input-email input').val(formData.email);
-                    formUpdate.find('.input-phone input').val(formData.phone);
-                    formUpdate.find('.input-password input').val(formData.password);
+                    formUpdate.find('.input-bank_number input').val(formData.bank_number);
+                    formUpdate.find('.input-bank_owner input').val(formData.bank_owner);
+                    formUpdate.find('.input-bank_name input').val(formData.bank_name);
+                    formUpdate.find('.input-address input').val(formData.address);
                 }
             }
         });
