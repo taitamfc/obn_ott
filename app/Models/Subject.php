@@ -41,10 +41,10 @@ class Subject extends Model
     }
     function getImgFmAttribute()
     {  
-        if ($this->img) {
-            return '<img class="avatar-md" src="'.asset($this->img).'" alt="">';
+        if (!empty($this->image_url)) {
+            return '<img class="avatar-md" src="'.asset($this->image_url).'" alt="">';
         } else {
-            return '<img src="'.asset('images/default.jpg').'" alt="">';
+            return '<img class="avatar-md" src="'.asset('assets/images/default.png').'" alt="">';
         }
     }
 }

@@ -40,7 +40,7 @@
 
 @section('footer')
 <script>
-jQuery(function() {
+jQuery(document).ready(function() {
     var indexUrl = "{{ route('account.index') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
@@ -48,7 +48,7 @@ jQuery(function() {
 
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
-    
+
     // Update account
     jQuery('body').on('click', ".edit-item", function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
@@ -71,11 +71,13 @@ jQuery(function() {
                             0
                         ]);
                     }
+                    showAlertError('Has problems, please try again!');
                 }
-                showAlertSuccess(res.message);
-                if (res.success) {
+                if (res.success) {}
+                showAlertSuccess('Update success');
+                setTimeout(() => {
                     window.location.reload();
-                }
+                }, 1200);
             }
         });
     });

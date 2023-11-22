@@ -53,3 +53,12 @@ function handleDelete(url,targetElm, parentElm = '.item'){
         }
     });
 }
+
+function preventEnter(){
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+    });
+}

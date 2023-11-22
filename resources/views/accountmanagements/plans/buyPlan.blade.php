@@ -46,7 +46,6 @@ var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.buyPlans-table-results';
 jQuery(document).ready(function() {
-
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
 });

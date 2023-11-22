@@ -35,9 +35,10 @@
 
 @section('footer')
 <script>
-jQuery(function() {
+jQuery(document).ready(function() {
+    preventEnter();
     var indexUrl = "{{ route('groups.index') }}";
-    var positionUrl = "";
+    var positionUrl = "{{ route('groups.position') }}";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.groups-table-results';
 
@@ -54,7 +55,7 @@ jQuery(function() {
         }
     });
 
-    // Xu ly them moi
+    // Handle create new group
     jQuery('body').on('click', ".add-item", function(e) {
         let formCreate = jQuery(this).closest('#formCreate');
         formCreate.find('.input-error').empty();
@@ -77,7 +78,7 @@ jQuery(function() {
                             0
                         ]);
                     }
-                    showAlertError('Form validated fail!');
+                    showAlertError('Has problems, please try again!');
                 }
                 if (res.success) {
                     // Delete all values
@@ -94,7 +95,7 @@ jQuery(function() {
         });
     });
 
-    // Xu ly cap nhat
+    // Handle update
     jQuery('body').on('click', ".edit-item", function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
         formUpdate.find('.input-error').empty();
@@ -116,7 +117,7 @@ jQuery(function() {
                             0
                         ]);
                     }
-                    showAlertError('Form validated fail!');
+                    showAlertError('Has problems, please try again!');
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
@@ -130,7 +131,7 @@ jQuery(function() {
         });
     });
 
-    // Xu ly form edit
+    // Handle form edit 
     jQuery('body').on('click', ".show-form-edit", function(e) {
         // Hien thi modal
         jQuery('#modalUpdate').modal('show');
@@ -162,11 +163,6 @@ jQuery(function() {
         });
     })
 });
-
-
-function displayMessage(message) {
-    toastr.success(message, '')
-}
 </script>
 
 @endsection

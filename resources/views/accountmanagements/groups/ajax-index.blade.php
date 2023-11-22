@@ -24,7 +24,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="text-danger delete-item" data-id="{{ $item->id }}" data-action="{{ route('groups.destroy',$item->id) }}">
+                                    <a href="javascript:;" class="text-danger delete-item" data-id="{{ $item->id }}"
+                                        data-action="{{ route('groups.destroy',$item->id) }}">
                                         <i class="ti-trash"></i>
                                     </a>
                                 </li>

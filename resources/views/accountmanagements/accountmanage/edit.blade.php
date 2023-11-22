@@ -11,12 +11,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">Name<span>*</span></label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
                     <div class="form-group input-email">
-                        <label for="email" class="col-form-label">Email</label>
+                        <label for="email" class="col-form-label">Email<span>*</span></label>
                         <input class="form-control" type="text" id="email" name='email'>
                         <div class="input-error text-danger">@error('price') {{ $message }} @enderror</div>
                     </div>
@@ -26,7 +26,7 @@
                         <div class="input-error text-danger">@error('price') {{ $message }} @enderror</div>
                     </div>
                     <div class="form-group input-phone">
-                        <label for="image" class="col-form-label">Phone</label>
+                        <label for="image" class="col-form-label">Phone<span>*</span></label>
                         <input class="form-control" type="text" name='phone' id="phone">
                         <div class="input-error text-danger">@error('phone') {{ $message }} @enderror</div>
                         <img src="" class="input-img" alt="" style="display:none;">

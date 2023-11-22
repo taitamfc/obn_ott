@@ -28,7 +28,6 @@ class StoreUserBankRequest extends FormRequest
             'bank_owner' => 'required',
             'bank_name' => 'required',
             'address' => 'required',
-           
         ];
     }
     public function messages()
