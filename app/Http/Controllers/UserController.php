@@ -17,6 +17,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -42,11 +43,11 @@ class UserController extends Controller
             $groups = Group::where('user_id',0)->get();
         }
         if( $request->ajax() ){
-            $items = User::where('parent_id',$this->user_id)->paginate(20);
+            $items = User::where('id',$this->user_id)->orWhere('parent_id',$this->user_id)->paginate(20);
             return view('accountmanagements.users.ajax-index',compact('items','groups'));
         }
-    return view('accountmanagements.users.index',compact('groups'));
-}
+        return view('accountmanagements.users.index',compact('groups'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -65,6 +66,7 @@ class UserController extends Controller
             $item->name = $request->name;
             $item->email = $request->email;
             $item->password = $request->password;
+            $item->slug = Str::slug($request->name);
             $item->group_id = $request->group_id;
             $item->parent_id = $this->user_id;
             if ($request->hasFile('image')) {
