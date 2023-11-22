@@ -233,11 +233,14 @@ jQuery(document).ready(function() {
                             0
                         ]);
                     }
+                    showAlertError('Has Problem, Please Try Again');
                 }
                 if (res.success) {
-                    window.location.reload();
+                    showAlertSuccess(res.message);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1200);
                 }
-
             }
         });
     });
