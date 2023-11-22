@@ -19,7 +19,8 @@ class SubscriptionController extends Controller
     function index(Request $request){
         $items = Subscription::get();
         $courses = Course::pluck('name', 'id');
-        return view('stores.subscriptions.index',compact('items','courses'));
+        $form = 'create';
+        return view('stores.subscriptions.index',compact('items','courses','form'));
     }
 
     /**
@@ -78,7 +79,8 @@ class SubscriptionController extends Controller
         $item   = Subscription::find($id);
         $selected_courses = $item->courses ? $item->courses->pluck('id')->toArray() : [];
         $courses = Course::get();
-        return view('stores.subscriptions.edit',compact('items','courses','item','selected_courses'));
+        $form = 'edit';
+        return view('stores.subscriptions.index',compact('items','courses','item','selected_courses','form'));
     }
 
     /**
@@ -96,7 +98,8 @@ class SubscriptionController extends Controller
             $item->save();
             $item->courses()->sync($request->course);
             return response()->json([
-                'success'=>true,
+                'success'=> true,
+                'redirect' => route('subscriptions.index'),
                 'message'=> 'Saved ' . $item->id,
                 'data'=> $item
             ],200);
