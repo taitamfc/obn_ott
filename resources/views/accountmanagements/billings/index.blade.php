@@ -96,121 +96,102 @@ jQuery(document).ready(function() {
         }
     });
 
-    // // Xu ly xoa
-    // jQuery(".delete-item").click(function(e) {
-    //     e.preventDefault();
-    //     var ele = $(this);
-    //     var id = ele.data("id");
-    //     if (confirm("Are you sure?")) {
-    //         var url = 'userbank/' + id;
-    //         jQuery.ajax({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             },
-    //             url: url,
-    //             type: "POST",
-    //             data: {
-    //                 _method: 'DELETE',
-    //                 _token: '{{ csrf_token() }}',
-    //             },
-    //             success: function(response) {
-    //                 ele.closest('.item').remove(); // Xóa phần tử khỏi DOM
-    //             }
-    //         });
-    //     }
-    // });
+    Xu ly them moi
+    jQuery('body').on('click', ".add-item", function(e) {
+        let formCreate = jQuery(this).closest('#formCreate');
+        formCreate.find('.input-error').empty();
+        var url = formCreate.prop('action');
+        let formData = new FormData($('#formCreate')[0]);
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(res) {
+                if (res.has_errors) {
+                    for (const key in res.errors) {
+                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
+                            0
+                        ]);
+                    }
+                    showAlertError('Has problems, Please try again!');
+                }
+                if (res.success) {
+                    // Delete all values
+                    $('#formCreate')[0].reset();
+
+                    showAlertSuccess(res.message);
+                    // Disable modal
+                    jQuery('#modalCreate').modal('hide');
+                    // Recall items
+                    getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+                }
+            }
+        });
+    });
 
     // Xu ly them moi
-    // jQuery(".add-item").click(function(e) {
-    //     let formCreate = jQuery(this).closest('#formCreate');
-    //     formCreate.find('.input-error').empty();
-    //     var url = formCreate.prop('action');
-    //     let formData = new FormData($('#formCreate')[0]);
-    //     jQuery.ajax({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         url: url,
-    //         type: "POST",
-    //         processData: false,
-    //         contentType: false,
-    //         data: formData,
-    //         success: function(res) {
-    //             if (res.has_errors) {
-    //                 for (const key in res.errors) {
-    //                     console.log(key);
-    //                     jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-    //                         0
-    //                     ]);
-    //                 }
-    //             }
-    //             if (res.success) {
-    //                 window.location.reload();
-    //             }
+    jQuery(".edit-item").click(function(e) {
+        let formUpdate = jQuery(this).closest('#formUpdate');
+        formUpdate.find('.input-error').empty();
+        var url = formUpdate.prop('action');
+        let formData = new FormData($('#formUpdate')[0]);
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(res) {
+                if (res.has_errors) {
+                    for (const key in res.errors) {
+                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
+                            0
+                        ]);
+                    }
+                }
+                if (res.success) {
+                    window.location.reload();
+                }
 
-    //         }
-    //     });
-    // });
+            }
+        });
+    });
 
-    // // Xu ly them moi
-    // jQuery(".edit-item").click(function(e) {
-    //     let formUpdate = jQuery(this).closest('#formUpdate');
-    //     formUpdate.find('.input-error').empty();
-    //     var url = formUpdate.prop('action');
-    //     let formData = new FormData($('#formUpdate')[0]);
-    //     jQuery.ajax({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         url: url,
-    //         type: "POST",
-    //         processData: false,
-    //         contentType: false,
-    //         data: formData,
-    //         success: function(res) {
-    //             if (res.has_errors) {
-    //                 for (const key in res.errors) {
-    //                     jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-    //                         0
-    //                     ]);
-    //                 }
-    //             }
-    //             if (res.success) {
-    //                 window.location.reload();
-    //             }
-
-    //         }
-    //     });
-    // });
-
-    // // Xu ly form edit
-    // jQuery('.show-form-edit').click(function() {
-    //     // alert(123)
-    //     // Hien thi modal
-    //     jQuery('#modalUpdate').modal('show');
-    //     let formUpdate = jQuery('#formUpdate');
-    //     // Lấy dữ liệu
-    //     let id = jQuery(this).data('id');
-    //     let action = jQuery(this).data('action');
-    //     var url = 'userbank/' + id;
-    //     jQuery.ajax({
-    //         url: url,
-    //         type: "GET",
-    //         dataType: 'json',
-    //         success: function(res) {
-    //             if (res.success) {
-    //                 let formData = res.data;
-    //                 formUpdate.prop('action', action);
-    //                 formUpdate.find('.input-id').val(formData.id);
-    //                 formUpdate.find('.input-name input').val(formData.name);
-    //                 formUpdate.find('.input-email input').val(formData.email);
-    //                 formUpdate.find('.input-phone input').val(formData.phone);
-    //                 formUpdate.find('.input-password input').val(formData.password);
-
-    //             }
-    //         }
-    //     });
-    // })
+    // Xu ly form edit
+    jQuery('.show-form-edit').click(function() {
+        // alert(123)
+        // Hien thi modal
+        jQuery('#modalUpdate').modal('show');
+        let formUpdate = jQuery('#formUpdate');
+        // Lấy dữ liệu
+        let id = jQuery(this).data('id');
+        let action = jQuery(this).data('action');
+        var url = 'userbank/' + id;
+        jQuery.ajax({
+            url: url,
+            type: "GET",
+            dataType: 'json',
+            success: function(res) {
+                if (res.success) {
+                    let formData = res.data;
+                    formUpdate.prop('action', action);
+                    formUpdate.find('.input-id').val(formData.id);
+                    formUpdate.find('.input-name input').val(formData.name);
+                    formUpdate.find('.input-email input').val(formData.email);
+                    formUpdate.find('.input-phone input').val(formData.phone);
+                    formUpdate.find('.input-password input').val(formData.password);
+                }
+            }
+        });
+    })
 });
 </script>
 @endsection

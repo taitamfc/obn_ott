@@ -10,7 +10,7 @@
                 <div class="modal-body">
 
 
-                <div class="form-group input-bank_number">
+                    <div class="form-group input-bank_number">
                         <label for="bank_number" class="col-form-label">CREDIT CARD NUMBER</label>
                         <input class="form-control" type="text" id="bank_number" name='bank_number'>
                         <div class="input-error text-danger">@error('bank_number') {{ $message }} @enderror</div>
@@ -22,7 +22,7 @@
                         <div class="input-error text-danger">@error('bank_owner') {{ $message }} @enderror</div>
                     </div>
 
-                    <div class="form-group input-bank_name">
+                    <div class="form-group input-bank_name">e32`
                         <label for="bank_name" class="col-form-label">BANK NAME</label>
                         <input class="form-control" type="text" id="bank_name" name='bank_name'>
                         <div class="input-error text-danger">@error('bank_name') {{ $message }} @enderror</div>

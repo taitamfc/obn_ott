@@ -10,7 +10,7 @@
                 <thead class="text-uppercase">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Bank Nam</th>
+                        <th scope="col">Bank Name</th>
                         <th scope="col">Bank Number</th>
                         <th scope="col">Bank Owner</th>
                         <th scope="col">STREET ADDRESS</th>

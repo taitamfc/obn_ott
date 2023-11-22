@@ -59,13 +59,14 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     function store(StoreUserRequest $request){
-        $item = new User();
-        $item->name = $request->name;
-        $item->email = $request->email;
-        $item->password = $request->password;
-        $item->group_id = $request->group_id;
-        $item->parent_id = $this->user_id;
         try {
+            $this->authorize('User',User::class);
+            $item = new User();
+            $item->name = $request->name;
+            $item->email = $request->email;
+            $item->password = $request->password;
+            $item->group_id = $request->group_id;
+            $item->parent_id = $this->user_id;
             if ($request->hasFile('image')) {
                 $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             } 
@@ -89,7 +90,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $item = User::where('parent_id',$this->user_id)->findOrfail($id);
+        $item = User::findOrfail($id);
         return new UserResource($item);
     }
 
@@ -142,12 +143,10 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
-            $item =  User::find($id);
+            $item =  User::findOrfail($id);
                 // Delete old file
                 $this->deleteFile([$item->img]);
-
                 $item->delete();
-    
                 return response()->json([
                     'success'=>true,
                     'message'=> __('sys.destroy_item_success'),

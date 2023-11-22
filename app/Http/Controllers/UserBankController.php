@@ -33,7 +33,7 @@ class UserBankController extends Controller
     }
 
     function store(StoreUserBankRequest $request){
-        $item = UserBank::where('user_id', '=', $this->user_id);
+        $item = UserBank::where('user_id', '=', $this->user_id)->first();
         if (empty($item)) {
             $item = new UserBank();
         }
@@ -62,5 +62,23 @@ class UserBankController extends Controller
                 'message'=> 'Save not success'
             ],200);
         }
+    }
+    function destroy(String $id){
+        try {
+            $this->authorize('User',User::class);
+            $item = UserBank::where('user_id',$this->user_id)->findOrfail($id);
+            $item->delete();
+            return response()->json([
+                'success'=> true,
+                'message'=> 'Destroy success'
+            ],200);
+        } catch (\Exception $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> 'Destroy fail'
+            ],200);
+        }
+
     }
 }
