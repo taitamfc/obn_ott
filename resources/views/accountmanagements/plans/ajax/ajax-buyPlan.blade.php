@@ -33,8 +33,8 @@
                                     New plan will start on : {{ $current_plan }}
                                 </div>
                                 @endif
-                                <a href='javascript:;' class='btn btn-light add-item'
-                                    data-id="{{ $item->id }}">Confirm</a>
+                                <a href='javascript:;' class='btn btn-light add-item' data-id="{{ $item->id }}"
+                                    data-action="{{ route('users.storePlans') }}">Confirm</a>
                             </div>
                         </div>
                     </div>
@@ -43,30 +43,3 @@
         </div>
     </div>
 </div>
-<script>
-jQuery(document).ready(function() {
-    jQuery(".add-item").click(function(e) {
-        e.preventDefault();
-        var ele = $(this);
-        var id = ele.data("id");
-        var url = '/users/storePlans/';
-        jQuery.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: url,
-            type: "POST",
-            data: {
-                _token: '{{ csrf_token() }}',
-                data: id
-            },
-            success: function(res) {
-                if (res.redirect) {
-                    showAlertSuccess(res.message);
-                    window.location.href = res.redirect;
-                }
-            }
-        });
-    });
-});
-</script>

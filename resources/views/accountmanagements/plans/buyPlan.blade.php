@@ -48,6 +48,36 @@ var wrapperResults = '.buyPlans-table-results';
 jQuery(document).ready(function() {
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+
+    //Handle add plans 
+    jQuery('body').on("click", ".add-item", function(e) {
+        e.preventDefault();
+        var ele = $(this);
+        var id = ele.data("id");
+        var action = ele.data("action");
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: action,
+            type: "POST",
+            data: {
+                _token: '{{ csrf_token() }}',
+                data: id
+            },
+            success: function(res) {
+                if (res.error) {
+                    showAlertError(res.error);
+                }
+                if (res.redirect) {
+                    showAlertSuccess(res.message);
+                    setTimeout(() => {
+                        window.location.href = res.redirect;
+                    }, 1200);
+                }
+            }
+        });
+    });
 });
 </script>
 @endsection
