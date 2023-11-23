@@ -35,6 +35,15 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     Route::get('/users/addPlans/{id}',[\App\Http\Controllers\UserController::class,'addPlan'])->name('users.addPlans');
     Route::post('/users/storePlans',[\App\Http\Controllers\UserController::class,'storePlans'])->name('users.storePlans');
     
+    //Update Avatar Users
+    Route::post('/users/avatar', [\App\Http\Controllers\UserController::class, 'avatar'])->name('users.avatar');
+    
+    // User
+    Route::get('/account', [\App\Http\Controllers\UserController::class, 'account'])->name('account.index');
+    Route::resource('userbank', \App\Http\Controllers\UserBankController::class);
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+    
+
     //Grade
     Route::post('/grades/position', [\App\Http\Controllers\GradeController::class, 'position'])->name('grades.position');
     Route::resource('grades', \App\Http\Controllers\GradeController::class);
@@ -51,11 +60,6 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     
     //Banners
     Route::resource('banners', \App\Http\Controllers\BannerController::class);
-    
-    // User
-    Route::get('/account', [\App\Http\Controllers\UserController::class, 'account'])->name('account.index');
-    Route::resource('userbank', \App\Http\Controllers\UserBankController::class);
-    Route::resource('users', \App\Http\Controllers\UserController::class);
     
     //Group
     Route::post('/groups/position', [\App\Http\Controllers\GroupController::class, 'position'])->name('groups.position');

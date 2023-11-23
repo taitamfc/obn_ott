@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateAvatarRequest;
 use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -70,8 +71,10 @@ class UserController extends Controller
             $item->group_id = $request->group_id;
             $item->parent_id = $this->user_id;
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
-            } 
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
+            }else {
+                $item->image_url = 'assets/images/default.png';
+            }
             $item->save();
             return response()->json([
                 'success'=>true,
@@ -121,10 +124,10 @@ class UserController extends Controller
         try {
             if ($request->hasFile('image')) {
                 // Delete old file
-                $this->deleteFile([$item->img]);
+                $this->deleteFile([$item->image_url]);
 
                 // Upload new file
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             }
             $item->save();
             return response()->json([
@@ -150,7 +153,7 @@ class UserController extends Controller
             $this->authorize('User',User::class);
             $item =  User::findOrfail($id);
             // Delete old file
-            $this->deleteFile([$item->img]);
+            $this->deleteFile([$item->image_url]);
             $item->delete();
             return response()->json([
                 'success'=>true,
@@ -240,5 +243,23 @@ class UserController extends Controller
         'success' => false,
         'error' =>  'You have max Plans!!'
     ],200);
+    }
+    function avatar(UpdateAvatarRequest $request){
+        try {
+            $item = User::findOrfail($this->user_id);
+            $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
+            $item->save();
+            return response([
+                'success' => true,
+                'message' => __('sys.store_item_success'),
+                'data' => $item
+            ],200);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => false,
+                'message' => __('sys.store_item_error'),
+            ],200);
+        }
     }
 }

@@ -6,7 +6,7 @@
     <div class="header-area-left">
         <a href="{{ route('home') }}" class="logo">
             <span>
-            OTT Platform
+                OTT Platform
             </span>
             <i>
                 <img src="{{ asset('assets/images/logo-collapsed.svg')}}" alt="" height="22">
@@ -54,23 +54,25 @@
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset('assets/images/user.jpg') }}" alt="" class="img-fluid">
+                            <img src="{{ asset( Auth::user()->image_url ) }}" alt="" class="img-fluid">
                         </button>
                         <div class="dropdown-menu dropdown_user" aria-labelledby="dropdownMenuButton">
                             <div class="dropdown-header d-flex flex-column align-items-center">
                                 <div class="user_img mb-3">
-                                    <img src="{{ asset('assets/images/user.jpg') }}" alt="User Image">
+                                    <img src="{{ asset( Auth::user()->image_url ) }}" alt="User Image">
                                 </div>
                                 <div class="user_bio text-center">
                                     <p class="name font-weight-bold mb-0">{{ Auth::user()->name }}</p>
                                     <p class="email text-muted mb-3"><a class="pl-3 pr-3"
-                                            href="{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></p>
+                                            href="{{ route('account.index') }}">{{ Auth::user()->email }}</a></p>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="{{ route('account.index') }}"><i class="ti-user"></i> Profile</a>
-                            <a class="dropdown-item" href="{{ route('cms',['site_name'=>Auth::user()->slug]) }}"><i class="ti-home"></i> View website</a>
+                            <a class="dropdown-item" href="{{ route('account.index') }}"><i class="ti-user"></i>
+                                Profile</a>
+                            <a class="dropdown-item" href="{{ route('cms',['site_name'=>Auth::user()->slug]) }}"><i
+                                    class="ti-home"></i> View website</a>
                             <span role="separator" class="divider"></span>
-                            <a class="dropdown-item" href="/logout"><i class="ti-power-off"></i>Logout</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"><i class="ti-power-off"></i>Logout</a>
                         </div>
                     </div>
                 </li>

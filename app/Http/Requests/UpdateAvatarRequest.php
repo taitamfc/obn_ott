@@ -5,7 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class StoreCourseRequest extends FormRequest
+
+class UpdateAvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,19 +24,16 @@ class StoreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'price' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg'
         ];
     }
-    public function messages()
+    function messages(): array
     {
         return [
-            'name.required' => 'The name field is required',
-            'price.required' => 'The price field is required',
+            'image.required' => 'image on image setting is required',
+            'image.mimes' => 'Invalid image format. Allowed formats: jpg, png, jpeg ',
         ];
     }
-
-
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

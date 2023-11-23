@@ -14,24 +14,7 @@
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
-        <div class="row mb-4">
-            <div class="col-md-12 grid-margin">
-                <div class="d-flex justify-content-between flex-wrap">
-                    <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">Account Management</h5>
-                        <div class="d-flex align-items-baseline dashboard-breadcrumb">
-                            <p class="text-muted mb-0 mr-1 hover-cursor">OTT</p>
-                            <i class="mdi mdi-chevron-right mr-1 text-primary"></i>
-                            <p class="text-muted mb-0 mr-1 hover-cursor">Account Management</p>
-                        </div>
-                    </div>
-                    <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="information-table-results">
+        <div class="card information-table-results">
             <div class="text-center">{{ __('sys.loading_data') }}</div>
         </div>
     </div>
@@ -73,11 +56,12 @@ jQuery(document).ready(function() {
                     }
                     showAlertError('Has Problems, Please Try Again!');
                 }
-                if (res.success) {}
-                showAlertSuccess('Update success');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1200);
+                if (res.success) {
+                    showAlertSuccess('Update success');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1200);
+                }
             }
         });
     });
@@ -106,6 +90,49 @@ jQuery(document).ready(function() {
                     formUpdate.find('.input-phone input').val(formData.phone);
                     formUpdate.find('.input-password input').val(formData.password);
 
+                }
+            }
+        });
+    });
+
+    // show form edit with value default
+    jQuery('body').on('click', ".show-form-edit-avatar", function(r) {
+        jQuery('#modalUpdateAvatar').modal('show');
+        let formUpdate = jQuery('#formUpdateAvatar');
+        let action = jQuery(this).data('action');
+        formUpdate.prop('action', action);
+    });
+
+    // Update account
+    jQuery('body').on('click', ".edit-avatar", function(e) {
+        let formUpdateAvatar = jQuery(this).closest('#formUpdateAvatar');
+        formUpdateAvatar.find('.input-error').empty();
+        var url = formUpdateAvatar.prop('action');
+        let formData = new FormData($('#formUpdateAvatar')[0]);
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(res) {
+                console.log(res);
+                if (res.has_errors) {
+                    for (const key in res.errors) {
+                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
+                            0
+                        ]);
+                    }
+                    showAlertError('Has Problems, Please Try Again!');
+                }
+                if (res.success) {
+                    showAlertSuccess('Update success');
+                    setTimeout(() => {
+                        getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+                    }, 1200);
                 }
             }
         });

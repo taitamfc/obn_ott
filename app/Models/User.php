@@ -26,15 +26,6 @@ class User extends Authenticatable
         'group_id',
         'parent_id',
     ];
-    // Trong model User
-public function group()
-{
-    return $this->belongsTo(Group::class, 'group_id');
-}
-public function userBanks()
-{
-    return $this->hasMany(UserBank::class, 'user_id');
-}
 
     /**
      * The attributes that should be hidden for serialization.
@@ -54,6 +45,8 @@ public function userBanks()
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relationship
     public function lesson()
     {
         return $this->hasMany(Lesson::class, 'use_id', 'id');
@@ -66,5 +59,13 @@ public function userBanks()
     }
     function user_plan(){
         return $this->hasMany(PlanUser::class,'user_id','id');
+    }
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id');
+    }
+    public function userBanks()
+    {
+        return $this->hasMany(UserBank::class, 'user_id');
     }
 }
