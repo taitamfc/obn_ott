@@ -184,11 +184,10 @@ class UserController extends Controller
         }
     }
     function plan(Request $request){
-        $next_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',0)->get();
-        $next_plan_data = $next_plan->pluck('plan_id', 'created_at')->toArray();
-        dd($next_plan_data);
         if ($request->ajax()) {
             $items = Plan::paginate(3);
+            $next_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',0)->get();
+            $next_plan_data = $next_plan->pluck('plan_id', 'created_at')->toArray();
             $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->first();
             return view('accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan_data'));
         }

@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    @elseif(!empty($next_plan) && $item->id == $next_plan->plan_id)
+                    @elseif(!empty($next_plan_data) && array_search($item->id, $next_plan_data))
                     <div class="col-lg-4">
                         <div class="main_pricing_conatiner wow fadeInLeftBig" data-wow-delay="0.3">
                             <div class="price">
@@ -64,8 +64,8 @@
                             </div>
                             <div class="choose_plan_btn">
                                 <a href="javascript:;" class='btn btn-secondary'>Will be start
-                                    on
-                                    {{ $next_plan->created_at->format('Y-m-d') }}</a>
+                                    on {{ $item->getKeyByValue($next_plan_data,$item->id)->format('Y-m-d') }}
+                                </a>
                             </div>
                         </div>
                     </div>
