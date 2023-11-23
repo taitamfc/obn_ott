@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Group;
+use App\Models\GroupRole;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -112,6 +113,7 @@ class GroupController extends Controller
         try {
             $this->authorize('Group',Group::class);
             Group::destroy($id);
+            GroupRole::where('group_id',$id)->delete();
             return response()->json([
                 'success'=>true,
                 'message'=> 'Deleted ' . $id

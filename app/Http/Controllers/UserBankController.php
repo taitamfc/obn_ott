@@ -27,7 +27,7 @@ class UserBankController extends Controller
     
     function index(Request $request){
         if($request->ajax()){
-            $items = UserBank::get();
+            $items = UserBank::where('user_id',$this->user_id)->get();
             return view('accountmanagements.billings.ajax-index',compact('items'));
         }
         return view('accountmanagements.billings.index');

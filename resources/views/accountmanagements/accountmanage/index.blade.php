@@ -130,9 +130,7 @@ jQuery(document).ready(function() {
                 }
                 if (res.success) {
                     showAlertSuccess('Update success');
-                    setTimeout(() => {
-                        getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
-                    }, 1200);
+                    window.location.reload();
                 }
             }
         });

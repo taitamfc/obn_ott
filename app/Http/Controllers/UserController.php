@@ -39,10 +39,6 @@ class UserController extends Controller
     function index(Request $request){
         $this->authorize('User',User::class);
         $groups = Group::all();
-        if( !count($groups) ){
-            // If not, get groups for system
-            $groups = Group::where('user_id',0)->get();
-        }
         if( $request->ajax() ){
             $items = User::where('id',$this->user_id)->orWhere('parent_id',$this->user_id)->paginate(20);
             return view('accountmanagements.users.ajax-index',compact('items','groups'));
@@ -111,8 +107,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, string $id)
-    {
+    public function update(UpdateUserRequest $request, string $id){
         $this->authorize('User',User::class);
         $item = User::findOrfail($id);
         $item->name = $request->name;
@@ -143,12 +138,10 @@ class UserController extends Controller
             ],200);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id){
         try {
             $this->authorize('User',User::class);
             $item =  User::findOrfail($id);
@@ -167,7 +160,6 @@ class UserController extends Controller
             ],200);
         }
     }
-
     function account(Request $request){
         try {
             $this->authorize('User',User::class);
@@ -239,10 +231,6 @@ class UserController extends Controller
                 'message' => __('sys.store_item_error'),
             ],200);
         }
-    return response([
-        'success' => false,
-        'error' =>  'You have max Plans!!'
-    ],200);
     }
     function avatar(UpdateAvatarRequest $request){
         try {

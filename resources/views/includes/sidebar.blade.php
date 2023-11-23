@@ -196,7 +196,9 @@
                 </li>
                 @endif
                 <!-- Setting -->
-                <li> <a href="{{ route('settings.index') }}">
+                @if (Auth::user()->hasPermission('Setting'))
+                <li>
+                    <a href="{{ route('settings.index') }}">
                         <i class="feather ft-home"></i>
                         <span>Setting</span>
                         <span class="float-right arrow">
@@ -256,6 +258,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
         <div class="clearfix"></div>

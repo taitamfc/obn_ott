@@ -19,6 +19,7 @@ class ClassController extends Controller
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
             $this->user_id = Auth::id();
+            $this->parent_id = Auth::user()->parent_id;
             return $next($request);
         });
     }
@@ -42,7 +43,7 @@ class ClassController extends Controller
     function students(Request $request){
         try {
             if ($request->ajax()) {
-                $query = StudentCourse::where('user_id',Auth::id())->with('student','course');
+                $query = StudentCourse::where('user_id',$this->user_id)->orWhere('user_id',$this->parent_id)->with('student','course');
                 if ($request->searchName) {
                     $query->whereHas('student', function ($query) use ($request) {
                         $query->where('name', 'LIKE', '%' . $request->searchName . '%');
