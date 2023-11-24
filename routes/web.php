@@ -17,9 +17,18 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::resource('store/subscriptions',\App\Http\Controllers\SubscriptionController::class);
+// Login
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
 Route::post('/postLogin',[App\Http\Controllers\AuthController::class,'postLogin'])->name('postLogin');
 Route::get('/logout',[App\Http\Controllers\AuthController::class,'Logout'])->name('logout');
+
+// Forgot password
+Route::get('/forgot',[App\Http\Controllers\AuthController::class,'forgot'])->name('forgot');
+Route::post('/postForgot',[App\Http\Controllers\AuthController::class,'postForgot'])->name('postForgot');
+Route::get('/resetPassword/{user}/{token}',[App\Http\Controllers\AuthController::class,'getReset'])->name('getReset');
+Route::post('/resetPassword/{user}/{token}',[App\Http\Controllers\AuthController::class,'postReset'])->name('postReset');
+
+// Register
 Route::get('/register',[App\Http\Controllers\AuthController::class,'register'])->name('register');
 Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('postRegister');
 

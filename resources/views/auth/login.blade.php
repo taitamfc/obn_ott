@@ -7,6 +7,11 @@
             {{ session('error') }}
         </div>
         @endif
+        @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+        @endif
         @csrf
         <div class="login-form-body">
             <div class="form-gp">
@@ -33,7 +38,8 @@
                     </div>
                 </div>
                 <div class="col-6 text-right">
-                    <!-- <a href="#" class="text-primary">Forgot Password?</a> -->
+                    <a href="{{ route('forgot') }}" class="text-primary" data-action="{{ route('postForgot') }}">Forgot
+                        Password?</a>
                 </div>
             </div>
             <div class="submit-btn-area">
