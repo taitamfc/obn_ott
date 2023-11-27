@@ -211,35 +211,10 @@
                                 <span>Logo</span>
                             </a>
                         </li>
-                        <li> <a href="{{ route('settings.pages') }}">
+                        <li> <a href="{{ route('pages.index') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Pages</span>
-                                <span class="float-right arrow">
-                                    <i class="ion ion-chevron-down"></i>
-                                </span>
                             </a>
-                            <ul>
-                                <li> <a href="{{ route('settings.pages.term') }}">
-                                        <i class="feather ft-home"></i>
-                                        <span>Terms</span>
-                                    </a>
-                                </li>
-                                <li> <a href="{{ route('settings.pages.privacy-policy') }}">
-                                        <i class="feather ft-home"></i>
-                                        <span>Privacy Policy</span>
-                                    </a>
-                                </li>
-                                <li> <a href="{{ route('settings.pages.refund-policy') }}">
-                                        <i class="feather ft-home"></i>
-                                        <span>Refund Policy</span>
-                                    </a>
-                                </li>
-                                <li> <a href="{{ route('settings.pages.faq') }}">
-                                        <i class="feather ft-home"></i>
-                                        <span>FAQ</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li> <a href="{{ route('settings.popup') }}">
                                 <i class="feather ft-home"></i>

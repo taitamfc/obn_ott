@@ -87,6 +87,8 @@ jQuery(document).ready(function() {
         formCreate.find('.input-error').empty();
         var url = formCreate.prop('action');
         let formData = new FormData($('#createLesson')[0]);
+        var desc = CKEDITOR.instances.description.getData();
+        formData.append('description', desc);
         jQuery.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -105,9 +107,7 @@ jQuery(document).ready(function() {
             }
             if (res.redirect) {
                 showAlertSuccess(res.message);
-                setTimeout(() => {
-                    window.location.href = res.redirect;
-                }, 1000);
+                window.location.href = res.redirect;
             }
         });
     });
