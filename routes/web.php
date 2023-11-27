@@ -96,7 +96,11 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     // Setting
     Route::post('/setting', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
     Route::get('setting', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
+    
+    //Logo
     Route::get('setting/logo',[\App\Http\Controllers\SettingController::class,'logo'])->name('settings.logo');
+    Route::post('setting/updateLogo',[\App\Http\Controllers\SettingController::class,'updateLogo'])->name('settings.updateLogo');
+    
     Route::get('setting/pages',[\App\Http\Controllers\SettingController::class,'pages'])->name('settings.pages');
     Route::get('setting/pages/term',[\App\Http\Controllers\SettingController::class,'pageTerm'])->name('settings.pages.term');
     Route::get('setting/pages/privacy-policy',[\App\Http\Controllers\SettingController::class,'pagePrivacyPolicy'])->name('settings.pages.privacy-policy');

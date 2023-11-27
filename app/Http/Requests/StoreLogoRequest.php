@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateAvatarRequest extends FormRequest
+class StoreLogoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,7 @@ class UpdateAvatarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|mimes:jpg,png,jpeg'
-        ];
-    }
-    function messages(): array
-    {
-        return [
-            'image.required' => 'image setting is required',
-            'image.mimes' => 'Invalid image format. Allowed formats: jpg, png, jpeg ',
+            'logo' => 'required|mimes:jpg,png,jpeg,svg,eps'
         ];
     }
     protected function failedValidation(Validator $validator)
