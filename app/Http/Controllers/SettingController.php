@@ -12,7 +12,6 @@ class SettingController extends Controller
     use UploadFileTrait;
     public function update(Request $request)
     {
-        // dd($request);
         $items = $request->except(['_token', '_method']);
         foreach ($items as $setting_name => $setting_value){
             Setting::where('setting_name',$setting_name)
@@ -21,7 +20,6 @@ class SettingController extends Controller
                 'setting_value'=> $setting_value
             ]);
         }
-
         if ($request->hasFile('auth_page_background_image')) {
             $imagePath = $this->uploadFile($request->file('auth_page_background_image'), Auth::id().'/banners/images');
             Setting::where('setting_name', 'auth_page_background_image')->where('user_id',Auth::id())->update([ 'setting_value' => $imagePath ]);

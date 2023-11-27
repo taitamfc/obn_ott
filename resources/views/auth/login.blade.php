@@ -32,10 +32,10 @@
             </div>
             <div class="row mb-4 rmber-area">
                 <div class="col-6">
-                    <div class="custom-control custom-checkbox primary-checkbox mr-sm-2">
+                    <!-- <div class="custom-control custom-checkbox primary-checkbox mr-sm-2">
                         <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
                         <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-6 text-right">
                     <a href="{{ route('forgot') }}" class="text-primary" data-action="{{ route('postForgot') }}">Forgot

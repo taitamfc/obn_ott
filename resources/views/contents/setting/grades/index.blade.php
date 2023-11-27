@@ -60,7 +60,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    // Xu ly them moi
+    // Handle Create
     jQuery('body').on('click', ".add-item", function(e) {
         let formCreate = jQuery(this).closest('#formCreate');
         formCreate.find('.input-error').empty();
@@ -98,7 +98,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly cap nhat
+    // Handle Update
     jQuery('body').on('click', ".edit-item", function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
         formUpdate.find('.input-error').empty();
@@ -134,7 +134,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly form edit
+    // Handle form edit
     jQuery('body').on('click', ".show-form-edit", function(e) {
         // Hien thi modal
         jQuery('#modalUpdate').modal('show');

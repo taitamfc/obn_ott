@@ -11,6 +11,7 @@ use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 use App\Traits\UploadFileTrait;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
 
 class BannerController extends Controller
 {
@@ -18,11 +19,25 @@ class BannerController extends Controller
      * Display a listing of the resource.
      */
     use UploadFileTrait;
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            $this->user_id = Auth::id();
+            return $next($request);
+        });
+    }
+
     function index(Request $request){
         $this->authorize('Banner',Banner::class);
-        $items = Banner::get();
         $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
-        return view('themes.banners.index',compact('items','settings'));
+        if ($request->ajax()) {
+            $items = Banner::get();
+            return view('themes.banners.ajax-index',compact('items'));
+        }
+        return view('themes.banners.index',compact('settings'));
     }
 
 
@@ -43,6 +58,7 @@ class BannerController extends Controller
         $item->name = $request->name;
         $item->description = $request->description;
         $item->link = $request->link;
+        $item->user_id = $this->user_id;
         try {
             if ($request->hasFile('image')) {
                 $item->img = $this->uploadFile($request->file('image'), 'banners/images');
@@ -67,7 +83,6 @@ class BannerController extends Controller
     public function show(string $id)
     {
         $item = Banner::find($id);
-       
         return new BannerResource($item);
     }
 
@@ -120,13 +135,13 @@ class BannerController extends Controller
             Banner::destroy($id);
             return response()->json([
                 'success'=>true,
-                'message'=> 'Deleted ' . $id
+                'message'=> 'Deleted success'
             ],200);
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
                 'success'=>false,
-                'message'=> 'Deleted not success ' . $id
+                'message'=> 'Deleted not success '
             ],200);
         }
     }
