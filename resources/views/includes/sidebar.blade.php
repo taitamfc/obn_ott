@@ -221,16 +221,6 @@
                                 <span>Popup</span>
                             </a>
                         </li>
-                        <li> <a href="{{ route('settings.notice') }}">
-                                <i class="feather ft-home"></i>
-                                <span>Notice</span>
-                            </a>
-                        </li>
-                        <li> <a href="{{ route('settings.customer-inquiry') }}">
-                                <i class="feather ft-home"></i>
-                                <span>Customer Inquiry</span>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 @endif

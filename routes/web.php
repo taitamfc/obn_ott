@@ -116,11 +116,9 @@ Route::middleware(['auth','preventhistory'])->group(function(){
 
         //Popup
         Route::get('/popup',[\App\Http\Controllers\SettingController::class,'popup'])->name('settings.popup');
-        Route::get('/showPopup',[\App\Http\Controllers\SettingController::class,'showPopup'])->name('settings.showPopup');
-        Route::post('/updatePopup',[\App\Http\Controllers\SettingController::class,'updatePopup'])->name('settings.updatePopup');
+        Route::get('/show-popup',[\App\Http\Controllers\SettingController::class,'showPopup'])->name('settings.showPopup');
+        Route::post('/update-popup',[\App\Http\Controllers\SettingController::class,'updatePopup'])->name('settings.updatePopup');
         
-        Route::post('/notice',[\App\Http\Controllers\SettingController::class,'notice'])->name('settings.notice');
-        Route::get('/customer-inquiry',[\App\Http\Controllers\SettingController::class,'customerInquiry'])->name('settings.customer-inquiry');
     });
 
 });

@@ -24,12 +24,12 @@ class SettingController extends Controller
             return $next($request);
         });
     }
+
     // Handle Banner & Setting Banner
     public function index()
     { 
         return view('settings.logo.index'); 
     }
-    
     public function update(Request $request)
     {
         $items = $request->except(['_token', '_method']);
@@ -62,7 +62,6 @@ class SettingController extends Controller
         }
         return view('settings.logo.index');
     }
-
     function updateLogo(StoreLogoRequest $request)
     {
         if ($request->hasFile('logo')) {
@@ -90,6 +89,7 @@ class SettingController extends Controller
             'message' => 'Update Logo Fail',
         ]);
     }
+
     // Handle Update Popup
     public function popup(Request $request)
     { 
@@ -99,13 +99,11 @@ class SettingController extends Controller
         }
         return view('settings.popup.index'); 
     }
-
     function showPopup(Request $request)
     {
         $item = Setting::where('user_id',$this->user_id)->where('setting_name','LIKE','popup')->first();
         return new SettingResource($item);
     }
-
     function updatePopup(Request $request)
     {
         try {
@@ -133,6 +131,4 @@ class SettingController extends Controller
             ]);
         }
     }
-    public function notice(){ return view('settings.notice'); }
-    public function customerInquiry(){ return view('settings.customer-inquiry'); }
 }
