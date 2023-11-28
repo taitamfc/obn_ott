@@ -9,7 +9,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\PageResource;
 use Illuminate\Support\Str;
 
 class PageController extends Controller

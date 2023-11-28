@@ -102,20 +102,25 @@ Route::middleware(['auth','preventhistory'])->group(function(){
     
     // Setting
     Route::prefix('setting')->group(function(){
-    
-    Route::get('/', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
-    Route::post('/', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
+        Route::get('/', [\App\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
+        
+        //Banner
+        Route::post('/', [\App\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
 
-    //Logo
-    Route::get('/logo',[\App\Http\Controllers\SettingController::class,'logo'])->name('settings.logo');
-    Route::post('/updateLogo',[\App\Http\Controllers\SettingController::class,'updateLogo'])->name('settings.updateLogo');
-    
-    //Pages
-    Route::resource('/pages',\App\Http\Controllers\PageController::class);
+        //Logo
+        Route::get('/logo',[\App\Http\Controllers\SettingController::class,'logo'])->name('settings.logo');
+        Route::post('/updateLogo',[\App\Http\Controllers\SettingController::class,'updateLogo'])->name('settings.updateLogo');
+        
+        //Pages
+        Route::resource('/pages',\App\Http\Controllers\PageController::class);
 
-    Route::get('/popup',[\App\Http\Controllers\SettingController::class,'popup'])->name('settings.popup');
-    Route::get('/notice',[\App\Http\Controllers\SettingController::class,'notice'])->name('settings.notice');
-    Route::get('/customer-inquiry',[\App\Http\Controllers\SettingController::class,'customerInquiry'])->name('settings.customer-inquiry');
+        //Popup
+        Route::get('/popup',[\App\Http\Controllers\SettingController::class,'popup'])->name('settings.popup');
+        Route::get('/showPopup',[\App\Http\Controllers\SettingController::class,'showPopup'])->name('settings.showPopup');
+        Route::post('/updatePopup',[\App\Http\Controllers\SettingController::class,'updatePopup'])->name('settings.updatePopup');
+        
+        Route::post('/notice',[\App\Http\Controllers\SettingController::class,'notice'])->name('settings.notice');
+        Route::get('/customer-inquiry',[\App\Http\Controllers\SettingController::class,'customerInquiry'])->name('settings.customer-inquiry');
     });
 
 });

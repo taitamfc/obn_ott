@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreLogoRequest;
+use App\Http\Resources\SettingResource;
 
 class SettingController extends Controller
 {
@@ -23,10 +24,14 @@ class SettingController extends Controller
             return $next($request);
         });
     }
-
-    public function index(){ return view('settings.logo.index'); }
+    // Handle Banner & Setting Banner
+    public function index()
+    { 
+        return view('settings.logo.index'); 
+    }
     
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $items = $request->except(['_token', '_method']);
         foreach ($items as $setting_name => $setting_value){
             Setting::where('setting_name',$setting_name)
@@ -48,15 +53,18 @@ class SettingController extends Controller
         return redirect()->route('banners.index')->with('success', 'Cập Nhật thành công!');
     }
     
-    // Handle Logo
-    public function logo(Request $request){
+    // Handle Update Logo
+    public function logo(Request $request)
+    {
         if ($request->ajax()) {
             $item = Setting::where('setting_name', 'LIKE', 'logo')->where('user_id',$this->user_id)->first();
             return view('settings.logo.ajax-index',compact('item'));
         }
         return view('settings.logo.index');
     }
-    function updateLogo(StoreLogoRequest $request){
+
+    function updateLogo(StoreLogoRequest $request)
+    {
         if ($request->hasFile('logo')) {
             $imagePath = $this->uploadFile($request->file('logo'), $this->user_id.'/banners/logo');
             $item =  Setting::where('setting_name', 'LIKE', 'logo')->where('user_id', $this->user_id)->first();
@@ -82,10 +90,49 @@ class SettingController extends Controller
             'message' => 'Update Logo Fail',
         ]);
     }
-    public function pagePrivacyPolicy(){ return view('settings.pages.privacy-policy'); }
-    public function pageRefundPolicy(){ return view('settings.pages.refund-policy'); }
-    public function pageFaq(){ return view('settings.pages.faq'); }
-    public function popup(){ return view('settings.popup'); }
+    // Handle Update Popup
+    public function popup(Request $request)
+    { 
+        if ($request->ajax()) {
+            $item = Setting::where('setting_name', 'LIKE', 'popup')->where('user_id',$this->user_id)->first();
+            return view('settings.popup.ajax-index',compact('item'));
+        }
+        return view('settings.popup.index'); 
+    }
+
+    function showPopup(Request $request)
+    {
+        $item = Setting::where('user_id',$this->user_id)->where('setting_name','LIKE','popup')->first();
+        return new SettingResource($item);
+    }
+
+    function updatePopup(Request $request)
+    {
+        try {
+            $item =  Setting::where('setting_name', 'LIKE', 'popup')->where('user_id', $this->user_id)->first();
+            if(empty($item)){
+                $data = [
+                    'setting_name' => 'popup',
+                    'setting_value' => $request->popup,
+                    'user_id' => $this->user_id,
+                ];
+                $item = Setting::create($data);
+            }else {
+                $item->setting_value = $request->popup;
+                $item->save();
+            }
+            return response([
+                'success' => true,
+                'message' => 'Update Popup Success',
+            ]); 
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => false,
+                'message' => 'Update Popup Fail',
+            ]);
+        }
+    }
     public function notice(){ return view('settings.notice'); }
     public function customerInquiry(){ return view('settings.customer-inquiry'); }
 }
