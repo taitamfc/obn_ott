@@ -1,0 +1,111 @@
+@extends('layouts.master')
+@section('content')
+<div class="main-content page-content">
+    <div class="main-content-inner" style="max-width: 100% !important;">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
+                        <h5 class="mr-4 mb-0 font-weight-bold">Create Page</h5>
+                    </div>
+                    <div class="buttons d-flex">
+                        <a class="btn btn-dark mr-1" href="{{ route('pages.index') }}">{{ __('sys.back') }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="formCreate" action="{{ route('pages.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group input-title-create">
+                                <label for="title" class="col-form-label">Title</label>
+                                <input class="form-control" type="text" id="title" name='title'
+                                    value="{{ old('title') }}">
+                                <div class="input-error text-danger">@error('title') {{ $message }} @enderror</div>
+                            </div>
+                            <div class="form-group input-description-create">
+                                <label for="description" class="col-form-label">Description</label>
+                                <textarea class="form-control" type="text" id="description"
+                                    name='description'>{{ old('description') }}</textarea>
+                                <div class="input-error text-danger">@error('description') {{ $message }} @enderror
+                                </div>
+                            </div>
+                            <div class="form-group input-status-create">
+                                <label for="status" class="col-form-label">Status</label>
+                                <div style="display: flex">
+                                    <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
+                                        <input type="radio" checked id="e-active" name="status"
+                                            class="custom-control-input input-active" value='1'>
+                                        <label class="custom-control-label" for="e-active">Active</label>
+                                    </div>
+                                    <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
+                                        <input type="radio" id="e-inactive" name="status"
+                                            class="custom-control-input input-inactive" value='0'>
+                                        <label class="custom-control-label" for="e-inactive">Inactive</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class='btn btn-primary add-item float-right'>Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('footer')
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('description');
+</script>
+<script>
+var description;
+jQuery(document).ready(function() {
+    // Handle Store 
+    jQuery('body').on('click', ".add-item", function(e) {
+        let formCreate = jQuery(this).closest('#formCreate');
+        formCreate.find('.input-error').empty();
+        var url = formCreate.prop('action');
+        var type = formCreate.prop('method');
+        let formData = new FormData($('#formCreate')[0]);
+        var desc = CKEDITOR.instances.description.getData();
+        formData.append('description', desc);
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(res) {
+                if (res.has_errors) {
+                    for (const key in res.errors) {
+                        console.log(key);
+                        jQuery('.input-' + key + '-create').find('.input-error').html(
+                            res
+                            .errors[key][
+                                0
+                            ]);
+                    }
+                    showAlertError('Has Problems, Please Try Again!');
+                }
+                if (res.success) {
+                    showAlertSuccess(res.message);
+                    window.location.href = "{{ route('pages.index') }}";
+                }
+
+            }
+        });
+    });
+});
+</script>
+@endsection

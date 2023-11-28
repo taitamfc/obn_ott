@@ -58,14 +58,11 @@ class CourseController extends Controller
             ],200);
         }
     }
-
     public function show(string $id)
     {
         $item = Course::where('user_id',$this->user_id)->findOrfail($id);
         return new CourseResource($item);
     }
-
-
     public function update(UpdateCourseRequest $request, string $id)
     {
         $item = Course::where('user_id',$this->user_id)->find($id);
@@ -94,7 +91,6 @@ class CourseController extends Controller
             ],200);
         }
     }
-
     public function destroy(string $id)
     {
         try {
@@ -116,7 +112,8 @@ class CourseController extends Controller
             ],200);
         }
     }
-    function position(Request $request){
+    function position(Request $request)
+    {
         try {
             foreach ($_REQUEST['item'] as $key => $value) {
                 $item = Course::where('user_id',$this->user_id)->findOrfail($value);
@@ -127,7 +124,8 @@ class CourseController extends Controller
             Log::error('Bug occurred: ' . $e->getMessage());
         }
     }
-    function products(Request $request){
+    function products(Request $request)
+    {
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
             $items = Course::where('user_id',$this->user_id)->paginate(20);
@@ -135,7 +133,8 @@ class CourseController extends Controller
         }
         return view('stores.productmanagement.index');
     }
-    function editProduct(Request $request){
+    function editProduct(Request $request)
+    {
         $this->authorize('Course',Course::class);
         try {  
             $item = Course::where('user_id',$this->user_id)->findOrfail($request->id);

@@ -11,10 +11,9 @@ class Setting extends Model
     protected $table = 'settings';
     protected $fillable = [
         'setting_name',
-        'description',
-        'setting_group',
-        'createt_at',
-        'updated_at',
+        'setting_value',
+        // 'setting_group',
+        'user_id',
     ];
 
     function getImgFmAttribute()

@@ -102,6 +102,7 @@
     <!-- Main Js -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    
     @yield('footer')
 </body>
 
