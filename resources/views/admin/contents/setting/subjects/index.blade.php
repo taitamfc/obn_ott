@@ -30,8 +30,8 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('contents.setting.subjects.create')
-        @include('contents.setting.subjects.edit')
+        @include('admin.contents.setting.subjects.create')
+        @include('admin.contents.setting.subjects.edit')
     </div>
 </div>
 

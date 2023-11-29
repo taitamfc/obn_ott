@@ -27,8 +27,8 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('contents.setting.courses.create')
-        @include('contents.setting.courses.edit')
+        @include('admin.contents.setting.courses.create')
+        @include('admin.contents.setting.courses.edit')
     </div>
 </div>
 

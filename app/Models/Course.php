@@ -13,7 +13,7 @@ class Course extends Model
     protected $fillable = [
         'name',
         'price',
-        'user_id',
+        'site_id',
         'position',
         'status',
         'image_url',
@@ -49,8 +49,8 @@ class Course extends Model
     const ACTIVE = 1;
     const INACTIVE = 0;
 
-    public static function getActiveItems(){
-        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    public static function getActiveItems($site_id){
+        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
     }
 
     // status_fm 

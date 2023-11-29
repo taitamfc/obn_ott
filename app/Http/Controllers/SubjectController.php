@@ -19,7 +19,7 @@ class SubjectController extends Controller
     function index(Request $request){
         $this->authorize('Subject',Subject::class);
         if( $request->ajax() ){
-        $items = Subject::where('user_id',Auth::id())->orderBy('position','ASC')->paginate(20);
+        $items = Subject::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
         return view('admin.contents.setting.subjects.ajax-index',compact('items'));
     }
     return view('admin.contents.setting.subjects.index');
@@ -37,12 +37,12 @@ class SubjectController extends Controller
      */
     function store(StoreSubjectRequest $request){
         $item = new Subject();
-        $item->user_id = Auth::id();
+        $item->site_id = $this->site_id;
         $item->name = $request->name;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/subjects');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->site_id.'/subjects');
             } 
             $item->save();
             return response()->json([
@@ -64,7 +64,7 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
-        $item = Subject::where('user_id',Auth::id())->find($id);
+        $item = Subject::where('site_id',$this->site_id)->find($id);
         return new SubjectResource($item);
     }
 
@@ -81,7 +81,7 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, string $id)
     {
-        $item = Subject::where('user_id',Auth::id())->find($id);
+        $item = Subject::where('site_id',$this->site_id)->find($id);
         $item->name = $request->name;
         $item->status = $request->status;
         try {
@@ -90,7 +90,7 @@ class SubjectController extends Controller
                 $this->deleteFile([$item->img]);
 
                 // Upload new file
-                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/subjects');
+                $item->img = $this->uploadFile($request->file('image'), 'uploads/'.$this->site_id.'/subjects');
             }
             $item->save();
             return response()->json([
@@ -113,7 +113,7 @@ class SubjectController extends Controller
     public function destroy(string $id)
     {
         try {
-            $item =  Subject::where('user_id',Auth::id())->find($id);
+            $item =  Subject::where('site_id',$this->site_id)->find($id);
                 // Delete old file
                 $this->deleteFile([$item->img]);
 

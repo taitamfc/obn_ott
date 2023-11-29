@@ -52,16 +52,16 @@
                                 <div class="tab-content col-lg-9" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-lesson-setting" role="tabpanel"
                                         aria-labelledby="v-lesson-setting-tab">
-                                        @include('lessons.tabs.lesson-setting')
+                                        @include('admin.lessons.tabs.lesson-setting')
                                     </div>
                                     <div class="tab-pane fade" id="v-video-setting" role="tabpanel"
                                         aria-labelledby="v-video-setting-tab">
-                                        @include('lessons.tabs.video-setting')
+                                        @include('admin.lessons.tabs.video-setting')
                                     </div>
 
                                     <div class="tab-pane fade" id="v-image-setting" role="tabpanel"
                                         aria-labelledby="v-image-setting-tab">
-                                        @include('lessons.tabs.image-setting')
+                                        @include('admin.lessons.tabs.image-setting')
                                     </div>
                                 </div>
 
