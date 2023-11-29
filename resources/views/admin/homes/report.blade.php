@@ -5,10 +5,11 @@
                 <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
                     <h5 class="mr-4 mb-0 font-weight-bold">Dashboard</h5>
                     <div class="d-flex align-items-baseline dashboard-breadcrumb">
-                            @foreach($grades as $grade)
-                            <a class="text-muted mb-0 mr-1 hover-cursor" href="/?grade={{$grade->id}}">{{ $grade->name }}</a>
-                            <i class="mdi mdi-chevron-right mr-1 text-muted"></i>
-                            @endforeach
+                        @foreach($grades as $grade)
+                        <a class="text-muted mb-0 mr-1 hover-cursor"
+                            href="/admin?grade={{$grade->id}}">{{ $grade->name }}</a>
+                        <i class="mdi mdi-chevron-right mr-1 text-muted"></i>
+                        @endforeach
                     </div>
                 </div>
                 <div class="d-flex">

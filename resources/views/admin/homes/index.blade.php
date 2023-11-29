@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
         searching: false,
         info: false
     });
-    var SITEURL = "{{url('/')}}";
+    var SITEURL = "{{url('/admin/')}}";
     jQuery.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

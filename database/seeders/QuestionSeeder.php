@@ -13,11 +13,13 @@ class QuestionSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('qas')->insert([
-            "student_id" => rand(1,4),
-            "site_id" => 1,
-            "question" => "Question ".$id,
-            "answer" => "Answer ".$id,
-        ]);
+        for ($i=0; $i < 5 ; $i++) { 
+            DB::table('qas')->insert([
+                "student_id" => rand(1,4),
+                "site_id" => 1,
+                "question" => "Question ".$i,
+                "answer" => "Answer ".$i,
+            ]);
+        }
     }
 }

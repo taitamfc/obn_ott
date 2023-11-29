@@ -5,7 +5,7 @@
             <div class="card-body col-12">
                 <div class="row d-flex justify-content-between">
                     <h4 class="header-title">Q&A Table</h4>
-                    <form class="input-group input-daterange w-50" method='get' action=''>
+                    <form class="input-group input-daterange w-50" method='get' action='/admin/'>
                         <input type="date" class="form-control bg-light w-25" name="fromDate">
                         <div class="input-group-addon btn btn-light">to</div>
                         <input type="date" class="form-control bg-light w-25" name="toDate">

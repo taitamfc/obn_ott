@@ -62,7 +62,7 @@ class HomeController extends Controller
                 ->where(DB::raw('YEAR(student_course.created_at)'), $year)
                 ->groupBy('student_course.course_id');
             // new student
-            $newsitesCount = $reports->get()->count();
+            $newUserCount = $reports->get()->count();
             // Sold course
             $soldCoursesCount = $reports->get()->count();
             // Count view lesson
@@ -75,9 +75,9 @@ class HomeController extends Controller
             $completedLessonsCount = $reports->where('student_course.is_complete', 1)->get()->count();
             $param = [
                 'reports' => [
-                    'newsitesCount' => [
-                        'content' => 'New sites',
-                        'data' => $newsitesCount,
+                    'newUserCount' => [
+                        'content' => 'New Users',
+                        'data' => $newUserCount,
                     ],
                     'soldCoursesCount' => [
                         'content' => 'Course Sold',
@@ -98,7 +98,7 @@ class HomeController extends Controller
             /* End report for grade
             --------------------*/
         }else {
-            $newsitesCount = DB::table('student_course')
+            $newUserCount = DB::table('student_course')
                 ->where(DB::raw('MONTH(created_at)'), $month)
                 ->where(DB::raw('YEAR(created_at)'), $year)
             ->count();
@@ -124,9 +124,9 @@ class HomeController extends Controller
     
             $param = [
                 'reports' => [
-                    'newsitesCount' => [
-                        'content' => 'New sites',
-                        'data' => $newsitesCount,
+                    'newUserCount' => [
+                        'content' => 'New Users',
+                        'data' => $newUserCount,
                     ],
                     'soldCoursesCount' => [
                         'content' => 'Course Sold',
