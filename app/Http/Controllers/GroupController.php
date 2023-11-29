@@ -25,9 +25,9 @@ class GroupController extends Controller
             $items = Group::orderBy('position','ASC')->get();
             $roles = Role::get();
             $selected_roles = [];
-            return view('accountmanagements.groups.ajax-index',compact('items','roles','selected_roles'));
+            return view('admin.accountmanagements.groups.ajax-index',compact('items','roles','selected_roles'));
         }
-        return view('accountmanagements.groups.index');
+        return view('admin.accountmanagements.groups.index');
     }
 
     /**
@@ -77,7 +77,7 @@ class GroupController extends Controller
         $item = Group::find($id);
         $selected_roles = $item->roles->pluck('id')->toArray();
         $roles = Role::get();
-        return view('accountmanagements.groups.edit',compact('items','roles','item','selected_roles'));
+        return view('admin.accountmanagements.groups.edit',compact('items','roles','item','selected_roles'));
     }
 
     /**

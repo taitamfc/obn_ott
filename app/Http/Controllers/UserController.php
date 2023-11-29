@@ -41,9 +41,9 @@ class UserController extends Controller
         $groups = Group::all();
         if( $request->ajax() ){
             $items = User::where('id',$this->user_id)->orWhere('parent_id',$this->user_id)->paginate(20);
-            return view('accountmanagements.users.ajax-index',compact('items','groups'));
+            return view('admin.accountmanagements.users.ajax-index',compact('items','groups'));
         }
-        return view('accountmanagements.users.index',compact('groups'));
+        return view('admin.accountmanagements.users.index',compact('groups'));
     }
     /**
      * Show the form for creating a new resource.
@@ -167,9 +167,9 @@ class UserController extends Controller
                 $item = User::findOrfail($this->user_id);
                 $bankOwner = UserBank::where('user_id',$this->user_id)->first();
                 $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->with('user','plan')->first();
-                return view('accountmanagements.accountmanage.ajax-index',compact('item','bankOwner','current_plan'));
+                return view('admin.accountmanagements.accountmanage.ajax-index',compact('item','bankOwner','current_plan'));
             }
-            return view('accountmanagements.accountmanage.index');
+            return view('admin.accountmanagements.accountmanage.index');
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
@@ -184,17 +184,17 @@ class UserController extends Controller
             $next_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',0)->get();
             $next_plan_data = $next_plan->pluck('plan_id', 'created_at')->toArray();
             $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->first();
-            return view('accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan_data'));
+            return view('admin.accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan_data'));
         }
-        return view('accountmanagements.plans.index');
+        return view('admin.accountmanagements.plans.index');
     }
     function addPlan(Request $request, String $id){
         if ($request->ajax()) {
             $item = Plan::findOrfail($id);
             $current_plan = PlanUser::where('user_id',$this->user_id)->where('is_current',1)->value('expiration_date');
-            return view('accountmanagements.plans.ajax.ajax-buyPlan',compact('item','current_plan'));
+            return view('admin.accountmanagements.plans.ajax.ajax-buyPlan',compact('item','current_plan'));
         }
-        return view('accountmanagements.plans.buyPlan');
+        return view('admin.accountmanagements.plans.buyPlan');
     }
     function storePlans(Request $request){
         $count = PlanUser::where('user_id', $this->user_id)->count();

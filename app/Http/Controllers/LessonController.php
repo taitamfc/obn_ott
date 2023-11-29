@@ -25,9 +25,9 @@ class LessonController extends Controller
         $this->authorize('Lesson',Lesson::class);
         if( $request->ajax() ){
             $items = Lesson::with('grade','course','subject')->where('user_id',Auth::id())->paginate(20);
-            return view('lessons.ajax-index',compact('items'));
+            return view('admin.lessons.ajax-index',compact('items'));
         }
-        return view('lessons.index');
+        return view('admin.lessons.index');
 
     }
     public function create()
@@ -38,7 +38,7 @@ class LessonController extends Controller
         $courses = Course::getActiveItems();
         $item = new Lesson();
         
-        return view('lessons.create',compact('grades','subjects','courses','item'));
+        return view('admin.lessons.create',compact('grades','subjects','courses','item'));
     }
     public function store(StoreLessonRequest $request)
     {
@@ -91,7 +91,7 @@ class LessonController extends Controller
             $subjects = Subject::getActiveItems();
             $courses = Course::getActiveItems();
 
-            return view('lessons.edit',compact('item','grades','subjects','courses'));
+            return view('admin.lessons.edit',compact('item','grades','subjects','courses'));
         } catch (QueryException $e) {
             Log::error($e->getMessage());
             return response([

@@ -20,9 +20,9 @@ class SubjectController extends Controller
         $this->authorize('Subject',Subject::class);
         if( $request->ajax() ){
         $items = Subject::where('user_id',Auth::id())->orderBy('position','ASC')->paginate(20);
-        return view('contents.setting.subjects.ajax-index',compact('items'));
+        return view('admin.contents.setting.subjects.ajax-index',compact('items'));
     }
-    return view('contents.setting.subjects.index');
+    return view('admin.contents.setting.subjects.index');
 }
     /**
      * Show the form for creating a new resource.

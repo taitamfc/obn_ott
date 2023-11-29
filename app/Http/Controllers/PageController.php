@@ -26,13 +26,13 @@ class PageController extends Controller
     function index(Request $request){
         if ($request->ajax()) {
             $items = Page::where('site_id',$this->user_id)->get();
-            return view('settings.pages.ajax-index',compact('items'));
+            return view('admin.settings.pages.ajax-index',compact('items'));
         }
-        return view('settings.pages.index');
+        return view('admin.settings.pages.index');
     }
     
     function create(){
-        return view('settings.pages.create');
+        return view('admin.settings.pages.create');
     }
 
     function store(Request $request){
@@ -56,7 +56,7 @@ class PageController extends Controller
     
     function edit(String $id){
         $item = Page::findOrfail($id);
-        return view('settings.pages.edit',compact('item'));
+        return view('admin.settings.pages.edit',compact('item'));
     }
 
     function update(Request $request,String $id){
@@ -96,6 +96,6 @@ class PageController extends Controller
 
     function show(String $id){
         $item = Page::findOrfail($id);
-        return view('settings.pages.show',compact('item'));
+        return view('admin.settings.pages.show',compact('item'));
     }
 }

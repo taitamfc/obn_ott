@@ -29,7 +29,7 @@ class ReportController extends Controller
         }
         $items = $query->orderBy('time','ASC')->get();
         $items = json_encode($items);
-        return view('reports.user',compact('items'));
+        return view('admin.reports.user',compact('items'));
     }
     function sales(Request $request){
         $query = DB::table('transactions')
@@ -53,7 +53,7 @@ class ReportController extends Controller
         }
         $items = $query->orderBy('time','ASC')->get();
         $items = json_encode($items);
-        return view('reports.sale',compact('items'));
+        return view('admin.reports.sale',compact('items'));
     }
     function contents(Request $request){
         $query = DB::table('lesson_student')
@@ -78,6 +78,6 @@ class ReportController extends Controller
         }
         $items = $query->orderBy('time','ASC')->get();
         $items = json_encode($items);
-        return view('reports.content',compact('items'));
+        return view('admin.reports.content',compact('items'));
     }
 }

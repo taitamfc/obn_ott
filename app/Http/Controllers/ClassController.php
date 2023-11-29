@@ -35,9 +35,9 @@ class ClassController extends Controller
                 $query->where('course_id',$request->course);
             }
             $items = $query->get();
-            return view('class.ajax-index',compact('courses','items'));
+            return view('admin.class.ajax-index',compact('courses','items'));
         }
-        return view('class.index',compact('courses'));
+        return view('admin.class.index',compact('courses'));
     }
 
     function students(Request $request){
@@ -50,9 +50,9 @@ class ClassController extends Controller
                     });
                 }
                 $items = $query->paginate(5);
-                return view('class.students.ajax-index',compact('items'));
+                return view('admin.class.students.ajax-index',compact('items'));
             }
-            return view('class.students.index');
+            return view('admin.class.students.index');
         } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
@@ -77,7 +77,7 @@ class ClassController extends Controller
             'transactionHistory' =>$transactionHistory,
             'informationStudent' => $informationStudent
         ];
-        return view('class.students.show',compact('items'));
+        return view('admin.class.students.show',compact('items'));
     }
 
     function destroy(String $id){

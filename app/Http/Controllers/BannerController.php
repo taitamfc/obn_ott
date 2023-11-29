@@ -35,9 +35,9 @@ class BannerController extends Controller
         $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
         if ($request->ajax()) {
             $items = Banner::get();
-            return view('themes.banners.ajax-index',compact('items'));
+            return view('admin.themes.banners.ajax-index',compact('items'));
         }
-        return view('themes.banners.index',compact('settings'));
+        return view('admin.themes.banners.index',compact('settings'));
     }
 
 

@@ -23,9 +23,9 @@ class GradeController extends Controller
         $this->authorize('Grade',Grade::class);
         if( $request->ajax() ){
             $items = Grade::where('user_id',Auth::id())->orderBy('position','ASC')->paginate(20);
-            return view('contents.setting.grades.ajax-index',compact('items'));
+            return view('admin.contents.setting.grades.ajax-index',compact('items'));
         }
-        return view('contents.setting.grades.index');
+        return view('admin.contents.setting.grades.index');
     }
 
     function store(StoreGradeRequest $request){

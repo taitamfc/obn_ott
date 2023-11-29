@@ -20,7 +20,7 @@ class SubscriptionController extends Controller
         $items = Subscription::get();
         $courses = Course::pluck('name', 'id');
         $form = 'create';
-        return view('stores.subscriptions.index',compact('items','courses','form'));
+        return view('admin.stores.subscriptions.index',compact('items','courses','form'));
     }
 
     /**
@@ -67,7 +67,7 @@ class SubscriptionController extends Controller
         $item = Subscription::find($id);
        
         return new SubscriptionResource($item);
-        // return view('stores.subscriptions.index');
+        // return view('admin.stores.subscriptions.index');
     }
 
     /**
@@ -80,7 +80,7 @@ class SubscriptionController extends Controller
         $selected_courses = $item->courses ? $item->courses->pluck('id')->toArray() : [];
         $courses = Course::get();
         $form = 'edit';
-        return view('stores.subscriptions.index',compact('items','courses','item','selected_courses','form'));
+        return view('admin.stores.subscriptions.index',compact('items','courses','item','selected_courses','form'));
     }
 
     /**

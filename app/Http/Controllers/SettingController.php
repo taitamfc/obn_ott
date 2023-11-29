@@ -28,14 +28,14 @@ class SettingController extends Controller
     // Handle Banner & Setting Banner
     public function index()
     { 
-        return view('settings.logo.index'); 
+        return view('admin.settings.logo.index'); 
     }
     public function update(Request $request)
     {
         $items = $request->except(['_token', '_method']);
         foreach ($items as $setting_name => $setting_value){
             Setting::where('setting_name',$setting_name)
-            ->where('user_id',Auth::id())
+            ->where('site_id',Auth::id())
             ->update([
                 'setting_value'=> $setting_value
             ]);
@@ -58,9 +58,9 @@ class SettingController extends Controller
     {
         if ($request->ajax()) {
             $item = Setting::where('setting_name', 'LIKE', 'logo')->where('user_id',$this->user_id)->first();
-            return view('settings.logo.ajax-index',compact('item'));
+            return view('admin.settings.logo.ajax-index',compact('item'));
         }
-        return view('settings.logo.index');
+        return view('admin.settings.logo.index');
     }
     function updateLogo(StoreLogoRequest $request)
     {
@@ -95,9 +95,9 @@ class SettingController extends Controller
     { 
         if ($request->ajax()) {
             $item = Setting::where('setting_name', 'LIKE', 'popup')->where('user_id',$this->user_id)->first();
-            return view('settings.popup.ajax-index',compact('item'));
+            return view('admin.settings.popup.ajax-index',compact('item'));
         }
-        return view('settings.popup.index'); 
+        return view('admin.settings.popup.index'); 
     }
     function showPopup(Request $request)
     {

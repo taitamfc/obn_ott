@@ -29,9 +29,9 @@ class CourseController extends Controller
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
             $items = Course::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(20);
-            return view('contents.setting.courses.ajax-index',compact('items'));
+            return view('admin.contents.setting.courses.ajax-index',compact('items'));
         } 
-        return view('contents.setting.courses.index');
+        return view('admin.contents.setting.courses.index');
     }
 
     function store(StoreCourseRequest $request){
@@ -129,9 +129,9 @@ class CourseController extends Controller
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
             $items = Course::where('user_id',$this->user_id)->paginate(20);
-            return view('stores.productmanagement.ajax-index',compact('items'));
+            return view('admin.stores.productmanagement.ajax-index',compact('items'));
         }
-        return view('stores.productmanagement.index');
+        return view('admin.stores.productmanagement.index');
     }
     function editProduct(Request $request)
     {
