@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 // Login
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
 Route::post('/postLogin',[App\Http\Controllers\AuthController::class,'postLogin'])->name('postLogin');

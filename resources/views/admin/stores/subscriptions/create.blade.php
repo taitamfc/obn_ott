@@ -38,7 +38,7 @@
                         <option value="{{ $id }}">{{ $courseName }}</option>
                         @endforeach
                     </select>
-                    <span class="btn btn-primary mt-4">Add more Courses</span>
+                    <a href="#" class="btn btn-primary mt-4">Add more Courses</a>
                 </div>
             </div>
 

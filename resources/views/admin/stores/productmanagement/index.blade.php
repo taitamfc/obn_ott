@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        @include('stores.productmanagement.edit')
+        @include('admin.stores.productmanagement.edit')
     </div>
 </div>
 @endsection
@@ -34,6 +34,7 @@ var positionUrl = "";
 var wrapperResults = '.product-table-results';
 var params = <?= json_encode(request()->query()); ?>;
 jQuery(document).ready(function() {
+    preventEnter();
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
     jQuery('body').on('click', ".page-link", function(e) {
         e.preventDefault();
@@ -46,6 +47,7 @@ jQuery(document).ready(function() {
             formUpdate.find('.input-error').empty();
             var url = formUpdate.prop('action');
             let formData = new FormData($('#formUpdate')[0]);
+            console.log(url);
             jQuery.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -82,7 +84,8 @@ jQuery(document).ready(function() {
         // Lấy dữ liệu
         let id = jQuery(this).data('id');
         let action = jQuery(this).data('action');
-        var url = '/courses/' + id;
+        var url = '/admin/courses/' + id;
+        console.log(action);
         jQuery.ajax({
             url: url,
             type: "GET",

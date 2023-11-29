@@ -17,10 +17,13 @@ class SubscriptionController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
-        $items = Subscription::get();
-        $courses = Course::pluck('name', 'id');
         $form = 'create';
-        return view('admin.stores.subscriptions.index',compact('items','courses','form'));
+        $courses = Course::pluck('name', 'id');
+        if($request->ajax()){
+            $items = Subscription::get();
+            return view('admin.stores.subscriptions.ajax-index',compact('items'));
+        }
+        return view('admin.stores.subscriptions.index',compact('courses','form'));
     }
 
     /**
@@ -39,9 +42,7 @@ class SubscriptionController extends Controller
         $item->name = $request->name;
         $item->price = $request->price;
         $item->duration = $request->duration;
-        $item->status = $request->status;
-
-       
+        $item->site_id = $this->site_id;
         try {
             $item->save();
             $item->courses()->attach($request->course);
@@ -93,7 +94,7 @@ class SubscriptionController extends Controller
         $item->name = $request->name;
         $item->price = $request->price;
         $item->duration = $request->duration;
-        $item->status = $request->status;
+        $item->site_id = $this->site_id;
         try {
             $item->save();
             $item->courses()->sync($request->course);

@@ -13,6 +13,7 @@ class Subscription extends Model
         'name',
         'price',
         'duration',
+        'site_id',
         'createt_at',
         'updated_at',
     ];

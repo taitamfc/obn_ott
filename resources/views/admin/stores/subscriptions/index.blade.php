@@ -18,50 +18,12 @@
         <div class="row mt-4">
             <div class="col-lg-12 mb-4">
                 <div class="card">
-                    @include("stores.subscriptions.$form")
+                    @include("admin.stores.subscriptions.$form")
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card_title">Current subscriptions</h4>
-                        <div class="single-table">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="text-uppercase">
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">NAME</th>
-                                            <th scope="col">PRICE</th>
-                                            <th scope="col">DURATION</th>
-                                            <th scope="col">ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($items as $item)
-                                        <tr class="item" id='item-{{ $item->id}}'>
-                                            <th scope="row">{{ $item->id }}</th>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->price }}</td>
-                                            <td>{{ $item->duration }}</td>
-                                            <td>
-                                                <a href="{{ route('subscriptions.edit', $item->id) }}"
-                                                    class="text-primary">
-                                                    <i class="ti-pencil mr-1 btn btn-success"></i>
-                                                </a>
-                                                <a href="javascript:;" class="text-danger delete-item"
-                                                    data-id="{{ $item->id }}"
-                                                    data-action="{{ route('subscriptions.destroy',$item->id) }}">
-                                                    <i class="ti-trash btn btn-danger"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card subscriptions-table-results">
+                    <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
                 </div>
             </div>
         </div>
@@ -72,9 +34,15 @@
 
 @section('footer')
 <script>
+var indexUrl = "{{ route('subscriptions.index') }}";
+var positionUrl = "";
+var wrapperResults = '.subscriptions-table-results';
+var params = <?= json_encode(request()->query()); ?>;
 jQuery(document).ready(function() {
+    preventEnter();
+    getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
     // Handle delete
-    jQuery(".delete-item").click(function(e) {
+    jQuery("body").on("click", ".delete-item", function(e) {
         e.preventDefault();
         var ele = $(this);
         let action = ele.data('action');
@@ -101,7 +69,8 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.has_errors) {
                     for (const key in res.errors) {
-                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
+                        jQuery('.input-' + key).find('.input-error').html(res.errors[
+                            key][
                             0
                         ]);
                     }
@@ -135,7 +104,8 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.has_errors) {
                     for (const key in res.errors) {
-                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
+                        jQuery('.input-' + key).find('.input-error').html(res.errors[
+                            key][
                             0
                         ]);
                     }

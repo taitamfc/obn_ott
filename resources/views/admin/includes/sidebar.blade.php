@@ -86,7 +86,7 @@
                                 <span>Product Management</span>
                             </a></li>
                         @endif
-                        <li> <a href="/store/subscriptions">
+                        <li> <a href="{{ route('subscriptions.index') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Subscription Management</span>
                             </a></li>
