@@ -30,8 +30,8 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('accountmanagements.users.create')
-        @include('accountmanagements.users.edit')
+        @include('admin.accountmanagements.users.create')
+        @include('admin.accountmanagements.users.edit')
     </div>
 </div>
 

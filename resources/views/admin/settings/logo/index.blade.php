@@ -24,7 +24,7 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('settings.logo.edit')
+        @include('admin.settings.logo.edit')
     </div>
 </div>
 @endsection

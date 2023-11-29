@@ -41,7 +41,7 @@
 <script>
 var url = window.location.href;
 var id = url.split("/").pop();
-var indexUrl = "{{url('/')}}" + "/users/addPlans/" + id;
+var indexUrl = "{{url('/')}}" + "/admin/users/addPlans/" + id;
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.buyPlans-table-results';

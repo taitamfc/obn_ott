@@ -47,7 +47,7 @@ class SettingController extends Controller
     public function logo(Request $request)
     {
         if ($request->ajax()) {
-            $item = Setting::where('setting_name', 'LIKE', 'logo')->where('site_idg',$this->site_id)->first();
+            $item = Setting::where('setting_name', 'LIKE', 'logo')->where('site_id',$this->site_id)->first();
             return view('admin.settings.logo.ajax-index',compact('item'));
         }
         return view('admin.settings.logo.index');
@@ -58,7 +58,6 @@ class SettingController extends Controller
             $imagePath = $this->uploadFile($request->file('logo'), $this->site_id.'/banners/logo');
             $item =  Setting::where('setting_name', 'LIKE', 'logo')->where('site_id', $this->site_id)->first();
             if(empty($item)){
-                $this->deleteFile([$item->setting_value]);
                 $data = [
                     'setting_name' => 'logo',
                     'setting_value' => $imagePath,
@@ -66,6 +65,7 @@ class SettingController extends Controller
                 ];
                 $item = Setting::create($data);
             }else {
+                $this->deleteFile([$item->setting_value]);
                 $item->setting_value = $imagePath;
                 $item->save();
             }

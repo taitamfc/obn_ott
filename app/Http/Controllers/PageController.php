@@ -14,18 +14,9 @@ use Illuminate\Support\Str;
 class PageController extends Controller
 {
     use UploadFileTrait;
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }
     function index(Request $request){
         if ($request->ajax()) {
-            $items = Page::where('site_id',$this->user_id)->get();
+            $items = Page::where('site_id',$this->site_id)->get();
             return view('admin.settings.pages.ajax-index',compact('items'));
         }
         return view('admin.settings.pages.index');
@@ -39,7 +30,7 @@ class PageController extends Controller
         try {
             $data = $request->except(['_method','_token']);
             $data['slug'] = Str::slug($request->title);
-            $data['site_id'] = $this->user_id;
+            $data['site_id'] = $this->site_id;
             $item = Page::create($data);
             return response([
                 'success' => true,

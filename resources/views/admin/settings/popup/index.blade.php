@@ -29,7 +29,7 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('settings.popup.edit')
+        @include('admin.settings.popup.edit')
     </div>
 </div>
 @endsection

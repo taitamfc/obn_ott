@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PlanUser extends Model
 {
     use HasFactory;
-    protected $table = 'plan_user';
-    function user(){
-        return $this->belongsTo(User::class,'user_id','id');
+    protected $table = 'plan_site';
+    function site(){
+        return $this->belongsTo(Site::class,'site_id','id');
     }
     function plan(){
         return $this->belongsTo(Plan::class,'plan_id','id');

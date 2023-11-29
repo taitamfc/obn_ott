@@ -52,6 +52,7 @@ jQuery(document).ready(function() {
         let action = ele.data('action');
         if (confirm("Are you sure?")) {
             handleDelete(action, ele);
+            // getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
         }
     });
 

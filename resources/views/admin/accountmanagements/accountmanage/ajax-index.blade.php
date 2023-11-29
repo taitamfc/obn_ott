@@ -176,5 +176,5 @@
         </div>
     </div>
 </div>
-@include('accountmanagements.accountmanage.edit-avatar')
-@include('accountmanagements.accountmanage.edit')
+@include('admin.accountmanagements.accountmanage.edit-avatar')
+@include('admin.accountmanagements.accountmanage.edit')

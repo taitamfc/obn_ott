@@ -22,7 +22,7 @@ class GroupController extends Controller
     function index(Request $request){
         if ($request->ajax()) {
             $this->authorize('Group',Group::class);
-            $items = Group::orderBy('position','ASC')->get();
+            $items = Group::where('site_id',$this->site_id)->orderBy('position','ASC')->get();
             $roles = Role::get();
             $selected_roles = [];
             return view('admin.accountmanagements.groups.ajax-index',compact('items','roles','selected_roles'));
@@ -45,6 +45,7 @@ class GroupController extends Controller
         $this->authorize('Group',Group::class);
         $item = new Group();
         $item->name = $request->name;
+        $item->site_id = $this->site_id;
         try {
             $item->save();
             $item->roles()->attach($request->role_ids);
