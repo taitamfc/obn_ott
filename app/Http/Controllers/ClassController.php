@@ -13,19 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            $this->parent_id = Auth::user()->parent_id;
-            return $next($request);
-        });
-    }
 
     function index(Request $request){
-        $courses = Course::where('user_id',$this->user_id)->get();
+        $courses = Course::where('site_id',$this->site_id)->get();
         if ($request->ajax()) {
             $query = DB::table('lesson_student')
             ->join('students', 'students.id', '=', 'lesson_student.student_id')
@@ -43,7 +33,7 @@ class ClassController extends Controller
     function students(Request $request){
         try {
             if ($request->ajax()) {
-                $query = StudentCourse::where('user_id',$this->user_id)->orWhere('user_id',$this->parent_id)->with('student','course');
+                $query = StudentCourse::where('site_id',$this->site_id)->with('student','course');
                 if ($request->searchName) {
                     $query->whereHas('student', function ($query) use ($request) {
                         $query->where('name', 'LIKE', '%' . $request->searchName . '%');
@@ -67,7 +57,7 @@ class ClassController extends Controller
         $transactionHistory = DB::table('transactions')
         ->join('courses', 'courses.id', '=', 'transactions.course_id')
         ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
-        ->where('transactions.user_id', '=', Auth::id())
+        ->where('transactions.site_id', '=', $this->site_id)
         ->where('student_id', '=',$id)
         ->groupBy('course_id', 'date')
         ->get();
