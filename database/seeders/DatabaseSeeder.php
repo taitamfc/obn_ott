@@ -24,6 +24,7 @@ use Database\Seeders\StudentCourseSeeder;
 use Database\Seeders\SubjectSeeder;
 use Database\Seeders\SubscriptionSeeder;
 use Database\Seeders\SubscriptionCourseSeeder;
+use Database\Seeders\SettingSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -52,5 +53,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SubjectSeeder::class);
         $this->call(SubscriptionSeeder::class);
         $this->call(SubscriptionCourseSeeder::class);
+        $this->call(SettingSeeder::class);
     }
 }

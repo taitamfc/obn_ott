@@ -15,16 +15,6 @@ use App\Http\Resources\SettingResource;
 class SettingController extends Controller
 {
     use UploadFileTrait;
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }
-
     // Handle Banner & Setting Banner
     public function index()
     { 
@@ -35,18 +25,18 @@ class SettingController extends Controller
         $items = $request->except(['_token', '_method']);
         foreach ($items as $setting_name => $setting_value){
             Setting::where('setting_name',$setting_name)
-            ->where('site_id',Auth::id())
+            ->where('site_id',$this->site_id)
             ->update([
                 'setting_value'=> $setting_value
             ]);
         }
         if ($request->hasFile('auth_page_background_image')) {
-            $imagePath = $this->uploadFile($request->file('auth_page_background_image'), Auth::id().'/banners/images');
-            Setting::where('setting_name', 'auth_page_background_image')->where('user_id',Auth::id())->update([ 'setting_value' => $imagePath ]);
+            $imagePath = $this->uploadFile($request->file('auth_page_background_image'), $this->site_id.'/banners/images');
+            Setting::where('setting_name', 'auth_page_background_image')->where('site_id',$this->site_id)->update([ 'setting_value' => $imagePath ]);
         }
         if ($request->hasFile('plan_page_background_image')) {
-            $imagePath = $this->uploadFile($request->file('plan_page_background_image'), Auth::id().'/banners/images');
-            Setting::where('setting_name', 'plan_page_background_image')->where('user_id',Auth::id())->update([ 'setting_value' => $imagePath ]);
+            $imagePath = $this->uploadFile($request->file('plan_page_background_image'), $this->site_id.'/banners/images');
+            Setting::where('setting_name', 'plan_page_background_image')->where('site_id',$this->site_id)->update([ 'setting_value' => $imagePath ]);
         }
 
 
@@ -57,7 +47,7 @@ class SettingController extends Controller
     public function logo(Request $request)
     {
         if ($request->ajax()) {
-            $item = Setting::where('setting_name', 'LIKE', 'logo')->where('user_id',$this->user_id)->first();
+            $item = Setting::where('setting_name', 'LIKE', 'logo')->where('site_idg',$this->site_id)->first();
             return view('admin.settings.logo.ajax-index',compact('item'));
         }
         return view('admin.settings.logo.index');
@@ -65,14 +55,14 @@ class SettingController extends Controller
     function updateLogo(StoreLogoRequest $request)
     {
         if ($request->hasFile('logo')) {
-            $imagePath = $this->uploadFile($request->file('logo'), $this->user_id.'/banners/logo');
-            $item =  Setting::where('setting_name', 'LIKE', 'logo')->where('user_id', $this->user_id)->first();
+            $imagePath = $this->uploadFile($request->file('logo'), $this->site_id.'/banners/logo');
+            $item =  Setting::where('setting_name', 'LIKE', 'logo')->where('site_id', $this->site_id)->first();
             if(empty($item)){
                 $this->deleteFile([$item->setting_value]);
                 $data = [
                     'setting_name' => 'logo',
                     'setting_value' => $imagePath,
-                    'user_id' => $this->user_id,
+                    'site_id' => $this->site_id,
                 ];
                 $item = Setting::create($data);
             }else {
@@ -94,25 +84,25 @@ class SettingController extends Controller
     public function popup(Request $request)
     { 
         if ($request->ajax()) {
-            $item = Setting::where('setting_name', 'LIKE', 'popup')->where('user_id',$this->user_id)->first();
+            $item = Setting::where('setting_name', 'LIKE', 'popup')->where('site_id',$this->site_id)->first();
             return view('admin.settings.popup.ajax-index',compact('item'));
         }
         return view('admin.settings.popup.index'); 
     }
     function showPopup(Request $request)
     {
-        $item = Setting::where('user_id',$this->user_id)->where('setting_name','LIKE','popup')->first();
+        $item = Setting::where('site_id',$this->site_id)->where('setting_name','LIKE','popup')->first();
         return new SettingResource($item);
     }
     function updatePopup(Request $request)
     {
         try {
-            $item =  Setting::where('setting_name', 'LIKE', 'popup')->where('user_id', $this->user_id)->first();
+            $item =  Setting::where('setting_name', 'LIKE', 'popup')->where('site_id', $this->site_id)->first();
             if(empty($item)){
                 $data = [
                     'setting_name' => 'popup',
                     'setting_value' => $request->popup,
-                    'user_id' => $this->user_id,
+                    'site_id' => $this->site_id,
                 ];
                 $item = Setting::create($data);
             }else {

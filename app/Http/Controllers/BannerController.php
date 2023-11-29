@@ -20,16 +20,6 @@ class BannerController extends Controller
      */
     use UploadFileTrait;
     
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }
-
     function index(Request $request){
         $this->authorize('Banner',Banner::class);
         $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
@@ -58,7 +48,7 @@ class BannerController extends Controller
         $item->name = $request->name;
         $item->description = $request->description;
         $item->link = $request->link;
-        $item->user_id = $this->user_id;
+        $item->site_id = $this->site_id;
         try {
             if ($request->hasFile('image')) {
                 $item->img = $this->uploadFile($request->file('image'), 'banners/images');
@@ -104,6 +94,7 @@ class BannerController extends Controller
         $item->description = $request->description;
         $item->status = $request->status;
         $item->link = $request->link;
+        $item->site_id = $this->site_id;
         try {
             if ($request->hasFile('image')) {
                 $item->img = $this->uploadFile($request->file('image'), 'banners/images');

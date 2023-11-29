@@ -48,10 +48,10 @@
             <div class="banners-table-results">
                 <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
             </div>
-            @include('themes.settings.edit')
+            @include('admin.themes.settings.edit')
         </div>
-        @include('themes.banners.create')
-        @include('themes.banners.edit')
+        @include('admin.themes.banners.create')
+        @include('admin.themes.banners.edit')
     </div>
 </div>
 @endsection
@@ -162,7 +162,7 @@ jQuery(document).ready(function() {
         let action = jQuery(this).data('action');
 
         jQuery.ajax({
-            url: '/banners/' + id,
+            url: '/admin/banners/' + id,
             type: "GET",
             dataType: 'json',
             success: function(res) {
