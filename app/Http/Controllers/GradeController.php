@@ -20,7 +20,7 @@ class GradeController extends Controller
     use UploadFileTrait;
 
     function index(Request $request){
-        $this->authorize('Grade',Grade::class);
+        // $this->authorize('Grade',Grade::class);
         if( $request->ajax() ){
             $items = Grade::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
             return view('admin.contents.setting.grades.ajax-index',compact('items'));

@@ -14,6 +14,8 @@ use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Str;
 use Mail;
+use Illuminate\Support\Facades\Session;
+
 class AuthController extends Controller
 {
 

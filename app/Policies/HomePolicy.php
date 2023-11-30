@@ -4,14 +4,14 @@ namespace App\Policies;
 
 use App\Models\Site;
 
-class BannerPolicy
+class HomePolicy
 {
     /**
      * Create a new policy instance.
      */
-    public function Banner(Site $site)
+    public function Home(Site $site)
     {
-       return $site->hasPermission('Banner');
+       return $site->hasPermission('Home');
        //
     }
 }

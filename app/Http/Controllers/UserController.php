@@ -28,7 +28,7 @@ class UserController extends Controller
      */
 
     function index(Request $request){
-        $this->authorize('User',User::class);
+        // $this->authorize('User',User::class);
         $groups = Group::all();
         if( $request->ajax() ){
             $items = User::where('id',$this->user_id)->paginate(20);
@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     function store(StoreUserRequest $request){
         try {
-            $this->authorize('User',User::class);
+            // $this->authorize('User',User::class);
             $item = new User();
             $item->name = $request->name;
             $item->email = $request->email;
@@ -82,7 +82,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $this->authorize('User',User::class);
+        // $this->authorize('User',User::class);
         $item = User::findOrfail($id);
         return new UserResource($item);
     }
@@ -99,7 +99,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateUserRequest $request, string $id){
-        $this->authorize('User',User::class);
+        // $this->authorize('User',User::class);
         $item = User::findOrfail($id);
         $item->name = $request->name;
         $item->email = $request->email;
@@ -134,7 +134,7 @@ class UserController extends Controller
      */
     public function destroy(string $id){
         try {
-            $this->authorize('User',User::class);
+            // $this->authorize('User',User::class);
             $item =  User::findOrfail($id);
             // Delete old file
             $this->deleteFile([$item->image_url]);
@@ -153,7 +153,7 @@ class UserController extends Controller
     }
     function account(Request $request){
         try {
-            $this->authorize('User',User::class);
+            // $this->authorize('User',User::class);
             if ($request->ajax()) {
                 $item = User::findOrfail($this->user_id);
                 $bankOwner = UserBank::where('user_id',$this->user_id)->first();

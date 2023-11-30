@@ -17,7 +17,7 @@ class SubjectController extends Controller
     use UploadFileTrait;
 
     function index(Request $request){
-        $this->authorize('Subject',Subject::class);
+        // $this->authorize('Subject',Subject::class);
         if( $request->ajax() ){
         $items = Subject::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
         return view('admin.contents.setting.subjects.ajax-index',compact('items'));

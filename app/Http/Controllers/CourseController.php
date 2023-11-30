@@ -18,7 +18,7 @@ class CourseController extends Controller
     use UploadFileTrait;
 
     function index(Request $request){
-        $this->authorize('Course',Course::class);
+        // $this->authorize('Course',Course::class);
         if( $request->ajax() ){
             $items = Course::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
             return view('admin.contents.setting.courses.ajax-index',compact('items'));
@@ -118,7 +118,7 @@ class CourseController extends Controller
     }
     function products(Request $request)
     {
-        $this->authorize('Course',Course::class);
+        // $this->authorize('Course',Course::class);
         if( $request->ajax() ){
             $items = Course::where('site_id',$this->site_id)->paginate(20);
             return view('admin.stores.productmanagement.ajax-index',compact('items'));
@@ -127,7 +127,7 @@ class CourseController extends Controller
     }
     function editProduct(Request $request)
     {
-        $this->authorize('Course',Course::class);
+        // $this->authorize('Course',Course::class);
         try {  
             $item = Course::where('site_id',$this->site_id)->findOrfail($request->id);
             $item->price = $request->price;

@@ -32,6 +32,11 @@ class Group extends Model
         return $this->belongsToMany(Site::class,'group_site');
     }
 
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'role_id');

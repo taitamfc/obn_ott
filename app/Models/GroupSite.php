@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GroupSite extends Model
 {
     use HasFactory;
+    protected $table = 'group_site';
     public function user(){
         return $this->belongsTo(User::class);
     }

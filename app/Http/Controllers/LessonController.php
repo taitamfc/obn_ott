@@ -22,7 +22,7 @@ class LessonController extends Controller
     use UploadFileTrait;
     public function index(Request $request)
     {
-        $this->authorize('Lesson',Lesson::class);
+        // $this->authorize('Lesson',Lesson::class);
         if( $request->ajax() ){
             $items = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->paginate(20);
             return view('admin.lessons.ajax-index',compact('items'));
@@ -32,7 +32,7 @@ class LessonController extends Controller
     }
     public function create()
     {
-        $this->authorize('Lesson',Lesson::class);
+        // $this->authorize('Lesson',Lesson::class);
         $grades = Grade::getActiveItems($this->site_id);
         $subjects = Subject::getActiveItems($this->site_id);
         $courses = Course::getActiveItems($this->site_id);
@@ -84,7 +84,7 @@ class LessonController extends Controller
     }
     function edit($id){
 
-        $this->authorize('Lesson',Lesson::class);
+        // $this->authorize('Lesson',Lesson::class);
         try{
             $item = Lesson::where('user_id',Auth::id())->findOrfail($id);
             

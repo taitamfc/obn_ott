@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasPermissions;
 
 class Site extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPermissions;
     protected $table = 'sites';
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -38,6 +39,9 @@ class Site extends Model
     }
     public function groups(){
         return $this->belongsToMany(Group::class, 'group_user', 'group_id', 'site_id');
+    }
+    public function group(){
+        return $this->hasMany(Group::class, 'site_id', 'id');
     }
     public function page(){
         return $this->hasMany(Page::class, 'site_id', 'id');
