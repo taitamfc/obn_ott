@@ -17,7 +17,7 @@ class Grade extends Model
     protected $fillable = [
         'name',
         'description',
-        'user_id',
+        'site_id',
         'position',
         'status',
         'img',
@@ -25,8 +25,8 @@ class Grade extends Model
         'updated_at',
     ];
 
-    public static function getActiveItems(){
-        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
+    public static function getActiveItems($site_id){
+        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
     }
 
     public function lesson()
@@ -50,8 +50,8 @@ class Grade extends Model
 
     function getImgFmAttribute()
     {  
-        if (!empty($this->image_url)) {
-            return '<img class="avatar-md" src="'.asset($this->image_url).'" alt="">';
+        if (!empty($this->img)) {
+            return '<img class="avatar-md" src="'.asset($this->img).'" alt="">';
         } else {
             return '<img class="avatar-md" src="'.asset('assets/images/default.png').'" alt="">';
         }

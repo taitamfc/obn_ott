@@ -13,7 +13,7 @@ class Setting extends Model
         'setting_name',
         'setting_value',
         // 'setting_group',
-        'user_id',
+        'site_id',
     ];
 
     function getImgFmAttribute()

@@ -18,22 +18,13 @@ use App\Models\QuestionAnswer;
 class HomeController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }  
 
     public function index(Request $request)
     
     {
         /* --------------------
         Data question */
-        $qas = QuestionAnswer::where('user_id',$this->user_id)->with('student');
+        $qas = QuestionAnswer::where('site_id',$this->site_id)->with('student');
         if ($request->fromDate && $request->toDate) {
             $qas->whereBetween('created_at', [$request->fromDate, $request->toDate]);
         }
@@ -62,16 +53,16 @@ class HomeController extends Controller
             $reports = DB::table('grades')
                 ->where('grades.id', $request->grade)
                 ->where('grades.status', 1)
-                ->where('grades.user_id', $this->user_id)
-                ->join('users', 'grades.user_id', '=', 'users.id')
-                ->join('student_course', 'users.id', '=', 'student_course.user_id')
+                ->where('grades.site_id', $this->site_id)
+                ->join('sites', 'grades.site_id', '=', 'sites.id')
+                ->join('student_course', 'sites.id', '=', 'student_course.site_id')
                 ->join('lesson_student', 'student_course.course_id', '=', 'lesson_student.course_id')
                 ->select('student_course.course_id', DB::raw('COUNT(lesson_student.lesson_id) AS lesson_views'))
                 ->where(DB::raw('MONTH(student_course.created_at)'), $month)
                 ->where(DB::raw('YEAR(student_course.created_at)'), $year)
                 ->groupBy('student_course.course_id');
             // new student
-            $newUsersCount = $reports->get()->count();
+            $newUserCount = $reports->get()->count();
             // Sold course
             $soldCoursesCount = $reports->get()->count();
             // Count view lesson
@@ -84,9 +75,9 @@ class HomeController extends Controller
             $completedLessonsCount = $reports->where('student_course.is_complete', 1)->get()->count();
             $param = [
                 'reports' => [
-                    'newUsersCount' => [
+                    'newUserCount' => [
                         'content' => 'New Users',
-                        'data' => $newUsersCount,
+                        'data' => $newUserCount,
                     ],
                     'soldCoursesCount' => [
                         'content' => 'Course Sold',
@@ -102,12 +93,12 @@ class HomeController extends Controller
                     ],
                 ],
                 'qas' => $qas,
-                'grades' => Grade::where('user_id',$this->user_id)->get(),
+                'grades' => Grade::where('site_id',$this->site_id)->get(),
             ];
             /* End report for grade
             --------------------*/
         }else {
-            $newUsersCount = DB::table('student_course')
+            $newUserCount = DB::table('student_course')
                 ->where(DB::raw('MONTH(created_at)'), $month)
                 ->where(DB::raw('YEAR(created_at)'), $year)
             ->count();
@@ -133,9 +124,9 @@ class HomeController extends Controller
     
             $param = [
                 'reports' => [
-                    'newUsersCount' => [
+                    'newUserCount' => [
                         'content' => 'New Users',
-                        'data' => $newUsersCount,
+                        'data' => $newUserCount,
                     ],
                     'soldCoursesCount' => [
                         'content' => 'Course Sold',
@@ -151,7 +142,7 @@ class HomeController extends Controller
                     ],
                 ],
                 'qas' => $qas,
-                'grades' => Grade::where('user_id',$this->user_id)->get(),
+                'grades' => Grade::where('site_id',$this->site_id)->get(),
             ];
         }
 
@@ -163,7 +154,7 @@ class HomeController extends Controller
             $data = Event::whereDate('start', '>=', $start)->whereDate('end','<=', $end)->get(['id','title','start', 'end']);
             return Response::json($data);
         }
-        return view('homes.index',$param);
+        return view('admin.homes.index',$param);
     }
     // Create event
     public function store(Request $request)
@@ -171,7 +162,7 @@ class HomeController extends Controller
         $insertArr = [ 'title' => $request->title,
                        'start' => $request->start,
                        'end' => $request->end,
-                       'user_id' => $this->user_id,
+                       'site_id' => $this->site_id,
                     ];
         $event = Event::insert($insertArr);   
         return Response::json($event);

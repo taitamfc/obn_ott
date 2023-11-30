@@ -16,11 +16,14 @@ use Illuminate\Support\Str;
 use Mail;
 class AuthController extends Controller
 {
+
+    public function __construct(){}
+
     public function login(){
         if (Auth::check()) {
-            return redirect()->route('grades.index');
+            return redirect()->route('homes.index');
         } else {
-            return view('auth.login');
+            return view('admin.auth.login');
         }
     }
 
@@ -42,7 +45,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('home');
         } else {
-            return view('auth.register');
+            return view('admin.auth.register');
         }
     }
     
@@ -53,20 +56,19 @@ class AuthController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = $request->password;
-            $user->slug = Str::slug($request->name);
             $user->group_id = 2;
             $user->save(); 
             $message = "Successfully register";
             return redirect()->route('login')->with('success',$message);
         } catch (QueryException $e) { 
             Log::error('Bug occurred: ' . $e->getMessage());
-            return view('auth.register')->with('error','Register fail');
+            return view('admin.auth.register')->with('error','Register fail');
         }   
     }
 
     function forgot(Request $request)
     {
-        return view('auth.forgot');
+        return view('admin.auth.forgot');
     }
     function postForgot(ForgotPasswordRequest $request){
         $item = User::where('email', 'LIKE' , $request->email )->first();
@@ -94,7 +96,7 @@ class AuthController extends Controller
                 'user' => $request->user,
                 'token' => $request->token,
             ];
-            return view('auth.resetpassword',compact('data'));
+            return view('admin.auth.resetpassword',compact('data'));
         }else {
             return redirect()->route('login')->with('error','Has Problems, Please Try Again');
         }

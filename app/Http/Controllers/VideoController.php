@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class VideoController extends Controller
 {
     public function videoAdvertisement(){
-        return view('videoadvertisements.video-advertisement');
+        return view('admin.videoadvertisements.video-advertisement');
     }
 }

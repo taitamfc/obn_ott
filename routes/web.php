@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 // Login
 Route::get('/login',[App\Http\Controllers\AuthController::class,'login'])->name('login');
 Route::post('/postLogin',[App\Http\Controllers\AuthController::class,'postLogin'])->name('postLogin');
@@ -31,7 +32,7 @@ Route::post('/resetPassword/{user}/{token}',[App\Http\Controllers\AuthController
 Route::get('/register',[App\Http\Controllers\AuthController::class,'register'])->name('register');
 Route::post('/postRegister',[App\Http\Controllers\AuthController::class,'postRegister'])->name('postRegister');
 
-Route::middleware(['auth','preventhistory'])->group(function(){
+Route::prefix('admin')->middleware(['auth','preventhistory'])->group(function(){
     
     //Home & fullcalender
     Route::get('/',[HomeController::class,'index'])->name('home');

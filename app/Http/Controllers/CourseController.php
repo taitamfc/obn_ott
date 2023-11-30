@@ -16,33 +16,25 @@ use Illuminate\Support\Facades\Auth;
 class CourseController extends Controller
 {
     use UploadFileTrait;
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }
+
     function index(Request $request){
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
-            $items = Course::where('user_id',$this->user_id)->orderBy('position','ASC')->paginate(20);
-            return view('contents.setting.courses.ajax-index',compact('items'));
+            $items = Course::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
+            return view('admin.contents.setting.courses.ajax-index',compact('items'));
         } 
-        return view('contents.setting.courses.index');
+        return view('admin.contents.setting.courses.index');
     }
 
     function store(StoreCourseRequest $request){
         $item = new Course();
-        $item->user_id = $this->user_id;
+        $item->site_id = $this->site_id;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
-                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->site_id.'/courses');
             } 
             $item->save();
             return response()->json([
@@ -60,12 +52,12 @@ class CourseController extends Controller
     }
     public function show(string $id)
     {
-        $item = Course::where('user_id',$this->user_id)->findOrfail($id);
+        $item = Course::where('site_id',$this->site_id)->findOrfail($id);
         return new CourseResource($item);
     }
     public function update(UpdateCourseRequest $request, string $id)
     {
-        $item = Course::where('user_id',$this->user_id)->find($id);
+        $item = Course::where('site_id',$this->site_id)->find($id);
         $item->name = $request->name;
         $item->price = $request->price;
         $item->status = $request->status;
@@ -75,7 +67,7 @@ class CourseController extends Controller
                 $this->deleteFile([$item->image_url]);
 
                 // Upload new file
-                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/courses');
+                $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->site_id.'/courses');
             }
             $item->save();
             return response()->json([
@@ -94,7 +86,7 @@ class CourseController extends Controller
     public function destroy(string $id)
     {
         try {
-            $item =  Course::where('user_id',$this->user_id)->find($id);
+            $item =  Course::where('site_id',$this->site_id)->find($id);
             // Delete old file
             $this->deleteFile([$item->image_url]);
 
@@ -116,7 +108,7 @@ class CourseController extends Controller
     {
         try {
             foreach ($_REQUEST['item'] as $key => $value) {
-                $item = Course::where('user_id',$this->user_id)->findOrfail($value);
+                $item = Course::where('site_id',$this->site_id)->findOrfail($value);
                 $item->position = $key;
                 $item->save();
             }
@@ -128,16 +120,16 @@ class CourseController extends Controller
     {
         $this->authorize('Course',Course::class);
         if( $request->ajax() ){
-            $items = Course::where('user_id',$this->user_id)->paginate(20);
-            return view('stores.productmanagement.ajax-index',compact('items'));
+            $items = Course::where('site_id',$this->site_id)->paginate(20);
+            return view('admin.stores.productmanagement.ajax-index',compact('items'));
         }
-        return view('stores.productmanagement.index');
+        return view('admin.stores.productmanagement.index');
     }
     function editProduct(Request $request)
     {
         $this->authorize('Course',Course::class);
         try {  
-            $item = Course::where('user_id',$this->user_id)->findOrfail($request->id);
+            $item = Course::where('site_id',$this->site_id)->findOrfail($request->id);
             $item->price = $request->price;
             $item->save();
             return response()->json([

@@ -14,32 +14,23 @@ use Illuminate\Support\Str;
 class PageController extends Controller
 {
     use UploadFileTrait;
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
-            $this->user_id = Auth::id();
-            return $next($request);
-        });
-    }
     function index(Request $request){
         if ($request->ajax()) {
-            $items = Page::where('site_id',$this->user_id)->get();
-            return view('settings.pages.ajax-index',compact('items'));
+            $items = Page::where('site_id',$this->site_id)->get();
+            return view('admin.settings.pages.ajax-index',compact('items'));
         }
-        return view('settings.pages.index');
+        return view('admin.settings.pages.index');
     }
     
     function create(){
-        return view('settings.pages.create');
+        return view('admin.settings.pages.create');
     }
 
     function store(Request $request){
         try {
             $data = $request->except(['_method','_token']);
             $data['slug'] = Str::slug($request->title);
-            $data['site_id'] = $this->user_id;
+            $data['site_id'] = $this->site_id;
             $item = Page::create($data);
             return response([
                 'success' => true,
@@ -56,7 +47,7 @@ class PageController extends Controller
     
     function edit(String $id){
         $item = Page::findOrfail($id);
-        return view('settings.pages.edit',compact('item'));
+        return view('admin.settings.pages.edit',compact('item'));
     }
 
     function update(Request $request,String $id){
@@ -96,6 +87,6 @@ class PageController extends Controller
 
     function show(String $id){
         $item = Page::findOrfail($id);
-        return view('settings.pages.show',compact('item'));
+        return view('admin.settings.pages.show',compact('item'));
     }
 }

@@ -24,21 +24,21 @@ class LessonController extends Controller
     {
         $this->authorize('Lesson',Lesson::class);
         if( $request->ajax() ){
-            $items = Lesson::with('grade','course','subject')->where('user_id',Auth::id())->paginate(20);
-            return view('lessons.ajax-index',compact('items'));
+            $items = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->paginate(20);
+            return view('admin.lessons.ajax-index',compact('items'));
         }
-        return view('lessons.index');
+        return view('admin.lessons.index');
 
     }
     public function create()
     {
         $this->authorize('Lesson',Lesson::class);
-        $grades = Grade::getActiveItems();
-        $subjects = Subject::getActiveItems();
-        $courses = Course::getActiveItems();
+        $grades = Grade::getActiveItems($this->site_id);
+        $subjects = Subject::getActiveItems($this->site_id);
+        $courses = Course::getActiveItems($this->site_id);
         $item = new Lesson();
         
-        return view('lessons.create',compact('grades','subjects','courses','item'));
+        return view('admin.lessons.create',compact('grades','subjects','courses','item'));
     }
     public function store(StoreLessonRequest $request)
     {
@@ -48,7 +48,7 @@ class LessonController extends Controller
         $item->grade_id = $request->grade_id;
         $item->description = $request->description;
         $item->status = $request->status;
-        $item->user_id = Auth::id();
+        $item->site_id = $this->site_id;
         try {
             DB::beginTransaction();
 
@@ -63,6 +63,7 @@ class LessonController extends Controller
                 $lessoncourse = new LessonCourse();
                 $lessoncourse->lesson_id = $item->id;
                 $lessoncourse->course_id = $request->course_id;
+                $lessoncourse->site_id = $this->site_id;
                 $lessoncourse->save();
             }
             DB::commit();
@@ -91,7 +92,7 @@ class LessonController extends Controller
             $subjects = Subject::getActiveItems();
             $courses = Course::getActiveItems();
 
-            return view('lessons.edit',compact('item','grades','subjects','courses'));
+            return view('admin.lessons.edit',compact('item','grades','subjects','courses'));
         } catch (QueryException $e) {
             Log::error($e->getMessage());
             return response([
@@ -110,7 +111,7 @@ class LessonController extends Controller
             $item->grade_id = $request->grade_id;
             $item->description = $request->description;
             $item->status = $request->status;
-            $item->user_id = Auth::id();
+            $item->site_id = $this->site_id;
             
             if ($request->hasFile('video')) {
                 $this->deleteFile([$item->video_url]);
@@ -126,6 +127,7 @@ class LessonController extends Controller
                 $lessoncourse = new LessonCourse();
                 $lessoncourse->lesson_id = $item->id;
                 $lessoncourse->course_id = $request->course_id;
+                $lessoncourse->site_id = $this->site_id;
                 $lessoncourse->save();
             }
             DB::commit();

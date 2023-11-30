@@ -10,10 +10,10 @@ class Plan extends Model
 {
     use HasFactory;
     protected $table = 'plans';
-    function user(){
-        return $this->belongsToMany(User::class,'plan_user','plan_id','user_id');
+    function site(){
+        return $this->belongsToMany(User::class,'plan_user','plan_id','site_id');
     }
-    function plan_user(){
+    function plan_site(){
         return $this->hasMany(PlanUser::class,'plan_id','id');
     }
     function getKeyByValue($array, $value)
