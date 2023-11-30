@@ -25,4 +25,7 @@ class Student extends Model
     function qas(){
         return $this->hasMany(QuestionAnswer::class,'student_id','id');
     }
+    public function students(){
+        return $this->hasMany(UserBank::class);
+    }
 }

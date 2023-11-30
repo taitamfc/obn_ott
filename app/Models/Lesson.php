@@ -26,26 +26,29 @@ class Lesson extends Model
         'updated_at',
     ];
     // Relationship
-    public function grade()
-    {
-        return $this->belongsTo(Grade::class, 'grade_id', 'id');
+    public function course(){
+        return $this->belongsTo(Lesson::class);
     }
-    public function subject()
-    {
-        return $this->belongsTo(Subject::class, 'subject_id', 'id');
+    public function subject(){
+        return $this->belongsTo(Subject::class);
     }
-    function course(){
-        return $this->belongsToMany(Course::class,'lesson_course','lesson_id','course_id');
+    public function grade(){
+        return $this->belongsTo(Grade::class);
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+    public function site(){
+        return $this->belongsTo(Site::class);
     }
-    function lesson_student(){
-        return $this->hasMany(LessonStudent::class,'lesson_id','id');
+    public function lessoncourse(){
+        return $this->hasMany(LessonCourse::class);
     }
-    function lesson_course(){
-        return $this->hasMany(LessonCourse::class,'lesson_id','id');
+    public function courses(){
+        return $this->belongsToMany(Course::class, 'lesson_course');
+    }
+    public function lessonstudent(){
+        return $this->hasMany(LessonStudent::class);
+    }
+    public function students(){
+        return $this->belongsToMany(Student::class, 'lesson_student');
     }
 
     // Feature

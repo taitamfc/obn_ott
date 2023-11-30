@@ -22,29 +22,37 @@ class Course extends Model
     ];
 
     // Relationship
-    function student(){
-        return $this->belongsToMany(Student::class);
+    public function site(){
+        $this->belongsTo(Site::class, 'site_id', 'id');
     }
-    public function course_student()
-    {
-        return $this->hasMany(StudentCourse::class, 'course_id', 'id');
+    public function subscriptionscourse(){
+        $this->hasMany(SubscriptionsCourse::class, 'course_id', 'id');
     }
-    function lesson_student()
-    {
-        return $this->hasMany(LessonStudent::class,'course_id','id');
+    public function subscriptions(){
+        $this->belongsToMany(Subscription::class, 'subscriptions_course', 'subscription_id', 'course_id');
     }
-    function course_lesson()
-    {
-        return $this->hasMany(LessonCourse::class,'course_id','id');
+    public function lessoncourse(){
+        $this->hasMany(LessonCourse::class, 'course_id', 'id');
     }
-    function lesson(){
-        return $this->belongsToMany(Lesson::class,'lesson_course','lesson_id','course_id');
+    public function lessons(){
+        $this->belongsToMany(Lessons::class, 'lesson_course', 'lesson_id', 'course_id');
     }
-    public function subscriptions()
-    {
-        return $this->belongsToMany(Subscription::class, 'subscription_course', 'course_id', 'subscription_id');
+    public function lesson(){
+        $this->belongsTo(Lesson::class);
     }
-    
+    public function studentcourse(){
+        $this->hasMany(StudentCourse::class, 'course_id', 'id');
+    }
+    public function students(){
+        $this->belongsToMany(Student::class, 'student_course', 'student_id', 'course_id');
+    }
+    public function lessonstudent(){
+        $this->hasMany(LessonStudent::class, 'course_id', 'id');
+    }
+    public function transaction(){
+        $this->hasMany(Transaction::class, 'course_id', 'id');
+    }
+
     // Feature
     const ACTIVE = 1;
     const INACTIVE = 0;

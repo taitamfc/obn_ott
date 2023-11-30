@@ -9,6 +9,7 @@ class StudentCourse extends Model
 {
     use HasFactory;
     protected $table='student_course';
+    // Relationship
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');
@@ -17,6 +18,12 @@ class StudentCourse extends Model
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+
+    // Feature
     function statusDisplay()
     {  
         return isset($this->student->status) ? ($this->student->status==0? '<span class="badge badge-warning">In Active</span>' : '<span class="badge badge-success">Active</span>' ) : '';
