@@ -12,6 +12,8 @@
                             <input type="file" class="form-control" name="auth_page_background_image"
                                 onchange="loadFile(event)">
                             <img src="{{ asset($settings['auth_page_background_image']) }}" id="output" width="150px" />
+                            <div class="input-error text-danger">@error('auth_page_background_image') {{ $message }}
+                                @enderror</div>
                         </div>
 
                     </div>
@@ -45,6 +47,8 @@
                             <input type="file" class="form-control" name="plan_page_background_image"
                                 onchange="loadFile(event)">
                             <img src="{{ asset($settings['plan_page_background_image']) }}" id="output" width="150px" />
+                            <div class="input-error text-danger">@error('plan_page_background_image') {{ $message }}
+                                @enderror</div>
                         </div>
                     </div>
                     <div class="row">

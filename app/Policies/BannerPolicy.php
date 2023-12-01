@@ -2,16 +2,16 @@
 
 namespace App\Policies;
 
-use App\Models\Site;
+use App\Models\User;
 
 class BannerPolicy
 {
     /**
      * Create a new policy instance.
      */
-    public function Banner(Site $site)
+    public function Banner(User $user)
     {
-       return $site->hasPermission('Banner');
+       return $user->hasPermission('Banner');
        //
     }
 }

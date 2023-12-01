@@ -14,7 +14,7 @@
                             <div class="col-lg-12">
                                 <div class="user-title">
                                     <h2>{{ Auth::user()->name }}</h2>
-                                    <span class="text-white">{{ Auth::user()->group->name }}</span>
+                                    <span class="text-white">{{ Auth::user()->group_names }}</span>
                                 </div>
                             </div>
                             <div>

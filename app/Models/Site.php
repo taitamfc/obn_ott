@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\HasPermissions;
 
 class Site extends Model
 {
-    use HasFactory, HasPermissions;
+    use HasFactory;
     protected $table = 'sites';
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');

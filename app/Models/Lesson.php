@@ -59,7 +59,7 @@ class Lesson extends Model
         return isset($this->subject) ? $this->subject->name : '';
     }
     function getCourse(){
-        return isset($this->course) ? $this->course->first()->name : '';
+        return isset($this->course) ? $this->course->name : '';
     }
     function getImgFmAttribute()
     {  

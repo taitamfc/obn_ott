@@ -21,7 +21,7 @@ class BannerController extends Controller
     use UploadFileTrait;
     
     function index(Request $request){
-        $this->authorize('Banner',Banner::class);
+        // $this->authorize('Banner',Banner::class);
         $settings = Setting::all()->pluck('setting_value','setting_name')->toArray();
         if ($request->ajax()) {
             $items = Banner::get();

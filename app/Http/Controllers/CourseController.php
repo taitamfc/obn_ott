@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\CourseResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -125,7 +126,7 @@ class CourseController extends Controller
         }
         return view('admin.stores.productmanagement.index');
     }
-    function editProduct(Request $request)
+    function editProduct(UpdateProductRequest $request)
     {
         // $this->authorize('Course',Course::class);
         try {  

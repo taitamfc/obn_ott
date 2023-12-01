@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreLogoRequest;
+use App\Http\Requests\UpdateSettingRequest;
 use App\Http\Resources\SettingResource;
 
 class SettingController extends Controller
@@ -20,7 +21,7 @@ class SettingController extends Controller
     { 
         return view('admin.settings.logo.index'); 
     }
-    public function update(Request $request)
+    public function update(UpdateSettingRequest $request)
     {
         $items = $request->except(['_token', '_method']);
         foreach ($items as $setting_name => $setting_value){

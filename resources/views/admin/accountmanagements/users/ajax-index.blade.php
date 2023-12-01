@@ -18,8 +18,7 @@
                     <td><img class="avatar-md img-thumbnail mr-2" src=" {{$item->image_url}} "
                             alt="AVT">{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
-                    <td>{{ optional($item->group)->name }}</td>
-
+                    <td>{{ $item->group_names }}</td>
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
@@ -42,9 +41,6 @@
             </tbody>
         </table>
     </div>
-</div>
-<div class="card-footer">
-    {{ $items->appends(request()->query())->links() }}
 </div>
 @else
 <div class="text-center pt-5 pb-5">{{ __('sys.no_data') }}</div>

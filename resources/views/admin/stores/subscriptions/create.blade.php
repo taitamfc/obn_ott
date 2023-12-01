@@ -16,6 +16,7 @@
                     <input class="form-control" type="text" name="price" value="" id="price">
                     <div class="input-error text-danger">@error('price') {{ $message }} @enderror
                     </div>
+
                 </div>
             </div>
             <div class="col-sm-6">
@@ -27,6 +28,8 @@
                     </select>
                     <div class="input-error text-danger">@error('duration') {{ $message }} @enderror
                     </div>
+                    <div class="input-error text-danger">@error('course') {{ $message }} @enderror</div>
+
                 </div>
             </div>
             <div class="col-sm-6">
@@ -38,6 +41,8 @@
                         <option value="{{ $id }}">{{ $courseName }}</option>
                         @endforeach
                     </select>
+                    <div class="input-error text-danger">@error('course') {{ $message }} @enderror
+                    </div>
                     <a href="#" class="btn btn-primary mt-4">Add more Courses</a>
                 </div>
             </div>

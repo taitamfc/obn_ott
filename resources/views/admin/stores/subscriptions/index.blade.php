@@ -9,7 +9,7 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">My Subscriptions</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -77,10 +77,12 @@ jQuery(document).ready(function() {
                     showAlertError('Has Problems, Please Try Again')
                 }
                 if (res.success) {
+                    $('#formCreate')[0].reset();
                     showAlertSuccess(res.message);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1200);
+                    getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+                    // setTimeout(() => {
+                    //     window.location.reload();
+                    // }, 1200);
                 }
             }
         });
@@ -113,9 +115,7 @@ jQuery(document).ready(function() {
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
-                    setTimeout(() => {
-                        window.location.href = res.redirect;
-                    }, 1200);
+                    window.location.href = indexUrl;
                 }
 
             }

@@ -10,7 +10,7 @@
             </thead>
             <tbody>
                 @foreach ($items as $item)
-                <tr>
+                <tr class='item'>
                     <td>{{ $item->name }}</td>
                     <td>${{ $item->price }}</td>
                     <td>

@@ -9,6 +9,13 @@ class LessonCourse extends Model
 {
     use HasFactory;
     protected $table='lesson_course';
+    protected $fillable = [
+        'lesson_id',
+        'subject_id',
+        'grade_id',
+        'course_id',
+        'site_id',
+    ];
     function site(){
         return $this->belongsTo(Site::class);
     }
