@@ -20,13 +20,19 @@ class Subject extends Model
         'createt_at',
         'updated_at',
     ];
-    public static function getActiveItems($site_id){
-        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
-    }
-    
+
+    // Relationship    
     public function lesson()
     {
         return $this->hasMany(Lesson::class, 'subject_id', 'id');
+    }
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+    // Feature method
+    public static function getActiveItems($site_id){
+        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
     }
     const ACTIVE = 1;
     const INACTIVE = 0;

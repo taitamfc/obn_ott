@@ -14,6 +14,12 @@ class Banner extends Model
     const ACTIVE = 1;
     const INACTIVE = 0;
 
+    //relationship
+    public function site(){
+        $this->belongsTo(Site::class, 'site_id', 'id');
+    }
+
+    //feature
     public static function getActiveItems(){
         return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
     }

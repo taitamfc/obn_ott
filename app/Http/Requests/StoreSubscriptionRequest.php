@@ -24,16 +24,21 @@ class StoreSubscriptionRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required',
-            // 'duration' => 'required',
+            'price' => 'required|numeric',
+            'duration' => 'required',
+            'course' => 'required|array',
+            'course.*' => 'numeric',
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'The name field is required',
+            'price.numeric' => 'The price field must contain numeric values',
             'price.required' => 'The price field is required',
-            // 'duration.required' => 'The duration field is required',
+            'duration.required' => 'The duration field is required',
+            'course.required' => 'The course field is required',
+            'course.*.numeric' => 'The course field must contain numeric values',
         ];
     }
     protected function failedValidation(Validator $validator)

@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
+
 class LessonController extends Controller
 {
     use UploadFileTrait;
     public function index(Request $request)
     {
-        $this->authorize('Lesson',Lesson::class);
+        // $this->authorize('Lesson',Lesson::class);
         if( $request->ajax() ){
             $items = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->paginate(20);
             return view('admin.lessons.ajax-index',compact('items'));
@@ -32,7 +33,7 @@ class LessonController extends Controller
     }
     public function create()
     {
-        $this->authorize('Lesson',Lesson::class);
+        // $this->authorize('Lesson',Lesson::class);
         $grades = Grade::getActiveItems($this->site_id);
         $subjects = Subject::getActiveItems($this->site_id);
         $courses = Course::getActiveItems($this->site_id);
@@ -46,6 +47,7 @@ class LessonController extends Controller
         $item->name = $request->name;
         $item->subject_id = $request->subject_id;
         $item->grade_id = $request->grade_id;
+        $item->course_id = $request->course_id;
         $item->description = $request->description;
         $item->status = $request->status;
         $item->site_id = $this->site_id;
@@ -62,6 +64,8 @@ class LessonController extends Controller
             if($item->save()){
                 $lessoncourse = new LessonCourse();
                 $lessoncourse->lesson_id = $item->id;
+                $lessoncourse->subject_id = $request->subject_id;
+                $lessoncourse->grade_id = $request->grade_id;
                 $lessoncourse->course_id = $request->course_id;
                 $lessoncourse->site_id = $this->site_id;
                 $lessoncourse->save();
@@ -84,13 +88,13 @@ class LessonController extends Controller
     }
     function edit($id){
 
-        $this->authorize('Lesson',Lesson::class);
+        // $this->authorize('Lesson',Lesson::class);
         try{
-            $item = Lesson::where('user_id',Auth::id())->findOrfail($id);
+            $item = Lesson::where('site_id',$this->site_id)->findOrfail($id);
             
-            $grades = Grade::getActiveItems();
-            $subjects = Subject::getActiveItems();
-            $courses = Course::getActiveItems();
+            $grades = Grade::getActiveItems($this->site_id);
+            $subjects = Subject::getActiveItems($this->site_id);
+            $courses = Course::getActiveItems($this->site_id);
 
             return view('admin.lessons.edit',compact('item','grades','subjects','courses'));
         } catch (QueryException $e) {
@@ -105,14 +109,17 @@ class LessonController extends Controller
         try {
             DB::beginTransaction();
             $item = Lesson::findOrfail($id);
+            // Get old value
             $old_course_id = $item->course_id;
+            $old_subject_id = $item->subject_id;
+            $old_grade_id = $item->grade_id;
+            // Push new value
             $item->name = $request->name;
             $item->subject_id = $request->subject_id;
             $item->grade_id = $request->grade_id;
             $item->description = $request->description;
             $item->status = $request->status;
-            $item->site_id = $this->site_id;
-            
+            $item->site_id = $this->site_id;            
             if ($request->hasFile('video')) {
                 $this->deleteFile([$item->video_url]);
                 $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
@@ -122,10 +129,11 @@ class LessonController extends Controller
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/lessons/image');
             } 
             if($item->save()){
-                LessonCourse::where('lesson_id',$item->id)->where('course_id',$old_course_id)->delete();
-
+                LessonCourse::where('lesson_id',$item->id)->where('course_id',$old_course_id)->where('subject_id',$old_subject_id)->where('grade_id',$old_grade_id)->delete();
                 $lessoncourse = new LessonCourse();
                 $lessoncourse->lesson_id = $item->id;
+                $lessoncourse->subject_id = $request->subject_id;
+                $lessoncourse->grade_id = $request->grade_id;
                 $lessoncourse->course_id = $request->course_id;
                 $lessoncourse->site_id = $this->site_id;
                 $lessoncourse->save();
@@ -141,7 +149,7 @@ class LessonController extends Controller
             Log::error($e->getMessage());
             return response([
                 'success' => false,
-                'message' => __('sys.store_item_error')
+                'message' => __('sys.update_item_error')
             ],200);
         }
     }
@@ -160,7 +168,14 @@ class LessonController extends Controller
     public function destroy(string $id)
     {
         try {
-            Lesson::where('user_id',Auth::id())->delete();
+            $item = Lesson::where('site_id',$this->site_id)->findOrfail($id);
+            LessonCourse::where('site_id',$this->site_id)
+            ->where('lesson_id',$item->id)
+            ->where('grade_id',$item->grade_id)
+            ->where('subject_id',$item->subject_id)
+            ->where('course_id',$item->course_id)
+            ->delete();
+            $item->delete();
             return response([
                 'success' => true,
                 'message' => __('sys.destroy_item_success'),

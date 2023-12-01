@@ -15,4 +15,16 @@ class SubscriptionCourse extends Model
         'createt_at',
         'updated_at',
     ];
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class);
+    }
 }

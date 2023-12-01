@@ -16,6 +16,10 @@ class Page extends Model
         'site_id',
         'status'
     ];
+    //Relationship
+    public function site(){
+        return $this->belongsTo(Site::class);
+    }
     
     // Feature
     const ACTIVE = 1;

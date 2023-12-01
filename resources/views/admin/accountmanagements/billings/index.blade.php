@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="buttons">
-
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>

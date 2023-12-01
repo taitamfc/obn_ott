@@ -25,6 +25,9 @@ use Database\Seeders\SubjectSeeder;
 use Database\Seeders\SubscriptionSeeder;
 use Database\Seeders\SubscriptionCourseSeeder;
 use Database\Seeders\SettingSeeder;
+use Database\Seeders\GroupSiteSeeder;
+use Database\Seeders\TransactionSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,26 +36,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-        $this->call(SiteSeeder::class);
-        $this->call(GroupSeeder::class);
-        $this->call(RoleSeeder::class);
-        $this->call(GroupRoleSeeder::class);
-        $this->call(BannerSeeder::class);
-        $this->call(EventSeeder::class);
-        $this->call(GradeSeeder::class);
-        $this->call(CourseSeeder::class);
-        $this->call(LessonSeeder::class);
-        $this->call(LessonCourseSeeder::class);
-        $this->call(LessonStudentSeeder::class);
-        $this->call(QuestionSeeder::class);
-        $this->call(PageSeeder::class);
-        $this->call(PlanSeeder::class);
-        $this->call(StudentSeeder::class);
-        $this->call(StudentCourseSeeder::class);
-        $this->call(SubjectSeeder::class);
-        $this->call(SubscriptionSeeder::class);
-        $this->call(SubscriptionCourseSeeder::class);
-        $this->call(SettingSeeder::class);
+        // $this->call(UserSeeder::class);
+        // $this->call(SiteSeeder::class);
+        // $this->call(GroupSeeder::class);
+        // $this->call(RoleSeeder::class);
+        // $this->call(GroupRoleSeeder::class);
+        // $this->call(BannerSeeder::class);
+        // $this->call(EventSeeder::class);
+        // $this->call(GradeSeeder::class);
+        // $this->call(CourseSeeder::class);
+        // $this->call(LessonSeeder::class);
+        // $this->call(LessonCourseSeeder::class);
+        // $this->call(LessonStudentSeeder::class);
+        // $this->call(QuestionSeeder::class);
+        // $this->call(PageSeeder::class);
+        // $this->call(PlanSeeder::class);
+        // $this->call(StudentSeeder::class);
+        // $this->call(StudentCourseSeeder::class);
+        // $this->call(SubjectSeeder::class);
+        // $this->call(SubscriptionSeeder::class);
+        // $this->call(SubscriptionCourseSeeder::class);
+        // $this->call(SettingSeeder::class);
+        $this->call(GroupSiteSeeder::class);
+        $this->call(TransactionSeeder::class);
     }
 }

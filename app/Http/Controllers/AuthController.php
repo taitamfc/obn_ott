@@ -14,6 +14,8 @@ use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Str;
 use Mail;
+use Illuminate\Support\Facades\Session;
+
 class AuthController extends Controller
 {
 
@@ -82,7 +84,7 @@ class AuthController extends Controller
                 'email' => $item->email,
                 'token' => $token
             ];
-        Mail::send('auth.mail',compact('data'), function($email) use ($item){
+        Mail::send('admin.auth.mail',compact('data'), function($email) use ($item){
             $email->subject('Forgot Password');
             $email->to($item->email, $item->name );
         });

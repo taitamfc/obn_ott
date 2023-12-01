@@ -2,8 +2,11 @@
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner">
+        <div class="row justify-content-end">
+            <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
+        </div>
         <div class="row">
-            <div class="tab-content">
+            <div class="tab-content w-100">
                 <div class="tab-pane active">
                     <div class="card mb-4">
                         <div class="card-header">

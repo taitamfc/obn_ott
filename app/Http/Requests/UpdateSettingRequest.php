@@ -11,7 +11,7 @@ class UpdateSettingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'auth_page_background_image' => 'required|mimes:jpg,png,jpeg',
+            'plan_page_background_image' => 'required|mimes:jpg,png,jpeg',
         ];
     }
 }

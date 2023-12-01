@@ -19,7 +19,6 @@ class SubscriptionSeeder extends Seeder
                 "price" => rand(100,1000),
                 "duration" => rand(1,12),
                 "site_id" => 1,
-                "grade_id" => rand(1,5),
                 "status" => rand(0,1),
                 "position" => $i,
             ]);

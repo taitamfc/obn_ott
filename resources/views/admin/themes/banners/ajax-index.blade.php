@@ -6,7 +6,7 @@
         <div class="row">
             @foreach($items as $item)
             <div class="col-sm-4">
-                <div class="card">
+                <div class="card item">
                     <div class="card-body d-flex justify-center align-center" class="position-relative">
                         <video controls width="100%">
                             <source src="{{ asset($item->video_url) }}">

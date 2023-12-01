@@ -20,8 +20,8 @@ class GroupController extends Controller
      * Display a listing of the resource.
      */
     function index(Request $request){
+        // $this->authorize('Group',Group::class);
         if ($request->ajax()) {
-            $this->authorize('Group',Group::class);
             $items = Group::where('site_id',$this->site_id)->orderBy('position','ASC')->get();
             $roles = Role::get();
             $selected_roles = [];
@@ -42,7 +42,7 @@ class GroupController extends Controller
      * Store a newly created resource in storage.
      */
     function store(StoreGroupRequest $request){
-        $this->authorize('Group',Group::class);
+        // $this->authorize('Group',Group::class);
         $item = new Group();
         $item->name = $request->name;
         $item->site_id = $this->site_id;
@@ -64,7 +64,7 @@ class GroupController extends Controller
     }
     public function show(string $id)
     {
-        $this->authorize('Group',Group::class);
+        // $this->authorize('Group',Group::class);
         $item = Group::find($id);
         return new GroupResource($item);
     }
@@ -86,7 +86,7 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, string $id)
     {
-        $this->authorize('Group',Group::class);
+        // $this->authorize('Group',Group::class);
         $item = Group::find($id);
         $item->name = $request->name;
         try {
@@ -112,7 +112,7 @@ class GroupController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->authorize('Group',Group::class);
+            // $this->authorize('Group',Group::class);
             Group::destroy($id);
             GroupRole::where('group_id',$id)->delete();
             return response()->json([

@@ -16,6 +16,7 @@
                     <div class="buttons">
                         <button data-toggle="modal" data-target="#modalCreate"
                             class="btn  btn-primary float-right">{{ __('sys.add_new') }}</button>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
