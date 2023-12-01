@@ -15,7 +15,7 @@
                 @foreach($items as $item)
                 <tr class="item draggable" id='item-{{ $item->id}}'>
                     <th scope="row">{{ $item->id }}</th>
-                    <td><img class="avatar-md img-thumbnail mr-2" src=" {{$item->image_url}} "
+                    <td><img class="avatar-md img-thumbnail mr-2" src="{{ asset($item->image_url) }} "
                             alt="AVT">{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->group_names }}</td>

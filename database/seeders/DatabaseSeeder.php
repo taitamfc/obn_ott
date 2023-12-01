@@ -25,6 +25,9 @@ use Database\Seeders\SubjectSeeder;
 use Database\Seeders\SubscriptionSeeder;
 use Database\Seeders\SubscriptionCourseSeeder;
 use Database\Seeders\SettingSeeder;
+use Database\Seeders\GroupSiteSeeder;
+use Database\Seeders\TransactionSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -51,8 +54,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(StudentSeeder::class);
         // $this->call(StudentCourseSeeder::class);
         // $this->call(SubjectSeeder::class);
-        $this->call(SubscriptionSeeder::class);
-        $this->call(SubscriptionCourseSeeder::class);
-        $this->call(SettingSeeder::class);
+        // $this->call(SubscriptionSeeder::class);
+        // $this->call(SubscriptionCourseSeeder::class);
+        // $this->call(SettingSeeder::class);
+        $this->call(GroupSiteSeeder::class);
+        $this->call(TransactionSeeder::class);
     }
 }
