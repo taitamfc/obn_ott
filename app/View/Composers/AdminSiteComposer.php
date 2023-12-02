@@ -19,10 +19,13 @@ class AdminSiteComposer
      */
     public function compose(View $view): void
     {
-        $site_id = session()->get('site_id');
-        $site_id = $site_id ? $site_id : Auth::user()->site_id;
-        $site    = Site::find($site_id);
-        $view->with('cr_site_id', $site_id);
-        $view->with('cr_site', $site);
+        if( Auth::user() ){
+            $site_id = session()->get('site_id');
+            $site_id = $site_id ? $site_id : Auth::user()->site_id;
+            $site    = Site::find($site_id);
+            $view->with('cr_site_id', $site_id);
+            $view->with('cr_site', $site);
+        }
+        
     }
 }

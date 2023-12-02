@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     public function login(){
         if (Auth::check()) {
-            return redirect()->route('homes.index');
+            return redirect()->route('admin.home');
         } else {
             return view('admin.auth.login');
         }
@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function postLogin(StoreLoginRequest $request){
         $dataUser = $request->only('email','password');
         if(Auth::attempt($dataUser)){
-            return redirect()->route('home')->with('success',__('auth.login_success'));
+            return redirect()->route('admin.home')->with('success',__('auth.login_success'));
         }else {
             return redirect()->back()->with('error',__('auth.login_error'));
         }
@@ -44,12 +44,12 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 
     public function register(){
         if (Auth::check()) {
-            return redirect()->route('home');
+            return redirect()->route('admin.home');
         } else {
             return view('admin.auth.register');
         }
@@ -57,6 +57,13 @@ class AuthController extends Controller
     public function postRegister(StoreRegisterRequest $request){
         try {
             DB::beginTransaction();
+            //Prepare slug
+            $slug = $maybe_slug = $maybe_slug = Str::slug($request->name);
+            $next = 2;
+            while (Site::where('slug', $slug)->first()) {
+                $slug = "{$maybe_slug}-{$next}";
+                $next++;
+            }
             // Register user
             $user = new User();
             $user->name = $request->name;
@@ -67,7 +74,7 @@ class AuthController extends Controller
             if($user->save()){
                 $site = new Site();
                 $site->name = $request->name;
-                $site->slug = Str::slug($request->name);
+                $site->slug = $slug;
                 $site->user_id = $user->id;
                 $site->status = Site::ACTIVE;
                 $site->save();
@@ -79,7 +86,7 @@ class AuthController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('login')->with('success',__('auth.register_success'));
+            return redirect()->route('admin.login')->with('success',__('auth.register_success'));
         } catch (QueryException $e) { 
             Log::error($e->getMessage());
             return redirect()->back()->with('error',__('auth.register_error'));
@@ -106,7 +113,7 @@ class AuthController extends Controller
             $email->subject('Forgot Password');
             $email->to($item->email, $item->name );
         });
-        return redirect()->route('login')->with('success','Please check mail to reset password');
+        return redirect()->route('admin.login')->with('success','Please check mail to reset password');
         }
     }
     function getReset(Request $request){
@@ -127,9 +134,9 @@ class AuthController extends Controller
             $item->password = bcrypt($request->password);
             $item->token = '';
             $item->save();
-            return redirect()->route('login')->with('success','Reset Password Success');
+            return redirect()->route('admin.login')->with('success','Reset Password Success');
         }else {
-            return redirect()->route('login')->with('error','Has Problems, Please Try Again');
+            return redirect()->back()->with('error','Has Problems, Please Try Again');
         }
     }
 }

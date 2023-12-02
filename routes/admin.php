@@ -66,12 +66,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::resource('/courses',\App\Http\Controllers\Admin\CourseController::class);
     
     // Lesson
-    Route::post('/lessons/position',[\App\Http\Controllers\LessonController::class,'position'])->name('lessons.position');
-    Route::resource('/lessons',\App\Http\Controllers\LessonController::class);
+    Route::post('/lessons/position',[\App\Http\Controllers\Admin\LessonController::class,'position'])->name('lessons.position');
+    Route::resource('/lessons',\App\Http\Controllers\Admin\LessonController::class);
 
     //Class
-    Route::get('/classes/students',[ClassController::class,'students'])->name('classes.students');
-    Route::resource('/classes',ClassController::class);
+    Route::get('/classes/students',[\App\Http\Controllers\Admin\ClassController::class,'students'])->name('classes.students');
+    Route::resource('/classes',\App\Http\Controllers\Admin\ClassController::class);
     
     //Report
     Route::get('/reports/users',[\App\Http\Controllers\ReportController::class,'users'])->name('report.users');

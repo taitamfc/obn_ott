@@ -17,7 +17,7 @@
             </div>
             <a class="dropdown-item" href="{{ route('admin.account.index') }}"><i class="ti-user"></i>
                 Profile</a>
-            <a class="dropdown-item" href="{{-- route('admin.cms',['site_name'=>$cr_admin->slug]) --}}"><i
+            <a class="dropdown-item" href="{{ route('cms',['site_name'=>$cr_site->slug]) }}"><i
                     class="ti-home"></i> View website</a>
             <span role="separator" class="divider"></span>
             <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="ti-power-off"></i>Logout</a>

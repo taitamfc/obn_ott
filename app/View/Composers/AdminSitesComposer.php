@@ -20,8 +20,10 @@ class AdminSitesComposer
      */
     public function compose(View $view): void
     {
-        $user_id = Auth::user()->id;
-        $sites = Site::where('user_id',$user_id)->get();
-        $view->with('cr_admin_sites', $sites);
+        if( Auth::user() ){
+            $user_id = Auth::user()->id;
+            $sites = Site::where('user_id',$user_id)->get();
+            $view->with('cr_admin_sites', $sites);
+        }
     }
 }
