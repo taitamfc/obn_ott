@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 use App\Http\Requests\StoreBankUserRequest;
 use App\Models\User;
 use App\Models\PlanSite;
@@ -22,7 +23,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use DB;
 
-class UserController extends Controller
+class UserController extends AdminController
 {
     use UploadFileTrait;
     /**

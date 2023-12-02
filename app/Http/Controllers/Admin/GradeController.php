@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Grade;
@@ -15,7 +16,7 @@ use Yajra\Datatables\Datatables;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 
-class GradeController extends Controller
+class GradeController extends AdminController
 {
     use UploadFileTrait;
 

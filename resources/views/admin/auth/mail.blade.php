@@ -5,7 +5,7 @@
     <p>Click link to reset password.</p>
     <b>Your email: {{ $data['email'] }}<br></b>
     <p>Remember : Link has active once time on click</p>
-    <a href="{{ route('postReset',[ 'user'=> $data['id'], 'token' => $data['token'] ]) }}">Reset Password</a>
+    <a href="{{ route('admin.postReset',[ 'user'=> $data['id'], 'token' => $data['token'] ]) }}">Reset Password</a>
     <p><br>If you do not take any action <br> please contact the administrator via email :<a href="gmail.com">
             nguyenhuukhuong27102000@gmail.com</a></p>
 </div>

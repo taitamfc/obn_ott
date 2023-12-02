@@ -1,6 +1,7 @@
 <?php
    
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
    
 use App\Models\Event;
 use App\Models\Grade;
@@ -15,12 +16,9 @@ use App\Models\Student;
 use Illuminate\Support\Facades\Log;
 use App\Models\QuestionAnswer;
 
-class HomeController extends Controller
+class HomeController extends AdminController
 {
-
-
     public function index(Request $request)
-    
     {
         /* --------------------
         Data question */

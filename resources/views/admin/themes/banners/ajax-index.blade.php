@@ -18,12 +18,12 @@
                         <div class="button-control d-flex justify-content-end">
 
                             <a href="javascript:;" data-id="{{ $item->id }}"
-                                data-action="{{ route('banners.update',$item->id) }}"
+                                data-action="{{ route('admin.banners.update',$item->id) }}"
                                 class="pt-1 pb-1 pl-3 pr-3 bg-danger mr-2 show-form-edit">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="javascript:;" class="pt-1 pb-1 pl-3 pr-3 bg-warning mr-2 delete-item"
-                                data-action="{{ route('banners.destroy',$item->id) }}">
+                                data-action="{{ route('admin.banners.destroy',$item->id) }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </div>

@@ -58,7 +58,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('banners.index') }}";
+var indexUrl = "{{ route('admin.banners.index') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.banners-table-results';

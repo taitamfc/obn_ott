@@ -31,7 +31,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('settings.logo') }}";
+var indexUrl = "{{ route('admin.settings.logo') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.logo-table-results';

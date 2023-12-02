@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Subscription;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\SubscriptionResource;
-class SubscriptionController extends Controller
+class SubscriptionController extends AdminController
 {
     /**
      * Display a listing of the resource.

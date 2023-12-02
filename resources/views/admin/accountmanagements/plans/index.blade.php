@@ -37,7 +37,7 @@
 @section('footer')
 <script>
 jQuery(function() {
-    var indexUrl = "{{ route('users.plans') }}";
+    var indexUrl = "{{ route('admin.users.plans') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.plans-table-results';

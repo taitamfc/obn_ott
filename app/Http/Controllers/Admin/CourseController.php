@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\CourseResource;
 use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class CourseController extends AdminController
 {
     use UploadFileTrait;
 

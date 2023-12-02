@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('settings.update') }}" enctype="multipart/form-data">
+<form method="post" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
     @csrf
     <div class="row mt-4">
         <div class="col-sm-12">

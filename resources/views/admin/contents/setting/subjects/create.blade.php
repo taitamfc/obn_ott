@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalCreate" style="display: none;" aria-hidden="true">
-	<form id="formCreate"  action="{{ route('subjects.store') }}" method="post" enctype="multipart/form-data">
+	<form id="formCreate"  action="{{ route('admin.subjects.store') }}" method="post" enctype="multipart/form-data">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			@csrf
 			<div class="modal-content">

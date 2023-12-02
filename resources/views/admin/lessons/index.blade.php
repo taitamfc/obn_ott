@@ -10,7 +10,7 @@
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</af>
-                        <a href="{{ route('lessons.create') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">
                             {{ __('sys.add_new') }}
                         </a>
                     </div>
@@ -32,8 +32,8 @@
 @section('footer')
 <script>
 jQuery(function() {
-    var indexUrl = "{{ route('lessons.index') }}";
-    var positionUrl = "{{ route('lessons.position') }}";
+    var indexUrl = "{{ route('admin.lessons.index') }}";
+    var positionUrl = "{{ route('admin.lessons.position') }}";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.lesson-table-results';
 

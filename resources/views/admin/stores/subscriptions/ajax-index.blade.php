@@ -21,11 +21,11 @@
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->duration }}</td>
                             <td>
-                                <a href="{{ route('subscriptions.edit', $item->id) }}" class="text-primary">
+                                <a href="{{ route('admin.subscriptions.edit', $item->id) }}" class="text-primary">
                                     <i class="ti-pencil mr-1 btn btn-success"></i>
                                 </a>
                                 <a href="javascript:;" class="text-danger delete-item" data-id="{{ $item->id }}"
-                                    data-action="{{ route('subscriptions.destroy',$item->id) }}">
+                                    data-action="{{ route('admin.subscriptions.destroy',$item->id) }}">
                                     <i class="ti-trash btn btn-danger"></i>
                                 </a>
                             </td>

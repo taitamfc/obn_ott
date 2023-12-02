@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 
-class ThemeController extends Controller
+class ThemeController extends AdminController
 {
     public function homepageBanner(){
         return view('admin.themes.homepage-banner');

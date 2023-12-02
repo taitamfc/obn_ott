@@ -1,5 +1,5 @@
 @if(empty($item))
-<form id="formCreate" action="{{ route('settings.updateLogo') }}" method="post" enctype="multipart/form-data">
+<form id="formCreate" action="{{ route('admin.settings.updateLogo') }}" method="post" enctype="multipart/form-data">
     <div class="modal-dialog modal-dialog-centered" role="document">
         @csrf
         <div class="modal-content">

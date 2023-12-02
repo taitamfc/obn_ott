@@ -40,7 +40,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('users.index') }}";
+var indexUrl = "{{ route('admin.users.index') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.user-table-results';

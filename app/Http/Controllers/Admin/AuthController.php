@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoginRequest;
@@ -16,6 +17,9 @@ use Illuminate\Support\Str;
 use Mail;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\User;
+use App\Models\Site;
+
 class AuthController extends Controller
 {
 
@@ -23,48 +27,69 @@ class AuthController extends Controller
 
     public function login(){
         if (Auth::check()) {
-            return redirect()->route('homes.index');
+            return redirect()->route('admin.home');
         } else {
             return view('admin.auth.login');
         }
     }
 
     public function postLogin(StoreLoginRequest $request){
-            $dataUser = $request->only('email','password');
-            if(Auth::attempt($dataUser)){
-                return redirect()->route('home')->with('success', 'Logged in successfully');;
-            }else {
-                return redirect()->route('login')->with('error','Account or password is incorrect');
-            }
+        $dataUser = $request->only('email','password');
+        if(Auth::attempt($dataUser)){
+            return redirect()->route('admin.home')->with('success',__('auth.login_success'));
+        }else {
+            return redirect()->back()->with('error',__('auth.login_error'));
+        }
     }
 
-    public function Logout(Request $request){
+    public function logout(Request $request){
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 
     public function register(){
         if (Auth::check()) {
-            return redirect()->route('home');
+            return redirect()->route('admin.home');
         } else {
             return view('admin.auth.register');
         }
     }
-    
-
     public function postRegister(StoreRegisterRequest $request){
         try {
+            DB::beginTransaction();
+            //Prepare slug
+            $slug = $maybe_slug = $maybe_slug = Str::slug($request->name);
+            $next = 2;
+            while (Site::where('slug', $slug)->first()) {
+                $slug = "{$maybe_slug}-{$next}";
+                $next++;
+            }
+            // Register user
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = $request->password;
-            $user->group_id = 2;
-            $user->save(); 
-            $message = "Successfully register";
-            return redirect()->route('login')->with('success',$message);
+            $user->password = bcrypt($request->password);
+            $user->group_id = env('DEFAULT_ADMIN_GROUP',1);
+            // Register sites
+            if($user->save()){
+                $site = new Site();
+                $site->name = $request->name;
+                $site->slug = $slug;
+                $site->user_id = $user->id;
+                $site->status = Site::ACTIVE;
+                $site->save();
+
+                // Set default site id for user
+                if($site->save()){
+                    $user->site_id = $site->id;
+                    $user->save();
+                }
+            }
+            DB::commit();
+            return redirect()->route('admin.login')->with('success',__('auth.register_success'));
         } catch (QueryException $e) { 
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return view('admin.auth.register')->with('error','Register fail');
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error',__('auth.register_error'));
         }   
     }
 
@@ -88,7 +113,7 @@ class AuthController extends Controller
             $email->subject('Forgot Password');
             $email->to($item->email, $item->name );
         });
-        return redirect()->route('login')->with('success','Please check mail to reset password');
+        return redirect()->route('admin.login')->with('success','Please check mail to reset password');
         }
     }
     function getReset(Request $request){
@@ -109,9 +134,9 @@ class AuthController extends Controller
             $item->password = bcrypt($request->password);
             $item->token = '';
             $item->save();
-            return redirect()->route('login')->with('success','Reset Password Success');
+            return redirect()->route('admin.login')->with('success','Reset Password Success');
         }else {
-            return redirect()->route('login')->with('error','Has Problems, Please Try Again');
+            return redirect()->back()->with('error','Has Problems, Please Try Again');
         }
     }
 }
