@@ -82,7 +82,7 @@ class AuthController extends Controller
                 'email' => $item->email,
                 'token' => $token
             ];
-        Mail::send('auth.mail',compact('data'), function($email) use ($item){
+        Mail::send('admin.auth.mail',compact('data'), function($email) use ($item){
             $email->subject('Forgot Password');
             $email->to($item->email, $item->name );
         });
