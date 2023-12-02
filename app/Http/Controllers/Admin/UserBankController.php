@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Http\Requests\StoreUserBankRequest;
 use App\Models\UserBank;
@@ -12,7 +13,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\UploadFileTrait;
 
-class UserBankController extends Controller
+class UserBankController extends AdminController
 {
     use UploadFileTrait;
     public function __construct()

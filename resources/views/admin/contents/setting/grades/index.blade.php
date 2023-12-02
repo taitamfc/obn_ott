@@ -35,8 +35,8 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('grades.index') }}";
-var positionUrl = "{{ route('grades.position') }}";
+var indexUrl = "{{ route('admin.grades.index') }}";
+var positionUrl = "{{ route('admin.grades.position') }}";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.grade-table-results';
 jQuery(document).ready(function() {

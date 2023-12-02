@@ -9,14 +9,14 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">Update Page</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('pages.index') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ route('admin.pages.index') }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form id="formUpdate" action="{{ route('pages.update',$item->id) }}" method="post"
+                <form id="formUpdate" action="{{ route('admin.pages.update',$item->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -98,7 +98,7 @@ jQuery(document).ready(function() {
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
-                    window.location.href = "{{ route('pages.index') }}";
+                    window.location.href = "{{ route('admin.pages.index') }}";
                 }
 
             }

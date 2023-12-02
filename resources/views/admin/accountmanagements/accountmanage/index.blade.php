@@ -24,7 +24,7 @@
 @section('footer')
 <script>
 jQuery(document).ready(function() {
-    var indexUrl = "{{ route('account.index') }}";
+    var indexUrl = "{{ route('admin.account.index') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.information-table-results';

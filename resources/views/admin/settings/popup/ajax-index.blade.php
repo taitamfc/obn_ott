@@ -1,5 +1,5 @@
 @if(empty($item))
-<form id="formCreate" action="{{ route('settings.updatePopup') }}" method="post" enctype="multipart/form-data">
+<form id="formCreate" action="{{ route('admin.settings.updatePopup') }}" method="post" enctype="multipart/form-data">
     <div class="modal-dialog modal-dialog-centered" role="document">
         @csrf
         <div class="modal-content">
@@ -31,7 +31,7 @@
             </div>
             <div class="d-flex justify-content-center align-items-center mt-3">
                 <a class='btn btn-primary show-form-edit w-50 text-white'
-                    data-action="{{ route('settings.showPopup') }}">Update</a>
+                    data-action="{{ route('admin.settings.showPopup') }}">Update</a>
             </div>
         </div>
         <div class="col-2"></div>

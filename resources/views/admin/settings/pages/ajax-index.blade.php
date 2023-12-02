@@ -19,14 +19,14 @@
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
-                                <a href="{{ route('pages.show',$item->id) }}" class="btn btn-success">
+                                <a href="{{ route('admin.pages.show',$item->id) }}" class="btn btn-success">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{{ route('pages.edit',$item->id) }}" class="btn btn-primary">
+                                <a href="{{ route('admin.pages.edit',$item->id) }}" class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $item->id }}"
-                                    data-action="{{ route('pages.destroy',$item->id) }}">
+                                    data-action="{{ route('admin.pages.destroy',$item->id) }}">
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>

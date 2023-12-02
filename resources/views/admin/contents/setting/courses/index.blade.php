@@ -36,8 +36,8 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('courses.index') }}";
-var positionUrl = "{{ route('courses.position') }}";
+var indexUrl = "{{ route('admin.courses.index') }}";
+var positionUrl = "{{ route('admin.courses.position') }}";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.course-table-results';
 jQuery(document).ready(function() {

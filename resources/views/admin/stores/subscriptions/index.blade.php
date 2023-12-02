@@ -34,7 +34,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('subscriptions.index') }}";
+var indexUrl = "{{ route('admin.subscriptions.index') }}";
 var positionUrl = "";
 var wrapperResults = '.subscriptions-table-results';
 var params = <?= json_encode(request()->query()); ?>;

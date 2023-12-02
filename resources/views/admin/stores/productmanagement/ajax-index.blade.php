@@ -15,7 +15,7 @@
                     <td>${{ $item->price }}</td>
                     <td>
                         <button data-toggle="modal" data-target="#modalUpdate" data-id="{{ $item->id }}"
-                            data-action="{{ route('courses.editProduct') }}" class='btn btn-success show-form-edit'>
+                            data-action="{{ route('admin.courses.editProduct') }}" class='btn btn-success show-form-edit'>
                             <i class="ti-pencil mr-1"></i>
                         </button>
                     </td>

@@ -9,7 +9,7 @@
 						<h5 class="mr-4 mb-0 font-weight-bold">Notice</h5>
 					</div>
 					<div class="buttons d-flex">
-						<a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+						<a class="btn btn-dark mr-1" href="{{ route('admin.home') }}">{{ __('sys.back') }}</a>
 						<!-- <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
 							{{ __('sys.add_new') }}
 						</button> -->

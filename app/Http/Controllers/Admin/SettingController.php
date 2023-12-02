@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
@@ -13,7 +14,7 @@ use App\Http\Requests\StoreLogoRequest;
 use App\Http\Requests\UpdateSettingRequest;
 use App\Http\Resources\SettingResource;
 
-class SettingController extends Controller
+class SettingController extends AdminController
 {
     use UploadFileTrait;
     // Handle Banner & Setting Banner

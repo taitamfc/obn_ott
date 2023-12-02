@@ -38,8 +38,8 @@
 <script>
 jQuery(document).ready(function() {
     preventEnter();
-    var indexUrl = "{{ route('groups.index') }}";
-    var positionUrl = "{{ route('groups.position') }}";
+    var indexUrl = "{{ route('admin.groups.index') }}";
+    var positionUrl = "{{ route('admin.groups.position') }}";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.groups-table-results';
 

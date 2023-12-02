@@ -39,7 +39,7 @@
 CKEDITOR.replace('popup');
 </script>
 <script>
-var indexUrl = "{{ route('settings.popup') }}";
+var indexUrl = "{{ route('admin.settings.popup') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.popup-table-results';

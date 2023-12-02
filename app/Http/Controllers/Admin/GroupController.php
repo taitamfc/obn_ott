@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\GroupResource;
 use Illuminate\Support\Facades\Auth;
 
-class GroupController extends Controller
+class GroupController extends AdminController
 {
     /**
      * Display a listing of the resource.

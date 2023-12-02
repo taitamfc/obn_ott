@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalUpdate" style="display: none;" aria-hidden="true">
-    <form id="formUpdate" action="{{ route('settings.updatePopup') }}" method="post" enctype="multipart/form-data">
+    <form id="formUpdate" action="{{ route('admin.settings.updatePopup') }}" method="post" enctype="multipart/form-data">
         <div class="modal-dialog modal-dialog-centered" role="document">
             @csrf
             <div class="modal-content">

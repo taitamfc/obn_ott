@@ -27,7 +27,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form id="updateLesson" action="{{ route('lessons.update',$item->id) }}" method="post"
+                <form id="updateLesson" action="{{ route('admin.lessons.update',$item->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

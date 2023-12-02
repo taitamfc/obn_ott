@@ -24,13 +24,13 @@
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
-                                <a href="{{ route('lessons.edit',$item->id) }}" class="btn btn-primary">
+                                <a href="{{ route('admin.lessons.edit',$item->id) }}" class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $item->id }}"
-                                    data-action="{{ route('lessons.destroy',$item->id) }}">
+                                    data-action="{{ route('admin.lessons.destroy',$item->id) }}">
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>

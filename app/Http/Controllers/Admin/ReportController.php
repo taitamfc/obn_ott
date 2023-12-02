@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\StudentCourse;
 use Illuminate\Support\Facades\DB;
 
-class ReportController extends Controller
+class ReportController extends AdminController
 {
     function users(Request $request){
         $query = DB::table('student_course');

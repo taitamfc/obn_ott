@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalCreate" style="display: none;" aria-hidden="true">
-    <form id="formCreate" action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data">
+    <form id="formCreate" action="{{ route('admin.banners.store') }}" method="post" enctype="multipart/form-data">
         <div class="modal-dialog modal-dialog-centered" role="document">
             @csrf
             <div class="modal-content">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary add-item" type='button'
-                        data-action="{{ route('banners.store') }}">Save changes</button>
+                        data-action="{{ route('admin.banners.store') }}">Save changes</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>

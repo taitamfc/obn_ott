@@ -39,8 +39,8 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('subjects.index') }}";
-var positionUrl = "{{ route('subjects.position') }}";
+var indexUrl = "{{ route('admin.subjects.index') }}";
+var positionUrl = "{{ route('admin.subjects.position') }}";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.subject-table-results';
 jQuery(document).ready(function() {

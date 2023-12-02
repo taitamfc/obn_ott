@@ -10,7 +10,7 @@
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
-                        <a class="btn btn-primary mr-1" href="{{ route('pages.create') }}">{{ __('sys.add_new') }}</a>
+                        <a class="btn btn-primary mr-1" href="{{ route('admin.pages.create') }}">{{ __('sys.add_new') }}</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('pages.index') }}";
+var indexUrl = "{{ route('admin.pages.index') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.pages-table-results';

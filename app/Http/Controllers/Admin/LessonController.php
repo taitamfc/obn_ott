@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Lesson;
@@ -18,7 +19,7 @@ use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
 
-class LessonController extends Controller
+class LessonController extends AdminController
 {
     use UploadFileTrait;
     public function index(Request $request)

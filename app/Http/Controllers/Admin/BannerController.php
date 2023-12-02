@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 use App\Http\Resources\BannerResource;
 use App\Models\Banner;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -13,7 +14,7 @@ use App\Traits\UploadFileTrait;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
-class BannerController extends Controller
+class BannerController extends AdminController
 {
     /**
      * Display a listing of the resource.

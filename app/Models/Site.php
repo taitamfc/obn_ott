@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Site extends Model
 {
+    const ACTIVE    = 1;
+    const INACTIVE  = 1;
+
     use HasFactory;
     protected $table = 'sites';
     public function user(){

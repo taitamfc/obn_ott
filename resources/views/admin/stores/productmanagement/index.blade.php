@@ -29,7 +29,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('courses.products') }}";
+var indexUrl = "{{ route('admin.courses.products') }}";
 var positionUrl = "";
 var wrapperResults = '.product-table-results';
 var params = <?= json_encode(request()->query()); ?>;

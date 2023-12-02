@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\SubjectResource;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\UploadFileTrait;
-class SubjectController extends Controller
+class SubjectController extends AdminController
 {
     use UploadFileTrait;
 

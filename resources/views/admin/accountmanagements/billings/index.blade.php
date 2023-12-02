@@ -72,7 +72,7 @@
 @section('footer')
 <script>
 jQuery(document).ready(function() {
-    var indexUrl = "{{ route('userbank.index') }}";
+    var indexUrl = "{{ route('admin.userbank.index') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.userbank-table-results';

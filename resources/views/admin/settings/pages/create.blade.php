@@ -9,14 +9,14 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">Create Page</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('pages.index') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ route('admin.pages.index') }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form id="formCreate" action="{{ route('pages.store') }}" method="post" enctype="multipart/form-data">
+                <form id="formCreate" action="{{ route('admin.pages.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-body">
@@ -100,7 +100,7 @@ jQuery(document).ready(function() {
                 }
                 if (res.success) {
                     showAlertSuccess(res.message);
-                    window.location.href = "{{ route('pages.index') }}";
+                    window.location.href = "{{ route('admin.pages.index') }}";
                 }
 
             }
