@@ -20,130 +20,40 @@ class HomeController extends AdminController
 {
     public function index(Request $request)
     {
+        $grade_id = $request->grade;
+
+        $grades = Grade::where('site_id',$this->site_id)
+        ->where('status',Grade::ACTIVE)
+        ->get();
+        // Reports
+        // $queryVisistor      = Visitor::where('site_id',$this->site_id);
+        // $queryImpression    = Impression::where('site_id',$this->site_id);
+        // $querySale          = Sale::where('site_id',$this->site_id);
+        // $queryStudent       = Student::where('site_id',$this->site_id);
+        // if($grade_id){
+        //     $queryVisistor->where('grade_id',$grade_id);
+        //     $queryImpression->where('grade_id',$grade_id);
+        //     $querySale->where('grade_id',$grade_id);
+        //     $queryStudent->where('grade_id',$grade_id);
+        // }
+        // $totalVisistor      = $queryVisistor->sum('amount');
+        // $totalImpression    = $queryImpression->sum('amount');
+        // $totalSales         = $querySale->sum('total');
+        // $totalStudents      = $queryStudent->count();
+        // $totalClasses       = 0;
+
+        $totalVisistor      = 0;
+        $totalImpression    = 0;
+        $totalSales         = 0;
+        $totalStudents      = 0;
+        $totalClasses       = 0;
+        // Qas
+
         /* --------------------
         Data question */
         $qas = QuestionAnswer::where('site_id',$this->site_id)->with('student');
-        if ($request->fromDate && $request->toDate) {
-            $qas->whereBetween('created_at', [$request->fromDate, $request->toDate]);
-        }
-        $qas = $qas->paginate(5);
-        /* End data question
-        --------------------*/
-
-        /* --------------------
-        Report on month */
-        $month = Carbon::now()->format('m');
-        $year = Carbon::now()->format('Y');
-
-        //If user want search report on month 
-        if ($request->month) {
-            $parts = explode(" ", $request->month);
-            $month = $parts[0];
-            $year = $parts[1];
-            // New student on month
-        }
-        /* End report on month  
-        --------------------*/
-
-        if ($request->grade) {
-            /* --------------------
-            Report for grade */
-            $reports = DB::table('grades')
-                ->where('grades.id', $request->grade)
-                ->where('grades.status', 1)
-                ->where('grades.site_id', $this->site_id)
-                ->join('sites', 'grades.site_id', '=', 'sites.id')
-                ->join('student_course', 'sites.id', '=', 'student_course.site_id')
-                ->join('lesson_student', 'student_course.course_id', '=', 'lesson_student.course_id')
-                ->select('student_course.course_id', DB::raw('COUNT(lesson_student.lesson_id) AS lesson_views'))
-                ->where(DB::raw('MONTH(student_course.created_at)'), $month)
-                ->where(DB::raw('YEAR(student_course.created_at)'), $year)
-                ->groupBy('student_course.course_id');
-            // new student
-            $newUserCount = $reports->get()->count();
-            // Sold course
-            $soldCoursesCount = $reports->get()->count();
-            // Count view lesson
-            $viewCounts = $reports->get();
-            $totalLessonViews = 0;
-            foreach ($viewCounts as $viewCount) {
-                $totalLessonViews += $viewCount->lesson_views;
-            }
-            // Complete lesson
-            $completedLessonsCount = $reports->where('student_course.is_complete', 1)->get()->count();
-            $param = [
-                'reports' => [
-                    'newUserCount' => [
-                        'content' => 'New Users',
-                        'data' => $newUserCount,
-                    ],
-                    'soldCoursesCount' => [
-                        'content' => 'Course Sold',
-                        'data' => $soldCoursesCount,
-                    ],
-                    'viewCount' => [
-                        'content' => 'Count View Lesson',
-                        'data' => $totalLessonViews,
-                    ],
-                    'completedLessonsCount' => [
-                        'content' => 'Count Course Complete',
-                        'data' => $completedLessonsCount,
-                    ],
-                ],
-                'qas' => $qas,
-                'grades' => Grade::where('site_id',$this->site_id)->get(),
-            ];
-            /* End report for grade
-            --------------------*/
-        }else {
-            $newUserCount = DB::table('student_course')
-                ->where(DB::raw('MONTH(created_at)'), $month)
-                ->where(DB::raw('YEAR(created_at)'), $year)
-            ->count();
-            
-            // Course sold on month
-            $soldCoursesCount = DB::table('student_course')
-                ->where(DB::raw('MONTH(created_at)'), $month)
-                ->where(DB::raw('YEAR(created_at)'), $year)
-            ->count();
-            
-            // Count view lesson 
-            $viewCount = DB::table('lesson_student')
-                ->where(DB::raw('MONTH(last_view)'), $month)
-                ->where(DB::raw('YEAR(last_view)'), $year)
-            ->count();
-            
-            // Count course complete
-            $completedLessonsCount = DB::table('student_course')
-                ->where(DB::raw('MONTH(created_at)'), $month)
-                ->where(DB::raw('YEAR(created_at)'), $year)
-                ->where('is_complete', 1)
-            ->count();
-    
-            $param = [
-                'reports' => [
-                    'newUserCount' => [
-                        'content' => 'New Users',
-                        'data' => $newUserCount,
-                    ],
-                    'soldCoursesCount' => [
-                        'content' => 'Course Sold',
-                        'data' => $soldCoursesCount,
-                    ],
-                    'viewCount' => [
-                        'content' => 'Count View Lesson',
-                        'data' => $viewCount,
-                    ],
-                    'completedLessonsCount' => [
-                        'content' => 'Count Course Complete',
-                        'data' => $completedLessonsCount,
-                    ],
-                ],
-                'qas' => $qas,
-                'grades' => Grade::where('site_id',$this->site_id)->get(),
-            ];
-        }
-
+        $qas = $qas->limit(5)->get();
+        /* End data question*/
         // Data calender
         if(request()->ajax()) 
         {
@@ -152,7 +62,16 @@ class HomeController extends AdminController
             $data = Event::whereDate('start', '>=', $start)->whereDate('end','<=', $end)->get(['id','title','start', 'end']);
             return Response::json($data);
         }
-        return view('admin.homes.index',$param);
+        $params = [
+            'qas'               => $qas,
+            'grades'            => $grades,
+            'totalVisistor'     => $totalVisistor,
+            'totalImpression'   => $totalImpression,
+            'totalSales'        => $totalSales,
+            'totalStudents'     => $totalStudents,
+            'totalClasses'      => $totalClasses
+        ];
+        return view('admin.homes.index',$params);
     }
     // Create event
     public function store(Request $request)

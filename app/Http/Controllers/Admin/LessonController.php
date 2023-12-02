@@ -76,7 +76,7 @@ class LessonController extends AdminController
             return response([
                 'success' => true,
                 'message' => __('sys.store_item_success'),
-                'redirect' => route('lessons.index')
+                'redirect' => route('admin.lessons.index')
             ],200);
         } catch (QueryException $e) {
             DB::rollback();
@@ -118,6 +118,7 @@ class LessonController extends AdminController
             $item->name = $request->name;
             $item->subject_id = $request->subject_id;
             $item->grade_id = $request->grade_id;
+            $item->course_id = $request->course_id;
             $item->description = $request->description;
             $item->status = $request->status;
             $item->site_id = $this->site_id;            
@@ -143,7 +144,7 @@ class LessonController extends AdminController
             return response([
                 'success' => true,
                 'message' => __('sys.update_item_success'),
-                'redirect' => route('lessons.index')
+                'redirect' => route('admin.lessons.index')
             ],200);
         } catch (QueryException $e) {
             DB::rollback();
@@ -163,7 +164,7 @@ class LessonController extends AdminController
             }
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
-            return redirect()->route('lessons.index')->with('error',__('sys.update_item_error'));
+            return redirect()->route('admin.lessons.index')->with('error',__('sys.update_item_error'));
         }
     }
     public function destroy(string $id)
@@ -180,7 +181,7 @@ class LessonController extends AdminController
             return response([
                 'success' => true,
                 'message' => __('sys.destroy_item_success'),
-                'redirect' => route('lessons.index')
+                'redirect' => route('admin.lessons.index')
             ],200);
         } catch (QueryException $e) {
             return response([

@@ -27,7 +27,7 @@ class Lesson extends Model
     ];
     // Relationship
     public function course(){
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Course::class);
     }
     public function subject(){
         return $this->belongsTo(Subject::class);
