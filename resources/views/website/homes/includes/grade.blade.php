@@ -1,19 +1,14 @@
 <!-- .about__tap__section__end -->
-<div class="gridarea__2 sp_bottom_100 sp_top_80" data-aos="fade-up">
-    <div class="container-fluid full__width__padding">
-
+<div class="gridarea__2 sp_bottom_30 sp_top_30" data-aos="fade-up">
+    <div class="container">
         <div class="section__title">
-
             <div class="section__title__heading">
-                <h2>Featured Course</h2>
+                <h2>{{ $grade->name }}</h2>
             </div>
         </div>
-
         <div class="row row__custom__class">
-
             <div class="swiper featured__course">
                 <div class="swiper-wrapper">
-
                     <div
                         class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 grid-item column__custom__class swiper-slide">
                         <div class="gridarea__wraper">

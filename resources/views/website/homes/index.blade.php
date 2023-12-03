@@ -2,9 +2,9 @@
 @section('content')
 
 @include('website.includes.header.banner')
-@include('website.homes.gird')
-@include('website.homes.featured-course')
-@include('website.homes.featured-course')
-@include('website.homes.featured-course')
+@include('website.homes.includes.grades')
+    @foreach( $grades as $grade )
+        @include('website.homes.includes.grade')
+    @endforeach
 
 @endsection

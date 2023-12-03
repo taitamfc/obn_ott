@@ -8,6 +8,7 @@ use Illuminate\Pagination\Paginator;
 use App\View\Composers\AdminProfileComposer;
 use App\View\Composers\AdminSiteComposer;
 use App\View\Composers\AdminSitesComposer;
+use App\View\Composers\SiteComposer;
 use App\View\Composers\LanguageComposer;
 use Illuminate\Support\Facades\View;
 
@@ -34,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         View::composer('admin.*', AdminSiteComposer::class);
         View::composer('admin.*', AdminSitesComposer::class);
         View::composer('*', LanguageComposer::class);
+        View::composer('website.*', SiteComposer::class);
     }
 }

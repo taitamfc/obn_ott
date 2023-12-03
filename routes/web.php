@@ -21,10 +21,8 @@ include 'admin.php';
 
 
 // Frontend
-Route::prefix('{site_name}')->middleware(['preventhistory'])->group(function(){
-    Route::get('/',function($site_name){
-        return view('website.homes.index',compact('site_name'));
-    })->name('cms');
+Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->group(function(){
+    Route::get('/',[\App\Http\Controllers\Website\HomeController::class,'index'])->name('cms');
 
     Route::get('/courses',function($site_name){
         return view('website.courses.index',compact('site_name'));
