@@ -22,6 +22,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::post('fullcalendar/create',[\App\Http\Controllers\Admin\HomeController::class,'store']);
     Route::post('fullcalendar/update',[\App\Http\Controllers\Admin\HomeController::class,'update']);
     Route::post('fullcalendar/delete',[\App\Http\Controllers\Admin\HomeController::class,'destroy']);
+    
+    //Question
+    Route::resource('/questionanswer',\App\Http\Controllers\Admin\QuestionController::class);
 
     //Plan
     Route::get('/users/plans',[\App\Http\Controllers\Admin\UserController::class,'plan'])->name('users.plans');
@@ -85,8 +88,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     
     
     // Setting
-    Route::prefix('setting')->group(function(){
+    Route::prefix('settings')->group(function(){
         Route::get('/', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::get('/show', [\App\Http\Controllers\Admin\SettingController::class, 'show'])->name('settings.show');
         
         //Banner
         Route::post('/', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');

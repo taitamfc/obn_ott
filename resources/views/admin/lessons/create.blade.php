@@ -46,7 +46,7 @@
 
                                     <a class="nav-link" id="v-image-setting-tab" data-toggle="pill"
                                         href="#v-image-setting" role="tab" aria-controls="v-image-setting"
-                                        aria-selected="false"><i class="fa fa-picture-o"></i> Image Setting</a>
+                                        aria-selected="false"><i class="fa fa-picture-o"></i> Thumbnail</a>
                                 </div>
                                 <div class="tab-content col-lg-9" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-lesson-setting" role="tabpanel"

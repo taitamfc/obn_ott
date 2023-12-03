@@ -11,7 +11,6 @@
                 <div id='calendar' class="pt-3 pb-3"></div>
             </div>
         </div>
-        @include('admin.homes.includes.question')
     </div>
 </div>
 @endsection

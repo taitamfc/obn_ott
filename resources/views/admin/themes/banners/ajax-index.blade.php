@@ -14,7 +14,11 @@
                         <i class="fa fa-close position-absolute  z-10  btn-close"></i>
                     </div>
                     <div class="card-footer">
-                        <h6 class="mt-0 pb-0">Title</h6>
+                        <div class="d-flex justify-content-between">
+                            <a class="mt-0 pb-0">{{$item->name}}</a>
+                            <a class="mt-0 pb-0">{{$item->created_at->format('d/m/Y')}}</a>
+                        </div>
+                        <a class="mt-0 pb-0">{{$item->description}}</a>
                         <div class="button-control d-flex justify-content-end">
 
                             <a href="javascript:;" data-id="{{ $item->id }}"

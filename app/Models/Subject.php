@@ -30,6 +30,9 @@ class Subject extends Model
     {
         return $this->belongsTo(Site::class);
     }
+    function qas(){
+        return $this->hasMany(QuestionAnswer::class);
+    }
     // Feature method
     public static function getActiveItems($site_id){
         return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();

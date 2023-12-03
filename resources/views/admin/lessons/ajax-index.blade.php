@@ -8,6 +8,8 @@
                     <th scope="col">Grade</th>
                     <th scope="col">Subject</th>
                     <th scope="col">Course</th>
+                    <th scope="col">View Count</th>
+                    <th scope="col">Created At</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -20,6 +22,8 @@
                     <td>{{ $item->getGrade() }}</td>
                     <td>{{ $item->getSubject() }}</td>
                     <td>{{ $item->getCourse() }}</td>
+                    <td>{{ $item->lessoncourse_count }}</td>
+                    <td>{{ $item->created_at }}</td>
                     <td>{!! $item->statusDisplay() !!}</td>
                     <td>
                         <ul class="d-flex justify-content-center">

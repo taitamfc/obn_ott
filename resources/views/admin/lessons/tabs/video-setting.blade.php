@@ -7,7 +7,8 @@
             <div class="dropzone dropzone-light dz-clickable dz-started dz-max-files-reached input-video" id="">
                 <div class="dz-default dz-message">
                     <span>
-                        <input type="file" class='form-control' name='video'>
+                        <label class="m-3">Drag and drop the file here</label>
+                        <input type="file" class='form-control' name='video' style="height:150px">
                     </span>
                 </div>
                 <div class="input-error text-danger">
