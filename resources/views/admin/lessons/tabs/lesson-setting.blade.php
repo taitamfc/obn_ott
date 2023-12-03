@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="lesson-header">
-            <h4>Lesson Information</h4>
+            <h4>Lesson Video Information</h4>
         </div>
     </div>
     <div class="col-lg-12">
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="form-group input-course_id">
-            <label for="" class="col-form-label">Couse <span>*</span></label>
+            <label for="" class="col-form-label">Course <span>*</span></label>
             <div class="form-floating">
                 <select name="course_id" id="course_id" class="form-control">
                     <option value="">Select course</option>

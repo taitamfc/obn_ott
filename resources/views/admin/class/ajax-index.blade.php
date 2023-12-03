@@ -13,7 +13,10 @@
                     <tbody>
                         @foreach($items as $item)
                         <tr>
-                            <td>{{ $item->name }}</td>
+                            <td>
+                                <a href="{{ route('admin.classes.show',$item->id) }}" style='color:black'>{{ $item->name }}
+                                </a>
+                            </td>
                             <td class='text-center'>{{ $item->total_lessons }}</td>
                             <td class='text-center'>{{ $item->last_view }}</td>
                         </tr>

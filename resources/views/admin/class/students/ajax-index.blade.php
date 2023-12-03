@@ -27,10 +27,10 @@
                             <td>{!! $item->statusDisplay()!!}</td>
                             <td>
                                 <ul class="d-flex justify-content-center">
-                                    <!-- <li class="mr-3">
+                                    <li class="mr-3">
                                         <a href="{{ route('admin.classes.show',$item->id) }}"><i class="ti-eye"></i>
                                         </a>
-                                    </li> -->
+                                    </li>
                                     <li>
                                         <a href="javascript:;" class="text-danger delete-item" data-id="{{ $item->id }}"
                                             data-action="{{ route('admin.classes.destroy',$item->id) }}">

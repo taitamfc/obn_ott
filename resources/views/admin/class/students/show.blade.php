@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('header')
 <style>
 select.form-control:not([size]):not([multiple]) {

@@ -4,7 +4,6 @@
             <table class="table table-hover progress-table text-left ">
                 <thead class="text-uppercase">
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col" class="text-center">Action</th>
                     </tr>
@@ -12,7 +11,6 @@
                 <tbody class="sortable-table ">
                     @foreach($items as $item)
                     <tr class="item draggable" id='item-{{ $item->id}}'>
-                        <th scope="row">{{ $item->id }}</th>
                         <td>{{ $item->name }}</td>
                         <td>
                             <ul class="d-flex justify-content-center">

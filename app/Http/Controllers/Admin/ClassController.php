@@ -20,8 +20,8 @@ class ClassController extends AdminController
         if ($request->ajax()) {
             $query = DB::table('lesson_student')
             ->join('students', 'students.id', '=', 'lesson_student.student_id')
-            ->select('students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
-            ->groupBy('students.name');
+            ->select('students.id', 'students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
+            ->groupBy('students.id','students.name');
             if ($request->course) {
                 $query->where('course_id',$request->course);
             }

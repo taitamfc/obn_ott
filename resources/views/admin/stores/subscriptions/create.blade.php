@@ -23,13 +23,13 @@
                 <div class="form-group">
                     <label for="duration" class="col-form-label">Duration <span>*</span></label>
                     <select name="duration" id="duration" class="form-control">
-                        <option value="Month">Month</option>
-                        <option value="Year">Year</option>
+                        <option value="3 Month">3 Month</option>
+                        <option value="6 Month">6 Month</option>
+                        <option value="Free">Free</option>
                     </select>
                     <div class="input-error text-danger">@error('duration') {{ $message }} @enderror
                     </div>
                     <div class="input-error text-danger">@error('course') {{ $message }} @enderror</div>
-
                 </div>
             </div>
             <div class="col-sm-6">
@@ -46,8 +46,7 @@
                     <a href="#" class="btn btn-primary mt-4">Add more Courses</a>
                 </div>
             </div>
-
-            <button class="btn btn-primary add-item" type='button'>Save changes</button>
         </div>
+        <button class="btn btn-primary add-item float-right" type='button'>Save changes</button>
     </form>
 </div>

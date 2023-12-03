@@ -10,9 +10,9 @@
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</af>
-                        <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">
-                            {{ __('sys.add_new') }}
-                        </a>
+                            <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">
+                                {{ __('sys.add_new') }}
+                            </a>
                     </div>
                 </div>
             </div>

@@ -22,6 +22,9 @@ class SettingController extends AdminController
     { 
         return view('admin.settings.logo.index'); 
     }
+    function show(){
+        return view('admin.contents.index');
+    }
     public function update(UpdateSettingRequest $request)
     {
         $items = $request->except(['_token', '_method']);
