@@ -24,7 +24,7 @@ include 'admin.php';
 Route::prefix('{site_name}')->middleware(['preventhistory'])->group(function(){
     Route::get('/',function($site_name){
         return view('website.homes.index',compact('site_name'));
-    })->name('website.homes');
+    })->name('cms');
 
     Route::get('/courses',function($site_name){
         return view('website.courses.index',compact('site_name'));

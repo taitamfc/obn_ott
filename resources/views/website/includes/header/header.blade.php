@@ -8,7 +8,7 @@
                     <div class="headerarea__left">
                         <div class="headerarea__left__logo">
 
-                            <a href="{{ route('website.homes',['site_name'=>$site_name]) }}"><img loading="lazy" src="{{ asset('website/img/logo/logo_1.png')}}"
+                            <a href="{{ route('cms',['site_name'=>$site_name]) }}"><img loading="lazy" src="{{ asset('website/img/logo/logo_1.png')}}"
                                     alt="logo"></a>
                         </div>
 

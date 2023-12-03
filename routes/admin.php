@@ -1,7 +1,7 @@
 <?php
     Route::middleware(['localization'])->group(function(){
     // Login
-    Route::get('/login',[\App\Http\Controllers\Admin\AuthController::class,'login'])->name('admin.login');
+    Route::get('/login',[\App\Http\Controllers\Admin\AuthController::class,'login'])->name('login');
     Route::post('/postLogin',[\App\Http\Controllers\Admin\AuthController::class,'postLogin'])->name('admin.postLogin');
     Route::get('/logout',[\App\Http\Controllers\Admin\AuthController::class,'logout'])->name('admin.logout');
 
