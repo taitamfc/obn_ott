@@ -23,10 +23,16 @@ include 'admin.php';
 // Frontend
 Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->group(function(){
     Route::get('/',[\App\Http\Controllers\Website\HomeController::class,'index'])->name('cms');
+    Route::get('grade/{id}',[\App\Http\Controllers\Website\GradeController::class,'show'])->name('website.grades.show');
+    Route::get('subject/{id}',[\App\Http\Controllers\Website\SubjectController::class,'show'])->name('website.subjects.show');
+    Route::get('lessons/{id}',[\App\Http\Controllers\Website\LessonController::class,'show'])->name('website.lessons.show');
+    Route::get('courses',[\App\Http\Controllers\Website\CourseController::class,'index'])->name('website.courses.index');
+    Route::get('courses/{id}',[\App\Http\Controllers\Website\CourseController::class,'show'])->name('website.courses.show');
+    Route::get('orders/create/{course_id}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
 
-    Route::get('/courses',function($site_name){
-        return view('website.courses.index',compact('site_name'));
-    })->name('website.courses');
+    // Route::get('/courses',function($site_name){
+    //     return view('website.courses.index',compact('site_name'));
+    // })->name('website.courses');
 
     Route::get('/grades',function($site_name){
         return view('website.grades.index',compact('site_name'));

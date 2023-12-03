@@ -24,9 +24,7 @@
 <body class="body__wrapper">
     @include('website.includes.header.dark-light')
     <main class="main_wrapper overflow-hidden">
-        @include('website.includes.header.header')
-        @include('website.includes.header.mobile-menu')
-       
+        @include('website.includes.header')
         @yield('content')
         @include('website.includes.footer')
     </main>

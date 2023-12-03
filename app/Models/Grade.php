@@ -29,6 +29,9 @@ class Grade extends Model
     public function site(){
         return $this->belongsTo(Site::class);
     }
+    public function subjects(){
+        return $this->hasMany(Subject::class)->where('status',Subject::ACTIVE)->limit(5);
+    }
 
     // Feature
     public static function getActiveItems($site_id){

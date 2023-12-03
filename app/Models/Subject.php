@@ -26,6 +26,10 @@ class Subject extends Model
     {
         return $this->hasMany(Lesson::class, 'subject_id', 'id');
     }
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'subject_id', 'id')->where('status',Lesson::ACTIVE);
+    }
     public function site()
     {
         return $this->belongsTo(Site::class);
