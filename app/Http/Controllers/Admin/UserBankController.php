@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Http\Requests\StoreUserBankRequest;
 use App\Models\UserBank;
@@ -12,7 +13,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\UploadFileTrait;
 
-class UserBankController extends Controller
+class UserBankController extends AdminController
 {
     use UploadFileTrait;
     public function __construct()
@@ -35,7 +36,7 @@ class UserBankController extends Controller
 
     function store(StoreUserBankRequest $request){
         try {
-            $this->authorize('User',User::class);
+            // $this->authorize('User',User::class);
             $item = new UserBank();
             $item->user_id = $this->user_id;
             $item->bank_number = $request->bank_number;
@@ -65,14 +66,14 @@ class UserBankController extends Controller
     
     public function show(string $id)
     {
-        $this->authorize('User',User::class);
+        // $this->authorize('User',User::class);
         $item = UserBank::findOrfail($id);
         return new UserBankResource($item);
     }
     
     function update(Request $request, String $id){
         try {
-            $this->authorize('User',User::class);
+            // $this->authorize('User',User::class);
             $item = UserBank::where('user_id', '=', $this->user_id)->findOrfail($id);
             $item->user_id = $this->user_id;
             $item->bank_number = $request->bank_number;
@@ -101,7 +102,7 @@ class UserBankController extends Controller
     }
     function destroy(String $id){
         try {
-            $this->authorize('User',User::class);
+            // $this->authorize('User',User::class);
             $item = UserBank::where('user_id',$this->user_id)->findOrfail($id);
             $item->delete();
             return response()->json([

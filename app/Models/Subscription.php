@@ -22,4 +22,17 @@ class Subscription extends Model
     {
         return $this->belongsToMany(Course::class, 'subscription_course', 'subscription_id', 'course_id');
     }
+    public function subscriptioncourse()
+    {
+        return $this->hasMany(SubscriptionCourse::class);
+    }
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+    
 }

@@ -9,4 +9,7 @@ class Event extends Model
 {
     use HasFactory;
     protected $table = 'events';
+    public function site(){
+        return $this->belongsTo(Site::class);
+    }
 }

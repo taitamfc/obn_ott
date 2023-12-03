@@ -1,5 +1,5 @@
 <div class="card-body">
-    <form id="formUpdate" action="{{ route('subscriptions.update', $item->id) }}" enctype="multipart/form-data">
+    <form id="formUpdate" action="{{ route('admin.subscriptions.update', $item->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -47,7 +47,7 @@
                     <span class="btn btn-primary mt-4">Add more Courses</span>
                 </div>
             </div>
-            <a class="btn btn-secondary mr-3" href="{{ route('subscriptions.index') }}">Back to list</a>
+            <a class="btn btn-secondary mr-3" href="{{ route('admin.subscriptions.index') }}">Back to list</a>
             <button class="btn btn-primary edit-item" type='button'>Save changes</button>
         </div>
     </form>

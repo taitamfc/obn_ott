@@ -12,4 +12,7 @@ class QuestionAnswer extends Model
     function student(){
         return $this->belongsTo(Student::class,'student_id','id');
     }
+    function site(){
+        return $this->belongsTo(Site::class);
+    }
 }

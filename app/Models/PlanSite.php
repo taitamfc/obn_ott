@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlanUser extends Model
+class PlanSite extends Model
 {
     use HasFactory;
     protected $table = 'plan_site';

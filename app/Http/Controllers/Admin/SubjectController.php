@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
@@ -12,12 +13,12 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\SubjectResource;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\UploadFileTrait;
-class SubjectController extends Controller
+class SubjectController extends AdminController
 {
     use UploadFileTrait;
 
     function index(Request $request){
-        $this->authorize('Subject',Subject::class);
+        // $this->authorize('Subject',Subject::class);
         if( $request->ajax() ){
         $items = Subject::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
         return view('admin.contents.setting.subjects.ajax-index',compact('items'));

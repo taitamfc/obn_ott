@@ -9,10 +9,20 @@ class LessonCourse extends Model
 {
     use HasFactory;
     protected $table='lesson_course';
-    function course_lesson(){
-        return $this->belongsTo(Course::class,'course_id','id');
+    protected $fillable = [
+        'lesson_id',
+        'subject_id',
+        'grade_id',
+        'course_id',
+        'site_id',
+    ];
+    function site(){
+        return $this->belongsTo(Site::class);
     }
-    function lesson_course(){
-        return $this->belongsTo(Lesson::class,'lesson_id','id');
+    function course(){
+        return $this->belongsTo(Course::class);
+    }
+    function lesson(){
+        return $this->belongsTo(Lesson::class);
     }
 }

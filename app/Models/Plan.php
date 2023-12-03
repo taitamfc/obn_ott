@@ -11,10 +11,10 @@ class Plan extends Model
     use HasFactory;
     protected $table = 'plans';
     function site(){
-        return $this->belongsToMany(User::class,'plan_user','plan_id','site_id');
+        return $this->belongsToMany(Site::class,'plan_site');
     }
     function plan_site(){
-        return $this->hasMany(PlanUser::class,'plan_id','id');
+        return $this->hasMany(PlanSite::class);
     }
     function getKeyByValue($array, $value)
     {

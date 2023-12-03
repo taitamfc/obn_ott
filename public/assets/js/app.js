@@ -49,8 +49,8 @@ function handleDelete(url,targetElm, parentElm = '.item'){
         },
         success: function (res) {
             showAlertSuccess(res.message);
-            getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
-            // targetElm.closest(parentElm).remove(); // Xóa phần tử khỏi DOM
+            // getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+            targetElm.closest(parentElm).remove(); // Xóa phần tử khỏi DOM
         }
     });
 }

@@ -20,14 +20,14 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">Upload Lesson</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('lessons.index') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form id="createLesson" action="{{ route('lessons.store') }}" method="post"
+                <form id="createLesson" action="{{ route('admin.lessons.store') }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card">

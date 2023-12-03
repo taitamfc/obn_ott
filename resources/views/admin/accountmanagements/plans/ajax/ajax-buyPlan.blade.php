@@ -34,7 +34,7 @@
                                 </div>
                                 @endif
                                 <a href='javascript:;' class='btn btn-light add-item' data-id="{{ $item->id }}"
-                                    data-action="{{ route('users.storePlans') }}">Confirm</a>
+                                    data-action="{{ route('admin.users.storePlans') }}">Confirm</a>
                             </div>
                         </div>
                     </div>

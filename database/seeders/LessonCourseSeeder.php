@@ -17,6 +17,8 @@ class LessonCourseSeeder extends Seeder
             DB::table('lesson_course')->insert([
                 "course_id" => rand(1,4),
                 "lesson_id" => rand(1,4),
+                "grade_id" => rand(1,4),
+                "subject_id" => rand(1,4),
                 "site_id" => 1,
             ]);
         }

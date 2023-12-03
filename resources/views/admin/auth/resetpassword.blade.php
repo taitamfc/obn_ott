@@ -1,7 +1,7 @@
 @extends('admin.layouts.form')
 @section('content')
 <div class="login-form">
-    <form action="{{ route('postReset',['user' => $data['user'],'token' => $data['token']]) }}" method="POST">
+    <form action="{{ route('admin.postReset',['user' => $data['user'],'token' => $data['token']]) }}" method="POST">
         @if (session('error'))
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
@@ -30,7 +30,7 @@
                         class="ti-arrow-right"></i></button>
             </div>
             <div class="form-footer text-center mt-5">
-                <p class="text-muted">Don't have an account? <a href="{{ route('register') }}" class="text-primary">Sign
+                <p class="text-muted">Don't have an account? <a href="{{ route('admin.register') }}" class="text-primary">Sign
                         up</a>
                 </p>
             </div>

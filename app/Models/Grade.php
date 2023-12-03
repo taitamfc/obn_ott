@@ -25,15 +25,15 @@ class Grade extends Model
         'updated_at',
     ];
 
+    //Relationship
+    public function site(){
+        return $this->belongsTo(Site::class);
+    }
+
+    // Feature
     public static function getActiveItems($site_id){
         return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
     }
-
-    public function lesson()
-    {
-        return $this->hasMany(Lesson::class, 'grade_id', 'id');
-    }
-
     // status_fm 
     function getStatusFmAttribute(){
         if($this->status == self::INACTIVE){
