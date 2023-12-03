@@ -9586,8 +9586,8 @@ Error
 Breadcrumb Area
 -------------------------------*/
 .breadcrumbarea {
-  padding-top: 162px;
-  padding-bottom: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   background: var(--lightGrey10);
   position: relative;
 }
@@ -12726,3 +12726,6 @@ Dark Mode
 /* .headerarea__2__input input {
   display: none;
 } */
+.sticky .headerarea__search__wrap {
+  display: none;
+}

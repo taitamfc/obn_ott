@@ -7,7 +7,7 @@
 <div class="coursearea sp_top_100 sp_bottom_100">
     <div class="container">
         <div class="row">
-            <div class="col-xl-12">
+            <!-- <div class="col-xl-12">
                 <div class="course__text__wraper aos-init aos-animate" data-aos="fade-up">
                     <div class="course__text">
                         <p>Showing 1–12 of 54 Results</p>
@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-xl-12">
 				<div class="row">
                     @foreach( $item->lessons as $lesson )
@@ -37,7 +37,7 @@
                     @endforeach
 				</div>
             </div>
-            <div class="main__pagination__wrapper aos-init aos-animate" data-aos="fade-up">
+            <!-- <div class="main__pagination__wrapper aos-init aos-animate" data-aos="fade-up">
                 <ul class="main__page__pagination">
                     <li><a class="disable" href="#"><i class="icofont-double-left"></i></a></li>
                     <li><a class="active" href="#">1</a></li>
@@ -45,7 +45,7 @@
                     <li><a href="#">3</a></li>
                     <li><a href="#"><i class="icofont-double-right"></i></a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
