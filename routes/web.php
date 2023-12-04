@@ -42,13 +42,18 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         return view('website.subjects.index',compact('site_name'));
     })->name('website.subjects');
 
-    Route::get('/accounts',function($site_name){
-        return view('website.dashboards.accounts.index',compact('site_name'));
-    })->name('website.accounts');
+    // Route::get('/accounts',function($site_name){
+    //     return view('website.dashboards.accounts.index',compact('site_name'));
+    // })->name('website.accounts');
+    
+    // Route::get('/accounts/edit', function ($site_name) {
+    //     return view('website.dashboards.accounts.edit', compact('site_name'));
+    // })->name('website.accounts.edit');
 
-    Route::get('/accounts/edit', function ($site_name) {
-        return view('website.dashboards.accounts.edit', compact('site_name'));
-    })->name('website.accounts.edit');
+    Route::get('accounts',[App\Http\Controllers\Website\StudentController::class,'index'])->name('website.accounts');
+    Route::get('accounts/edit',[App\Http\Controllers\Website\StudentController::class,'edit'])->name('website.accounts.edit');
+    Route::put('accounts/update',[App\Http\Controllers\Website\StudentController::class,'update'])->name('website.accounts.update');
+
     
   
     Route::get('/lessons',function($site_name){
@@ -74,6 +79,8 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     Route::get('/q&a',function($site_name){
         return view('website.dashboards.q&a.index',compact('site_name'));
     })->name('website.q&a');
+
+
     // Login
     Route::get('login',[App\Http\Controllers\Website\AuthController::class,'login'])->name('website.login');
     Route::post('postLogin',[App\Http\Controllers\Website\AuthController::class,'postLogin'])->name('website.postLogin');
@@ -86,6 +93,6 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     // Forgot password
     Route::get('/forgot',[App\Http\Controllers\Website\AuthController::class,'forgot'])->name('website.forgot');
     Route::post('/postForgot',[App\Http\Controllers\Website\AuthController::class,'postForgot'])->name('website.postForgot');
-    Route::get('/resetPassword/{user}/{token}',[App\Http\Controllers\Website\AuthController::class,'getReset'])->name('website.getReset');
-    Route::post('/resetPassword/{user}/{token}',[App\Http\Controllers\Website\AuthController::class,'postReset'])->name('website.postReset');
+    Route::get('/resetPassword/{student}/{token}',[App\Http\Controllers\Website\AuthController::class,'getReset'])->name('website.getReset');
+    Route::post('/resetPassword/{student}/{token}',[App\Http\Controllers\Website\AuthController::class,'postReset'])->name('website.postReset');
 });

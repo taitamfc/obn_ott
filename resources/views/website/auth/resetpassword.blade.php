@@ -15,7 +15,7 @@ Reset Password
                 </p>
             </div>
             <form
-                action="{{ route('website.postReset',['site_name' => $site_name,'user' => $data['user'],'token' => $data['token']]) }}"
+                action="{{ route('website.postReset',['site_name' => $site_name,'student' => $data['student'],'token' => $data['token']]) }}"
                 method="POST">
                 @if (session('error'))
                 <div class="alert alert-danger" role="alert">
