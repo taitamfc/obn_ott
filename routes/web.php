@@ -57,6 +57,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     
     Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
     Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
+    Route::get('saved',[App\Http\Controllers\Website\StudentLessonController::class,'whitlist'])->name('website.saved');
 
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));
@@ -66,9 +67,9 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     //     return view('website.dashboards.currently-watching.index',compact('site_name'));
     // })->name('website.currently-watching');
 
-    Route::get('/saved',function($site_name){
-        return view('website.dashboards.saved.index',compact('site_name'));
-    })->name('website.saved');
+    // Route::get('/saved',function($site_name){
+    //     return view('website.dashboards.saved.index',compact('site_name'));
+    // })->name('website.saved');
 
     Route::get('/notices',function($site_name){
         return view('website.dashboards.notices.index',compact('site_name'));
