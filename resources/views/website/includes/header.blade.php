@@ -22,9 +22,8 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
-                        @include('website.includes.header.cart')
                         <div class="headerarea__login">
-                            <a href="login.html"><i class="icofont-user-alt-5"></i></a>
+                            <a href="{{route('website.accounts',['site_name'=>$site_name])}}"><i class="icofont-user-alt-5"></i></a>
                         </div>
                     </div>
                 </div>
