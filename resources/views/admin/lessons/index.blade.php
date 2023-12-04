@@ -56,6 +56,18 @@ jQuery(function() {
             handleDelete(action, ele);
         }
     });
+
+    // Handle filter
+    jQuery('body').on('change', '.f-filter',function(){
+        let filterData = jQuery('#form-search').serialize();
+        getAjaxTable(indexUrl, wrapperResults, positionUrl, filterData);
+    });
+    jQuery('body').on('keyup', '.f-filter-text',function(){
+        setTimeout(() => {
+            let filterData = jQuery('#form-search').serialize();
+            getAjaxTable(indexUrl, wrapperResults, positionUrl, filterData);
+        }, 1000);
+    });
 });
 </script>
 @endsection
