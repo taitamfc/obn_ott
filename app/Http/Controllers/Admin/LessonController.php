@@ -28,7 +28,35 @@ class LessonController extends AdminController
         $grades = Grade::getActiveItems($this->site_id);
         $subjects = Subject::getActiveItems($this->site_id);
         $courses = Course::getActiveItems($this->site_id);
-        $items = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->orderBy('created_at', 'desc')->withCount('lessoncourse')->paginate(20);
+        $query = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->withCount('lessoncourse');
+        if($request->name){
+            $query->where('name','LIKE','%'.$request->name.'%');
+        }
+        if($request->grade_id){
+            $query->where('grade_id',$request->grade_id);
+        }
+        if($request->subject_id){
+            $query->where('subject_id',$request->subject_id);
+        }
+        if($request->course_id){
+            $query->where('subject_id',$request->subject_id);
+        }
+        switch ($request->sortBy) {
+            case 'grade_desc':
+                $query->with(['grade' => function ($q){
+                    $q->orderBy('name','DESC');
+                }]);
+                break;
+            case 'grade_asc':
+                $query->with(['grade' => function ($q){
+                    $q->orderBy('name','ASC');
+                }]);
+                break;
+            default:
+                $query->orderBy('id','desc');
+                break;
+        }
+        $items = $query->paginate(20);
         if( $request->ajax() ){
             return view('admin.lessons.ajax-index',compact('items','grades','subjects','courses'));
         }
