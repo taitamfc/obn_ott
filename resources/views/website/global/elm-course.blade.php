@@ -9,13 +9,16 @@
     </div>
     <div class="gridarea__content">
         <div class="gridarea__heading">
-            <h3><a href="{{ route('website.courses.show',['id'=> $course->id,'site_name'=> $site_name]) }}">{{ $course->name }}</a></h3>
+            <h3><a
+                    href="{{ route('website.courses.show',['id'=> $course->id,'site_name'=> $site_name]) }}">{{ $course->name }}</a>
+            </h3>
         </div>
         <div class="gridarea__price">
             {{ $course->price }}
         </div>
         <div class="course__summery__button">
-            <a href="{{ route('website.orders.create',['course_id'=> $course->id,'site_name'=> $site_name]) }}" class="default__button" href="#">Purchase</a>
+            <a href="{{ route('website.make.payment',['site_name'=> $site_name, 'course' => $course->id]) }}"
+                class="default__button">Purchase</a>
         </div>
     </div>
 </div>

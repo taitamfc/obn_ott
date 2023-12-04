@@ -34,6 +34,12 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     //     return view('website.courses.index',compact('site_name'));
     // })->name('website.courses');
 
+     //Payment
+    Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
+    Route::get('handle-payment',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
+    Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
+    Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
+
     Route::get('/grades',function($site_name){
         return view('website.grades.index',compact('site_name'));
     })->name('website.grades');

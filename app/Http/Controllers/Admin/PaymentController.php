@@ -9,9 +9,9 @@ use Srmklive\PayPal\Services\PayPal as PayPalClient;
 class PaymentController extends Controller
 {
 
-    function index(){
-        return view('admin.accountmanagements.billings.paypal');       
-    }
+    // function index(){
+    //     return view('admin.accountmanagements.billings.paypal');       
+    // }
 
     public function handlePayment(Request $request)
     {
