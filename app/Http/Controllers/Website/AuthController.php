@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Website;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Student;
@@ -18,11 +18,11 @@ use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Str;
 use Mail;
 
-class AuthController extends Controller
+class AuthController extends MainController
 {
     public function login(){
         if (Auth::guard('students')->check()) {
-            return redirect()->route('website.homes',['site_name'=>$this->site_name]);
+            return redirect()->route('cms',['site_name'=>$this->site_name]);
             // return view('website.auth.login');
 
         } else {
@@ -34,7 +34,7 @@ class AuthController extends Controller
         // dd($request);
         $dataUser = $request->only('email','password');
         if(Auth::guard('students')->attempt($dataUser,$request->remember)){
-            return redirect()->route('website.homes',['site_name'=>$this->site_name])->with('success', 'Logged in successfully');;
+            return redirect()->route('cms',['site_name'=>$this->site_name])->with('success', 'Logged in successfully');;
         }else {
             return redirect()->route('website.login',['site_name'=>$this->site_name])->with('error','Account or password is incorrect');
         }
