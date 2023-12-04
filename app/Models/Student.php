@@ -46,6 +46,10 @@ class Student extends Authenticatable
     {
         return $this->belongsToMany(Lesson::class, 'lesson_student', 'student_id', 'lesson_id');
     }
+    public function whitlist_lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'student_whitlist', 'student_id', 'lesson_id');
+    }
     public function incomplete_lessons()
     {
         return $this->belongsToMany(Lesson::class, 'lesson_student', 'student_id', 'lesson_id')->where('is_complete',0);

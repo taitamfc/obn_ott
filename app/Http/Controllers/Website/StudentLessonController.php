@@ -23,4 +23,12 @@ class StudentLessonController extends Controller
         $lessons = $student->incomplete_lessons;
         return view('website.dashboards.currently-watching.index', compact('student', 'lessons'));
     }
+
+    public function whitlist()
+    {
+        $student = Auth::guard('students')->user();
+
+        $lessons = $student->whitlist_lessons;
+        return view('website.dashboards.saved.index', compact('student', 'lessons'));
+    }
 }
