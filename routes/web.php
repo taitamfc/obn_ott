@@ -55,14 +55,16 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     Route::put('accounts/update',[App\Http\Controllers\Website\StudentController::class,'update'])->name('website.accounts.update');
 
     
-  
-    Route::get('/lessons',function($site_name){
-        return view('website.dashboards.lessons.index',compact('site_name'));
-    })->name('website.lessons');
+    Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
+    Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
 
-    Route::get('/currently-watching',function($site_name){
-        return view('website.dashboards.currently-watching.index',compact('site_name'));
-    })->name('website.currently-watching');
+    // Route::get('/lessons',function($site_name){
+    //     return view('website.dashboards.lessons.index',compact('site_name'));
+    // })->name('website.lessons');
+
+    // Route::get('/currently-watching',function($site_name){
+    //     return view('website.dashboards.currently-watching.index',compact('site_name'));
+    // })->name('website.currently-watching');
 
     Route::get('/saved',function($site_name){
         return view('website.dashboards.saved.index',compact('site_name'));

@@ -53,9 +53,7 @@ class Lesson extends Model
     public function lessonstudent(){
         return $this->hasMany(LessonStudent::class);
     }
-    public function students(){
-        return $this->belongsToMany(Student::class, 'lesson_student');
-    }
+   
     function qas(){
         return $this->hasMany(QuestionAnswer::class);
     }

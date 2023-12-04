@@ -21,6 +21,7 @@ use Mail;
 class AuthController extends MainController
 {
     public function login(){
+        // dd(Auth::guard('students')->user());
         if (Auth::guard('students')->check()) {
             return redirect()->route('cms',['site_name'=>$this->site_name]);
             // return view('website.auth.login');
