@@ -25,12 +25,14 @@ class StoreSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'grade_id' => 'required|numeric',
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'The name field is required',
+            'grade_id.required' => 'The grade field is required',
         ];
     }
 

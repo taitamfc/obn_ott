@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
+use App\Models\Grade;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -13,18 +14,22 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\SubjectResource;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\UploadFileTrait;
+use DB;
+
 class SubjectController extends AdminController
 {
     use UploadFileTrait;
 
     function index(Request $request){
         // $this->authorize('Subject',Subject::class);
-        if( $request->ajax() ){
-        $items = Subject::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
-        return view('admin.contents.setting.subjects.ajax-index',compact('items'));
+        $grades = Grade::where('site_id',$this->site_id)->get();
+        $items = Subject::with('grade')->where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
+        if( $request->ajax() )
+        {
+            return view('admin.contents.setting.subjects.ajax-index',compact('items','grades'));
+        }
+        return view('admin.contents.setting.subjects.index');
     }
-    return view('admin.contents.setting.subjects.index');
-}
     /**
      * Show the form for creating a new resource.
      */
@@ -40,6 +45,7 @@ class SubjectController extends AdminController
         $item = new Subject();
         $item->site_id = $this->site_id;
         $item->name = $request->name;
+        $item->grade_id = $request->grade_id;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
@@ -84,6 +90,7 @@ class SubjectController extends AdminController
     {
         $item = Subject::where('site_id',$this->site_id)->find($id);
         $item->name = $request->name;
+        $item->grade_id = $request->grade_id;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {

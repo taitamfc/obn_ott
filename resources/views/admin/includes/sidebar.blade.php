@@ -34,7 +34,7 @@
                     </a>
                     <ul>
                         <a href="{{ route('admin.settings.show') }}" class="toggle-setting">
-                            <span>Setting</span>
+                            <span class="ml-2">Setting</span>
                             <span class="float-right arrow">
                                 <i class="ion ion-chevron-down"></i>
                             </span>

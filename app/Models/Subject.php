@@ -37,6 +37,11 @@ class Subject extends Model
     function qas(){
         return $this->hasMany(QuestionAnswer::class);
     }
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
+
     // Feature method
     public static function getActiveItems($site_id){
         return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
@@ -59,5 +64,10 @@ class Subject extends Model
         } else {
             return '<img class="avatar-md" src="'.asset('assets/images/default.png').'" alt="">';
         }
+    }
+    
+    function getGradeNameAttribute()
+    {
+        return isset($this->grade) ? $this->grade->name : 'Grade Default'; 
     }
 }

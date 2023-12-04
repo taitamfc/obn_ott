@@ -5,6 +5,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Grade</th>
                     <th scope="col">Image</th>
                     <th scope="col">Status</th>
                     <th scope="col" class="text-center">Action</th>
@@ -16,6 +17,7 @@
                 <tr class="item draggable" id='item-{{ $item->id}}'>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
+                    <td>{!! $item->grade_name !!}</td>
                     <td>{!! $item->img_fm !!}</td>
                     <td>{!! $item->status_fm !!}</td>
                     <td>
@@ -49,3 +51,5 @@
 <div class="card-footer">
     {{ $items->appends(request()->query())->links() }}
 </div>
+@include('admin.contents.setting.subjects.create')
+@include('admin.contents.setting.subjects.edit')
