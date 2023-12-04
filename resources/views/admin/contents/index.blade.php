@@ -31,9 +31,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="card_with_image">
+            <div class="card_with_image m-5">
                 <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4">
+                    <div class="blog_card_date col-4 mt-3 ml-3">
                         <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
                     </div>
                     <div class="blog_card_description col-8">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4">
+                    <div class="blog_card_date col-4 mt-3 ml-3">
                         <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
                     </div>
                     <div class="blog_card_description col-8">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4">
+                    <div class="blog_card_date col-4 mt-3 ml-3">
                         <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
                     </div>
                     <div class="blog_card_description col-8">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4">
+                    <div class="blog_card_date col-4 mt-3 ml-3">
                         <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
                     </div>
                     <div class="blog_card_description col-8">

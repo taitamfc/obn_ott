@@ -30,7 +30,6 @@
                         <input class="form-control" type="file" name='image' id="image">
                         <div class="input-error text-danger">@error('image') {{ $message }} @enderror</div>
                     </div>
-
                     <div class="form-group">
                         <label for="status" class="col-form-label">Status</label>
                         <div style="display: flex">

@@ -25,9 +25,12 @@ class LessonController extends AdminController
     public function index(Request $request)
     {
         // $this->authorize('Lesson',Lesson::class);
+        $grades = Grade::getActiveItems($this->site_id);
+        $subjects = Subject::getActiveItems($this->site_id);
+        $courses = Course::getActiveItems($this->site_id);
         $items = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->orderBy('created_at', 'desc')->withCount('lessoncourse')->paginate(20);
         if( $request->ajax() ){
-            return view('admin.lessons.ajax-index',compact('items'));
+            return view('admin.lessons.ajax-index',compact('items','grades','subjects','courses'));
         }
         return view('admin.lessons.index');
 
