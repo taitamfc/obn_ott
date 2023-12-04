@@ -94,7 +94,7 @@
                                 </ul>
                             </div>
                             <div class="choose_plan_btn">
-                                <a href="{{ route('users.addPlans',$item->id) }}" class='btn btn-primary'>CHOOSE
+                                <a href="{{ route('admin.users.addPlans',$item->id) }}" class='btn btn-primary'>CHOOSE
                                     PLAN</a>
                             </div>
                         </div>

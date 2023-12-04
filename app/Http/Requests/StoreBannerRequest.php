@@ -25,7 +25,9 @@ class StoreBannerRequest extends FormRequest
         return [
             'name' => 'required',
             'description' => 'required',
-            'link' => 'required',
+            'image' => 'required|mimes:jpg,jpeg,png,svg',
+            'video' => 'required|mimes:mp4,avi,mov,flv',
+            'status' => 'required',
         ];
     }
     public function messages()
@@ -33,7 +35,11 @@ class StoreBannerRequest extends FormRequest
         return [
             'name.required' => 'The name field is required',
             'description.required' => 'The description field is required',
-            'link.required' => 'The link field is required',
+            'image.required' => 'The image field is required',
+            'image.mimes' => 'Invalid video format. Allowed formats: jpg, jpeg, png, svg',
+            'video.required' => 'The video field is required',
+            'video.mimes' => 'Invalid image format. Allowed formats: mp4, avi, mov, flv',
+            'status.required' => 'The link field is required',
         ];
     }
 

@@ -25,11 +25,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => [
-                'required',
-                Rule::unique('users', 'email'), // Kiểm tra tính duy nhất trong bảng 'users' cho trường 'email'
-            ],
-            
+            'email' => 'required',
+            'group_id' => 'required',
             'password' => 'required',
            
         ];

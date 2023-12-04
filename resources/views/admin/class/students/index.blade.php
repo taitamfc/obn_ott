@@ -21,7 +21,7 @@ select.form-control:not([size]):not([multiple]) {
                         </div>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('classes.index') }}">Back to List</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@ select.form-control:not([size]):not([multiple]) {
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('classes.students') }}";
+var indexUrl = "{{ route('admin.classes.students') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.students-table-results';

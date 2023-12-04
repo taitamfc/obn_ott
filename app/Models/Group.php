@@ -21,17 +21,29 @@ class Group extends Model
         'updated_at',
     ];
 
-    public static function getActiveItems(){
-        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
-    }
-
+    //Relationship
     public function users()
     {
-        return $this->hasMany(User::class, 'group_id');
+        return $this->belongsToMany(User::class,'group_site','user_id','group_id');
+    }
+
+    public function sites()
+    {
+        return $this->belongsToMany(Site::class,'group_site');
+    }
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
     }
 
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'group_role', 'group_id', 'role_id');
+    }
+
+    //Feature
+    public static function getActiveItems(){
+        return self::where('user_id',Auth::id())->where('status',self::ACTIVE)->get();
     }
 }

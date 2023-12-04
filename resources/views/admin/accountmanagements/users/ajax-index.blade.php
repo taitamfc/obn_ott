@@ -15,23 +15,22 @@
                 @foreach($items as $item)
                 <tr class="item draggable" id='item-{{ $item->id}}'>
                     <th scope="row">{{ $item->id }}</th>
-                    <td><img class="avatar-md img-thumbnail mr-2" src=" {{$item->image_url}} "
+                    <td><img class="avatar-md img-thumbnail mr-2" src="{{ asset($item->image_url) }} "
                             alt="AVT">{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
-                    <td>{{ optional($item->group)->name }}</td>
-
+                    <td>{{ $item->group_names }}</td>
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
                                 <a href="javascript:;" data-id="{{ $item->id }}"
-                                    data-action="{{ route('users.update',$item->id) }}"
+                                    data-action="{{ route('admin.users.update',$item->id) }}"
                                     class="btn btn-primary show-form-edit">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $item->id }}"
-                                    data-action="{{ route('users.destroy',$item->id) }}">
+                                    data-action="{{ route('admin.users.destroy',$item->id) }}">
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>
@@ -42,9 +41,6 @@
             </tbody>
         </table>
     </div>
-</div>
-<div class="card-footer">
-    {{ $items->appends(request()->query())->links() }}
 </div>
 @else
 <div class="text-center pt-5 pb-5">{{ __('sys.no_data') }}</div>

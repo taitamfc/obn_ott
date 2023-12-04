@@ -4,16 +4,15 @@
 @endsection
 @section('content')
 <div class="main-content page-content">
-    @include('admin.homes.report')
-    <div class="row">
-        <div class="col-lg-12 m-3">
-            <div class="container">
-                <div class="response"></div>
-                <div id='calendar' class="bg-white p-3"></div>
+    <div class="main-content-inner">
+        @include('admin.homes.includes.report')
+        <div class="row mt-3 p-3">
+            <div class="col-lg-12 bg-white">
+                <div id='calendar' class="pt-3 pb-3"></div>
             </div>
         </div>
+        @include('admin.homes.includes.question')
     </div>
-    @include('admin.homes.question')
 </div>
 @endsection
 @section('footer')

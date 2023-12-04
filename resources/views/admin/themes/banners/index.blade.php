@@ -35,7 +35,7 @@
                     </div>
                     <div class="buttons">
                         <div class="buttons d-flex">
-                            <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                            <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                             <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
                                 {{ __('sys.add_new') }}
                             </button>
@@ -58,7 +58,7 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('banners.index') }}";
+var indexUrl = "{{ route('admin.banners.index') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.banners-table-results';

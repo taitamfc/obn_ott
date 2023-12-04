@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Grade;
@@ -15,12 +16,12 @@ use Yajra\Datatables\Datatables;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 
-class GradeController extends Controller
+class GradeController extends AdminController
 {
     use UploadFileTrait;
 
     function index(Request $request){
-        $this->authorize('Grade',Grade::class);
+        // $this->authorize('Grade',Grade::class);
         if( $request->ajax() ){
             $items = Grade::where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
             return view('admin.contents.setting.grades.ajax-index',compact('items'));

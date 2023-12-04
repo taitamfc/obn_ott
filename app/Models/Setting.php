@@ -16,6 +16,10 @@ class Setting extends Model
         'site_id',
     ];
 
+    public function site(){
+        return $this->belongsTo(Site::class);
+    }
+
     function getImgFmAttribute()
     {  
         if ($this->img) {

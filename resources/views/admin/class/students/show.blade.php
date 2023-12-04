@@ -26,7 +26,7 @@ $informationStudent = $items['informationStudent'];
                         </div>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('classes.students') }}">Back to Students</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>

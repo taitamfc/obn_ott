@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="buttons">
-
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
 @section('footer')
 <script>
 jQuery(document).ready(function() {
-    var indexUrl = "{{ route('userbank.index') }}";
+    var indexUrl = "{{ route('admin.userbank.index') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.userbank-table-results';

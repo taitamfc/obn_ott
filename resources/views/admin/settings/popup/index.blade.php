@@ -14,7 +14,7 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">Popup</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 CKEDITOR.replace('popup');
 </script>
 <script>
-var indexUrl = "{{ route('settings.popup') }}";
+var indexUrl = "{{ route('admin.settings.popup') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.popup-table-results';

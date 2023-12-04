@@ -5,7 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
+use App\View\Composers\AdminProfileComposer;
+use App\View\Composers\AdminSiteComposer;
+use App\View\Composers\AdminSitesComposer;
+use App\View\Composers\LanguageComposer;
 use Illuminate\Support\Facades\View;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,8 +28,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
-        $site_name = 'hieu';
-        session()->put('site_name', $site_name);
-        View::share('site_name', $site_name);
+
+        // Passdata to all views in admin
+        View::composer('admin.*', AdminProfileComposer::class);
+        View::composer('admin.*', AdminSiteComposer::class);
+        View::composer('admin.*', AdminSitesComposer::class);
+        View::composer('*', LanguageComposer::class);
     }
 }

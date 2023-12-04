@@ -46,20 +46,26 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Relationship
-    public function lesson()
-    {
-        return $this->hasMany(Lesson::class, 'use_id', 'id');
+    //Relationship
+    public function site(){
+        return $this->hasMany(Site::class, 'user_id', 'id');
     }
-    function student(){
-        return $this->belongsToMany(Student::class,'student_course','student_id','user_id');
+    public function sites(){
+        return $this->belongsToMany(Site::class, 'user_manage_site', 'user_id', 'site_id');
     }
-    public function group()
-    {
-        return $this->belongsTo(Group::class, 'group_id');
+    public function userbank(){
+        return $this->hasMany(UserBank::class, 'user_id', 'id');
     }
-    public function userBanks()
+    public function groupsite(){
+        return $this->hasMany(GroupSite::class, 'user_id', 'id');
+    }
+    public function groups(){
+        return $this->belongsToMany(Group::class, 'group_site', 'user_id', 'group_id');
+    }
+
+    //Feature
+    public function getGroupNamesAttribute()
     {
-        return $this->hasMany(UserBank::class, 'user_id');
+        return $this->groupsite->pluck('group.name')[0];
     }
 }

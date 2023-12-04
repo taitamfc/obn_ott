@@ -21,7 +21,7 @@ select.form-control:not([size]):not([multiple]) {
                         </div>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ select.form-control:not([size]):not([multiple]) {
                                 <div class="filer-class">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <form action="{{ route('classes.students') }}" method='get'
+                                            <form action="{{ route('admin.classes.students') }}" method='get'
                                                 class='d-flex justify-content-center align-items-center'>
                                                 <input class="form-control mr-3" type="text" name="searchName"
                                                     placeholder="Search student">
@@ -45,7 +45,7 @@ select.form-control:not([size]):not([multiple]) {
                                         </div>
                                         <div class="col-sm-4 text-center">
                                             <div class="form-group">
-                                                <form action="{{ route('classes.students') }}" method='get'>
+                                                <form action="{{ route('admin.classes.students') }}" method='get'>
                                                     <input type="hidden" name="viewAll" value='viewAll'>
                                                     <button class="btn btn-primary">View All</button>
                                                 </form>
@@ -80,7 +80,7 @@ select.form-control:not([size]):not([multiple]) {
 @section('footer')
 <script>
 jQuery(function() {
-    var indexUrl = "{{ route('classes.index') }}";
+    var indexUrl = "{{ route('admin.classes.index') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.classes-table-results';

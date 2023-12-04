@@ -18,14 +18,14 @@
                             <ul class="d-flex justify-content-center">
                                 <li class="mr-3">
                                     <a href="javascript:;" data-id="{{ $item->id }}"
-                                        data-action="{{ route('groups.update',$item->id) }}"
+                                        data-action="{{ route('admin.groups.update',$item->id) }}"
                                         class="text-primary show-form-edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" class="text-danger delete-item" data-id="{{ $item->id }}"
-                                        data-action="{{ route('groups.destroy',$item->id) }}">
+                                        data-action="{{ route('admin.groups.destroy',$item->id) }}">
                                         <i class="ti-trash"></i>
                                     </a>
                                 </li>

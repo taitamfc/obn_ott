@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use App\Models\LessonStudent;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
-class ClassController extends Controller
+class ClassController extends AdminController
 {
 
     function index(Request $request){

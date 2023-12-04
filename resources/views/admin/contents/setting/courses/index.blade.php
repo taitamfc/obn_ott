@@ -9,7 +9,7 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">My Courses</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                         <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
                             {{ __('sys.add_new') }}
                         </button>
@@ -36,8 +36,8 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('courses.index') }}";
-var positionUrl = "{{ route('courses.position') }}";
+var indexUrl = "{{ route('admin.courses.index') }}";
+var positionUrl = "{{ route('admin.courses.position') }}";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.course-table-results';
 jQuery(document).ready(function() {

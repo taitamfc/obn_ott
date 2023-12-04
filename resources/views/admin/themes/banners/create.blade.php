@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalCreate" style="display: none;" aria-hidden="true">
-    <form id="formCreate" action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data">
+    <form id="formCreate" action="{{ route('admin.banners.store') }}" method="post" enctype="multipart/form-data">
         <div class="modal-dialog modal-dialog-centered" role="document">
             @csrf
             <div class="modal-content">
@@ -15,27 +15,29 @@
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
 
-                    <div class="form-group input-description">
+                    <div class="form-group input-video">
                         <label for="description" class="col-label">Description</label>
                         <textarea class="form-control" name="description" id="description" cols="30"
                             rows="5"></textarea>
-                        <div class="input-error text-danger">@error('Description') {{ $message }} @enderror</div>
+                        <div class="input-error text-danger">@error('description') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group input-image">
                         <label for="image" class="col-form-label">Banner</label>
                         <input class="form-control" type="file" name='image' id="image">
+                        <div class="input-error text-danger">@error('image') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group input-video">
                         <label for="video" class="col-form-label">Media file</label>
                         <input class="form-control" type="file" name='video' id="video">
+                        <div class="input-error text-danger">@error('video') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group input-link">
                         <label for="link" class="col-form-label">Link</label>
                         <input class="form-control" type="text" id="link" name='link'>
-                        <div class="input-error text-danger">@error('Link') {{ $message }} @enderror</div>
+                        <div class="input-error text-danger">@error('link') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group">
@@ -57,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary add-item" type='button'
-                        data-action="{{ route('banners.store') }}">Save changes</button>
+                        data-action="{{ route('admin.banners.store') }}">Save changes</button>
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
             </div>

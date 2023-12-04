@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 @section('footer')
 <script>
 jQuery(function() {
-    var indexUrl = "{{ route('users.plans') }}";
+    var indexUrl = "{{ route('admin.users.plans') }}";
     var positionUrl = "";
     var params = <?= json_encode(request()->query()); ?>;
     var wrapperResults = '.plans-table-results';

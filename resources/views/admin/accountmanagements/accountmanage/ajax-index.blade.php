@@ -14,13 +14,13 @@
                             <div class="col-lg-12">
                                 <div class="user-title">
                                     <h2>{{ Auth::user()->name }}</h2>
-                                    <span class="text-white">{{ Auth::user()->group->name }}</span>
+                                    <span class="text-white">{{ Auth::user()->group_names }}</span>
                                 </div>
                             </div>
                             <div>
                                 <div class="pull-right cover-btn">
                                     <a class="btn btn-light show-form-edit-avatar"
-                                        data-action="{{ route('users.avatar') }}">
+                                        data-action="{{ route('admin.users.avatar') }}">
                                         <i class="icofont icofont-ui-messaging"></i> Avatar</a>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
             <h4>Current Account Information</h4>
         </div>
         <div class="col-sm-6 text-right" style="float:right">
-            <a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('users.update',$item->id) }}"
+            <a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('admin.users.update',$item->id) }}"
                 class="text-primary show-form-edit">
                 <i class="fa fa-edit"></i>
             </a>
@@ -78,7 +78,7 @@
             <h4>Current Plan</h4>
         </div>
         <div class="col-sm-6 text-right">
-            <a href="{{ route('users.plans') }}"><i class="fa fa-edit"></i></a>
+            <a href="{{ route('admin.users.plans') }}"><i class="fa fa-edit"></i></a>
         </div>
     </div>
     <div class="card-body ml-4">
@@ -121,7 +121,7 @@
             <h4>Current Account Information</h4>
         </div>
         <div class="col-sm-6 text-right" style="float:right">
-            <a href="{{ route('userbank.index') }}"><i class="fa fa-edit"></i></a>
+            <a href="{{ route('admin.userbank.index') }}"><i class="fa fa-edit"></i></a>
         </div>
     </div>
     <div class="card-body ml-4">
@@ -156,7 +156,7 @@
                 </table>
             </div>
             @else
-            <div class="row" onclick="window.location.href='{{ route('userbank.index') }}'">
+            <div class="row" onclick="window.location.href='{{ route('admin.userbank.index') }}'">
                 <div class=" col-sm-6">
                     <div class="col-sm-4">
                         <a href="" data-toggle="modal" data-target="#modalCreate">

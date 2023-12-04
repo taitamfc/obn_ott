@@ -9,7 +9,7 @@
                         <h5 class="mr-4 mb-0 font-weight-bold">My Products</h5>
                     </div>
                     <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ route('home') }}">{{ __('sys.back') }}</a>
+                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
                     </div>
                 </div>
             </div>
@@ -29,25 +29,27 @@
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('courses.products') }}";
+var indexUrl = "{{ route('admin.courses.products') }}";
 var positionUrl = "";
 var wrapperResults = '.product-table-results';
 var params = <?= json_encode(request()->query()); ?>;
 jQuery(document).ready(function() {
     preventEnter();
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+    // Handle Paginate
     jQuery('body').on('click', ".page-link", function(e) {
         e.preventDefault();
         let url = jQuery(this).attr('href');
-        getAjaxTable(url, wrapperResults, positionUrl);
+        getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
     });
+    // Handle Update Item
     jQuery('body').on('click', ".edit-item", function(e) {
         {
             let formUpdate = jQuery(this).closest('#formUpdate');
             formUpdate.find('.input-error').empty();
             var url = formUpdate.prop('action');
+            var ele = $(this).closest('.item');
             let formData = new FormData($('#formUpdate')[0]);
-            console.log(url);
             jQuery.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -69,14 +71,16 @@ jQuery(document).ready(function() {
                     }
                     if (res.success) {
                         showAlertSuccess(res.message);
-                        setTimeout(() => {
-                            window.location.reload()
-                        }, 1200);
+                        jQuery('#modalUpdate').modal('hide');
+                        window.location.reload();
+                        // getAjaxTable(url, wrapperResults, positionUrl, params);
+                        // ele.load(window.location.href + ' ' + ele.selector);
                     }
                 }
             });
         }
     });
+    // Handle Form Edit
     jQuery('body').on('click', ".show-form-edit", function(e) {
         // Hien thi modal
         jQuery('#modalUpdate').modal('show');

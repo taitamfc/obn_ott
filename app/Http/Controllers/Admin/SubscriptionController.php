@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use Illuminate\Http\Request;
 use App\Models\Subscription;
 use App\Models\Course;
+use App\Models\SubscriptionCourse;
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Http\Requests\UpdateSubscriptionRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\SubscriptionResource;
-class SubscriptionController extends Controller
+class SubscriptionController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -45,7 +47,13 @@ class SubscriptionController extends Controller
         $item->site_id = $this->site_id;
         try {
             $item->save();
-            $item->courses()->attach($request->course);
+            foreach($request->course as $course){
+                $sub_cou = new SubscriptionCourse();
+                $sub_cou->course_id = $course;
+                $sub_cou->subscription_id = $item->id;
+                $sub_cou->site_id = $this->site_id;
+                $sub_cou->save();
+            }
             return response()->json([
                 'success'=>true,
                 'message'=> 'Saved ' . $item->id,
@@ -100,7 +108,6 @@ class SubscriptionController extends Controller
             $item->courses()->sync($request->course);
             return response()->json([
                 'success'=> true,
-                'redirect' => route('subscriptions.index'),
                 'message'=> 'Saved ' . $item->id,
                 'data'=> $item
             ],200);
