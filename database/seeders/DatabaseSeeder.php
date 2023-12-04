@@ -48,11 +48,11 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionSeeder::class);
         $this->call(PageSeeder::class);
         $this->call(PlanSeeder::class);
-        $this->call(StudentSeeder::class);
         $this->call(StudentCourseSeeder::class);
         $this->call(SubjectSeeder::class);
         $this->call(SubscriptionSeeder::class);
         $this->call(SubscriptionCourseSeeder::class);
         $this->call(SettingSeeder::class);
+        $this->call(StudentSeeder::class);
     }
 }

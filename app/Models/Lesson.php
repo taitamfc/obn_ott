@@ -25,6 +25,12 @@ class Lesson extends Model
         'createt_at',
         'updated_at',
     ];
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'lesson_student', 'lesson_id', 'student_id');
+    
+    }
     // Relationship
     public function grade()
     {
