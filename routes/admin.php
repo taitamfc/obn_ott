@@ -14,6 +14,7 @@
     // Register
     Route::get('/register',[\App\Http\Controllers\Admin\AuthController::class,'register'])->name('admin.register');
     Route::post('/postRegister',[\App\Http\Controllers\Admin\AuthController::class,'postRegister'])->name('admin.postRegister');
+
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','localization'])->group(function(){
@@ -25,7 +26,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     
     //Question
     Route::resource('/questionanswer',\App\Http\Controllers\Admin\QuestionController::class);
-
+    
+    //Payment
+    Route::get('payment',[\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payment');
+    Route::get('handle-payment',[\App\Http\Controllers\Admin\PaymentController::class, 'handlePayment'])->name('make.payment');
+    Route::get('cancel-payment',[\App\Http\Controllers\Admin\PaymentController::class, 'paymentCancel'])->name('cancel.payment');
+    Route::get('payment-success',[\App\Http\Controllers\Admin\PaymentController::class, 'paymentSuccess'])->name('success.payment');
+    
     //Plan
     Route::get('/users/plans',[\App\Http\Controllers\Admin\UserController::class,'plan'])->name('users.plans');
     Route::get('/users/addPlans/{id}',[\App\Http\Controllers\Admin\UserController::class,'addPlan'])->name('users.addPlans');
@@ -77,9 +84,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::resource('/classes',\App\Http\Controllers\Admin\ClassController::class);
     
     //Report
-    Route::get('/reports/users',[\App\Http\Controllers\ReportController::class,'users'])->name('report.users');
-    Route::get('/reports/sales',[\App\Http\Controllers\ReportController::class,'sales'])->name('report.sales');
-    Route::get('/reports/contents',[\App\Http\Controllers\ReportController::class,'contents'])->name('report.contents');
+    Route::get('/reports/users',[\App\Http\Controllers\Admin\ReportController::class,'users'])->name('report.users');
+    Route::get('/reports/sales',[\App\Http\Controllers\Admin\ReportController::class,'sales'])->name('report.sales');
+    Route::get('/reports/contents',[\App\Http\Controllers\Admin\ReportController::class,'contents'])->name('report.contents');
 
     //Banners
     Route::get('themes/homepage-banner',[\App\Http\Controllers\Admin\ThemeController::class,'homepageBanner'])->name('themes.homepage-banner');

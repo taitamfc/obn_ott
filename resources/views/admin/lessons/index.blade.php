@@ -17,7 +17,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="card lesson-table-results">
@@ -58,11 +57,11 @@ jQuery(function() {
     });
 
     // Handle filter
-    jQuery('body').on('change', '.f-filter',function(){
+    jQuery('body').on('change', '.f-filter', function() {
         let filterData = jQuery('#form-search').serialize();
         getAjaxTable(indexUrl, wrapperResults, positionUrl, filterData);
     });
-    jQuery('body').on('keyup', '.f-filter-text',function(){
+    jQuery('body').on('keyup', '.f-filter-text', function() {
         setTimeout(() => {
             let filterData = jQuery('#form-search').serialize();
             getAjaxTable(indexUrl, wrapperResults, positionUrl, filterData);

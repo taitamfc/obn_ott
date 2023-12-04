@@ -2,14 +2,15 @@
     <form action="" method="GET" id="form-search">
         <div class="row">
             <div class="col">
-                <input name="name" value="{{ request('name') }}" class="form-control f-filter-text"
-                    type="text" placeholder="Lesson..." />
+                <input name="name" value="{{ request('name') }}" class="form-control f-filter-text" type="text"
+                    placeholder="Lesson..." />
             </div>
             <div class="col">
                 <select name="grade_id" class="form-control f-filter">
                     <option value="">Select grade....</option>
                     @foreach($grades as $grade)
-                    <option @selected( request()->grade_id == $grade->id ) value="{{ $grade->id }}">{{ $grade->name }}</option>
+                    <option @selected( request()->grade_id == $grade->id ) value="{{ $grade->id }}">{{ $grade->name }}
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -17,7 +18,8 @@
                 <select name="subject_id" class="form-control f-filter">
                     <option value="">Select subject....</option>
                     @foreach($subjects as $subject)
-                    <option @selected( request()->subject_id == $subject->id ) value="{{ $subject->id }}">{{ $subject->name }}</option>
+                    <option @selected( request()->subject_id == $subject->id )
+                        value="{{ $subject->id }}">{{ $subject->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -25,7 +27,8 @@
                 <select name="course_id" class="form-control f-filter">
                     <option value="">Select course....</option>
                     @foreach($courses as $course)
-                    <option @selected( request()->course_id == $course->id )  value="{{ $course->id }}">{{ $course->name }}</option>
+                    <option @selected( request()->course_id == $course->id )
+                        value="{{ $course->id }}">{{ $course->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -34,6 +37,10 @@
                     <option value="">Sort by</option>
                     <option @selected( request()->sortBy == 'grade_asc' ) value="grade_asc" >Grade ASC</option>
                     <option @selected( request()->sortBy == 'grade_desc' ) value="grade_desc" >Grade DESC</option>
+                    <option @selected( request()->sortBy == 'subject_asc' ) value="subject_asc" >Subject ASC</option>
+                    <option @selected( request()->sortBy == 'subject_desc' ) value="subject_desc" >Subject DESC</option>
+                    <option @selected( request()->sortBy == 'course_asc' ) value="course_asc" >Course ASC</option>
+                    <option @selected( request()->sortBy == 'course_desc' ) value="course_desc" >Course DESC</option>
                 </select>
             </div>
         </div>
@@ -63,7 +70,7 @@
                     <td>{{ $item->getGrade() }}</td>
                     <td>{{ $item->getSubject() }}</td>
                     <td>{{ $item->getCourse() }}</td>
-                    <td>{{ $item->lessoncourse_count }}</td>
+                    <td>{{ $item->lessonstudent_count }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>{!! $item->statusDisplay() !!}</td>
                     <td>
