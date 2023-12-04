@@ -25,10 +25,12 @@
                 <div class="form-group">
                     <label for="duration" class="col-form-label">Duration</label>
                     <select name="duration" id="duration" class="form-control">
-                        <option value="Month" {{ (old('duration', $item->duration) == 'Month') ? 'selected' : '' }}>
-                            Month</option>
-                        <option value="Year" {{ (old('duration', $item->duration) == 'Year') ? 'selected' : '' }}>
-                            Year</option>
+                        <option value="3 Month" {{ (old('duration', $item->duration) == '3 Month') ? 'selected' : '' }}>
+                            3 Month</option>
+                        <option value="6 Month" {{ (old('duration', $item->duration) == '6 Month') ? 'selected' : '' }}>
+                            6 Month</option>
+                        <option value="Free" {{ (old('duration', $item->duration) == 'Free') ? 'selected' : '' }}>Free
+                        </option>
                     </select>
                     <div class="input-error text-danger">@error('duration') {{ $message }} @enderror
                     </div>

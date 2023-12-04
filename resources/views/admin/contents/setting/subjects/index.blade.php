@@ -30,8 +30,6 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('admin.contents.setting.subjects.create')
-        @include('admin.contents.setting.subjects.edit')
     </div>
 </div>
 
@@ -159,24 +157,9 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.success) {
                     let formData = res.data;
-
                     formUpdate.prop('action', action);
-
-                    formUpdate.find('.input-id').val(formData.id);
                     formUpdate.find('.input-name input').val(formData.name);
-
-                    if (formData.img) {
-                        formUpdate.find('.input-img').attr('src', formData.img);
-                        formUpdate.find('.input-img').show();
-                    }
-                    formUpdate.find('.input-status input').prop('checked', false);
-                    if (formData.status) {
-                        formUpdate.find('.input-status .input-active').prop('checked',
-                            true);
-                    } else {
-                        formUpdate.find('.input-status .input-inactive').prop('checked',
-                            true);
-                    }
+                    formUpdate.find('.input-img src').val(formData.img);
                 }
             }
         });
