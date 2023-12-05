@@ -68,6 +68,9 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('q-a/create',[App\Http\Controllers\Website\QuestionAnswerController::class,'create'])->name('website.q-a.create');
         Route::post('q-a/store',[App\Http\Controllers\Website\QuestionAnswerController::class,'store'])->name('website.q-a.store');
         Route::get('q-a/{id}',[App\Http\Controllers\Website\QuestionAnswerController::class,'show'])->name('website.q-a.show');
+
+        Route::get('notice',[App\Http\Controllers\Website\NoticeController::class,'index'])->name('website.notices');
+        Route::get('notice/{id}',[App\Http\Controllers\Website\NoticeController::class,'show'])->name('website.notices.show');
     });
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));
@@ -81,9 +84,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     //     return view('website.dashboards.saved.index',compact('site_name'));
     // })->name('website.saved');
 
-    Route::get('/notices',function($site_name){
-        return view('website.dashboards.notices.index',compact('site_name'));
-    })->name('website.notices');
+
 
     Route::get('/progress',function($site_name){
         return view('website.dashboards.progress.index',compact('site_name'));
