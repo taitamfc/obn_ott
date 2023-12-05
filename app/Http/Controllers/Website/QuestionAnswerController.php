@@ -28,6 +28,7 @@ class QuestionAnswerController extends MainController
         $items->title = $request->input('title');
         $items->question = $request->input('question');
         $items->student_id = $student->id;
+        $items->site_id = $this->site_id;
         $items->save();
         return redirect()->route('website.q-a',['site_name'=>$this->site_name])->with('success', 'Question-Answer created successfully');
     }
