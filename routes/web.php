@@ -28,17 +28,10 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     Route::get('lessons/{id}',[\App\Http\Controllers\Website\LessonController::class,'show'])->name('website.lessons.show');
     Route::get('courses',[\App\Http\Controllers\Website\CourseController::class,'index'])->name('website.courses.index');
     Route::get('courses/{id}',[\App\Http\Controllers\Website\CourseController::class,'show'])->name('website.courses.show');
-    Route::get('orders/create/{course_id}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
 
     // Route::get('/courses',function($site_name){
     //     return view('website.courses.index',compact('site_name'));
     // })->name('website.courses');
-
-     //Payment
-    Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
-    Route::get('handle-payment',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
-    Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
-    Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
 
     Route::get('/grades',function($site_name){
         return view('website.grades.index',compact('site_name'));
@@ -64,6 +57,15 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
         Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
         Route::get('saved',[App\Http\Controllers\Website\StudentLessonController::class,'whitlist'])->name('website.saved');
+
+          //Payment
+        Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
+        Route::get('handle-payment/{item_id}',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
+        Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
+        Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
+
+        Route::get('orders/create/{course_id}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
+        Route::post('orders/store',[\App\Http\Controllers\Website\OrderController::class,'store'])->name('website.orders.store');
     });
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));

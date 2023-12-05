@@ -72,4 +72,7 @@ class Site extends Model
     public function subscriptioncourse(){
         return $this->hasMany(SubscriptionCourse::class, 'site_id', 'id');
     }
+    function orders(){
+        return $this->hasMany(Order::class);
+    }
 }
