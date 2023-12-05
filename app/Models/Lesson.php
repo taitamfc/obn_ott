@@ -25,6 +25,12 @@ class Lesson extends Model
         'createt_at',
         'updated_at',
     ];
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'lesson_student', 'lesson_id', 'student_id');
+    
+    }
     // Relationship
     public function course(){
         return $this->belongsTo(Course::class);
@@ -47,9 +53,7 @@ class Lesson extends Model
     public function lessonstudent(){
         return $this->hasMany(LessonStudent::class);
     }
-    public function students(){
-        return $this->belongsToMany(Student::class, 'lesson_student');
-    }
+   
     function qas(){
         return $this->hasMany(QuestionAnswer::class);
     }

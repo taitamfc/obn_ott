@@ -43,7 +43,7 @@ Login
                 </div>
                 <div class="login__form d-flex justify-content-between flex-wrap gap-2">
                     <div class="form__check">
-                        <input id="forgot" type="checkbox" name="remember" id="remember">
+                        <input id="forgot" type="checkbox" name="remember" id="remember" value="1">
                         <label for="forgot"> Remember me</label>
                     </div>
                     <div class="text-end login__form__link">

@@ -1,25 +1,29 @@
 <?php
 
 namespace App\Http\Controllers\Website;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\StoreRegisterStudentRequest;
 use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ForgotPasswordStudentRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Str;
 use Mail;
 
-class AuthController extends Controller
+class AuthController extends MainController
 {
     public function login(){
-        if (Auth::check()) {
-            return redirect()->route('website.homes',['site_name'=>$this->site_name]);
+        // dd(Auth::guard('students')->user());
+        if (Auth::guard('students')->check()) {
+            return redirect()->route('cms',['site_name'=>$this->site_name]);
             // return view('website.auth.login');
 
         } else {
@@ -30,35 +34,33 @@ class AuthController extends Controller
     public function postLogin(StoreLoginRequest $request){
         // dd($request);
         $dataUser = $request->only('email','password');
-        if(Auth::attempt($dataUser,$request->remember)){
-            return redirect()->route('website.homes',['site_name'=>$this->site_name])->with('success', 'Logged in successfully');;
+        if(Auth::guard('students')->attempt($dataUser,$request->remember)){
+            return redirect()->route('cms',['site_name'=>$this->site_name])->with('success', 'Logged in successfully');;
         }else {
             return redirect()->route('website.login',['site_name'=>$this->site_name])->with('error','Account or password is incorrect');
         }
     }
-
     public function Logout(Request $request){
-        Auth::logout();
+        Auth::guard('students')->logout();
         // return redirect()->route('login');
          return redirect()->route('website.login',['site_name'=>$this->site_name]);
     }
 
     public function register(){
         if (Auth::check()) {
-            return redirect()->route('website.login',['site_name'=>$this->site_name]);
-            // return view('website.auth.register');
+            // return redirect()->route('website.register',['site_name'=>$this->site_name]);
+            return view('website.auth.register');
         } else {
             return view('website.auth.register');
         }
     }
-    public function postRegister(StoreRegisterRequest $request){
+    public function postRegister(StoreRegisterStudentRequest $request){
         try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = $request->password;
-            $user->group_id = 2;
-            $user->save(); 
+            $student = new Student();
+            $student->name = $request->name;
+            $student->email = $request->email;
+            $student->password = $request->password;
+            $student->save(); 
             $message = "Successfully register";
             return redirect()->route('website.login',['site_name'=>$this->site_name])->with('success',$message);
         } catch (QueryException $e) { 
@@ -71,9 +73,9 @@ class AuthController extends Controller
     {
         return view('website.auth.forgot');
     }
-    function postForgot(ForgotPasswordRequest $request){
+    function postForgot(ForgotPasswordStudentRequest $request){
         // dd($request);
-        $item = User::where('email', 'LIKE' , $request->email )->first();
+        $item = Student::where('email', 'LIKE' , $request->email )->first();
         if ($item) {
             $token = strtoupper(Str::random(10));
             $item->token = $token;
@@ -92,10 +94,11 @@ class AuthController extends Controller
         }
     }
     function getReset(Request $request){
-        $item = User::findOrfail($request->user);
+        $item = Student::findOrfail($request->student);
+        // dd($item);
         if($item->token === $request->token){
             $data = [
-                'user' => $request->user,
+                'student' => $request->student,
                 'token' => $request->token,
             ];
             return view('website.auth.resetpassword',compact('data'));
@@ -104,7 +107,7 @@ class AuthController extends Controller
         }
     }
     function postReset(ResetPasswordRequest $request){
-        $item = User::findOrfail($request->user);
+        $item = Student::findOrfail($request->student);
         if($item && $item->token === $request->token){
             $item->password = bcrypt($request->password);
             $item->token = '';
