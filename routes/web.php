@@ -49,16 +49,16 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     // Route::get('/accounts/edit', function ($site_name) {
     //     return view('website.dashboards.accounts.edit', compact('site_name'));
     // })->name('website.accounts.edit');
+    Route::middleware(['auth.student'])->group(function () {
+        Route::get('accounts',[App\Http\Controllers\Website\StudentController::class,'index'])->name('website.accounts');
+        Route::get('accounts/edit',[App\Http\Controllers\Website\StudentController::class,'edit'])->name('website.accounts.edit');
+        Route::put('accounts/update',[App\Http\Controllers\Website\StudentController::class,'update'])->name('website.accounts.update');
 
-    Route::get('accounts',[App\Http\Controllers\Website\StudentController::class,'index'])->name('website.accounts');
-    Route::get('accounts/edit',[App\Http\Controllers\Website\StudentController::class,'edit'])->name('website.accounts.edit');
-    Route::put('accounts/update',[App\Http\Controllers\Website\StudentController::class,'update'])->name('website.accounts.update');
-
-    
-    Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
-    Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
-    Route::get('saved',[App\Http\Controllers\Website\StudentLessonController::class,'whitlist'])->name('website.saved');
-
+        
+        Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
+        Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
+        Route::get('saved',[App\Http\Controllers\Website\StudentLessonController::class,'whitlist'])->name('website.saved');
+    });
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));
     // })->name('website.lessons');
