@@ -24,44 +24,75 @@ class LessonController extends AdminController
     use UploadFileTrait;
     public function index(Request $request)
     {
+        try {
         // $this->authorize('Lesson',Lesson::class);
-        $grades = Grade::getActiveItems($this->site_id);
-        $subjects = Subject::getActiveItems($this->site_id);
-        $courses = Course::getActiveItems($this->site_id);
-        $query = Lesson::with('grade','course','subject')->where('site_id',$this->site_id)->withCount('lessoncourse');
-        if($request->name){
-            $query->where('name','LIKE','%'.$request->name.'%');
-        }
-        if($request->grade_id){
-            $query->where('grade_id',$request->grade_id);
-        }
-        if($request->subject_id){
-            $query->where('subject_id',$request->subject_id);
-        }
-        if($request->course_id){
-            $query->where('subject_id',$request->subject_id);
-        }
-        switch ($request->sortBy) {
-            case 'grade_desc':
-                $query->with(['grade' => function ($q){
-                    $q->orderBy('name','DESC');
-                }]);
-                break;
-            case 'grade_asc':
-                $query->with(['grade' => function ($q){
-                    $q->orderBy('name','ASC');
-                }]);
-                break;
-            default:
-                $query->orderBy('id','desc');
-                break;
-        }
-        $items = $query->paginate(20);
-        if( $request->ajax() ){
+        if($request->ajax()){
+            $grades = Grade::getActiveItems($this->site_id);
+            $subjects = Subject::getActiveItems($this->site_id);
+            $courses = Course::getActiveItems($this->site_id);
+            $query = Lesson::where('site_id',$this->site_id)->withCount('lessonstudent');
+            if($request->name){
+                $query->where('name','LIKE','%'.$request->name.'%');
+            }
+            if($request->grade_id){
+                $query->where('grade_id',$request->grade_id);
+            }
+            if($request->subject_id){
+                $query->where('subject_id',$request->subject_id);
+            }
+            if($request->course_id){
+                $query->where('course_id',$request->course_id);
+            }
+            switch ($request->sortBy) {
+                // Sort grade 
+                case 'grade_desc':
+                    $query->with(['grade' => function ($q) {
+                        $q->orderBy('name', 'desc');
+                    }]);
+                    break;
+                case 'grade_asc':
+                    $query->with(['grade' => function ($q) {
+                        $q->orderBy('name', 'asc');
+                    }]);
+                    break;
+                // Sort Subject
+                case 'subject_desc':
+                    $query->with(['subject' => function ($q) {
+                        $q->orderBy('name', 'desc');
+                    }]);
+                    break;
+                case 'subject_asc':
+                    $query->with(['subject' => function ($q) {
+                        $q->orderBy('name', 'asc');
+                    }]);
+                    break;
+                // Sort Course
+                case 'course_desc':
+                    $query->with(['course' => function ($q) {
+                        $q->orderBy('name', 'desc');
+                    }]);
+                    break;
+                case 'course_asc':
+                    $query->with(['course' => function ($q) {
+                        $q->orderBy('name', 'asc');
+                    }]);
+                    break;
+                default : 
+                    $query->orderBy('id','desc');
+                    break;
+                }
+            $query->with('grade', 'subject', 'course');
+            $items = $query->paginate(20);
             return view('admin.lessons.ajax-index',compact('items','grades','subjects','courses'));
         }
         return view('admin.lessons.index');
-
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response([
+                'success' => true,
+                'message' => 'Error'
+            ]);
+        }
     }
     public function create()
     {

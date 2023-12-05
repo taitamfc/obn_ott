@@ -34,6 +34,12 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     //     return view('website.courses.index',compact('site_name'));
     // })->name('website.courses');
 
+     //Payment
+    Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
+    Route::get('handle-payment',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
+    Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
+    Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
+
     Route::get('/grades',function($site_name){
         return view('website.grades.index',compact('site_name'));
     })->name('website.grades');
@@ -96,6 +102,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     // Forgot password
     Route::get('/forgot',[App\Http\Controllers\Website\AuthController::class,'forgot'])->name('website.forgot');
     Route::post('/postForgot',[App\Http\Controllers\Website\AuthController::class,'postForgot'])->name('website.postForgot');
+
     Route::get('/resetPassword/{student}/{token}',[App\Http\Controllers\Website\AuthController::class,'getReset'])->name('website.getReset');
     Route::post('/resetPassword/{student}/{token}',[App\Http\Controllers\Website\AuthController::class,'postReset'])->name('website.postReset');
 });

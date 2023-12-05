@@ -1,19 +1,27 @@
 <?php
+
+/**
+ * PayPal Setting & API Credentials
+ * Created by Raza Mehdi <srmk@outlook.com>.
+ */
+
 return [
-	// Client ID của app mà bạn đã đăng ký trên PayPal Dev
-    'client_id' => env('PAYPAL_CLIENT_ID'),
-    // Secret của app
-    'secret' => env('PAYPAL_SECRET'),
-    'settings' => [
-    	// PayPal mode, sanbox hoặc live
-        'mode' => env('PAYPAL_MODE'),
-        // Thời gian của một kết nối (tính bằng giây)
-        'http.ConnectionTimeOut' => 30,
-        // Có ghi log khi xảy ra lỗi
-        'log.logEnabled' => true,
-        // Đường dẫn đền file sẽ ghi log
-        'log.FileName' => storage_path() . '/logs/paypal.log',
-        // Kiểu log
-        'log.LogLevel' => 'FINE'
+    'mode'    => env('PAYPAL_MODE', 'sandbox'),
+    'sandbox' => [
+        'client_id'     => env('PAYPAL_SANDBOX_CLIENT_ID', ''),
+        'client_secret' => env('PAYPAL_SANDBOX_CLIENT_SECRET', ''),
+        'app_id'        => 'APP-80W284485P519543T',
     ],
+    'live' => [
+        'client_id'    => env('PAYPAL_SANDBOX_API_USERNAME', ''),
+        'client_secret'    => env('PAYPAL_SANDBOX_API_PASSWORD', ''),
+        'app_id'      => 'APP-80W284485P519543T',
+    ],
+
+    'payment_action' => 'Sale', // Can only be 'Sale', 'Authorization' or 'Order'
+    'currency'       => env('PAYPAL_CURRENCY', 'USD'),
+    'billing_type'   => 'MerchantInitiatedBilling',
+    'notify_url'     => '', // Change this accordingly for your application.
+    'locale'         => '', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
+    'validate_ssl'   => true, // Validate SSL when creating api client.
 ];

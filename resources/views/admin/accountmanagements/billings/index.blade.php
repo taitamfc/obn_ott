@@ -41,17 +41,14 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class=" col-sm-6">
+                                <!-- <div class=" col-sm-6">
                                     <div class="col-sm-4">
-                                        <form action="" method="post">
-                                            @csrf
-                                            <button type='submit'>
-                                                <img src="https://ott.rrtech247.com/public/assets/studio/images/Paypal-logo.png"
-                                                    alt="">
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('admin.make.payment') }}">
+                                            <img src="https://ott.rrtech247.com/public/assets/studio/images/Paypal-logo.png"
+                                                alt="">
+                                        </a>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
