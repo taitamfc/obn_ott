@@ -17,7 +17,7 @@
             {{ $course->price }}
         </div>
         <div class="course__summery__button">
-            <a href="{{ route('website.make.payment',['site_name'=> $site_name, 'course' => $course->id]) }}"
+            <a href="{{ route('website.orders.create',['site_name'=> $site_name, 'course_id' => $course->id]) }}"
                 class="default__button">Purchase</a>
         </div>
     </div>

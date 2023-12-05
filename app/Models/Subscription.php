@@ -34,5 +34,7 @@ class Subscription extends Model
     {
         return $this->hasMany(Transaction::class);
     }
-    
+    function orders(){
+        $this->hasMany(Order::class, 'item_id','id');
+    }
 }

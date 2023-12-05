@@ -53,6 +53,10 @@ class Course extends Model
         $this->hasMany(Transaction::class, 'course_id', 'id');
     }
 
+    function orders(){
+        $this->hasMany(Order::class, 'item_id','id');
+    }
+
     // Feature
     const ACTIVE = 1;
     const INACTIVE = 0;
