@@ -83,7 +83,7 @@ class PaymentController extends MainController
                 // Transaction
                 $bill = new Transactions();
                 $bill->student_id = $this->user_id;
-                $bill->course_id =isset($request->course)?$request->course:0e;
+                $bill->course_id =isset($request->course)?$request->course:0;
                 $bill->subscription_id = isset($request->subscription)?$request->subscription:0;
                 $bill->site_id = $this->site_id;
                 $bill->price = $course->price;
