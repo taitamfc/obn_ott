@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/animate.min.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/aos.min.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{ asset('website/css/icofont.min.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icofont@1.0.0/dist/icofont.min.css">
     <link rel="stylesheet" href="{{ asset('website/css/slick.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/swiper-bundle.min.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/style.css')}}">
