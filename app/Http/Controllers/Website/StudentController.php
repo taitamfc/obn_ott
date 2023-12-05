@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Http\Requests\UpdateStudentRequest;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-class StudentController extends Controller
+class StudentController extends MainController
 {
     public function index(Request $request)
     {
