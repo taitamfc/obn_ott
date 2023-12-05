@@ -66,6 +66,11 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
 
         Route::get('orders/create/{course_id}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
         Route::post('orders/store',[\App\Http\Controllers\Website\OrderController::class,'store'])->name('website.orders.store');
+        
+        Route::get('q-a',[App\Http\Controllers\Website\QuestionAnswerController::class,'index'])->name('website.q-a');
+        Route::get('q-a/create',[App\Http\Controllers\Website\QuestionAnswerController::class,'create'])->name('website.q-a.create');
+        Route::post('q-a/store',[App\Http\Controllers\Website\QuestionAnswerController::class,'store'])->name('website.q-a.store');
+        Route::get('q-a/{id}',[App\Http\Controllers\Website\QuestionAnswerController::class,'show'])->name('website.q-a.show');
     });
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));
@@ -87,9 +92,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         return view('website.dashboards.progress.index',compact('site_name'));
     })->name('website.progress');
 
-    Route::get('/q&a',function($site_name){
-        return view('website.dashboards.q&a.index',compact('site_name'));
-    })->name('website.q&a');
+
 
 
     // Login
