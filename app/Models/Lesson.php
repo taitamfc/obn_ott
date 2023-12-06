@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Lesson extends Model
 {
@@ -57,6 +58,12 @@ class Lesson extends Model
     function qas(){
         return $this->hasMany(QuestionAnswer::class);
     }
+
+    //is_added_whitlist
+    function getIsAddedWhitlistAttribute(){
+        $student_id = Auth::guard('students')->id();
+        return StudentWhitlist::where('lesson_id',$this->id)->where('student_id', $student_id)->exists();
+    } 
 
     // Feature
     function getGrade(){

@@ -28,6 +28,16 @@
                 </div>
             </div> -->
             <div class="col-xl-12">
+                 @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+                @endif
 				<div class="row">
                     @foreach( $item->lessons as $lesson )
 					<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 aos-init aos-animate"

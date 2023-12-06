@@ -1,0 +1,3 @@
+.gridarea__wraper .gridarea__img .gridarea__small__icon i.active {
+    background: var(--primaryColor);
+}
