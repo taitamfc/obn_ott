@@ -42,12 +42,16 @@ Subject
                 </div>
                 @endif
 				<div class="row">
+                @if(count($item->lessons))
                     @foreach( $item->lessons as $lesson )
 					<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 aos-init aos-animate"
 						data-aos="fade-up">
 						@include('website.global.elm-lesson')
 					</div>
                     @endforeach
+                    @else
+                        <p class="text-center">{{__('sys.no_item_found')}}</p>
+                    @endif
 				</div>
             </div>
             <!-- <div class="main__pagination__wrapper aos-init aos-animate" data-aos="fade-up">
