@@ -13,10 +13,13 @@ class LessonStudent extends Model
         return $this->belongsTo(Lesson::class,'lesson_id','id');
     }
     function course(){
-        return $this->belongsTo(Course::class,'student_id','id');  
+        return $this->belongsTo(Course::class,'course_id','id');  
     }
     function student(){
         return $this->belongsTo(Student::class,'student_id','id');
+    }
+    function grade(){
+        return $this->belongsTo(Grade::class,'grade_id','id');
     }
     function site(){
         return $this->belongsTo(Site::class);

@@ -13,6 +13,7 @@
         </div>
     </div>
 </div>
+@include('admin.homes.includes.modal-event')
 @endsection
 @section('footer')
 <!-- Sort Table -->
@@ -52,7 +53,9 @@ jQuery(document).ready(function() {
         selectable: true,
         selectHelper: true,
         select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
+            jQuery('#modalEvent').modal('show');
+            // var title = prompt('Event Title:');
+            title = '';
             if (title) {
                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
                 var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
