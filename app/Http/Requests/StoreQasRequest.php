@@ -26,11 +26,11 @@ class StoreQasRequest extends FormRequest
             'question' => 'required',
         ];
     }
-    public function messages()
-    {
-        return  [
-                'title.required' => 'The title field is required',
-                'question.required' => 'The question field is required',
-            ];
-    }
+    // public function messages()
+    // {
+    //     return  [
+    //             'title.required' => 'The title field is required',
+    //             'question.required' => 'The question field is required',
+    //         ];
+    // }
 }

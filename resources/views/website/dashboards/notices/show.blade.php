@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Notice
+@endsection
 @section('content')
 <!-- dashboardarea__area__start  -->
 <div class="dashboardarea sp_bottom_100">

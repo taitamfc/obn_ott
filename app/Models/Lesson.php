@@ -62,7 +62,18 @@ class Lesson extends Model
     //is_added_whitlist
     function getIsAddedWhitlistAttribute(){
         $student_id = Auth::guard('students')->id();
-        return StudentWhitlist::where('lesson_id',$this->id)->where('student_id', $student_id)->exists();
+        if($student_id){
+            return StudentWhitlist::where('lesson_id',$this->id)->where('student_id', $student_id)->exists();
+        }
+        return false;
+    } 
+    //is_bought
+    function getIsBoughtAttribute(){
+        $student_id = Auth::guard('students')->id();
+        if($student_id){
+            return LessonStudent::where('lesson_id',$this->id)->where('student_id', $student_id)->exists();
+        }
+        return false;
     } 
 
     // Feature

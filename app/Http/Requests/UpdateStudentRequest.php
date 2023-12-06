@@ -27,8 +27,6 @@ class UpdateStudentRequest extends FormRequest
             'email' => 'required|email|unique:students,email,'.Auth::guard('students')->id(),
             'phone' => 'required',
             'status' => 'required',
-            // 'password' => 'required',
-            // 'repeatpassword' => 'required|same:password',
             'address' => 'required',
             'city' => 'required',
         ];
@@ -45,21 +43,21 @@ class UpdateStudentRequest extends FormRequest
      *
      * @return array<string, string>
      */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'The name field is required',
-            'code.required' => 'The code field is required',
-            'email.required' => 'The email field is required',
-            // 'email.email' => 'The email must be a valid email address',
-            'email.unique' => 'The email has already been taken',
-            'phone.required' => 'The phone field is required',
-            'status.required' => 'The status field is required',
-            'password.required' => 'The password field is required',
-            'repeatpassword.required' => 'The Confirm Password field is required',
-            'repeatpassword.same' => 'The Confirm Password and password must match',
-            'address.required' => 'The address field is required',
-            'city.required' => 'The city field is required',
-        ];
-    }
+    // public function messages(): array
+    // {
+    //     return [
+    //         'name.required' => __('validate.required', ['name' => ':attribute']),
+    //         'code.required' => __('validate.required', ['name' => ':attribute']),
+    //         'email.required' => __('validate.required', ['name' => ':attribute']),
+    //         // 'email.email' => 'The email must be a valid email address',
+    //         'email.unique' => 'The email has already been taken',
+    //         'phone.required' => 'The phone field is required',
+    //         'status.required' => 'The status field is required',
+    //         'password.required' => 'The password field is required',
+    //         'repeatpassword.required' => 'The Confirm Password field is required',
+    //         'repeatpassword.same' => 'The Confirm Password and password must match',
+    //         'address.required' => 'The address field is required',
+    //         'city.required' => 'The city field is required',
+    //     ];
+    // }
 }

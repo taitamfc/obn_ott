@@ -8,7 +8,7 @@
                     </div>
                     <div class="breadcrumb__inner">
                         <ul>
-                            <li><a href="{{ route('cms',['site_name'=>$site_name]) }}">Home</a></li>
+                            <li><a href="{{ route('cms',['site_name'=>$site_name]) }}">{{__('header.home')}}</a></li>
                             <li>{{ $page_title }}</li>
                         </ul>
                     </div>

@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Subject
+@endsection
 @section('content')
 @include('website.includes.header.breadcrumb',[
 'page_title' => $item->name

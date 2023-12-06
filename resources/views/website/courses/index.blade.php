@@ -1,4 +1,9 @@
 @extends('website.layouts.master')
+
+@section('title')
+{{ __('plan.title') }}
+@endsection
+
 @section('content')
 @include('website.includes.header.breadcrumb',[
 'page_title' => 'Plan'

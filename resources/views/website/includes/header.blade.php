@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="headerarea__2__input">
-                        <input type="text" placeholder="Search Course">
+                        <input type="text" placeholder="{{__('header.search-course')}}">
                         <i class="icofont-search-1"></i>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
                         <div class="headerarea__button">
-                            <a href="{{ route('website.courses.index',['site_name'=>$site_name]) }}">Plan</a>
+                            <a href="{{ route('website.courses.index',['site_name'=>$site_name]) }}">{{__('account.plan')}}</a>
                         </div>
                     </div>
                 </div>
