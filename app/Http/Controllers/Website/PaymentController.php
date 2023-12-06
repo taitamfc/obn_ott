@@ -88,6 +88,7 @@ class PaymentController extends MainController
                 foreach ($lessons as $lesson) {
                     $student_lesson = new LessonStudent();
                     $student_lesson->lesson_id = $lesson->id;
+                    $student_lesson->grade_id = $lesson->grade_id;
                     $student_lesson->student_id = Auth::guard('students')->id();
                     $student_lesson->course_id = $request->course;
                     $student_lesson->site_id = $this->site_id;

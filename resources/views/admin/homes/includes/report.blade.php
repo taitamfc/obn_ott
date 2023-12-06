@@ -28,39 +28,48 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-3 col-md-6 col-lg-12 stretched_card">
+    <div class="col stretched_card">
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white"></p>
-                <h3 class="mb-0 text-white"></h3>
+                <p class="card-title mb-0 text-white">Visitors</p>
+                <h3 class="mb-0 text-white">{{$totalVisistor}}</h3>
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6 col-lg-12 stretched_card">
+    <div class="col stretched_card">
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white"></p>
-                <h3 class="mb-0 text-white"></h3>
+                <p class="card-title mb-0 text-white">Impressions</p>
+                <h3 class="mb-0 text-white">{{$totalImpression}}</h3>
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6 col-lg-12 stretched_card">
+    <div class="col stretched_card">
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white"></p>
-                <h3 class="mb-0 text-white"></h3>
+                <p class="card-title mb-0 text-white">Sales</p>
+                <h3 class="mb-0 text-white">{{$totalSales}}</h3>
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6 col-lg-12 stretched_card">
+    <div class="col stretched_card">
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white"></p>
-                <h3 class="mb-0 text-white"></h3>
+                <p class="card-title mb-0 text-white">Students</p>
+                <h3 class="mb-0 text-white">{{$totalStudents}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col stretched_card">
+        <div class="card mb-mob-4 primary_card_bg">
+            <!-- Card body -->
+            <div class="card-body">
+                <p class="card-title mb-0 text-white">Classes</p>
+                <h3 class="mb-0 text-white">{{$totalClasses}}</h3>
             </div>
         </div>
     </div>

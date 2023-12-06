@@ -12,9 +12,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Carbon\Carbon;
-use App\Models\Student;
 use Illuminate\Support\Facades\Log;
 use App\Models\QuestionAnswer;
+
+use App\Models\Student;
+use App\Models\Visitor;
+use App\Models\Impression;
+use App\Models\Order;
+use App\Models\Course;
 
 class HomeController extends AdminController
 {
@@ -26,27 +31,23 @@ class HomeController extends AdminController
         ->where('status',Grade::ACTIVE)
         ->get();
         // Reports
-        // $queryVisistor      = Visitor::where('site_id',$this->site_id);
-        // $queryImpression    = Impression::where('site_id',$this->site_id);
-        // $querySale          = Sale::where('site_id',$this->site_id);
-        // $queryStudent       = Student::where('site_id',$this->site_id);
-        // if($grade_id){
-        //     $queryVisistor->where('grade_id',$grade_id);
-        //     $queryImpression->where('grade_id',$grade_id);
-        //     $querySale->where('grade_id',$grade_id);
-        //     $queryStudent->where('grade_id',$grade_id);
-        // }
-        // $totalVisistor      = $queryVisistor->sum('amount');
-        // $totalImpression    = $queryImpression->sum('amount');
-        // $totalSales         = $querySale->sum('total');
-        // $totalStudents      = $queryStudent->count();
-        // $totalClasses       = 0;
+        $queryVisistor      = Visitor::where('site_id',$this->site_id);
+        $queryImpression    = Impression::where('site_id',$this->site_id);
+        $querySale          = Order::where('site_id',$this->site_id);
+        $queryStudent       = Student::where('students.site_id',$this->site_id);
+        $queryCourse       = Course::where('site_id',$this->site_id);
+        if($grade_id){
+            $queryVisistor->where('grade_id',$grade_id);
+            $queryImpression->where('grade_id',$grade_id);
+            // $querySale->where('grade_id',$grade_id);
+            $queryStudent->join('lesson_student', 'students.id', '=', 'lesson_student.student_id')->where('lesson_student.grade_id',$grade_id);
+        }
+        $totalVisistor      = $queryVisistor->first() ? $queryVisistor->first()->amount : 0;
+        $totalImpression    = $queryImpression->first() ? $queryImpression->first()->amount : 0;
+        $totalSales         = number_format($querySale->sum('price'));
+        $totalStudents      = $queryStudent->count();
+        $totalClasses       = $queryCourse->count();
 
-        $totalVisistor      = 0;
-        $totalImpression    = 0;
-        $totalSales         = 0;
-        $totalStudents      = 0;
-        $totalClasses       = 0;
         // Qas
 
         /* --------------------
