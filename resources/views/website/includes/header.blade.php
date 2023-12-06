@@ -23,13 +23,19 @@
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
                         <div class="headerarea__login">
-                            <a href="{{route('website.accounts',['site_name'=>$site_name])}}"><i class="icofont-user-alt-5"></i></a>
+                            @if(auth('students')->check())
+                            <a>Hi, {{ auth('students')->user()->name }}</a>
+                            @else
+                            @endif
+                            <a href="{{ route('website.accounts',['site_name'=>$site_name]) }}"><i
+                                class="icofont-user-alt-5"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-2 col-lg-2 col-md-6">
+                <!-- <div class="col-xl-2 col-lg-2 col-md-6">
                     <div class="headerarea__left">
                         <div class="headerarea__left__logo">
                             <a href="{{ route('cms',['site_name'=>$site_name]) }}">
@@ -37,14 +43,27 @@
                             </a>
                         </div>
                     </div>
+                </div> -->
+
+                <div class="col-xl-2 col-lg-2 col-md-6">
+                    <div class="headerarea__left">
+                        <div class="headerarea__left__logo">
+                            <a href="{{ route('cms',['site_name'=>$site_name]) }}" style="text-align: center;">
+                                <img loading="lazy" src="{{ asset($site_setting['logo']) }}" alt="logo"
+                                    style="width: 169px;">
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-xl-7 col-lg-7 main_menu_wrap">
                     @include('website.includes.header.main-menu')
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
                         <div class="headerarea__button">
-                            <a href="{{ route('website.courses.index',['site_name'=>$site_name]) }}">{{__('account.plan')}}</a>
+                            <a
+                                href="{{ route('website.courses.index',['site_name'=>$site_name]) }}">{{__('account.plan')}}</a>
                         </div>
                     </div>
                 </div>

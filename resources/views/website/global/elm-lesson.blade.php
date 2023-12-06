@@ -2,7 +2,7 @@
 <div class="gridarea__wraper">
     <div class="gridarea__img">
         <a href="{{ route('website.lessons.show',['id'=> $lesson->id,'site_name'=> $site_name]) }}">
-            <img src="{{ asset($lesson->image_url)}}" alt="grid">
+            <img src="{{ asset($lesson->image_url_fm)}}" alt="grid">
         </a>
          <div class="gridarea__small__icon">
             @if(!$lesson->is_bought)

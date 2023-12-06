@@ -76,6 +76,13 @@ class Lesson extends Model
         return false;
     } 
 
+    function getImageUrlFmAttribute(){
+        if ($this->image_url) {
+            return asset($this->image_url);
+        } else {
+            return asset('assets/images/default.png');
+        }
+    } 
     // Feature
     function getGrade(){
         return isset($this->grade) ? $this->grade->name : '';

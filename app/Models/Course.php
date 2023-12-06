@@ -81,4 +81,10 @@ class Course extends Model
             return '<img class="avatar-md" src="'.asset('assets/images/default.png').'" alt="">';
         }
     }
+
+    function getPriceFmAttribute()
+    {  
+        $formattedPrice = '$' . number_format($this->price);
+        return $formattedPrice;
+    }
 }
