@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('header')
+<link rel="stylesheet" href="{{ asset('assets/vendors/dropzone/css/dropzone.css') }}">
 <style>
 #lesson .lesson-content li {
     font-size: 16px;
@@ -78,6 +79,7 @@
 @endsection
 
 @section('footer')
+<script src="{{ asset('assets/vendors/dropzone/js/dropzone.js') }}"></script>
 <script>
 jQuery(document).ready(function() {
     // Handle Add
@@ -111,6 +113,19 @@ jQuery(document).ready(function() {
             }
         });
     });
+
+    // Handle upload file
+    $('#file-validation').dropzone({
+        url: "{{ route('admin.lessons.storeVideo') }}",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        maxFiles: 1,
+        maxFilesize: 10,
+        acceptedFiles:".mp4,.mkv,.avi",
+    });
+    $('#file-validation').addClass('dropzone');
+
 });
 </script>
 @endsection

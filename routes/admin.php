@@ -60,6 +60,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::resource('subscriptions',\App\Http\Controllers\Admin\SubscriptionController::class);
     
     //Lessons
+    Route::post('lessons/storeVideo/{id?}', [\App\Http\Controllers\Admin\LessonController::class, 'storeVideo'])->name('lessons.storeVideo');
     Route::resource('lessons', \App\Http\Controllers\Admin\LessonController::class);
     
     //Banners
