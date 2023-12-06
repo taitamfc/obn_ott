@@ -32,4 +32,6 @@ return [
     'confirm_new_password' => '새 암호를 확인합니다',
     'password' => '비밀번호',
     'plan' => '계획',
+    'back' => '뒤쪽에',
+
 ];

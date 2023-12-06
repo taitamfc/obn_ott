@@ -15,7 +15,7 @@ Q&A
                         <div class="dashboard__section__title">
                             <h4>{{$item->title}}</h4>
                             <a href="{{ route('website.q-a', ['site_name' => $site_name]) }}"
-								class="btn btn-primary">Back</a>
+								class="btn btn-primary">{{__('account.back')}}</a>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
