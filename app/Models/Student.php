@@ -75,4 +75,5 @@ class Student extends Authenticatable
     function qas(){
         return $this->hasMany(QuestionAnswer::class,'student_id','id');
     }
+    
 }
