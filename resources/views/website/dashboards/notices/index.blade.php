@@ -32,6 +32,7 @@ Notice
                                                 <th></th>
                                             </tr>
                                         </thead>
+                                        @if(count($items))
                                         <tbody>
                                             @foreach($items as $key => $item)
                                             <tr>
@@ -60,6 +61,13 @@ Notice
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <p>{{__('sys.no_item_found')}}</p>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

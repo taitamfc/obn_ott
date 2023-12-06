@@ -37,6 +37,7 @@ Q&A
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @if(count($items))
                                             @foreach($items as $key => $item)
                                             <tr>
                                                 <td>
@@ -66,6 +67,13 @@ Q&A
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <p>{{__('sys.no_item_found')}}</p>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
