@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Whitlist
+@endsection
 @section('content')
 
 <!-- dashboardarea__area__start  -->
@@ -11,7 +14,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>Whitlist</h4>
+                            <h4>{{__('account.whitlist')}}</h4>
                         </div>
                         <div class="row">
                             @foreach($lessons as $lesson)

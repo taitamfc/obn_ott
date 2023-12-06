@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Q&A
+@endsection
 @section('content')
 <!-- dashboardarea__area__start  -->
 <div class="dashboardarea sp_bottom_100">
@@ -10,9 +13,9 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>Q&A</h4>
+                            <h4>{{__('account.qas')}}</h4>
                             <a href="{{ route('website.q-a.create', ['site_name' => $site_name]) }}"
-                                class="btn btn-primary">Composer</a>
+                                class="btn btn-primary">{{__('account.composer')}}</a>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
@@ -26,18 +29,18 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Author</th>
-                                                <th>Date</th>
-                                                <th>View</th>
+                                                <th>{{__('account.title')}}</th>
+                                                <th>{{__('account.author')}}</th>
+                                                <th>{{__('account.date')}}</th>
+                                                <th>{{__('account.view')}}</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($items as $item)
+                                            @foreach($items as $key => $item)
                                             <tr>
                                                 <td>
-                                                    <p>{{ $item->id }}</p>
+                                                    <p>{{ $key +1 }}</p>
                                                 </td>
                                                 <td>
                                                     <p>{{ $item->title }}</p>

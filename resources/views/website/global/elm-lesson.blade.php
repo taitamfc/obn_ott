@@ -5,6 +5,9 @@
             <img src="{{ asset($lesson->image_url)}}" alt="grid">
         </a>
          <div class="gridarea__small__icon">
+            @if(!$lesson->is_bought)
+            <i class="icofont-lock bg-dark"></i>
+            @endif
             <a href="javascript:;" class="saved_whitlist" data-href="{{ route('website.saved_whitlist',['id'=> $lesson->id,'site_name'=> $site_name]) }}">
                 <i class="icofont-heart-alt {{ $lesson->is_added_whitlist ? 'active' : '' }}"></i>
             </a>

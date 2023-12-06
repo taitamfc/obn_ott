@@ -11,19 +11,9 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>My Profile</h4>
+                            <h4>{{__('account.my_page')}}</h4>
                         </div>
                         <div class="row">
-                            <div class="col-xl-12 aos-init aos-animate" data-aos="fade-up">
-                                <ul class="nav  about__button__wrap dashboard__button__wrap" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="single__tab__link active" data-bs-toggle="tab"
-                                            data-bs-target="#projects__one" type="button" aria-selected="true"
-                                            role="tab">Profile</button>
-                                    </li>
-                                </ul>
-                            </div>
-
                             <div class="tab-content tab__content__wrapper aos-init aos-animate" id="myTabContent"
                                 data-aos="fade-up">
 
@@ -44,7 +34,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Name</label>
+                                                                <label>{{__('account.full_name')}}</label>
                                                                 <input type="text" placeholder="John" name="name"
                                                                     id="name" value="{{ $student->name }}">
                                                                 @if ($errors->any())
@@ -58,7 +48,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Zip Code</label>
+                                                                <label>{{__('account.zip_code')}}</label>
                                                                 <input type="text" placeholder="John" name="code"
                                                                     id="code" value="{{ $student->code }}">
                                                                 @if ($errors->any())
@@ -72,7 +62,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Email Address</label>
+                                                                <label>{{__('account.email_address')}}</label>
                                                                 <input type="email" placeholder="email" name="email"
                                                                     value="{{ $student->email }}">
 
@@ -83,7 +73,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Phone</label>
+                                                                <label>{{__('account.phone_number')}}</label>
                                                                 <input type="text" placeholder="Phone Number"
                                                                     name="phone" value="{{ $student->phone }}">
                                                                 @if ($errors->any())
@@ -97,7 +87,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Passwword</label>
+                                                                <label>{{__('account.password')}}</label>
                                                                 <input type="password" name="password" id="password">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">{{ $errors->first('password') }}
@@ -110,7 +100,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Confirm New Password</label>
+                                                                <label>{{__('account.confirm_new_password')}}</label>
                                                                 <input type="password" name="repeatpassword">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">
@@ -124,7 +114,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Address</label>
+                                                                <label>{{__('account.address')}}</label>
                                                                 <input type="text" placeholder="John" name="address"
                                                                     id="address" value="{{ $student->address }}">
                                                                 @if ($errors->any())
@@ -138,7 +128,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>City</label>
+                                                                <label>{{__('account.city')}}</label>
                                                                 <input type="text" placeholder="John" name="city"
                                                                     id="city" value="{{ $student->city }}">
                                                                 @if ($errors->any())
@@ -152,7 +142,7 @@
                                                     <div class="col-xl-12">
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
-                                                                <label>Status</label>
+                                                                <label>{{__('account.status')}}</label>
                                                                 <select name="status" id="status" class="form-control">
                                                                 <option @selected( $student->status == 0 )
                                                                     value='0'>Inactive</option>
@@ -171,8 +161,8 @@
                                                         <div class="dashboard__form__button">
                                                         <a href="{{ route('website.accounts',['site_name' => $site_name]) }}"
                                                             class="btn btn-secondary" style="margin: 30px auto 0;"
-                                                            >Cancel</a>
-                                                            <button type="submit" class="btn btn-primary" style="margin: 30px auto 0;">Save</button>
+                                                            >{{__('account.cancel')}}</a>
+                                                            <button type="submit" class="btn btn-primary" style="margin: 30px auto 0;">{{__('account.save')}}</button>
                                                         </div>
                                                     </div>
 

@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Progress
+@endsection
 @section('content')
 
 <!-- dashboardarea__area__start  -->
@@ -11,7 +14,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                             <div class="dashboard__content__wraper">
                                 <div class="dashboard__section__title">
-                                    <h4>Progress</h4>
+                                    <h4>{{__('account.progress')}}</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12 aos-init aos-animate" data-aos="fade-up">

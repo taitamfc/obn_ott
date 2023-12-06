@@ -1,6 +1,8 @@
 @extends('website.layouts.master')
+@section('title')
+Currently Watching
+@endsection
 @section('content')
-
 <!-- dashboardarea__area__start  -->
 <div class="dashboardarea sp_bottom_100">
     @include('website.dashboards.dashboard-wraper')
@@ -11,7 +13,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>Currently Watching</h4>
+                            <h4>{{__('account.currently-watching')}}</h4>
                         </div>
                         <div class="row">
                             @foreach($lessons as $lesson)
