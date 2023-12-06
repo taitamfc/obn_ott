@@ -1,5 +1,6 @@
 <?php
 return [
+    'full_name' => 'Full Name',
     'my_page' => 'My Page',
     'all_lessons' => 'All Lessons',
     'currently-watching' => 'Currently Watching',
@@ -31,4 +32,6 @@ return [
     'confirm_new_password' => 'Confirm New Password',
     'password' => 'Password',
     'plan' => 'Plan',
+    'back' => 'Back',
+
 ];
