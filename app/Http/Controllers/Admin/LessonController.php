@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Grade;
@@ -103,6 +103,45 @@ class LessonController extends AdminController
         $item = new Lesson();
         
         return view('admin.lessons.create',compact('grades','subjects','courses','item'));
+    }
+    public function storeVideo(Request $request)
+    {
+        $video = $request->file('file');
+        $libraryId = '91253';
+        $AccessKey = '5785ce35-7af4-40af-be7725e43189-094c-41b8';
+        $urlCreate = "https://video.bunnycdn.com/library/{$libraryId}/videos/";
+        // Create video
+        $response = Http::withHeaders([
+            'AccessKey' => $AccessKey
+        ])->post($urlCreate, [
+            'title' => md5(time()),
+        ]);
+        if( $response->ok() ){
+            $guid = $response->json('guid');
+            if($guid){
+                $urlUpload = "https://video.bunnycdn.com/library/{$libraryId}/videos/{$guid}";
+                // Upload video
+                $response = Http::withHeaders([
+                    'Content-Type' => 'video/mp4',
+                    'AccessKey' => $AccessKey
+                ])->attach('file', file_get_contents($video), $video->getClientOriginalName())
+                ->put($urlUpload);
+                if( $response->ok() ){
+                    //Get video detail
+                    $success = $response->json('success');
+                    if($success == 'true'){
+                        $response = Http::withHeaders([
+                            'AccessKey' => $AccessKey
+                        ])->get($urlUpload);
+                        if( $response->ok() ){
+                            echo($response->body());
+                            die();
+                        }
+                    }
+                    
+                }
+            }
+        } 
     }
     public function store(StoreLessonRequest $request)
     {

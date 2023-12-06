@@ -4,25 +4,15 @@
             <h4>Video Information <span>*</span></h4>
         </div>
         <div class="form-group">
-            <div class="dropzone dropzone-light dz-clickable dz-started dz-max-files-reached input-video" id="">
+            <div action="{{ route('admin.lessons.storeVideo') }}" class="ct-dropzone dropzone-primary" id="file-validation">
                 <div class="dz-default dz-message">
-                    <span>
-                        <label class="m-3">Drag and drop the file here</label>
-                        <input type="file" class='form-control' name='video' style="height:150px">
-                    </span>
+                    <span><i class="ti-image"></i></span>
                 </div>
-                <div class="input-error text-danger">
-                    @error('video') {{ $message }} @enderror
-                </div>
+                <input type="hidden" id="video" name='video'>
+            </div>
+            <div class="input-error text-danger">
+                @error('video') {{ $message }} @enderror
             </div>
         </div>
-        @if( $item->video )
-        <div class="form-group">
-            <video src="{{ asset($item->video) }}" style="width:100px">
-        </div>
-        @endif
-
-
-
     </div>
 </div>
