@@ -160,6 +160,14 @@ jQuery(document).ready(function() {
                     formUpdate.prop('action', action);
                     formUpdate.find('.input-name input').val(formData.name);
                     formUpdate.find('.input-img src').val(formData.img);
+                    formUpdate.find('.input-status input').prop('checked', false);
+                    if (formData.status) {
+                        formUpdate.find('.input-status .input-active').prop('checked',
+                            true);
+                    } else {
+                        formUpdate.find('.input-status .input-inactive').prop('checked',
+                            true);
+                    }
                 }
             }
         });

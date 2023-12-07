@@ -45,4 +45,27 @@ class Subscription extends Model
     function getDurationNameAttribute(){
         return isset($this->duration)? $this->duration->name : '';
     }
+
+    // Feature
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+
+    public static function getActiveItems($site_id){
+        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
+    }
+
+    // status_fm 
+    function getStatusFmAttribute(){
+        if($this->status == self::INACTIVE){
+            return '<span class="badge badge-warning">In Active</span>';
+        }else{
+            return '<span class="badge badge-success">Active</span>';
+        }
+    }
+
+    function getPriceFmAttribute()
+    {  
+        $formattedPrice = '$' . number_format($this->price);
+        return $formattedPrice;
+    }
 }
