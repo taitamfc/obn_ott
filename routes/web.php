@@ -18,10 +18,12 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 include 'admin.php';
-
+// login by gg
+Route::get('/google',[App\Http\Controllers\Website\AuthGGController::class,'loginbyGG'])->name('login.google');
+Route::get('/google/callback',[App\Http\Controllers\Website\AuthGGController::class,'loginGGCallBack'])->name('login.backgoogle');
 
 // Frontend
-Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->group(function(){
+Route::prefix('{site_name}')->middleware(['preventhistory','localization'])gi->group(function(){
     Route::get('/',[\App\Http\Controllers\Website\HomeController::class,'index'])->name('cms');
     Route::get('grade/{id}',[\App\Http\Controllers\Website\GradeController::class,'show'])->name('website.grades.show');
     Route::get('subject/{id}',[\App\Http\Controllers\Website\SubjectController::class,'show'])->name('website.subjects.show');
@@ -92,8 +94,6 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     Route::get('/progress',function($site_name){
         return view('website.dashboards.progress.index',compact('site_name'));
     })->name('website.progress');
-
-
 
 
     // Login

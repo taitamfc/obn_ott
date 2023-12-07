@@ -1,5 +1,7 @@
 <?php
 
+
+
 return [
 
     /*
@@ -35,5 +37,9 @@ return [
         'client_secret' => '●●●●●●●●',
         'redirect' => '/hieu/auth/facebook/callback',
       ], 
-
+    'google' => [
+    'client_id' => '654852381692-tt5chnust7llima3sbo8croj0au190ti.apps.googleusercontent.com',
+    'client_secret' => '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',
+    'redirect' => "http://127.0.0.1:8000/google/callback",
+    ], 
 ];

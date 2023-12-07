@@ -17,6 +17,7 @@ use App\Http\Requests\ForgotPasswordStudentRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Str;
 use Mail;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends MainController
 {
@@ -117,5 +118,5 @@ class AuthController extends MainController
             return redirect()->route('website.login',['site_name'=>$this->site_name])->with('error','Has Problems, Please Try Again');
         }
     }
-
+    
 }
