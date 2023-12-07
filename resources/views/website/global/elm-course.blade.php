@@ -3,9 +3,6 @@
         <a href="{{ route('website.courses.show',['id'=> $course->id,'site_name'=> $site_name]) }}">
             <img src="{{ asset($course->image_url)}}" alt="grid">
         </a>
-        <div class="gridarea__small__button">
-            <div class="grid__badge">Monthly</div>
-        </div>
     </div>
     <div class="gridarea__content">
         <div class="gridarea__heading">

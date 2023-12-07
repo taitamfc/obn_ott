@@ -18,7 +18,7 @@
         @endif
         <form action="{{ route('website.orders.store',['site_name' => $site_name]) }}" method="post">
             @csrf
-            <input type="hidden" name="course_id" value="{{ $item->id }}">
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
             <input type="hidden" name="price" value="{{ $item->price }}">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12">

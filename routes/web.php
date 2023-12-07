@@ -72,6 +72,8 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
         Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
 
+        Route::get('orders/fail/{order_id}',[\App\Http\Controllers\Website\OrderController::class,'fail'])->name('website.orders.fail');
+        Route::get('orders/success/{order_id}',[\App\Http\Controllers\Website\OrderController::class,'success'])->name('website.orders.success');
         Route::get('orders/create/{item_id}/{type}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
         Route::post('orders/store',[\App\Http\Controllers\Website\OrderController::class,'store'])->name('website.orders.store');
         

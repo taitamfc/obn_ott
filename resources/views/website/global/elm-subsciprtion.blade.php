@@ -1,16 +1,16 @@
 <div class="gridarea__wraper">
     <div class="gridarea__img">
         <a href="{{ route('website.subscriptions.show',['id'=> $subscription->id,'site_name'=> $site_name]) }}">
-            <img src="{{ asset($course->image_url)}}" alt="grid">
+            <img src="{{ asset($subscription->image_url)}}" alt="grid">
         </a>
         <div class="gridarea__small__button">
-            <div class="grid__badge">Monthly</div>
+            <div class="grid__badge">{{ $subscription->duration }}</div>
         </div>
     </div>
     <div class="gridarea__content">
         <div class="gridarea__heading">
-            <h3><a
-                    href="{{ route('website.subscriptions.show',['id'=> $subscription->id,'site_name'=> $site_name]) }}">{{ $subscription->name }}</a>
+            <h3>
+                <a href="{{ route('website.subscriptions.show',['id'=> $subscription->id,'site_name'=> $site_name]) }}">{{ $subscription->name }}</a>
             </h3>
         </div>
         <div class="gridarea__price">
