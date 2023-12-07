@@ -1,4 +1,6 @@
 <?php
 return [
-    'title' => 'Plan'
+    'title' => 'Plan',
+    'courses' => 'Courses',
+    'subscriptions' => 'Subscriptions',
 ];

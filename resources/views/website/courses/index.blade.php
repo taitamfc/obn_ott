@@ -17,11 +17,11 @@
                 <ul class="nav  about__button__wrap dashboard__button__wrap" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="single__tab__link active" data-bs-toggle="tab" data-bs-target="#projects__one"
-                            type="button" aria-selected="true" role="tab">Courses</button>
+                            type="button" aria-selected="true" role="tab">{{__('plan.courses')}}</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="single__tab__link" data-bs-toggle="tab" data-bs-target="#projects__two"
-                            type="button" aria-selected="false" role="tab" tabindex="-1">Subscriptions</button>
+                            type="button" aria-selected="false" role="tab" tabindex="-1">{{__('plan.subscriptions')}}</button>
                     </li>
                 </ul>
             </div>
