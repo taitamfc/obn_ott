@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Lesson extends Model
 {
@@ -58,6 +59,30 @@ class Lesson extends Model
         return $this->hasMany(QuestionAnswer::class);
     }
 
+    //is_added_whitlist
+    function getIsAddedWhitlistAttribute(){
+        $student_id = Auth::guard('students')->id();
+        if($student_id){
+            return StudentWhitlist::where('lesson_id',$this->id)->where('student_id', $student_id)->exists();
+        }
+        return false;
+    } 
+    //is_bought
+    function getIsBoughtAttribute(){
+        $student_id = Auth::guard('students')->id();
+        if($student_id){
+            return LessonStudent::where('lesson_id',$this->id)->where('student_id', $student_id)->exists();
+        }
+        return false;
+    } 
+
+    function getImageUrlFmAttribute(){
+        if ($this->image_url) {
+            return asset($this->image_url);
+        } else {
+            return asset('assets/images/default.png');
+        }
+    } 
     // Feature
     function getGrade(){
         return isset($this->grade) ? $this->grade->name : '';

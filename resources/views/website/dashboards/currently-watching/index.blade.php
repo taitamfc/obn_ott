@@ -1,6 +1,8 @@
 @extends('website.layouts.master')
+@section('title')
+Currently Watching
+@endsection
 @section('content')
-
 <!-- dashboardarea__area__start  -->
 <div class="dashboardarea sp_bottom_100">
     @include('website.dashboards.dashboard-wraper')
@@ -11,14 +13,18 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>Currently Watching</h4>
+                            <h4>{{__('account.currently-watching')}}</h4>
                         </div>
                         <div class="row">
+                        @if(count($lessons))
                             @foreach($lessons as $lesson)
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
                                 @include('website.global.elm-lesson')
                             </div>
                             @endforeach
+                            @else
+                            <p class="text-center">{{__('sys.no_item_found')}}</p>
+                            @endif
                         </div>
 
                     </div>

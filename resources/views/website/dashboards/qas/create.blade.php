@@ -11,7 +11,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>Composer</h4>
+                            <h4>{{__('account.composer')}}</h4>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
@@ -28,7 +28,7 @@
                                         <div class="col-xl-12">
                                             <div class="dashboard__form__wraper">
                                                 <div class="dashboard__form__input">
-                                                    <label>Title</label>
+                                                    <label>{{__('account.title')}}</label>
                                                     <input type="text" name="title" id="title" value="{{ old('title') }}">
                                                     @if ($errors->any())
                                                     <p style="color:red">{{ $errors->first('title') }}
@@ -41,7 +41,7 @@
                                         <div class="col-xl-12">
                                             <div class="dashboard__form__wraper">
                                                 <div class="dashboard__form__input">
-                                                    <label>Question</label>
+                                                    <label>{{__('account.question')}}</label>
                                                     <textarea type="text" name="question" id="question">{{ old('question') }}</textarea>
                                                     @if ($errors->any())
                                                     <p style="color:red">{{ $errors->first('question') }}
@@ -59,9 +59,9 @@
                                         <div class="col-xl-12">
                                             <div class="dashboard__form__button">
                                                 <a href="{{ route('website.q-a',['site_name' => $site_name]) }}"
-                                                    class="btn btn-secondary" style="margin: 30px auto 0;">Cancel</a>
+                                                    class="btn btn-secondary" style="margin: 30px auto 0;">{{__('account.cancel')}}</a>
                                                 <button type="submit" class="btn btn-primary"
-                                                    style="margin: 30px auto 0;">Save</button>
+                                                    style="margin: 30px auto 0;">{{__('account.save')}}</button>
                                             </div>
                                         </div>
 

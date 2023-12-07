@@ -14,7 +14,7 @@
             </h3>
         </div>
         <div class="gridarea__price">
-            {{ $course->price }}
+            {{ $course->price_fm }}
         </div>
         <div class="course__summery__button">
             <a href="{{ route('website.orders.create',['site_name'=> $site_name, 'course_id' => $course->id]) }}"

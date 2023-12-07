@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home-5 Online Course | Edurock - Education LMS Template</title>
+    <title>@yield('title')</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('website/img/favicon.ico')}}">
@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/slick.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/swiper-bundle.min.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('website/css/custom.css')}}">
 </head>
 
 
@@ -46,6 +47,7 @@
     <script src="{{ asset('website/js/plugins.js')}}"></script>
     <script src="{{ asset('website/js/swiper-bundle.min.js')}}"></script>
     <script src="{{ asset('website/js/main.js')}}"></script>
+    <script src="{{ asset('website/js/custom.js')}}"></script>
     <script>
     $(document).ready(function() {
         $('#searchIcon').click(function() {

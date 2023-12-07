@@ -12,4 +12,6 @@ return [
     'no_data' => 'No data',
     'back' => 'Back',
     'no_item_found' => 'No item found',
+    '404_title' => 'Oops... It looks like you ‘re lost !',
+    '404_sub_title' => 'Oops! The page you are looking for does not exist. It might have been moved or deleted',
 ];

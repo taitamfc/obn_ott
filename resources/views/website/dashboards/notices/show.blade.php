@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Notice
+@endsection
 @section('content')
 <!-- dashboardarea__area__start  -->
 <div class="dashboardarea sp_bottom_100">
@@ -12,7 +15,7 @@
                         <div class="dashboard__section__title">
                             <h4>{{$item->title}}</h4>
                             <a href="{{ route('website.notices', ['site_name' => $site_name]) }}"
-								class="btn btn-primary">Back</a>
+								class="btn btn-primary">{{__('account.back')}}</a>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">

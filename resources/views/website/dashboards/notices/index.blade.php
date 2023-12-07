@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+Notice
+@endsection
 @section('content')
 <!-- dashboardarea__area__start  -->
 <div class="dashboardarea sp_bottom_100">
@@ -10,7 +13,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>Notice</h4>
+                            <h4>{{__('account.notice')}}</h4>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
@@ -24,16 +27,17 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Date</th>
+                                                <th>{{__('account.title')}}</th>
+                                                <th>{{__('account.date')}}</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
+                                        @if(count($items))
                                         <tbody>
-                                            @foreach($items as $item)
+                                            @foreach($items as $key => $item)
                                             <tr>
                                                 <td>
-                                                    <p>{{ $item->id }}</p>
+                                                    <p>{{ $key +1 }}</p>
                                                 </td>
 
                                                 <td>
@@ -57,6 +61,13 @@
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <p>{{__('sys.no_item_found')}}</p>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

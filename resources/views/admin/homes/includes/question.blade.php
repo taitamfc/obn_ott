@@ -14,7 +14,7 @@
                             <tr>
                                 <td class="w-70">Avatar</td>
                                 <td class="w-30p">Name</td>
-                                <td>Student_ID</td>
+                                <td>Student</td>
                                 <td>Question</td>
                                 <td>Answer</td>
                                 <td>Date</td>

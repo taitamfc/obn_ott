@@ -18,9 +18,9 @@ class Student extends Authenticatable
 
     function getStatusFmAttribute(){
         if($this->status == self::INACTIVE){
-            return 'In Active';
+            return __('account.inactive');
         }else{
-            return 'Active';
+            return __('account.active');
         }
 
     }
@@ -75,4 +75,5 @@ class Student extends Authenticatable
     function qas(){
         return $this->hasMany(QuestionAnswer::class,'student_id','id');
     }
+    
 }
