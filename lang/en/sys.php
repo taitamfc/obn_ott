@@ -6,6 +6,7 @@ return [
     'update_item_error' => 'Failed to update',
     'destroy_item_success' => 'Deleted successfully',
     'destroy_item_error' => 'Failed to delete',
+    'buy_item_error' => 'You buyed it',
     'item_not_found' => 'No matching results found',
     'add_new' => 'Add new',
     'loading_data' => 'Loading data...',

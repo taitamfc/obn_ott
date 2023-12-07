@@ -228,7 +228,7 @@ class UserController extends AdminController
             return response([
                 'success' => true,
                 'message' => __('sys.store_item_success'),
-                'redirect' => route('users.plans')
+                'redirect' => route('admin.users.plans')
             ],200);
         } catch (QueryException $e) {
             Log::error($e->getMessage());

@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class StoreSubscriptionRequest extends FormRequest
+use Illuminate\Contracts\Validation\Validator;
+
+class StoreDurationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,20 +25,6 @@ class StoreSubscriptionRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required|numeric',
-            'duration' => 'numeric',
-            'course' => 'required|array',
-            'course.*' => 'numeric',
-        ];
-    }
-    public function messages()
-    {
-        return [
-            'name.required' => 'The name field is required',
-            'price.numeric' => 'The price field must contain numeric values',
-            'price.required' => 'The price field is required',
-            'duration.numeric' => 'The duration field is required',
-            'course.*.numeric' => 'The course field is required',
         ];
     }
     protected function failedValidation(Validator $validator)
