@@ -106,7 +106,7 @@ class PaymentController extends MainController
                 DB::commit();
 
                 return redirect()
-                ->route('website.orders.create',['site_name'=>$this->site_name,'course_id'=>$request->course])
+                ->route('website.orders.success',['site_name'=>$this->site_name,'order_id'=>$request->order_id])
                 ->with('success', 'Transaction complete.');
 
             } catch (\Exception $e) {

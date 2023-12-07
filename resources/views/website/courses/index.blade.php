@@ -21,7 +21,7 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="single__tab__link" data-bs-toggle="tab" data-bs-target="#projects__two"
-                            type="button" aria-selected="false" role="tab" tabindex="-1">Subscript</button>
+                            type="button" aria-selected="false" role="tab" tabindex="-1">Subscriptions</button>
                     </li>
                 </ul>
             </div>

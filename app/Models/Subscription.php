@@ -60,4 +60,8 @@ class Subscription extends Model
         $formattedPrice = '$' . number_format($this->price);
         return $formattedPrice;
     }
+    function getImageUrlAttribute()
+    {  
+        return asset('assets/images/default.png');
+    }
 }
