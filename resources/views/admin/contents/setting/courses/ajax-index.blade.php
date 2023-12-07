@@ -6,7 +6,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Price</th>
                     <th scope="col">Status</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
@@ -18,7 +17,6 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
                     <td>{!! $item->getImgFmAttribute() !!}</td>
-                    <td>{{ $item->price }}</td>
                     <td>{!! $item->status_fm !!}</td>
                     <td>
                         <ul class="d-flex justify-content-center">
