@@ -31,6 +31,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     Route::get('courses',[\App\Http\Controllers\Website\CourseController::class,'index'])->name('website.courses.index');
     Route::get('courses/{id}',[\App\Http\Controllers\Website\CourseController::class,'show'])->name('website.courses.show');
     Route::get('subscriptions/{id}',[\App\Http\Controllers\Website\SubscriptionController::class,'show'])->name('website.subscriptions.show');
+    Route::get('pages/{id}',[\App\Http\Controllers\Website\PageController::class,'show'])->name('website.pages.show');
                                                                   
     // Route::get('/courses',function($site_name){
     //     return view('website.courses.index',compact('site_name'));
