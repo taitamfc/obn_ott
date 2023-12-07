@@ -57,24 +57,23 @@
                              <ul>
                                  @foreach($site_pages as $page)
                                  <li>
-                                     <a href="{{ $page->url }}">{{ $page->title }}</a>
+                                 <a href="{{ route('website.pages.show', ['site_name' => $site_name, 'id' => $page->id]) }}">{{ $page->title }} </a>
                                  </li>
                                  @endforeach
                              </ul>
                          </div>
 
-
-                     </div>
-                 </div>
-                 <div class="col-xl-5 col-lg-5 col-sm-6 col-md-6" data-aos="fade-up">
-                     <div class="footerarea__inner footerarea__padding__left">
-                         <div class="footerarea__heading">
-                             <h3>{{__('footer.course')}}</h3>
-                         </div>
-                         <div class="footerarea__list">
-                             <ul>
-                                 @foreach($site_courses as $course)
-                                 <li>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-5 col-sm-6 col-md-6" data-aos="fade-up">
+                        <div class="footerarea__inner footerarea__padding__left">
+                            <div class="footerarea__heading">
+                                <h3>{{__('footer.course')}}</h3>
+                            </div>
+                            <div class="footerarea__list">
+                                <ul>
+                                    @foreach($site_courses as $course)
+                                    <li>
                                  <a href="{{ route('website.courses.show', ['site_name' => $site_name, 'id' => $course->id]) }}">{{ $course->name }}</a>
                                  </li>
                                  @endforeach
