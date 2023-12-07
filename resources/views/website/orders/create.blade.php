@@ -24,34 +24,34 @@
                 <div class="col-xl-6 col-lg-6 col-md-12">
                     <div class="checkoutarea__billing">
                         <div class="checkoutarea__billing__heading">
-                            <h2>Billing Details</h2>
+                            <h2>{{__('checkout.billing-details')}}</h2>
                         </div>
                         <div class="checkoutarea__billing__form">
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="checkoutarea__inputbox">
-                                        <label for="name">Name *</label>
+                                        <label for="name">{{__('checkout.name')}} *</label>
                                         <input type="text" id="first__name" name="name" class="info" placeholder="Name"
                                             value="{{$student->name}}">
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="checkoutarea__inputbox">
-                                        <label for="company__name">Email *</label>
+                                        <label for="company__name">{{__('checkout.email')}} *</label>
                                         <input type="text" id="company__name" name="email" class="info"
                                             value="{{$student->email}}" placeholder="Email *">
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="checkoutarea__inputbox">
-                                        <label for="email__address">Phone Number *</label>
+                                        <label for="email__address">{{__('checkout.phone-number')}} *</label>
                                         <input type="text" id="email__address" name="phone" class="info"
                                             value="{{$student->phone}}" placeholder="Your email">
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="checkoutarea__inputbox">
-                                        <label for="order__note">Order Notes</label>
+                                        <label for="order__note">{{__('checkout.orders-notes')}}</label>
                                         <input type="text" id="order__note" name="note" class="info"
                                             placeholder="Order Notes">
                                     </div>
@@ -98,12 +98,11 @@
                                     <div class="checkoutarea__payment__type">
                                         <input type="radio" id="pay-toggle04" name="pay" checked="checked"
                                             value='paypal'>
-                                        <label for="pay-toggle04">Paypal</label>
+                                        <label for="pay-toggle04">{{__('checkout.paypal')}}</label>
                                     </div>
                                 </div>
                                 <div class="checkoutarea__payment__input__box">
-                                    <button class="default__button">Place
-                                        order</button>
+                                    <button class="default__button">{{__('checkout.place-order')}}</button>
                                 </div>
                             </div>
                         </div>
