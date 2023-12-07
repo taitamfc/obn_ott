@@ -10,8 +10,8 @@
                     <div class="col-xl-8 col-lg-10 col-sm-12 col-12 m-auto">
                         <div class="errorarea__inner aos-init aos-animate" data-aos="fade-up">
                             <div class="error__text">
-                                <h3>Order success</h3>
-                                <p>Thanks for your order</p>
+                                <h3>Order failed</h3>
+                                <p>Msg</p>
                             </div>
                             <div class="order-checkout-info">
                                 Order info

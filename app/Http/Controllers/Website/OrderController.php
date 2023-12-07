@@ -21,6 +21,13 @@ class OrderController extends MainController
         ];
         return view('website.orders.success',$params);
     }
+    public function fail($site_id,$order_id){
+        $item = Order::find($order_id);
+        $params = [
+            'item' => $item
+        ];
+        return view('website.orders.fail',$params);
+    }
     public function create($site_id,$item_id,$type){
         if($type == 'course'){
             $course = Course::find($item_id);
