@@ -20,20 +20,20 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group input-duration">
                     <label for="duration" class="col-form-label">Duration <span>*</span></label>
                     <select name="duration" id="duration" class="form-control">
-                        <option value="3 Month">3 Month</option>
-                        <option value="6 Month">6 Month</option>
-                        <option value="Free">Free</option>
+                        <option value="">Select Duration</option>
+                        @foreach ($durations as $id => $durationName)
+                        <option value="{{ $id }}">{{ $durationName }}</option>
+                        @endforeach
                     </select>
                     <div class="input-error text-danger">@error('duration') {{ $message }} @enderror
                     </div>
-                    <div class="input-error text-danger">@error('course') {{ $message }} @enderror</div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group input-course">
                     <label for="course" class="col-form-label">Course <span>*</span></label>
                     <select name="course[]" id="course" class="form-control" multiple>
                         <option value="">Select Course</option>
@@ -41,7 +41,7 @@
                         <option value="{{ $id }}">{{ $courseName }}</option>
                         @endforeach
                     </select>
-                    <div class="input-error text-danger">@error('course') {{ $message }} @enderror
+                    <div class="input-error text-danger">@error('courses') {{ $message }} @enderror
                     </div>
                     <a href="#" class="btn btn-primary mt-4">Add more Courses</a>
                 </div>

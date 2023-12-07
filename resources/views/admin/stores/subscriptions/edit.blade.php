@@ -25,12 +25,11 @@
                 <div class="form-group">
                     <label for="duration" class="col-form-label">Duration</label>
                     <select name="duration" id="duration" class="form-control">
-                        <option value="3 Month" {{ (old('duration', $item->duration) == '3 Month') ? 'selected' : '' }}>
-                            3 Month</option>
-                        <option value="6 Month" {{ (old('duration', $item->duration) == '6 Month') ? 'selected' : '' }}>
-                            6 Month</option>
-                        <option value="Free" {{ (old('duration', $item->duration) == 'Free') ? 'selected' : '' }}>Free
-                        </option>
+                        <option value="">Select Course</option>
+                        @foreach ($durations as $duration)
+                        <option @selected( in_array($duration->id,explode(',', $item->duration_id)))
+                            value="{{ $duration->id }}">{{ $duration->name }}</option>
+                        @endforeach
                     </select>
                     <div class="input-error text-danger">@error('duration') {{ $message }} @enderror
                     </div>
@@ -49,8 +48,8 @@
                     <span class="btn btn-primary mt-4">Add more Courses</span>
                 </div>
             </div>
-            <a class="btn btn-secondary mr-3" href="{{ route('admin.subscriptions.index') }}">Back to list</a>
-            <button class="btn btn-primary edit-item" type='button'>Save changes</button>
         </div>
+        <a class="btn btn-secondary mr-3 float-left" href="{{ route('admin.subscriptions.index') }}">Back to list</a>
+        <button class="btn btn-primary edit-item float-right" type='button'>Save changes</button>
     </form>
 </div>

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Subscription;
 use App\Models\Course;
+use App\Models\Duration;
 use App\Models\SubscriptionCourse;
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Http\Requests\UpdateSubscriptionRequest;
@@ -20,12 +21,13 @@ class SubscriptionController extends AdminController
      */
     function index(Request $request){
         $form = 'create';
-        $courses = Course::pluck('name', 'id');
+        $courses = Course::where('site_id',$this->site_id)->where('status',Course::ACTIVE)->pluck('name', 'id');
+        $durations = Duration::where('site_id',$this->site_id)->pluck('name', 'id');
         if($request->ajax()){
-            $items = Subscription::get();
+            $items = Subscription::with('duration')->get();
             return view('admin.stores.subscriptions.ajax-index',compact('items'));
         }
-        return view('admin.stores.subscriptions.index',compact('courses','form'));
+        return view('admin.stores.subscriptions.index',compact('courses','form','durations'));
     }
 
     /**
@@ -43,7 +45,7 @@ class SubscriptionController extends AdminController
         $item = new Subscription();
         $item->name = $request->name;
         $item->price = $request->price;
-        $item->duration = $request->duration;
+        $item->duration_id = $request->duration;
         $item->site_id = $this->site_id;
         try {
             $item->save();
@@ -87,9 +89,10 @@ class SubscriptionController extends AdminController
         $items  = Subscription::get();
         $item   = Subscription::find($id);
         $selected_courses = $item->courses ? $item->courses->pluck('id')->toArray() : [];
+        $durations = Duration::get();
         $courses = Course::get();
         $form = 'edit';
-        return view('admin.stores.subscriptions.index',compact('items','courses','item','selected_courses','form'));
+        return view('admin.stores.subscriptions.index',compact('items','courses','item','selected_courses','form','durations'));
     }
 
     /**
@@ -101,7 +104,7 @@ class SubscriptionController extends AdminController
         $item = Subscription::find($id);
         $item->name = $request->name;
         $item->price = $request->price;
-        $item->duration = $request->duration;
+        $item->duration_id = $request->duration;
         $item->site_id = $this->site_id;
         try {
             $item->save();

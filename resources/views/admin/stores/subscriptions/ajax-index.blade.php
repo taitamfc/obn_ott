@@ -19,7 +19,7 @@
                             <th scope="row">{{ $item->id }}</th>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->price }}</td>
-                            <td>{{ $item->duration }}</td>
+                            <td>{{ $item->duration_name }}</td>
                             <td>
                                 <a href="{{ route('admin.subscriptions.edit', $item->id) }}" class="text-primary">
                                     <i class="ti-pencil mr-1 btn btn-success"></i>

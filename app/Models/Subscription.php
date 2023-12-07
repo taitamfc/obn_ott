@@ -12,7 +12,7 @@ class Subscription extends Model
     protected $fillable = [
         'name',
         'price',
-        'duration',
+        'duration_id',
         'site_id',
         'createt_at',
         'updated_at',
@@ -35,6 +35,14 @@ class Subscription extends Model
         return $this->hasMany(Transaction::class);
     }
     function orders(){
-        $this->hasMany(Order::class, 'item_id','id');
+        return $this->hasMany(Order::class, 'item_id','id');
+    }
+    function duration(){
+        return $this->belongsTo(Duration::class);
+    }
+
+    //Feature 
+    function getDurationNameAttribute(){
+        return isset($this->duration)? $this->duration->name : '';
     }
 }

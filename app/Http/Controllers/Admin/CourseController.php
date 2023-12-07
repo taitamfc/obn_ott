@@ -122,7 +122,7 @@ class CourseController extends AdminController
     {
         // $this->authorize('Course',Course::class);
         if( $request->ajax() ){
-            $items = Course::where('site_id',$this->site_id)->paginate(20);
+            $items = Course::where('site_id',$this->site_id)->where('status',Course::ACTIVE)->paginate(20);
             return view('admin.stores.productmanagement.ajax-index',compact('items'));
         }
         return view('admin.stores.productmanagement.index');

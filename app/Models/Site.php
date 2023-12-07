@@ -75,4 +75,7 @@ class Site extends Model
     function orders(){
         return $this->hasMany(Order::class);
     }
+    function durations(){
+        return $this->hasMany(Duration::class);
+    }
 }

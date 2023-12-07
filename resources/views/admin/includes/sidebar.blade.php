@@ -105,6 +105,14 @@
                 </ul>
             </li>
             <!-- endif -->
+
+            <!-- Duration -->
+            <li> <a href="{{ route('admin.durations.index') }}">
+                    <i class="feather ft-home"></i>
+                    <span>Duration</span>
+                </a>
+            </li>
+
             <!-- Class -->
             <!-- if (Auth::user()->hasPermission('Class')) -->
             <li> <a href="{{ route('admin.classes.index') }}">

@@ -33,6 +33,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::get('cancel-payment',[\App\Http\Controllers\Admin\PaymentController::class, 'paymentCancel'])->name('cancel.payment');
     Route::get('payment-success',[\App\Http\Controllers\Admin\PaymentController::class, 'paymentSuccess'])->name('success.payment');
     
+    //Duration
+    Route::resource('/durations',\App\Http\Controllers\Admin\DurationController::class);
+
     //Plan
     Route::get('/users/plans',[\App\Http\Controllers\Admin\UserController::class,'plan'])->name('users.plans');
     Route::get('/users/addPlans/{id}',[\App\Http\Controllers\Admin\UserController::class,'addPlan'])->name('users.addPlans');
