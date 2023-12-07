@@ -17,11 +17,11 @@
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
 
-                    <div class="form-group input-price-update">
+                    <!-- <div class="form-group input-price-update">
                         <label for="price" class="col-form-label">Price</label>
                         <input class="form-control" type="text" id="price" name='price'>
                         <div class="input-error text-danger">@error('price') {{ $message }} @enderror</div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label for="image" class="col-form-label">Banner</label>

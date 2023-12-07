@@ -14,11 +14,11 @@
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
 
-                    <div class="form-group input-price-create">
+                    <!-- <div class="form-group input-price-create">
                         <label for="price" class="col-form-label">Price</label>
                         <input class="form-control" type="text" id="price" name='price'>
                         <div class="input-error text-danger">@error('price') {{ $message }} @enderror</div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group input-image-create">
                         <label for="image" class="col-form-label">Banner</label>
