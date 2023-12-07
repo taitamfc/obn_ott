@@ -4,7 +4,7 @@
             <img src="{{ asset($subscription->image_url)}}" alt="grid">
         </a>
         <div class="gridarea__small__button">
-            <div class="grid__badge">{{ $subscription->duration }}</div>
+            <div class="grid__badge">{{ $subscription->duration->name }}</div>
         </div>
     </div>
     <div class="gridarea__content">
