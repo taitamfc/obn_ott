@@ -12,45 +12,46 @@
 <div class="coursearea sp_top_100 sp_bottom_100">
     <div class="container">
         <div class="row">
-            <!-- <div class="col-xl-12">
-                <div class="course__text__wraper aos-init aos-animate" data-aos="fade-up">
-                    <div class="course__text">
-                        <p>Showing 1–12 of 54 Results</p>
-                    </div>
-                    <div class="course__icon">
-                        <ul class="nav property__team__tap" id="myTab" role="tablist">
-                            <li class="short__by__new">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected=""> Short by New</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </li>
+       
+            <div class="col-xl-12 aos-init aos-animate" data-aos="fade-up">
+                <ul class="nav  about__button__wrap dashboard__button__wrap" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="single__tab__link active" data-bs-toggle="tab" data-bs-target="#projects__one"
+                            type="button" aria-selected="true" role="tab">Courses</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="single__tab__link" data-bs-toggle="tab" data-bs-target="#projects__two"
+                            type="button" aria-selected="false" role="tab" tabindex="-1">Subscript</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-12">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="projects__one" role="tabpanel">
+                                <div class="row">
+                                    @foreach( $items as $course )
+                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 aos-init aos-animate" data-aos="fade-up">
+                                        @include('website.global.elm-course')
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
 
-                        </ul>
+                            <div class="tab-pane fade" id="projects__two" role="tabpanel">
+                                <div class="row">
+                                    @foreach( $subscriptions as $subscription )
+                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 aos-init aos-animate" data-aos="fade-up">
+                                        @include('website.global.elm-subsciprtion')
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div> -->
-            <div class="col-xl-12">
-				<div class="row">
-                    @foreach( $items as $course )
-					<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 aos-init aos-animate"
-						data-aos="fade-up">
-						@include('website.global.elm-course')
-					</div>
-                    @endforeach
-				</div>
             </div>
-            <!-- <div class="main__pagination__wrapper aos-init aos-animate" data-aos="fade-up">
-                <ul class="main__page__pagination">
-                    <li><a class="disable" href="#"><i class="icofont-double-left"></i></a></li>
-                    <li><a class="active" href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="icofont-double-right"></i></a></li>
-                </ul>
-            </div> -->
+
         </div>
     </div>
 </div>

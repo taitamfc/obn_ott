@@ -31,21 +31,21 @@
                         <img src="" class="input-img" alt="" style="display:none;">
                     </div>
 
-                    <div class="form-group">
-                        <label for="status" class="col-form-label">Status</label>
-                        <div style="display: flex">
-                            <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
-                                <input type="radio" checked id="c-active" name="status" class="custom-control-input"
-                                    value='1'>
-                                <label class="custom-control-label" for="c-active">Active</label>
-                            </div>
-                            <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
-                                <input type="radio" id="c-inactive" name="status" class="custom-control-input"
-                                    value='0'>
-                                <label class="custom-control-label" for="c-inactive">Inactive</label>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="form-group input-status">
+						<label for="status" class="col-form-label">Status</label>
+						<div style="display: flex">
+							<div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
+								<input type="radio" checked id="e-active" name="status" class="custom-control-input input-active"
+									value='1'>
+								<label class="custom-control-label" for="e-active">Active</label>
+							</div>
+							<div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
+								<input type="radio"  id="e-inactive" name="status" class="custom-control-input input-inactive"
+									value='0'>
+								<label class="custom-control-label" for="e-inactive">Inactive</label>
+							</div>
+						</div>
+					</div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary edit-item" type='button'>Save changes</button>

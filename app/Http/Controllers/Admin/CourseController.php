@@ -32,7 +32,7 @@ class CourseController extends AdminController
         $item = new Course();
         $item->site_id = $this->site_id;
         $item->name = $request->name;
-        $item->price = $request->price;
+        // $item->price = $request->price;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {
@@ -61,7 +61,7 @@ class CourseController extends AdminController
     {
         $item = Course::where('site_id',$this->site_id)->find($id);
         $item->name = $request->name;
-        $item->price = $request->price;
+        // $item->price = $request->price;
         $item->status = $request->status;
         try {
             if ($request->hasFile('image')) {

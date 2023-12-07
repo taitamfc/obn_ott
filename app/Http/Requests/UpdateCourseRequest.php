@@ -24,14 +24,14 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required'
+            // 'price' => 'required'
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'The name field is required',
-            'price.required' => 'The price field is required',
+            // 'price.required' => 'The price field is required',
         ];
     }
 
