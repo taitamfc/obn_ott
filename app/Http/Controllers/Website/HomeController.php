@@ -10,7 +10,7 @@ class HomeController extends MainController
 {
     public function index(){
 
-        $grades = Grade::where('site_id',$this->site_id)->where('status',Grade::ACTIVE)->get();
+        $grades = Grade::where('site_id',$this->site_id)->where('status',Grade::ACTIVE)->withCount('')->get();
         $params = [
             'grades' => $grades
         ];
