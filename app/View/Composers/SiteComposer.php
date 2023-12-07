@@ -6,6 +6,9 @@ use App\Repositories\UserRepository;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Site;
+use App\Models\Course;
+use App\Models\Page;
+use App\Models\Subscription;
 use App\Models\Setting;
  
 class SiteComposer
@@ -39,6 +42,14 @@ class SiteComposer
             $view->with('cr_site', $site);
             $view->with('site_name', $site->slug);
             $view->with('site_setting', $setting);
+
+            $site_pages = Page::where('site_id',$site->id)->get();
+            $site_courses = Course::where('site_id',$site->id)->get();
+            $site_subscriptions = Subscription::where('site_id',$site->id)->get();
+            
+            $view->with('site_pages', $site_pages);
+            $view->with('site_courses', $site_courses);
+            $view->with('site_subscriptions', $site_subscriptions);
         }
         
 

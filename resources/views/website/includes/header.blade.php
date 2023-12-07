@@ -24,7 +24,7 @@
                     <div class="headerarea__right">
                         <div class="headerarea__login">
                             @if(auth('students')->check())
-                            <a>Hi, {{ auth('students')->user()->name }}</a>
+                            <a>{{__('header.hi')}}, {{ auth('students')->user()->name }}</a>
                             @else
                             @endif
                             <a href="{{ route('website.accounts',['site_name'=>$site_name]) }}"><i
@@ -50,7 +50,7 @@
                         <div class="headerarea__left__logo">
                             <a href="{{ route('cms',['site_name'=>$site_name]) }}" style="text-align: center;">
                                 <img loading="lazy" src="{{ asset($site_setting['logo']) }}" alt="logo"
-                                    style="width: 169px;">
+                                style="width: 169px;max-height: 100px;object-fit: contain;">
                             </a>
                         </div>
                     </div>
