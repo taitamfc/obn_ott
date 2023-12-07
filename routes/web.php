@@ -28,7 +28,8 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
     Route::get('lessons/{id}',[\App\Http\Controllers\Website\LessonController::class,'show'])->name('website.lessons.show');
     Route::get('courses',[\App\Http\Controllers\Website\CourseController::class,'index'])->name('website.courses.index');
     Route::get('courses/{id}',[\App\Http\Controllers\Website\CourseController::class,'show'])->name('website.courses.show');
-
+    Route::get('subscriptions/{id}',[\App\Http\Controllers\Website\SubscriptionController::class,'show'])->name('website.subscriptions.show');
+                                                                  
     // Route::get('/courses',function($site_name){
     //     return view('website.courses.index',compact('site_name'));
     // })->name('website.courses');
@@ -69,7 +70,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
         Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
 
-        Route::get('orders/create/{course_id}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
+        Route::get('orders/create/{item_id}/{type}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
         Route::post('orders/store',[\App\Http\Controllers\Website\OrderController::class,'store'])->name('website.orders.store');
         
         Route::get('q-a',[App\Http\Controllers\Website\QuestionAnswerController::class,'index'])->name('website.q-a');
