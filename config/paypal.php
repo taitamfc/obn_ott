@@ -8,8 +8,8 @@
 return [
     'mode'    => env('PAYPAL_MODE', 'sandbox'),
     'sandbox' => [
-        'client_id'     => env('PAYPAL_SANDBOX_CLIENT_ID', ''),
-        'client_secret' => env('PAYPAL_SANDBOX_CLIENT_SECRET', ''),
+        'client_id'     => 'AR4Exg0jiAa-cVcfei2lbolAweoAwZz_s5S9X45E_nT7C8qDME6BCitynQJcxKF7_16hqmYS2TEF9MUo',
+        'client_secret' => 'EC7elh7ZPYT_KGfVecaevuQ7U95lURVfT930lcsBNILk0tt_IXIRdfBXRnL_KFwLtKk-Y42jZ-N92RJa',
         'app_id'        => 'APP-80W284485P519543T',
     ],
     'live' => [
