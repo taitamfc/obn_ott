@@ -124,7 +124,7 @@ class LessonController extends AdminController
             if ($request->hasFile('file')) {
                 $video = $request->file('file');
             }else{
-                throw new Exception("Can not upload video");
+                throw new \Exception("Can not upload video");
             }
             $urlCreate = "https://video.bunnycdn.com/library/{$this->stream_library_id}/videos/";
             // Create video
@@ -136,13 +136,14 @@ class LessonController extends AdminController
             if( $response->ok() ){
                 $guid = $response->json('guid');
                 if($guid){
-                    $response = $this->APIcall('PUT', "library/{$this->stream_library_id}/videos/" . $guid, array('file' => $video->path()), 'STREAM');
+                    $urlUpload = "library/{$this->stream_library_id}/videos/" . $guid;
+                    $response = $this->APIcall('PUT', $urlUpload, array('file' => $video->path()), 'STREAM');
                     if( !empty($response['url']) ){
                         $video_url = $response['url'];
                     }
                 }
             }else{
-                throw new Exception("Can not create video");
+                throw new \Exception("Can not create video");
             }
         } catch (\Exception $e) {
             Log::error('Upload video API: '.$e->getMessage());
@@ -161,6 +162,7 @@ class LessonController extends AdminController
         $item->status = $request->status;
         $item->site_id = $this->site_id;
         $item->video_url = $request->video;
+        $item->image_url = $request->video;
         try {
             DB::beginTransaction();
 
@@ -231,7 +233,12 @@ class LessonController extends AdminController
             $item->description = $request->description;
             $item->status = $request->status;
             $item->site_id = $this->site_id; 
-            $item->video_url = $this->video;           
+            if($request->video && $item->video_url){
+                $urlUpload = "library/{$this->stream_library_id}/videos/" . $item->video_url;
+                $this->APIcall('DELETE', $urlUpload,null, 'STREAM');
+                $item->video_url = $request->video;
+                $item->image_url = $request->video;
+            }
             // if ($request->hasFile('video')) {
             //     $this->deleteFile([$item->video_url]);
             //     $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
