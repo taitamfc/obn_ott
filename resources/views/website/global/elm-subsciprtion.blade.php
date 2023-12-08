@@ -10,7 +10,8 @@
     <div class="gridarea__content">
         <div class="gridarea__heading">
             <h3>
-                <a href="{{ route('website.subscriptions.show',['id'=> $subscription->id,'site_name'=> $site_name]) }}">{{ $subscription->name }}</a>
+                <a
+                    href="{{ route('website.subscriptions.show',['id'=> $subscription->id,'site_name'=> $site_name]) }}">{{ $subscription->name }}</a>
             </h3>
         </div>
         <div class="gridarea__price">
@@ -21,4 +22,4 @@
                 class="default__button">Purchase</a>
         </div>
     </div>
-</div>      
+</div>
