@@ -2,7 +2,7 @@
     <div class="col-md-12 grid-margin">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                <h5 class="mr-4 mb-0 font-weight-bold">Dashboard</h5>
+                <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-content.dashboard')}}</h5>
                 <div class="d-flex align-items-baseline dashboard-breadcrumb">
                     {{ $cr_site->name }}
                 </div>

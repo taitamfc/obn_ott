@@ -30,7 +30,7 @@ class Grade extends Model
         return $this->belongsTo(Site::class);
     }
     public function subjects(){
-        return $this->hasMany(Subject::class)->where('status',Subject::ACTIVE)->limit(5);
+        return $this->hasMany(Subject::class)->where('status',Subject::ACTIVE)->orderBy('position');
     }
     function subject(){
         return $this->hasMany(Subject::class,'grade_id');

@@ -11,6 +11,7 @@ class Duration extends Model
     protected $table = 'durations';
     protected $fillable = [
         'name',
+        'number_days',
         'site_id'
     ];
     function site(){

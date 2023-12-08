@@ -13,6 +13,12 @@
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
+
+                    <div class="form-group input-number_days-create">
+                        <label for="number_days" class="col-form-label">Number Day</label>
+                        <input class="form-control" type="number" id="number_days" name='number_days'>
+                        <div class="input-error text-danger">@error('number_days') {{ $message }} @enderror</div>
+                    </div>
                     <!-- <div class="form-group">
                         <label for="status" class="col-form-label">Status</label>
                         <div style="display: flex">

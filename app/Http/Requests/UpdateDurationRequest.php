@@ -25,6 +25,7 @@ class UpdateDurationRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'number_days' => 'required|numeric',
         ];
     }
     protected function failedValidation(Validator $validator)

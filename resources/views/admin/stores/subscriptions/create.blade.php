@@ -19,6 +19,7 @@
 
                 </div>
             </div>
+            
             <div class="col-sm-6">
                 <div class="form-group input-duration">
                     <label for="duration" class="col-form-label">Duration <span>*</span></label>
@@ -28,10 +29,17 @@
                         <option value="{{ $id }}">{{ $durationName }}</option>
                         @endforeach
                     </select>
-                    <div class="input-error text-danger">@error('duration') {{ $message }} @enderror
-                    </div>
+                    <div class="input-error text-danger">@error('duration') {{ $message }} @enderror</div>
+                   
+                    <!-- <div class="buttons d-flex" style="margin-top: 20px">
+                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
+                            Add more Duration
+                        </button>
+                    </div> -->
+
                 </div>
             </div>
+
             <div class="col-sm-6">
                 <div class="form-group input-course">
                     <label for="course" class="col-form-label">Course <span>*</span></label>
