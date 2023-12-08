@@ -37,7 +37,7 @@ Q&A
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @if(count($items))
+                                            @if(count($items))
                                             @foreach($items as $key => $item)
                                             <tr>
                                                 <td>
@@ -51,28 +51,29 @@ Q&A
                                                 </td>
 
                                                 <td>
-                                                    <p>{{ $item->created_at->format('d/m/Y') }}</p>
+                                                    <p>{{ $item->created_at->format('d/m/Y h:i a') }}</p>
                                                 </td>
                                                 <td>
                                                     <p>0</p>
                                                 </td>
-                                             
+
                                                 <td>
                                                     @if($item->answer)
-                                                        <a href="{{ route('website.q-a.show', ['site_name' => $site_name, 'id' => $item->id]) }}">
-                                                            <i class="icofont-eye" title="Show Details"></i>
-                                                        </a>
+                                                    <a
+                                                        href="{{ route('website.q-a.show', ['site_name' => $site_name, 'id' => $item->id]) }}">
+                                                        <i class="icofont-eye" title="Show Details"></i>
+                                                    </a>
                                                     @endif
                                                 </td>
                                                 </td>
                                             </tr>
                                             @endforeach
                                             @else
-                                                <tr>
-                                                    <td colspan="6" class="text-center">
-                                                        <p>{{__('sys.no_item_found')}}</p>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td colspan="6" class="text-center">
+                                                    <p>{{__('sys.no_item_found')}}</p>
+                                                </td>
+                                            </tr>
                                             @endif
                                         </tbody>
                                     </table>

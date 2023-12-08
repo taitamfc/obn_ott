@@ -86,7 +86,7 @@ class AuthController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('admin.login')->with('success',__('auth.register_success'));
+            return redirect()->route('login')->with('success',__('auth.register_success'));
         } catch (QueryException $e) { 
             Log::error($e->getMessage());
             return redirect()->back()->with('error',__('auth.register_error'));
@@ -113,7 +113,7 @@ class AuthController extends Controller
             $email->subject('Forgot Password');
             $email->to($item->email, $item->name );
         });
-        return redirect()->route('admin.login')->with('success','Please check mail to reset password');
+        return redirect()->route('login')->with('success','Please check mail to reset password');
         }
     }
     function getReset(Request $request){
@@ -134,7 +134,7 @@ class AuthController extends Controller
             $item->password = bcrypt($request->password);
             $item->token = '';
             $item->save();
-            return redirect()->route('admin.login')->with('success','Reset Password Success');
+            return redirect()->route('login')->with('success','Reset Password Success');
         }else {
             return redirect()->back()->with('error','Has Problems, Please Try Again');
         }

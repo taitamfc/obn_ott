@@ -18,7 +18,7 @@
                 <li>
                     <a href="{{ route('website.currently-watching',['site_name'=>$site_name]) }}">
                     <i class="icofont-book"></i>
-                    {{__('account.currently-watching')}}</a><span class="dashboard__label">12</span>
+                    {{__('account.currently-watching')}}</a>
                 </li>
                 <li>
                     <a href="{{ route('website.progress',['site_name'=>$site_name]) }}">
@@ -39,6 +39,7 @@
                     <a href="{{ route('website.q-a',['site_name'=>$site_name]) }}">
                     <i class="icofont-question-circle"></i>
                     {{__('account.qas')}}</a>
+                    <!-- <span class="dashboard__label">12</span> -->
                 </li>
                 <li>
                     <a href="{{ route('website.logout',['site_name'=>$site_name]) }}">
