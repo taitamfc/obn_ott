@@ -25,7 +25,7 @@ Q&A
 								</div>
 								@endif
                                 <div class="dashboard__table table-responsive">
-                                {{$item->answer}}
+                                {!! $item->answer !!}
                                 </div>
                             </div>
                         </div>

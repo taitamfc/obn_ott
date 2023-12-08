@@ -32,7 +32,7 @@
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white">Visitors</p>
+                <p class="card-title mb-0 text-white">{{__('admin-content.visitors')}}</p>
                 <h3 class="mb-0 text-white">{{$totalVisistor}}</h3>
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white">Impressions</p>
+                <p class="card-title mb-0 text-white">{{__('admin-content.impressions')}}</p>
                 <h3 class="mb-0 text-white">{{$totalImpression}}</h3>
             </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white">Sales</p>
+                <p class="card-title mb-0 text-white">{{__('admin-content.sales')}}</p>
                 <h3 class="mb-0 text-white">{{$totalSales}}</h3>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white">Students</p>
+                <p class="card-title mb-0 text-white">{{__('admin-content.students')}}</p>
                 <h3 class="mb-0 text-white">{{$totalStudents}}</h3>
             </div>
         </div>
@@ -68,7 +68,7 @@
         <div class="card mb-mob-4 primary_card_bg">
             <!-- Card body -->
             <div class="card-body">
-                <p class="card-title mb-0 text-white">Classes</p>
+                <p class="card-title mb-0 text-white">{{__('admin-content.classes')}}</p>
                 <h3 class="mb-0 text-white">{{$totalClasses}}</h3>
             </div>
         </div>

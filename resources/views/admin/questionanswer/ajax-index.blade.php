@@ -3,16 +3,16 @@
         <table class="table table-hover progress-table text-left ">
             <thead>
                 <tr>
-                    <td class="w-70">Avatar</td>
-                    <td class="w-30p">Name</td>
-                    <td>Student ID</td>
-                    <td>Question</td>
-                    <td>Lesson</td>
-                    <td>Subject</td>
-                    <td>Teacher</td>
-                    <td>Answer</td>
-                    <td>Date</td>
-                    <td class='text-center'>Action</td>
+                    <td class="w-70">{{__('admin-question.avatar')}}</td>
+                    <td class="w-30p">{{__('admin-question.name')}}</td>
+                    <td>{{__('admin-question.student-id')}}</td>
+                    <td>{{__('admin-question.question')}}</td>
+                    <td>{{__('admin-question.lesson')}}</td>
+                    <td>{{__('admin-question.subject')}}</td>
+                    <td>{{__('admin-question.teacher')}}</td>
+                    <td>{{__('admin-question.answer')}}</td>
+                    <td>{{__('admin-question.date')}}</td>
+                    <td class='text-center'>{{__('admin-question.action')}}</td>
                 </tr>
             </thead>
             <tbody>
