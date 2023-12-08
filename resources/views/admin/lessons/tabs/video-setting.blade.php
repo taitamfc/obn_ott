@@ -8,7 +8,7 @@
                 <div class="dz-default dz-message">
                     <span><i class="ti-image"></i></span>
                 </div>
-                <input type="hidden" id="video" name='video'>
+                <input type="hidden" id="video_url" name='video' value="{{ old('video_url')  }}">
             </div>
             <div class="input-error text-danger">
                 @error('video') {{ $message }} @enderror

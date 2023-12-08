@@ -123,6 +123,14 @@ jQuery(document).ready(function() {
         maxFiles: 1,
         maxFilesize: 10,
         acceptedFiles:".mp4,.mkv,.avi",
+        success: function(file, response) {
+            if(file.status == "success"){
+                $('#video_url').val(file.upload.uuid);
+            }
+        },
+        error: function(file, response) {
+            alert(response);
+        }
     });
     $('#file-validation').addClass('dropzone');
 
