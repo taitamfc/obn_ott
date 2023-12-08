@@ -33,13 +33,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'facebook' => [
-        'client_id' => '900914937689301',
-        'client_secret' => '●●●●●●●●',
-        'redirect' => '/hieu/auth/facebook/callback',
-      ], 
+        'client_id' => '922163426197125',
+        'client_secret' => 'b43776fa2abb744743bfb82bb65391e4',
+        'redirect' => "/facebook/callback",
+    ],  
     'google' => [
-    'client_id' => '654852381692-tt5chnust7llima3sbo8croj0au190ti.apps.googleusercontent.com',
-    'client_secret' => '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',
-    'redirect' => "http://127.0.0.1:8000/google/callback",
+        'client_id' => '654852381692-tt5chnust7llima3sbo8croj0au190ti.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => "/google/callback",
     ], 
 ];

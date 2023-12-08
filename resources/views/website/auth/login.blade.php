@@ -61,7 +61,9 @@ Login
             <div class="login__social__option">
                 <p>or Log-in with</p>
                 <ul class="login__social__btn">
-                    <li><a class="default__button login__button__1" href="#"><i class="icofont-facebook"></i>
+                    <li><a class="default__button login__button__1"
+                            href="{{ route('login.facebook',['site_name'=>$site_name]) }}"><i
+                                class="icofont-facebook"></i>
                             Facebook</a></li>
                     <li><a class="default__button" href="{{ route('login.google',['site_name'=>$site_name]) }}"><i
                                 class="icofont-google-plus"></i> Google</a></li>

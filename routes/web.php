@@ -18,9 +18,10 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 include 'admin.php';
-// login by gg
-Route::get('/google',[App\Http\Controllers\Website\AuthGGController::class,'loginbyGG'])->name('login.google');
-Route::get('/google/callback',[App\Http\Controllers\Website\AuthGGController::class,'loginGGCallBack'])->name('login.backgoogle');
+
+// login by social
+Route::get('/google/callback',[App\Http\Controllers\AuthSocialiteController::class,'GoogleCallBack']);
+Route::get('/facebook/callback',[App\Http\Controllers\AuthSocialiteController::class,'FacebookCallBack']);
 
 // Frontend
 Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->group(function(){
@@ -104,6 +105,11 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         return view('website.dashboards.progress.index',compact('site_name'));
     })->name('website.progress');
 
+     // Login Google
+     Route::get('/google',[App\Http\Controllers\AuthSocialiteController::class,'loginbyGG'])->name('login.google');
+
+     // Login Facebook
+     Route::get('/facebook',[App\Http\Controllers\AuthSocialiteController::class,'loginbyFB'])->name('login.facebook');
 
     // Login
     Route::get('login',[App\Http\Controllers\Website\AuthController::class,'login'])->name('website.login');
