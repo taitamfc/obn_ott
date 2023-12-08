@@ -1,13 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('header')
-<style>
-#lesson .lesson-content li {
-    font-size: 16px;
-    margin-bottom: 10px;
-    float: left;
-}
-</style>
+<link rel="stylesheet" href="{{ asset('assets/vendors/dropzone/css/dropzone.css') }}">
+
 @endsection
 
 @section('content')
@@ -68,7 +63,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class='btn btn-primary update-item float-right'>Save</button>
+                            <button id="saveLesson" type="button" class='btn btn-primary update-item float-right'>Save</button>
                         </div>
                     </div>
                 </form>
@@ -79,6 +74,7 @@
 @endsection
 
 @section('footer')
+<script src="{{ asset('assets/vendors/dropzone/js/dropzone.js') }}"></script>
 <script>
 jQuery(document).ready(function() {
     jQuery('body').on('click', ".update-item", function(e) {
@@ -111,6 +107,36 @@ jQuery(document).ready(function() {
             }
         });
     });
+
+    // Handle upload file
+    $('#file-validation').dropzone({
+        url: "{{ route('admin.lessons.storeVideo') }}",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        maxFiles: 1,
+        maxFilesize: 10,
+        acceptedFiles:".mp4,.mkv,.avi",
+        sending: function(file, xhr, formData) {
+            console.log('file:', file);
+            console.log('formData:', formData);
+            console.log('xhr:', formData);
+            $('#saveLesson').prop('disabled',true);
+        },
+        success: function(file, response) {
+            showAlertSuccess('Video uploaded');
+            if(file.status == "success"){
+                $('#video_url').val(file.upload.uuid);
+            }
+            $('#saveLesson').prop('disabled',false);
+
+        },
+        error: function(file, response) {
+            showAlertError('Video uploaded error');
+            $('#saveLesson').prop('disabled',false);
+        }
+    });
+    $('#file-validation').addClass('dropzone');
 });
 </script>
 @endsection

@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class='btn btn-primary add-item float-right'>Submit</button>
+                            <button id="saveLesson" type="button" class='btn btn-primary add-item float-right'>Submit</button>
                         </div>
                     </div>
                 </form>
@@ -123,13 +123,23 @@ jQuery(document).ready(function() {
         maxFiles: 1,
         maxFilesize: 10,
         acceptedFiles:".mp4,.mkv,.avi",
+        sending: function(file, xhr, formData) {
+            console.log('file:', file);
+            console.log('formData:', formData);
+            console.log('xhr:', formData);
+            $('#saveLesson').prop('disabled',true);
+        },
         success: function(file, response) {
+            showAlertSuccess('Video uploaded');
             if(file.status == "success"){
                 $('#video_url').val(file.upload.uuid);
             }
+            $('#saveLesson').prop('disabled',false);
+
         },
         error: function(file, response) {
-            alert(response);
+            showAlertError('Video uploaded error');
+            $('#saveLesson').prop('disabled',false);
         }
     });
     $('#file-validation').addClass('dropzone');

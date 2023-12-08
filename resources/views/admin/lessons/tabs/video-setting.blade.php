@@ -10,6 +10,7 @@
                 </div>
                 <input type="hidden" id="video_url" name='video' value="{{ old('video_url')  }}">
             </div>
+            <p class="help-text mt-2">Video uploaded: {{ @$item->video_url }}</p>
             <div class="input-error text-danger">
                 @error('video') {{ $message }} @enderror
             </div>
