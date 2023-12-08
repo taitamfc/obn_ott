@@ -29,7 +29,8 @@ class StoreLessonRequest extends FormRequest
             'subject_id' => 'required|numeric',
             'course_id' => 'required|numeric',
             'status' => 'required|numeric',
-            'video' => 'required|mimes:mp4,avi,mov,flv',
+            // 'video' => 'required|mimes:mp4,avi,mov,flv',
+            'video' => 'required',
         ];
     }
     function messages(): array
