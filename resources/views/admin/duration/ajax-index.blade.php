@@ -4,6 +4,7 @@
             <thead>
                 <tr>
                     <td class="w-30p">Name</td>
+                    <td class="w-30p">Number Day</td>
                     <td class='text-center'>Action</td>
                 </tr>
             </thead>
@@ -12,6 +13,9 @@
                 <tr class='item'>
                     <td class="text-nowrap">
                         <div class="fw-600 ">{{ $item->name }}</div>
+                    </td>
+                    <td class="text-nowrap">
+                        <div class="fw-600 ">{{ $item->number_days }}</div>
                     </td>
                     <td>
                         <ul class="d-flex justify-content-center">

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\DurationResource;
 use App\Http\Requests\StoreDurationRequest;
 use App\Http\Requests\UpdateDurationRequest;
+use Illuminate\Database\QueryException;
 
 class DurationController extends AdminController
 {
@@ -39,6 +40,7 @@ class DurationController extends AdminController
         try {
             $item = new Duration();
             $item->name = $request->name;
+            $item->number_days = $request->number_days;
             $item->site_id = $this->site_id;
             $item->save();
             return response([
@@ -79,6 +81,7 @@ class DurationController extends AdminController
         try {
             $item = Duration::findOrfail($id);
             $item->name = $request->name;
+            $item->number_days = $request->number_days;
             $item->site_id = $this->site_id;
             $item->save();
             return response([

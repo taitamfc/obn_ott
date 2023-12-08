@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.home') }}
+@endsection
 @section('header')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 @endsection
