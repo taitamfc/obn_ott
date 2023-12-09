@@ -40,6 +40,9 @@ class Subscription extends Model
     function duration(){
         return $this->belongsTo(Duration::class);
     }
+    function studentscriptions(){
+        return $this->hasMany(StudentScription::class);
+    }
 
     //Feature 
     function getDurationNameAttribute(){

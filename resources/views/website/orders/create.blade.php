@@ -18,6 +18,7 @@
         @endif
         <form action="{{ route('website.orders.store',['site_name' => $site_name]) }}" method="post">
             @csrf
+            <input type="hidden" name="type" value="{{ $type }}">
             <input type="hidden" name="item_id" value="{{ $item->id }}">
             <input type="hidden" name="price" value="{{ $item->price }}">
             <div class="row">

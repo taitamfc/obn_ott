@@ -78,4 +78,7 @@ class Site extends Model
     function durations(){
         return $this->hasMany(Duration::class);
     }
+    function studentscriptions(){
+        return $this->hasMany(StudentScription::class);
+    }
 }
