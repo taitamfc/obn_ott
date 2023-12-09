@@ -1,7 +1,7 @@
 <div class="gridarea__wraper">
     <div class="gridarea__img">
         <a href="{{ route('website.subjects.show',['id'=> $subject->id,'site_name'=> $site_name]) }}">
-            <img src="{{ asset($subject->img)}}" alt="grid">
+            <img src="{{ asset($subject->img ?? 'assets/images/default.png')}}" alt="grid">
         </a>
     </div>
     <div class="gridarea__content">
