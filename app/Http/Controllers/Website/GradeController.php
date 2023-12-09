@@ -16,9 +16,11 @@ class GradeController extends MainController
             $item =  Grade::findOrfail($id);
             Impression::increase($this->site_id,$id);
             Visitor::increase($this->site_id,$id);
+
             $items = Subject::where('site_id',$this->site_id)
                                 ->where('grade_id',$id)
                                 ->where('status',Subject::ACTIVE)
+                                ->orderBy('position')
                                 ->get();
             $params = [
                 'item'  => $item,

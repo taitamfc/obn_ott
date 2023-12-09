@@ -21,7 +21,7 @@ class MenuComposer
     public function compose(View $view): void
     {
         $site_id = session()->get('site_id');
-        $items = Grade::where('site_id',$site_id)->where('status',1)->get();
+        $items = Grade::getActiveItems($site_id);
         $view->with('site_menus', $items);
     }
 }

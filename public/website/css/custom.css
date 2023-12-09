@@ -1,3 +1,12 @@
 .gridarea__wraper .gridarea__img .gridarea__small__icon i.active {
     background: var(--primaryColor);
 }
+.dashboard__nav .active a {
+    color: blue;
+}
+.headerarea__main__menu .active a {
+    color: blue;
+}
+.gridarea__img img {
+    max-height: 213px;
+}
