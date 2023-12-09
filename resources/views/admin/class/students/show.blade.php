@@ -34,23 +34,17 @@ $informationStudent = $items['informationStudent'];
         <div class="" style="padding: 20px">
             <div class="row">
                 <div class="col-sm-6">
-                    <div id="class">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="grade-header">
-                                    <button class="btn btn-primary">Information Student</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card">
+                        <div class="card-header">
+                            Information History
+                        </div>
                         <div class="card-body">
                             <div class="single-table">
                                 <div class="table-responsive">
                                     <table class="table table-hover progress-table text-left ">
                                         <tr>
                                             <th>Student ID : </th>
-                                            <td>{{ $informationStudent->code }}</td>
+                                            <td>{{ $informationStudent->id }}</td>
                                         </tr>
                                         <tr>
                                             <th>Name : </th>
@@ -70,38 +64,30 @@ $informationStudent = $items['informationStudent'];
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div id="class">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="grade-header">
-                                    <button class="btn btn-primary">Transaction History</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card">
+                        <div class="card-header">
+                            Transaction History
+                        </div>
                         <div class="card-body">
-                            <div class="single-table">
-                                <div class="table-responsive">
-                                    <table class="table table-hover progress-table text-left ">
-                                        <thead class="text-uppercase">
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Course</th>
-                                                <th>Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($transactionHistory as $item)
-                                            <tr>
-                                                <td>{{ $item->date }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->total_sales }}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover progress-table text-left ">
+                                    <thead class="text-uppercase">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Course</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($transactionHistory as $item)
+                                        <tr>
+                                            <td>{{ $item->created_at }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->price }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -109,18 +95,12 @@ $informationStudent = $items['informationStudent'];
             </div>
         </div>
         <div class="" style="padding: 20px">
-            <div id="class">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="grade-header">
-                            <button class="btn btn-primary">Viewing History</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
+                        <div class="card-header">
+                            Viewing History
+                        </div>
                         <div class="card-body">
                             <div class="single-table">
                                 <div class="table-responsive">

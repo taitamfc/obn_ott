@@ -48,6 +48,7 @@ class OrderController extends MainController
             $order = new Order();
             $order->item_id = $request->item_id;
             $order->site_id = $this->site_id;
+            $order->student_id = Auth::guard('students')->id();
             $order->price = $request->price;
             $order->payment_method = $request->pay;
             $order->type = $request->type;
@@ -60,7 +61,7 @@ class OrderController extends MainController
             Log::error('Bug occurred: ' . $e->getMessage());
             return redirect()
             ->route('website.courses.index',['site_name'=>$this->site_name])
-            ->with('error', 'Transaction complete.');
+            ->with('error', 'Transaction incomplete.');
 
         }
     }
