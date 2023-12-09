@@ -24,11 +24,11 @@
                     <i class="icofont-book"></i>
                     {{__('account.currently-watching')}}</a>
                 </li>
-                <li class="@if($currentRouteName == 'website.progress') active @endif">
+                <!-- <li class="@if($currentRouteName == 'website.progress') active @endif">
                     <a href="{{ route('website.progress',['site_name'=>$site_name]) }}">
                     <i class="icofont-ui-clock"></i> 
                     {{__('account.progress')}}</a>
-                </li>
+                </li> -->
                 <li class="@if($currentRouteName == 'website.saved') active @endif">
                     <a href="{{ route('website.saved',['site_name'=>$site_name]) }}">
                     <i class="icofont-star"></i>
