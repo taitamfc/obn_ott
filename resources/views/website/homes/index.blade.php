@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-@include('website.includes.header.banner')
+<!-- @include('website.includes.header.banner') -->
 @include('website.homes.includes.new_lessons')
 @include('website.homes.includes.incomplete_lessons')
 
