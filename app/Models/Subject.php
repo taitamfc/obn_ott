@@ -28,7 +28,7 @@ class Subject extends Model
     }
     public function lessons()
     {
-        return $this->hasMany(Lesson::class, 'subject_id', 'id')->where('status',Lesson::ACTIVE);
+        return $this->hasMany(Lesson::class, 'subject_id', 'id')->where('status',Lesson::ACTIVE)->orderBy('position');
     }
     public function site()
     {
@@ -44,7 +44,7 @@ class Subject extends Model
 
     // Feature method
     public static function getActiveItems($site_id){
-        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
+        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->orderBy('position')->get();
     }
     const ACTIVE = 1;
     const INACTIVE = 0;

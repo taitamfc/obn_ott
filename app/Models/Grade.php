@@ -39,7 +39,7 @@ class Grade extends Model
 
     // Feature
     public static function getActiveItems($site_id){
-        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->get();
+        return self::where('site_id',$site_id)->where('status',self::ACTIVE)->orderBy('position')->get();
     }
     // status_fm 
     function getStatusFmAttribute(){

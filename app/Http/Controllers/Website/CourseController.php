@@ -13,7 +13,7 @@ class CourseController extends MainController
 {
     public function index($site_name){
         $items = Course::where('site_id',$this->site_id)->where('status',Course::ACTIVE)->get();
-        $subscriptions = Subscription::where('site_id',$this->site_id)->where('status',Subscription::ACTIVE)->get();
+        $subscriptions = Subscription::where('site_id',$this->site_id)->get();
         $params = [
             'items' => $items,
             'subscriptions' => $subscriptions
