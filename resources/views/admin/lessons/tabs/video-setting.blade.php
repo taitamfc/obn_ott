@@ -10,7 +10,7 @@
                 </div>
                 <input type="hidden" id="video_url" name='video' value="{{ old('video_url')  }}">
             </div>
-            <p class="help-text mt-2">Video uploaded: {{ @$item->video_url }}</p>
+            <p class="help-text mt-2">Video uploaded: <a id="video_preview" href="/{{ @$item->video_url }}" target="_blank">{{ @$item->video_url }}</a ></p>
             <div class="input-error text-danger">
                 @error('video') {{ $message }} @enderror
             </div>
