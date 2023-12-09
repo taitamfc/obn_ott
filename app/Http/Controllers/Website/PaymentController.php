@@ -92,11 +92,11 @@ class PaymentController extends MainController
                     foreach ($lessons as $lesson) {
                         $student_lesson = new LessonStudent();
                         $student_lesson->lesson_id = $lesson->id;
-                        $student_lesson->grade_id = $lesson->grade_id;
+                        $student_lesson->course_id = $lesson->course_id;
                         $student_lesson->student_id = Auth::guard('students')->id();
-                        $student_lesson->course_id = $item->id;
                         $student_lesson->site_id = $this->site_id;
                         $student_lesson->is_complete = 0;
+                        $student_lesson->grade_id = $lesson->grade_id;
                         $student_lesson->save();
                     }
                     $student_course = new StudentCourse();
@@ -115,7 +115,7 @@ class PaymentController extends MainController
                             $student_lesson->lesson_id = $lesson->id;
                             $student_lesson->grade_id = $lesson->grade_id;
                             $student_lesson->student_id = Auth::guard('students')->id();
-                            $student_lesson->course_id = $request->course;
+                            $student_lesson->course_id = $item->course_id;
                             $student_lesson->site_id = $this->site_id;
                             $student_lesson->is_complete = 0;
                             $student_lesson->save();
@@ -135,6 +135,7 @@ class PaymentController extends MainController
                 $bill->payment_id = $response['id'];
                 $bill->status = 'COMPLETED';
                 $bill->order_id = $order_id;
+                $bill->site_id = $this->site_id;
                 $bill->save();
     
                 DB::commit();
