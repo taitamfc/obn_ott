@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\StudentCourse;
 use App\Models\Course;
+use App\Models\Subscription;
 use App\Models\Student;
 use App\Models\Order;
 use App\Models\LessonStudent;
@@ -64,6 +65,14 @@ class ClassController extends AdminController
         // ->groupBy('course_id', 'date')
         // ->get();
         $transactionHistory = Order::where('site_id',$this->site_id)->where('student_id',$id)->get();
+        foreach($transactionHistory as $transactionHis){
+            if($transactionHis->type == 'course'){
+                $transactionHis->name = Course::find($transactionHis->item_id)->name;
+            }else{
+                $transactionHis->name = Subscription::find($transactionHis->item_id)->name;
+            }
+        }
+        
         $informationStudent = Student::findOrfail($id);
         $items = [
             'lessonHistory' => $lessonHistory,
