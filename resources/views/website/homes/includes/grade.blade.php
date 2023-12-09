@@ -12,18 +12,7 @@
                 <div class="swiper-wrapper">
                     @foreach( $grade->subjects as $subject )
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 grid-item column__custom__class swiper-slide">
-                        <div class="gridarea__wraper">
-                            <div class="gridarea__img">
-                                <a href="{{ route('website.subjects.show',['id'=> $subject->id,'site_name'=> $site_name]) }}">
-                                    <img src="{{ asset($subject->img)}}" alt="grid">
-                                </a>
-                            </div>
-                            <div class="gridarea__content">
-                                <div class="gridarea__heading">
-                                    <h3><a href="{{ route('website.subjects.show',['id'=> $subject->id,'site_name'=> $site_name]) }}">{{ $subject->name }}</a></h3>
-                                </div>
-                            </div>
-                        </div>
+                        @include('website.global.elm-subject')
                     </div>
                     @endforeach
                 </div>
