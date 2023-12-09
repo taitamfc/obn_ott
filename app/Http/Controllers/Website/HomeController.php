@@ -11,13 +11,19 @@ class HomeController extends MainController
 {
     public function index(){
 
-        $student = Auth::guard('students')->user();
-        $incomplete_lessons = $student->incomplete_lessons;
-        $lessons = Lesson::orderBy('id', 'desc')->limit(6)->get();
+        if(Auth::guard('students')->user()){
+            $student = Auth::guard('students')->user();
+            $incomplete_lessons = $student->incomplete_lessons;
+            $new_lessons = Lesson::orderBy('id', 'desc')->limit(6)->get();
+        }else{
+            $incomplete_lessons =[];
+            $new_lessons =[];
+        }
+       
         $grades = Grade::getActiveItems($this->site_id);
         $params = [
             'grades' => $grades,
-            'new_lessons' => $lessons,
+            'new_lessons' => $new_lessons,
             'incomplete_lessons' => $incomplete_lessons
         ];
         return view('website.homes.index',$params);
