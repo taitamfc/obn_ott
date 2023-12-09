@@ -124,18 +124,15 @@ jQuery(document).ready(function() {
         maxFilesize: 10,
         acceptedFiles:".mp4,.mkv,.avi",
         sending: function(file, xhr, formData) {
-            console.log('file:', file);
-            console.log('formData:', formData);
-            console.log('xhr:', formData);
             $('#saveLesson').prop('disabled',true);
         },
         success: function(file, response) {
-            showAlertSuccess('Video uploaded');
-            if(file.status == "success"){
-                $('#video_url').val(file.upload.uuid);
+            if(response.success){
+                $('#video_url').val(response.video_url);
+                $('#video_preview').text(response.video_url);
+                $('#video_preview').attr('href','/'+response.video_url);
             }
             $('#saveLesson').prop('disabled',false);
-
         },
         error: function(file, response) {
             showAlertError('Video uploaded error');
