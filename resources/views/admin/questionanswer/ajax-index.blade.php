@@ -28,7 +28,7 @@
                         <div class="fw-600 ">{{ isset($item->student)?$item->student->name : '' }}</div>
                     </td>
                     <td>{{ isset($item->student)?$item->student->id : '' }}</td>
-                    <td>{{ $item->question }}</td>
+                    <td>{!! $item->question !!}</td>
                     <td>{{ $item->lesson_name }}</td>
                     <td>{{ $item->subject_name }}</td>
                     <td>{{ $item->user_name }}</td>
