@@ -22,15 +22,24 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
+                    @if(auth('students')->check())
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{__('header.hi')}}, {{ auth('students')->user()->name }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ route('website.accounts',['site_name'=>$site_name]) }}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ route('website.logout',['site_name'=>$site_name]) }}">Logout</a></li>
+                            </ul>
+                        </div>
+                        @else
                         <div class="headerarea__login">
-                            @if(auth('students')->check())
-                            <a>{{__('header.hi')}}, {{ auth('students')->user()->name }}</a>
-                            @else
-                            @endif
                             <a href="{{ route('website.accounts',['site_name'=>$site_name]) }}"><i
                                 class="icofont-user-alt-5"></i>
                             </a>
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

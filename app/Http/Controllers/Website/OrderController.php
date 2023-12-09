@@ -16,6 +16,11 @@ class OrderController extends MainController
 {
     public function success($site_id,$order_id){
         $item = Order::find($order_id);
+        if($item->type == 'course'){
+            $item->name = Course::find($item->item_id)->name;
+        }else{
+            $item->name = Subscription::find($item->item_id)->name;
+        }
         $params = [
             'item' => $item
         ];

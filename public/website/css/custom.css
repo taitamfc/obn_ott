@@ -10,3 +10,6 @@
 .gridarea__img img {
     max-height: 213px;
 }
+ul.dropdown-menu li {
+    display: block;
+}
