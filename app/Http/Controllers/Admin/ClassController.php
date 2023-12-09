@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\StudentCourse;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Order;
 use App\Models\LessonStudent;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -55,13 +56,14 @@ class ClassController extends AdminController
 
     function show(String $id){
         $lessonHistory = LessonStudent::with('lesson','course')->where('student_id',$id)->paginate(5);
-        $transactionHistory = DB::table('transactions')
-        ->join('courses', 'courses.id', '=', 'transactions.course_id')
-        ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
-        ->where('transactions.site_id', '=', $this->site_id)
-        ->where('student_id', '=',$id)
-        ->groupBy('course_id', 'date')
-        ->get();
+        // $transactionHistory = DB::table('transactions')
+        // ->join('courses', 'courses.id', '=', 'transactions.course_id')
+        // ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
+        // ->where('transactions.site_id', '=', $this->site_id)
+        // ->where('student_id', '=',$id)
+        // ->groupBy('course_id', 'date')
+        // ->get();
+        $transactionHistory = Order::where('site_id',$this->site_id)->where('student_id',$id)->get();
         $informationStudent = Student::findOrfail($id);
         $items = [
             'lessonHistory' => $lessonHistory,

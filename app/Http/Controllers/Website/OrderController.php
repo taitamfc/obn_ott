@@ -35,13 +35,14 @@ class OrderController extends MainController
     }
     public function create($site_id,$item_id,$type){
         if($type == 'course'){
-            $course = Course::find($item_id);
+            $item = Course::find($item_id);
         }else{
-            $course = Subscription::find($item_id);
+            $item = Subscription::find($item_id);
         }
         $student = Student::find(Auth::guard('students')->id());
         $params = [
-            'item' => $course,
+            'type' => $type,
+            'item' => $item,
             'student' => $student
         ];
         return view('website.orders.create',$params);
@@ -58,7 +59,7 @@ class OrderController extends MainController
             $order->save();
 
             if ($order->payment_method == 'paypal') {
-                return redirect()->route('website.make.payment',['site_name' => $this->site_name,'item_id' => $order->item_id,'order_id' => $order->id,'type' => $order->type]);
+                return redirect()->route('website.make.payment',['site_name' => $this->site_name,'order_id' => $order->id, 'price' => $order->price]);
             }
         } catch (\Exception $e) {
             Log::error('Bug occurred: ' . $e->getMessage());

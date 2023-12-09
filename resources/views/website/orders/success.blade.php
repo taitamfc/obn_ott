@@ -1,8 +1,9 @@
 @extends('website.layouts.master')
 @section('content')
-    @include('website.includes.header.breadcrumb',[
-    'page_title' => 'Success'
-    ])
+@include('website.includes.header.breadcrumb',[
+'page_title' => 'Success'
+])
+
 
     <div class="errorarea sp_top_100 sp_bottom_100">
         <div class="container">
@@ -38,9 +39,11 @@
                                 <i class="icofont-simple-right"></i>
                             </a>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+

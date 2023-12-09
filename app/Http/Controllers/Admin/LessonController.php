@@ -20,21 +20,11 @@ use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
 use Corbpie\BunnyCdn\BunnyAPIStream;
+use App\Jobs\ProcessVideoBunny;
 class LessonController extends AdminController
 {
     use UploadFileTrait;
-    private const API_URL = 'https://api.bunny.net/';//URL for BunnyCDN API
-    protected const STORAGE_API_URL = 'https://storage.bunnycdn.com/';//URL for storage zone replication region (LA|NY|SG|SYD) Falkenstein is as default
-    private const VIDEO_STREAM_URL = 'https://video.bunnycdn.com/';//URL for Bunny video stream API
-    protected const HOSTNAME = 'storage.bunnycdn.com';//FTP hostname
-
-    public function __construct(){
-        parent::__construct();
-        $this->access_key                   = env('BUNNY_ACCESS_KEY','');
-        $this->stream_library_access_key    = env('BUNNY_ACCESS_KEY','');
-        $this->stream_library_id            = env('BUNNY_LIBRARY_ID','');
-        $this->debug_request                = true;
-    }
+   
     public function index(Request $request)
     {
         try {
@@ -120,36 +110,13 @@ class LessonController extends AdminController
     public function storeVideo(Request $request)
     {
         $video_url = '';
-        try {
-            if ($request->hasFile('file')) {
-                $video = $request->file('file');
-            }else{
-                throw new \Exception("Can not upload video");
-            }
-            $urlCreate = "https://video.bunnycdn.com/library/{$this->stream_library_id}/videos/";
-            // Create video
-            $response = Http::withHeaders([
-                'AccessKey' => $this->stream_library_access_key
-            ])->post($urlCreate, [
-                'title' => md5(time()),
-            ]);
-            if( $response->ok() ){
-                $guid = $response->json('guid');
-                if($guid){
-                    $urlUpload = "library/{$this->stream_library_id}/videos/" . $guid;
-                    $response = $this->APIcall('PUT', $urlUpload, array('file' => $video->path()), 'STREAM');
-                    if( !empty($response['url']) ){
-                        $video_url = $response['url'];
-                    }
-                }
-            }else{
-                throw new \Exception("Can not create video");
-            }
-        } catch (\Exception $e) {
-            Log::error('Upload video API: '.$e->getMessage());
+        if ($request->hasFile('file')) {
+            $video_url = $this->uploadFile($request->file('file'), 'uploads/'.Auth::id().'/lessons/video');
         }
-        return $video_url;
-        
+        return response()->json([
+            'success'=>true,
+            'video_url'=> $video_url
+        ],200);
     }
     public function store(StoreLessonRequest $request)
     {
@@ -162,13 +129,13 @@ class LessonController extends AdminController
         $item->status = $request->status;
         $item->site_id = $this->site_id;
         $item->video_url = $request->video;
-        $item->image_url = $request->video;
+        // $item->image_url = $request->video;
         try {
             DB::beginTransaction();
 
-            // if ($request->hasFile('video')) {
-            //     $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
-            // }
+            if ($request->hasFile('video')) {
+                $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
+            }
             if ($request->hasFile('image')) {
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/lessons/image');
             } 
@@ -183,6 +150,9 @@ class LessonController extends AdminController
                 $lessoncourse->save();
             }
             DB::commit();
+
+            // Upload video to bunny by queue
+            ProcessVideoBunny::dispatch($item);
 
             return response([
                 'success' => true,
@@ -221,6 +191,7 @@ class LessonController extends AdminController
         try {
             DB::beginTransaction();
             $item = Lesson::findOrfail($id);
+            $old_item = $item;
             // Get old value
             $old_course_id = $item->course_id;
             $old_subject_id = $item->subject_id;
@@ -233,16 +204,13 @@ class LessonController extends AdminController
             $item->description = $request->description;
             $item->status = $request->status;
             $item->site_id = $this->site_id; 
-            if($request->video && $item->video_url){
-                $urlUpload = "library/{$this->stream_library_id}/videos/" . $item->video_url;
-                $this->APIcall('DELETE', $urlUpload,null, 'STREAM');
+            if($request->video){
                 $item->video_url = $request->video;
-                $item->image_url = $request->video;
             }
-            // if ($request->hasFile('video')) {
-            //     $this->deleteFile([$item->video_url]);
-            //     $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
-            // }
+            if ($request->hasFile('video')) {
+                $this->deleteFile([$item->video_url]);
+                $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
+            }
             if ($request->hasFile('image')) {
                 $this->deleteFile([$item->image_url]);
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.Auth::id().'/lessons/image');
@@ -257,6 +225,12 @@ class LessonController extends AdminController
                 $lessoncourse->site_id = $this->site_id;
                 $lessoncourse->save();
             }
+
+            // Upload new video
+            if($request->video){
+                ProcessVideoBunny::dispatch($item,$old_item);
+            }
+
             DB::commit();
             return response([
                 'success' => true,
@@ -307,78 +281,5 @@ class LessonController extends AdminController
             ],200);
             Log::error('Bug occurred: ' . $e->getMessage());
         }
-    }
-
-    protected function APIcall(string $method, string $url, array $params = [], string $url_type = 'BASE'): array
-    {
-        $curl = curl_init();
-        if ($method === "GET") {//GET request
-            if (!empty($params)) {
-                $url = sprintf("%s?%s", $url, http_build_query($params));
-            }
-        } elseif ($method === "POST") {//POST request
-            curl_setopt($curl, CURLOPT_POST, 1);
-            if (!empty($params)) {
-                $data = json_encode($params);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-            }
-        } elseif ($method === "PUT") {//PUT request
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-            if ($url_type === 'STORAGE') {
-                $params = json_decode(json_encode($params));
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_UPLOAD, 1);
-                curl_setopt($curl, CURLOPT_INFILE, fopen($params->file, 'rb'));
-                curl_setopt($curl, CURLOPT_INFILESIZE, filesize($params->file));
-            } else {
-                $data = json_encode($params);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-            }
-        } elseif ($method === "DELETE") {//DELETE request
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
-            if (!empty($params)) {
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
-            }
-        }
-
-        if ($url_type === 'BASE') {//General CDN
-            curl_setopt($curl, CURLOPT_URL, self::API_URL . $url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Accept: application/json", "AccessKey: $this->api_key", "Content-Type: application/json"));
-        } elseif ($url_type === 'STORAGE') {//Storage zone
-            curl_setopt($curl, CURLOPT_URL, self::STORAGE_API_URL . $url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("AccessKey: $this->access_key"));
-        } else {//Video stream
-            curl_setopt($curl, CURLOPT_URL, self::VIDEO_STREAM_URL . $url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("AccessKey: " . $this->stream_library_access_key, "Content-Type: application/*+json"));
-            if ($method === "PUT") {
-                curl_setopt($curl, CURLOPT_POSTFIELDS, file_get_contents($params['file']));
-            }
-        }
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 0);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);//Need this (Bunny net issue??)
-
-        $result = curl_exec($curl);
-        $responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        $debug_info = curl_getinfo($curl);
-        curl_close($curl);
-
-        if ($this->debug_request) {
-            return $debug_info;
-        }
-        if ($responseCode === 204) {
-            return [
-                'http_code' => $responseCode,
-                'response' => json_decode($result, true),
-            ];
-        }
-        if ($responseCode >= 200 && $responseCode < 300) {
-            return json_decode($result, true) ?? [];
-        }
-        return [
-            'http_code' => $responseCode,
-            'response' => json_decode($result, true),
-        ];
     }
 }
