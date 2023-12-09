@@ -70,9 +70,9 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
 
           //Payment
         Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
-        Route::get('handle-payment/{item_id}',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
+        Route::get('handle-payment/{order_id}/{price}',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
         Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
-        Route::get('payment-success',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
+        Route::get('payment-success/{order_id}',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
 
         Route::get('orders/fail/{order_id}',[\App\Http\Controllers\Website\OrderController::class,'fail'])->name('website.orders.fail');
         Route::get('orders/success/{order_id}',[\App\Http\Controllers\Website\OrderController::class,'success'])->name('website.orders.success');
