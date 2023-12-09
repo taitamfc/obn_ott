@@ -13,6 +13,9 @@ Login
                 <p class="login__description">Don't have an account yet?
                     <a href="{{ route('website.register',['site_name'=>$site_name]) }}">Sign up for free</a>
                 </p>
+                <p>
+                    <a href="{{ route('cms',['site_name'=>$site_name]) }}">Back to home</a>
+                </p>
             </div>
 
             <form action="{{ route('website.postLogin',['site_name'=>$site_name]) }}" method="POST">

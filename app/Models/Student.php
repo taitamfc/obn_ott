@@ -76,4 +76,8 @@ class Student extends Authenticatable
         return $this->hasMany(QuestionAnswer::class,'student_id','id');
     }
     
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'subscription_id', 'id');
+    }
 }

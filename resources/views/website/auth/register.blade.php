@@ -10,8 +10,12 @@ Register
         <div class="loginarea__wraper">
             <div class="login__heading">
                 <h5 class="login__title">Sing Up</h5>
-                <p class="login__description">Already have an account? <a
-                        href="{{ route('website.login',['site_name'=>$site_name]) }}">Log In</a></p>
+                <p class="login__description">Already have an account? 
+                    <a href="{{ route('website.login',['site_name'=>$site_name]) }}">Log In</a>
+                </p>
+                <p>
+                    <a href="{{ route('cms',['site_name'=>$site_name]) }}">Back to home</a>
+                </p>
             </div>
             <form action="{{ route('website.postRegister',['site_name'=>$site_name]) }}" method='post'>
                 @if (session('error'))
@@ -23,7 +27,8 @@ Register
                 <div class="row">
                     <div class="login__form">
                         <label class="form__label">Full Name</label>
-                        <input class="common__login__input" type="text" placeholder="Full Name" name="name" value="{{ old('name') }}">
+                        <input class="common__login__input" type="text" placeholder="Full Name" name="name"
+                            value="{{ old('name') }}">
                         @if ($errors->any())
                         <p style="color:red">{{ $errors->first('name') }}</p>
                         @endif
@@ -31,7 +36,8 @@ Register
 
                     <div class="login__form">
                         <label class="form__label">Email</label>
-                        <input class="common__login__input" type="email" placeholder="Email" name="email" value="{{ old('email') }}">
+                        <input class="common__login__input" type="email" placeholder="Email" name="email"
+                            value="{{ old('email') }}">
                         @if ($errors->any())
                         <p style="color:red">{{ $errors->first('email') }}</p>
                         @endif
@@ -39,7 +45,8 @@ Register
 
                     <div class="login__form">
                         <label class="form__label">Password</label>
-                        <input class="common__login__input" type="password" placeholder="Password" name="password" value="{{ old('password') }}">
+                        <input class="common__login__input" type="password" placeholder="Password" name="password"
+                            value="{{ old('password') }}">
                         @if ($errors->any())
                         <p style="color:red">{{ $errors->first('password') }}</p>
                         @endif
@@ -65,8 +72,8 @@ Register
                 </div>
 
                 <div class="submit-btn-area">
-                    <button id="form_submit" class="default__button" style="display: block; margin: 30px auto 0;" type="submit">Submit <i
-                            class="ti-arrow-right"></i></button>
+                    <button id="form_submit" class="default__button" style="display: block; margin: 30px auto 0;"
+                        type="submit">Submit <i class="ti-arrow-right"></i></button>
                 </div>
             </form>
 

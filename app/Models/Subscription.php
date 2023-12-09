@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Subscription extends Model
 {
@@ -72,4 +73,12 @@ class Subscription extends Model
     {  
         return asset('assets/images/default.png');
     }
+
+    function getIsBoughtAttribute(){
+        $student_id = Auth::guard('students')->id();
+        if($student_id){
+            return StudentSubscription::where('subscription_id',$this->id)->where('student_id', $student_id)->exists();
+        }
+        return false;
+    } 
 }

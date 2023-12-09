@@ -13,9 +13,11 @@
         <div class="gridarea__price">
             {{ $course->price_fm }}
         </div>
+        @if(!$course->is_bought)
         <div class="course__summery__button">
             <a href="{{ route('website.orders.create',['site_name'=> $site_name, 'item_id' => $course->id,'type'=>'course']) }}"
                 class="default__button">Purchase</a>
         </div>
+        @endif
     </div>
 </div>

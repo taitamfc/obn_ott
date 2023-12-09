@@ -87,4 +87,12 @@ class Course extends Model
         $formattedPrice = '$' . number_format($this->price);
         return $formattedPrice;
     }
+
+    function getIsBoughtAttribute(){
+        $student_id = Auth::guard('students')->id();
+        if($student_id){
+            return StudentCourse::where('course_id',$this->id)->where('student_id', $student_id)->exists();
+        }
+        return false;
+    } 
 }
