@@ -10,7 +10,13 @@
                 </div>
                 <input type="hidden" id="video_url" name='video' value="{{ old('video_url')  }}">
             </div>
-            <p class="help-text mt-2">Video uploaded: <a id="video_preview" href="/{{ @$item->video_url }}" target="_blank">{{ @$item->video_url }}</a ></p>
+            
+            <p class="help-text mt-2 mb-1">Video uploaded: 
+                <a id="video_preview" href="/{{ @$item->video_url }}" target="_blank">{{ @$item->video_url }}</a >
+            </p>
+            @if($item->videoId)
+            <p class="help-text">Video Id: {{ $item->videoId }} - Processed: {{ $item->encodeProgress }}%</p>
+            @endif
             <div class="input-error text-danger">
                 @error('video') {{ $message }} @enderror
             </div>
