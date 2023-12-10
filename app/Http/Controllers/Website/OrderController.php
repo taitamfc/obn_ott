@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\MainController;
+use App\Http\Requests\StoreOrderRequest;
+
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Order;
@@ -48,7 +50,7 @@ class OrderController extends MainController
         return view('website.orders.create',$params);
     }
 
-    function store(Request $request){
+    function store(StoreOrderRequest $request){
         try {
             $order = new Order();
             $order->item_id = $request->item_id;

@@ -43,10 +43,11 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
+        session()->forget('site_id');
         Auth::logout();
         return redirect()->route('login');
     }
-
+    
     public function register(){
         if (Auth::check()) {
             return redirect()->route('admin.home');
