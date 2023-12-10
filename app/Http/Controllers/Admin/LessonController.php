@@ -149,9 +149,9 @@ class LessonController extends AdminController
             DB::commit();
 
             // Upload video to bunny by queue
-            ProcessVideoBunny::dispatch($item);
+            ProcessVideoBunny::dispatch($item->id);
             for($i=1; $i<=5;$i++){
-                CheckVideoBunny::dispatch($item)->delay(now()->addMinutes($i * 5));
+                CheckVideoBunny::dispatch($item->id)->delay(now()->addMinutes($i * 5));
             }
 
             return response([
@@ -208,9 +208,9 @@ class LessonController extends AdminController
             // Upload new video
             if($request->video){
                 $item->video_url = $request->video;
-                ProcessVideoBunny::dispatch($item,$old_item);
+                ProcessVideoBunny::dispatch($item->id,$old_item);
                 for($i=1; $i<=5;$i++){
-                    CheckVideoBunny::dispatch($item,$old_item)->delay(now()->addMinutes($i * 5));
+                    CheckVideoBunny::dispatch($item->id,$old_item)->delay(now()->addMinutes($i * 5));
                 }
             }
 
