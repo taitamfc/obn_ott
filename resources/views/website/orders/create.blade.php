@@ -34,6 +34,9 @@
                                         <label for="name">{{__('checkout.name')}} *</label>
                                         <input type="text" id="first__name" name="name" class="info" placeholder="Name"
                                             value="{{$student->name}}">
+                                        @if ($errors->any())
+                                        <p style="color:red">{{ $errors->first('name') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -41,6 +44,9 @@
                                         <label for="company__name">{{__('checkout.email')}} *</label>
                                         <input type="text" id="company__name" name="email" class="info"
                                             value="{{$student->email}}" placeholder="Email *">
+                                        @if ($errors->any())
+                                        <p style="color:red">{{ $errors->first('email') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -48,6 +54,9 @@
                                         <label for="email__address">{{__('checkout.phone-number')}} *</label>
                                         <input type="text" id="email__address" name="phone" class="info"
                                             value="{{$student->phone}}" placeholder="Your email">
+                                        @if ($errors->any())
+                                        <p style="color:red">{{ $errors->first('phone') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-xl-12">

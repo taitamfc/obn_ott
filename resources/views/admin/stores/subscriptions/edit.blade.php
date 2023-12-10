@@ -35,19 +35,25 @@
                     </div>
                 </div>
             </div>
+ 
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="course" class="col-form-label">Course</label>
                     <select name="course[]" id="course" class="form-control" multiple>
                         <option value="">Select Course</option>
                         @foreach ($courses as $course)
-                        <option @selected( in_array($course->id,$selected_courses) )
-                            value="{{ $course->id }}">{{ $course->name }}</option>
+                        @php
+                        $isSelected = in_array($course->id, $selected_courses);
+                        @endphp
+                        <option value="{{ $course->id }}" style="@if($isSelected) color: blue; @endif">
+                            {{ $course->name }}
+                        </option>
                         @endforeach
                     </select>
                     <span class="btn btn-primary mt-4">Add more Courses</span>
                 </div>
             </div>
+
         </div>
         <a class="btn btn-secondary mr-3 float-left" href="{{ route('admin.subscriptions.index') }}">Back to list</a>
         <button class="btn btn-primary edit-item float-right" type='button'>Save changes</button>

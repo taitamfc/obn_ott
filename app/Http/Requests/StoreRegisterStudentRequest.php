@@ -26,8 +26,11 @@ class StoreRegisterStudentRequest extends FormRequest
             'email' => 'required|unique:students|email',
             'password' => 'required',
             'repeatpassword' => 'required|same:password',
+            'accept_pp' => 'accepted',
         ];
     }
+
+   
     public function messages()
     {
         return  [
@@ -35,7 +38,7 @@ class StoreRegisterStudentRequest extends FormRequest
                 'email.required' => 'The email field is required',
                 'password.required' => 'The password field is required',
                 'repeatpassword.required' => 'The Confirm Password field is required',
-                         
+                'accept_pp.accepted' => 'You must accept the Terms and Privacy Policy'
             ];
     }
 }

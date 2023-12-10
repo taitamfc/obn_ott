@@ -10,7 +10,7 @@ Register
         <div class="loginarea__wraper">
             <div class="login__heading">
                 <h5 class="login__title">Sing Up</h5>
-                <p class="login__description">Already have an account? 
+                <p class="login__description">Already have an account?
                     <a href="{{ route('website.login',['site_name'=>$site_name]) }}">Log In</a>
                 </p>
                 <p>
@@ -61,15 +61,16 @@ Register
                         @endif
                     </div>
 
-                </div>
 
-                <div class="login__form d-flex justify-content-between flex-wrap gap-2">
-                    <div class="form__check">
-                        <input id="accept_pp" type="checkbox"> <label for="accept_pp">Accept the Terms and Privacy
-                            Policy</label>
+                    <div class="form__check" style="margin-top: 30px;">
+                        <input id="accept_pp" type="checkbox" name="accept_pp" >
+                        <label for="accept_pp">Accept the Terms and Privacy Policy</label>
+                        @if ($errors->has('accept_pp'))
+                        <div class="error-message" style="color:red">{{ $errors->first('accept_pp') }}</div>
+                        @endif
                     </div>
-
                 </div>
+
 
                 <div class="submit-btn-area">
                     <button id="form_submit" class="default__button" style="display: block; margin: 30px auto 0;"
