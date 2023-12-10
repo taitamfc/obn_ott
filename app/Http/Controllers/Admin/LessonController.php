@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\Grade;
@@ -19,8 +17,8 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
-use Corbpie\BunnyCdn\BunnyAPIStream;
 use App\Jobs\ProcessVideoBunny;
+use App\Jobs\CheckVideoBunny;
 class LessonController extends AdminController
 {
     use UploadFileTrait;
@@ -129,7 +127,6 @@ class LessonController extends AdminController
         $item->status = $request->status;
         $item->site_id = $this->site_id;
         $item->video_url = $request->video;
-        // $item->image_url = $request->video;
         try {
             DB::beginTransaction();
 
@@ -153,6 +150,9 @@ class LessonController extends AdminController
 
             // Upload video to bunny by queue
             ProcessVideoBunny::dispatch($item);
+            for($i=1; $i<=5;$i++){
+                CheckVideoBunny::dispatch($item)->delay(now()->addMinutes($i * 5));
+            }
 
             return response([
                 'success' => true,
@@ -204,9 +204,16 @@ class LessonController extends AdminController
             $item->description = $request->description;
             $item->status = $request->status;
             $item->site_id = $this->site_id; 
+
+            // Upload new video
             if($request->video){
                 $item->video_url = $request->video;
+                ProcessVideoBunny::dispatch($item,$old_item);
+                for($i=1; $i<=5;$i++){
+                    CheckVideoBunny::dispatch($item,$old_item)->delay(now()->addMinutes($i * 5));
+                }
             }
+
             if ($request->hasFile('video')) {
                 $this->deleteFile([$item->video_url]);
                 $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
@@ -226,10 +233,7 @@ class LessonController extends AdminController
                 $lessoncourse->save();
             }
 
-            // Upload new video
-            if($request->video){
-                ProcessVideoBunny::dispatch($item,$old_item);
-            }
+            
 
             DB::commit();
             return response([
