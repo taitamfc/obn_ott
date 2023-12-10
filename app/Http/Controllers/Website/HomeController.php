@@ -13,8 +13,11 @@ class HomeController extends MainController
 
         if(Auth::guard('students')->user()){
             $student = Auth::guard('students')->user();
-            $incomplete_lessons = $student->incomplete_lessons;
-            $new_lessons = Lesson::orderBy('id', 'desc')->limit(6)->get();
+            $incomplete_lessons = $student->incomplete_lessons()
+            ->where('lesson_student.site_id', $this->site_id) 
+            ->get();
+
+            $new_lessons = Lesson::where('site_id', $this->site_id)->orderBy('id', 'desc')->limit(6)->get();
         }else{
             $incomplete_lessons =[];
             $new_lessons =[];

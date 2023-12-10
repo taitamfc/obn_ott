@@ -9,6 +9,7 @@
 }
 .gridarea__img img {
     max-height: 213px;
+    object-fit: cover;
 }
 ul.dropdown-menu li {
     display: block;
