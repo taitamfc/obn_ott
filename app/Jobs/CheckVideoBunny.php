@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Factory;
+use Illuminate\Support\Facades\Storage;
 
-class ProcessVideoBunny implements ShouldQueue
+class CheckVideoBunny implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     private const API_URL = 'https://api.bunny.net/';//URL for BunnyCDN API
@@ -46,29 +47,19 @@ class ProcessVideoBunny implements ShouldQueue
     public function handle(): void
     {
         try {
-            $urlCreate = "https://video.bunnycdn.com/library/{$this->stream_library_id}/videos/";
-            $response = Http::withHeaders([
-                'AccessKey' => $this->stream_library_access_key
-            ])->post($urlCreate, [
-                'title' => $this->lesson->name,
-            ]);
-            if( $response->ok() ){
-                $guid = $response->json('guid');
-                if($guid){
-                    $this->lesson->videoId = $guid;
-                    $this->lesson->videoLibraryId = $this->stream_library_id;
-                    $this->lesson->encodeProgress = 0;
-                    $this->lesson->save();
-                    $urlUpload = "library/{$this->stream_library_id}/videos/" . $guid;
-
-                    if( $this->old_lesson ){
-                        // Handle remove old video
-                    }
-                    $response = $this->APIcall('PUT', $urlUpload, array('file' => asset($this->lesson->video_url)), 'STREAM');
-                }
+            if(!$this->lesson->encodeProgress == 100){
+                $guid = $this->lesson->videoId;
+                $urlUpload = "library/{$this->stream_library_id}/videos/" . $guid;
+                $response = $this->APIcall('GET', $urlUpload,[],'STREAM');
+                $this->lesson->encodeProgress = $response['encodeProgress'];
+                $this->lesson->save();
             }else{
-                throw new \Exception("Can not create video");
+                $disk = 'public';
+                if( Storage::exists($disk . '/' . $this->lesson->video_url) ){
+                    Storage::delete($disk . '/' . $this->lesson->video_url);
+                }
             }
+            
         } catch (\Exception $e) {
             Log::error('Upload video API: '.$e->getMessage());
         }
