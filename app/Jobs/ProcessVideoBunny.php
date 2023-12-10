@@ -30,8 +30,8 @@ class ProcessVideoBunny implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(Lesson $lesson,Lesson $old_lesson = null) {
-        $this->lesson       = $lesson;
+    public function __construct($lessonId,Lesson $old_lesson = null) {
+        $this->lesson       = $lessonId;
         $this->old_lesson   = $old_lesson;
 
         $this->access_key                   = env('BUNNY_ACCESS_KEY','');
@@ -45,6 +45,7 @@ class ProcessVideoBunny implements ShouldQueue
      */
     public function handle(): void
     {
+        $this->lesson = Lesson::find($this->lesson);
         try {
             $urlCreate = "https://video.bunnycdn.com/library/{$this->stream_library_id}/videos/";
             $response = Http::withHeaders([

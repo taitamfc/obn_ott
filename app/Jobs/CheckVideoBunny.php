@@ -31,8 +31,8 @@ class CheckVideoBunny implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(Lesson $lesson,Lesson $old_lesson = null) {
-        $this->lesson       = $lesson;
+    public function __construct($lessonId,Lesson $old_lesson = null) {
+        $this->lesson       = $lessonId;
         $this->old_lesson   = $old_lesson;
 
         $this->access_key                   = env('BUNNY_ACCESS_KEY','');
@@ -46,6 +46,8 @@ class CheckVideoBunny implements ShouldQueue
      */
     public function handle(): void
     {
+        $this->lesson = Lesson::find($this->lesson);
+        $this->stream_library_id = $this->lesson->videoLibraryId;
         try {
             if(!$this->lesson->encodeProgress == 100){
                 $guid = $this->lesson->videoId;
