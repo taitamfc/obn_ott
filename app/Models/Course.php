@@ -95,4 +95,8 @@ class Course extends Model
         }
         return false;
     } 
+    public function getLessonsCountAttribute()
+    {
+        return $this->lessons()->count();
+    }
 }

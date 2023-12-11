@@ -8,6 +8,14 @@
         </div>
     </div>
     <div class="gridarea__content">
+         <div class="gridarea__list">
+            <ul>
+                <li>
+                    <i class="icofont-book-alt"></i> {{ $subscription->courses_count }} {{__('home.courses')}}
+
+                </li>
+            </ul>
+        </div>
         <div class="gridarea__heading">
             <h3>
                 <a
@@ -20,7 +28,7 @@
         @if(!$subscription->is_bought)
         <div class="course__summery__button">
             <a href="{{ route('website.orders.create',['site_name'=> $site_name, 'item_id' => $subscription->id,'type'=>'subscription']) }}"
-                class="default__button">Purchase</a>
+                class="default__button">{{__('sys.purchase')}}</a>
         </div>
         @endif
     </div>

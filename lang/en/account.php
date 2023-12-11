@@ -33,5 +33,9 @@ return [
     'password' => 'Password',
     'plan' => 'Plan',
     'back' => 'Back',
-
+    'history' => 'History',
+    'name' => 'Name',
+    'price' => 'Price',
+    'payment-method' => 'Payment',
+    'type' => 'Type',
 ];

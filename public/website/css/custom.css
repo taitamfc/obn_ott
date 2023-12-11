@@ -8,9 +8,16 @@
     color: blue;
 }
 .gridarea__img img {
-    max-height: 213px;
+    height: 213px;
     object-fit: cover;
 }
 ul.dropdown-menu li {
     display: block;
+}
+.gridarea__heading h3 {
+    max-height: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     /* white-space: normal; */
 }

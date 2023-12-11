@@ -30,4 +30,5 @@ return [
     'logo' => 'Logo',
     'pages' => 'Pages',
     'popup' => 'Popup',
+    'sites' => 'Sites',
 ];

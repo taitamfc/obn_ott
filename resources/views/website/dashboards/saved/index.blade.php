@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 @section('title')
-Whitlist
+{{__('account.whitlist')}}
 @endsection
 @section('content')
 

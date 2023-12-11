@@ -16,6 +16,23 @@ use Illuminate\Support\Facades\Log;
 
 class OrderController extends MainController
 {
+
+   
+public function order_history()
+{
+    $student = Auth::guard('students')->user();
+
+    $orders = Order::where('student_id', $student->id)
+        ->where('site_id', $this->site_id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    $params = [
+        'orders' => $orders,
+    ];
+
+    return view('website.orders.index', $params);
+}
     public function success($site_id,$order_id){
         $item = Order::find($order_id);
         if($item->type == 'course'){
