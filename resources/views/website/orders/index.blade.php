@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 @section('title')
-{{__('account.notice')}}
+{{__('account.history')}}
 @endsection
 @section('content')
 <!-- dashboardarea__area__start  -->
@@ -13,7 +13,7 @@
                 <div class="col-xl-9 col-lg-9 col-md-12">
                     <div class="dashboard__content__wraper">
                         <div class="dashboard__section__title">
-                            <h4>{{__('account.notice')}}</h4>
+                            <h4>{{__('account.history')}}</h4>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
@@ -27,41 +27,29 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>{{__('account.title')}}</th>
+                                                <th>{{__('account.name')}}</th>
+                                                <th>{{__('account.price')}}</th>
+                                                <th>{{__('account.payment-method')}}</th>
+                                                <th>{{__('account.type')}}</th>
                                                 <th>{{__('account.date')}}</th>
-                                                <th></th>
+                                                <th>{{__('account.status')}}</th>
                                             </tr>
                                         </thead>
-                                        @if(count($items))
+                                        @if(count($orders))
+                                        
                                         <tbody>
-                                            @foreach($items as $key => $item)
+                                            @foreach($orders as $key => $order)
                                             <tr>
-                                                <td>
-                                                    <p>{{ $key +1 }}</p>
-                                                </td>
-
-                                                <td>
-                                                    @if(!$item->is_read)
-                                                    <strong>{{ $item->title }}</strong>
-                                                    @else
-                                                    <p>{{ $item->title }}</p>
-                                                    @endif
-                                                </td>
-
-                                                <td>
-                                                    <p>{{ $item->created_at->format('d/m/Y') }}</p>
-                                                </td>
-
-                                                <td>
-                                                    <a
-                                                        href="{{ route('website.notices.show', ['site_name' => $site_name, 'id' => $item->id]) }}">
-                                                        <i class="icofont-eye" title="Show Details"></i>
-                                                    </a>
-                                                </td>
-                                                </td>
+                                                <td>{{ $key +1 }}</td>
+                                                <td>{{ getItemName($order->type, $order->item_id) }}</td>
+                                                <td>${{ number_format($order->price) }}</td>
+                                                <td>{{ $order->payment_method }}</td>
+                                                <td>{{ $order->type }}</td>
+                                                <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                                <td>{{ $order->status }}</td>
                                             </tr>
-                                            @endforeach
-                                            @else
+                                      @endforeach
+                                      @else
                                                 <tr>
                                                     <td colspan="6" class="text-center">
                                                         <p>{{__('sys.no_item_found')}}</p>
@@ -84,3 +72,16 @@
 <!-- dashboardarea__area__end   -->
 
 @endsection
+@php
+function getItemName($type, $item_id) {
+switch ($type) {
+case 'course':
+return \App\Models\Course::find($item_id)->name;
+case 'subscription':
+return \App\Models\Subscription::find($item_id)->name;
+// Add cases for other types if needed
+default:
+return $item_id;
+}
+}
+@endphp

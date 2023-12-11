@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 @section('title')
-Q&A
+{{__('account.qas')}}
 @endsection
 @section('content')
 <!-- dashboardarea__area__start  -->

@@ -74,6 +74,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
         Route::get('payment-success/{order_id}',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
 
+        Route::get('orders/history',[\App\Http\Controllers\Website\OrderController::class,'order_history'])->name('website.orders.history');
         Route::get('orders/fail/{order_id}',[\App\Http\Controllers\Website\OrderController::class,'fail'])->name('website.orders.fail');
         Route::get('orders/success/{order_id}',[\App\Http\Controllers\Website\OrderController::class,'success'])->name('website.orders.success');
         Route::get('orders/create/{item_id}/{type}',[\App\Http\Controllers\Website\OrderController::class,'create'])->name('website.orders.create');
@@ -86,6 +87,9 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
 
         Route::get('notice',[App\Http\Controllers\Website\NoticeController::class,'index'])->name('website.notices');
         Route::get('notice/{id}',[App\Http\Controllers\Website\NoticeController::class,'show'])->name('website.notices.show');
+
+        Route::get('search',[App\Http\Controllers\Website\SearchController::class,'index'])->name('website.search');
+
     });
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));

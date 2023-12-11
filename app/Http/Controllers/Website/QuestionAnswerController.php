@@ -13,7 +13,9 @@ class QuestionAnswerController extends MainController
     public function index()
     {
         $student = Auth::guard('students')->user();
-        $items = QuestionAnswer::where('student_id', $student->id)->orderBy('created_at', 'desc')->get();
+        $items = QuestionAnswer::where('student_id', $student->id)
+            ->where('site_id', $this->site_id)
+            ->orderBy('created_at', 'desc')->get();
         return view('website.dashboards.qas.index', ['items' => $items]);
     }
 

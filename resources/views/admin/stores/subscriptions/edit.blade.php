@@ -40,12 +40,8 @@
                 <div class="form-group">
                     <label for="course" class="col-form-label">Course</label>
                     <select name="course[]" id="course" class="form-control" multiple>
-                        <option value="">Select Course</option>
                         @foreach ($courses as $course)
-                        @php
-                        $isSelected = in_array($course->id, $selected_courses);
-                        @endphp
-                        <option value="{{ $course->id }}" style="@if($isSelected) color: blue; @endif">
+                        <option value="{{ $course->id }}" @selected(in_array($course->id, $selected_courses))>
                             {{ $course->name }}
                         </option>
                         @endforeach

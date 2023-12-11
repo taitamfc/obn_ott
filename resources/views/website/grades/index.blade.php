@@ -2,6 +2,6 @@
 @section('content')
 @include('website.includes.header.banner')
 
-@include('website.homes.featured-course')
+@include('website.homes.featured-course')   
 
 @endsection

@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 @section('title')
-Currently Watching
+{{__('account.currently-watching')}}
 @endsection
 @section('content')
 <!-- dashboardarea__area__start  -->

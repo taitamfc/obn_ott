@@ -70,4 +70,8 @@ class Subject extends Model
     {
         return isset($this->grade) ? $this->grade->name : 'Grade Default'; 
     }
+    public function getLessonsCountAttribute()
+    {
+        return $this->lessons()->count();
+    }
 }

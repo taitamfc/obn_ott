@@ -2,5 +2,7 @@
 return [
     'search-course' => 'Search Course',
     'home' => 'Home',
-    'hi' => 'Hi'
+    'hi' => 'Hi',
+    'profile' => 'Profile',
+    'logout' => 'Logout',
 ];

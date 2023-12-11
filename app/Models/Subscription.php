@@ -84,4 +84,8 @@ class Subscription extends Model
         }
         return false;
     } 
+    public function getCoursesCountAttribute()
+    {
+        return $this->courses()->count();
+    }
 }

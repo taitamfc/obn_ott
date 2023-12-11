@@ -30,4 +30,5 @@ return [
     'logo' => '로고',
     'pages' => '페이지',
     'popup' => '팝업',
+    'sites' => '사이트',
 ];

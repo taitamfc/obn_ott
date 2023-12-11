@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Site extends Model
 {
     const ACTIVE    = 1;
-    const INACTIVE  = 1;
+    const INACTIVE  = 0;
 
     use HasFactory;
     protected $table = 'sites';
@@ -80,5 +80,12 @@ class Site extends Model
     }
     function studentscriptions(){
         return $this->hasMany(StudentScription::class);
+    }
+    function getStatusFmAttribute(){
+        if($this->status == self::INACTIVE){
+            return '<span class="badge badge-warning">In Active</span>';
+        }else{
+            return '<span class="badge badge-success">Active</span>';
+        }
     }
 }

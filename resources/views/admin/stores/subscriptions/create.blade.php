@@ -44,7 +44,6 @@
                 <div class="form-group input-course">
                     <label for="course" class="col-form-label">Course <span>*</span></label>
                     <select name="course[]" id="course" class="form-control" multiple>
-                        <option value="">Select Course</option>
                         @foreach ($courses as $id => $courseName)
                         <option value="{{ $id }}">{{ $courseName }}</option>
                         @endforeach

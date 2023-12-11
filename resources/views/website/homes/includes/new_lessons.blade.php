@@ -4,7 +4,7 @@
     <div class="container">
         <div class="section__title">
             <div class="section__title__heading">
-                <h2>New Lessons</h2>
+                <h2>{{__('home.new-lessons')}}</h2>
             </div>
         </div>
         <div class="row row__custom__class">

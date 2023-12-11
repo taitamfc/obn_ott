@@ -99,6 +99,7 @@ class AuthController extends Controller
         return view('admin.auth.forgot');
     }
     function postForgot(ForgotPasswordRequest $request){
+        // dd($request);
         $item = User::where('email', 'LIKE' , $request->email )->first();
         if ($item) {
             $token = strtoupper(Str::random(10));
