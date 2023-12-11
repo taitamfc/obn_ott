@@ -81,4 +81,7 @@ class Site extends Model
     function studentscriptions(){
         return $this->hasMany(StudentScription::class);
     }
+    function plan_order(){
+        return $this->hasMany(PlanOrder::class);
+    }
 }

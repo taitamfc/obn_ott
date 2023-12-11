@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreBankUserRequest;
 use App\Models\User;
-use App\Models\PlanSite;
-use App\Models\Plan;
 use App\Models\UserBank;
 use App\Models\GroupSite;
+use App\Models\PlanSite;
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
@@ -181,60 +180,6 @@ class UserController extends AdminController
             return response()->json([
                 'success'=>false,
                 'message'=> __('sys.destroy_item_error'),
-            ],200);
-        }
-    }
-    function plan(Request $request){
-        if ($request->ajax()) {
-            $items = Plan::paginate(3);
-            $next_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',0)->get();
-            $next_plan_data = $next_plan->pluck('plan_id', 'created_at')->toArray();
-            $current_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',1)->first();
-            return view('admin.accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan_data'));
-        }
-        return view('admin.accountmanagements.plans.index');
-    }
-    function addPlan(Request $request, String $id){
-        if ($request->ajax()) {
-            $item = Plan::findOrfail($id);
-            $current_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',1)->value('expiration_date');
-            return view('admin.accountmanagements.plans.ajax.ajax-buyPlan',compact('item','current_plan'));
-        }
-        return view('admin.accountmanagements.plans.buyPlan');
-    }
-    function storePlans(Request $request){
-        $count = PlanSite::where('site_id', $this->site_id)->count();
-        try {
-            $id = $_REQUEST['data'];
-            $currentDateTime = Carbon::now();
-            $plan = Plan::findOrfail($id);
-            $item = new PlanSite();
-            $item->plan_id = $id;
-            $item->site_id = $this->site_id;
-            $current_plan_date = PlanSite::where('site_id',$this->site_id)->latest('created_at')->value('expiration_date');
-            // if user has current plan
-            if (!empty($current_plan_date)) {
-                $current_plan_date = Carbon::parse($current_plan_date);
-                $item->is_current = 0;
-                $item->created_at = $current_plan_date;
-                $item->expiration_date = $current_plan_date->addMonths($plan->duration);
-            // if user don't have plan
-            }else {
-                $item->is_current = 1;
-                $item->created_at = $currentDateTime;
-                $item->expiration_date = $currentDateTime->addMonths($plan->duration);
-            }
-            $item->save();
-            return response([
-                'success' => true,
-                'message' => __('sys.store_item_success'),
-                'redirect' => route('admin.users.plans')
-            ],200);
-        } catch (QueryException $e) {
-            Log::error($e->getMessage());
-            return response([
-                'success' => false,
-                'message' => __('sys.store_item_error'),
             ],200);
         }
     }

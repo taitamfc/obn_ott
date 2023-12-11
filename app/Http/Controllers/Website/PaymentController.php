@@ -136,6 +136,7 @@ class PaymentController extends MainController
                 $bill->status = 'COMPLETED';
                 $bill->order_id = $order_id;
                 $bill->site_id = $this->site_id;
+                $bill->is_plan = 0;
                 $bill->save();
     
                 DB::commit();

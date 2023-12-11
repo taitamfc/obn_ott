@@ -20,4 +20,7 @@ class Duration extends Model
     function subscriptions(){
         return $this->hasMany(Subscription::class);
     }
+    function plan(){
+        return $this->hasMany(Plan::class);
+    }
 }
