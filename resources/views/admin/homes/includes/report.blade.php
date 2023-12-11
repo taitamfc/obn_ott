@@ -10,9 +10,8 @@
             <div class="d-flex">
                 <div class="btn-group mr-3">
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                        id="select-grade-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        {{ __('admin-dashboard.select_grade') }} 
+                        id="select-grade-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ __('admin-dashboard.select_grade') }}
                     </button>
                     <form action="" method="get">
                         <div class="dropdown-menu" aria-labelledby="select-grade-dropdown" id="dropdownMenu">

@@ -34,11 +34,16 @@ class AuthController extends Controller
     }
 
     public function postLogin(StoreLoginRequest $request){
-        $dataUser = $request->only('email','password');
-        if(Auth::attempt($dataUser)){
-            return redirect()->route('admin.home')->with('success',__('auth.login_success'));
-        }else {
-            return redirect()->back()->with('error',__('auth.login_error'));
+        try {
+            $dataUser = $request->only('email','password');
+            if(Auth::attempt($dataUser)){
+                return redirect()->route('admin.home')->with('success',__('auth.login_success'));
+            }else {
+                return redirect()->back()->with('error',__('auth.login_error'));
+            }
+        } catch (Exception $e) {
+            Log::error('Bug error : '.$e->getMessage());
+            return redirect()->route('login')->with('error','Has Problems, Please Try Again');
         }
     }
 
@@ -100,44 +105,56 @@ class AuthController extends Controller
     }
     function postForgot(ForgotPasswordRequest $request){
         $item = User::where('email', 'LIKE' , $request->email )->first();
-        if ($item) {
-            $token = strtoupper(Str::random(10));
-            $item->token = $token;
-            $item->save();
-            $data = [
-                'id' => $item->id,
-                'name' => $item->name,
-                'email' => $item->email,
-                'token' => $token
-            ];
-        Mail::send('admin.auth.mail',compact('data'), function($email) use ($item){
-            $email->subject('Forgot Password');
-            $email->to($item->email, $item->name );
-        });
-        return redirect()->route('login')->with('success','Please check mail to reset password');
+        try {
+            if ($item) {
+                $token = strtoupper(Str::random(10));
+                $item->token = $token;
+                $item->save();
+                $data = [
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'email' => $item->email,
+                    'token' => $token
+                ];
+            Mail::send('admin.auth.mail',compact('data'), function($email) use ($item){
+                $email->subject('Forgot Password');
+                $email->to($item->email, $item->name );
+            });
+            return redirect()->route('login')->with('success','Please check mail to reset password');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('admin.forgot')->with('error','Have problem, Please try again late!');
         }
     }
     function getReset(Request $request){
-        $item = User::findOrfail($request->user);
-        if($item->token === $request->token){
-            $data = [
-                'user' => $request->user,
-                'token' => $request->token,
-            ];
-            return view('admin.auth.resetpassword',compact('data'));
-        }else {
-            return redirect()->route('login')->with('error','Has Problems, Please Try Again');
+        try {
+            $item = User::findOrfail($request->user);
+            if($item->token === $request->token){
+                $data = [
+                    'user' => $request->user,
+                    'token' => $request->token,
+                ];
+                return view('admin.auth.resetpassword',compact('data'));
+            }else {
+                return redirect()->route('login')->with('error','Has Problems, Please Try Again');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('admin.forgot')->with('error','Have problem, Please try again late!');
         }
     }
     function postReset(ResetPasswordRequest $request){
-        $item = User::findOrfail($request->user);
-        if($item && $item->token === $request->token){
-            $item->password = bcrypt($request->password);
-            $item->token = '';
-            $item->save();
-            return redirect()->route('login')->with('success','Reset Password Success');
-        }else {
-            return redirect()->back()->with('error','Has Problems, Please Try Again');
+        try {
+            $item = User::findOrfail($request->user);
+            if($item && $item->token === $request->token){
+                $item->password = bcrypt($request->password);
+                $item->token = '';
+                $item->save();
+                return redirect()->route('login')->with('success','Reset Password Success');
+            }else {
+                return redirect()->back()->with('error','Has Problems, Please Try Again');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('admin.forgot')->with('error','Have problem, Please try again late!');
         }
     }
 }

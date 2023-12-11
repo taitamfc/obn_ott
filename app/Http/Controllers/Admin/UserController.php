@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserBank;
 use App\Models\GroupSite;
 use App\Models\PlanSite;
+use App\Models\Site;
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
@@ -67,7 +68,7 @@ class UserController extends AdminController
             if ($request->hasFile('image')) {
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             }else {
-                $item->image_url = 'assets/images/default.png';
+                $item->image_url = 'assets/images/favicon.png';
             }
                 if($item->save()){
                     $user_site = new GroupSite();
@@ -75,6 +76,15 @@ class UserController extends AdminController
                     $user_site->user_id = $item->id;
                     $user_site->site_id = $this->site_id;
                     $user_site->save();
+
+                    $site = new Site();
+                    $site->name = $item->name;
+                    $site->slug = Str::slug($item->name);
+                    $site->user_id = $item->id;
+                    $site->status = 1;
+                    $site->save();
+                    $item->site_id = $site->id;
+                    $item->save();
                 }
             DB::commit();
             return response()->json([
