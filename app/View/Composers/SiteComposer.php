@@ -35,7 +35,9 @@ class SiteComposer
                     "plan_page_background_image" => null,
                     "plan_page_header_background_color" => null,
                     "plan_page_event_section_background_color" => null,
-                    "logo" => asset('assets/images/no-logo.png')
+                    "logo" => asset('assets/images/no-logo.png'),
+                    'footer_about' => '',
+                    'footer_copyright' => ''
                 ];
             }
             $view->with('cr_site_id', $site_id);
