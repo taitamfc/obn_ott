@@ -84,4 +84,17 @@
     </div>
 </div>
 @endif
+
+@if(!count($courses ) && !count($subjects ) && !count($lessons ) )
+<div class="coursearea sp_top_100 sp_bottom_100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <p class="text-center">{{__('sys.no_item_found')}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 @endsection

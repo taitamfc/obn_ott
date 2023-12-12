@@ -13,4 +13,7 @@ class ThemeController extends AdminController
     public function homepageSections(){
         return view('admin.themes.homepage-sections');
     }
+    public function footerSections(){
+        return view('admin.themes.footer-sections');
+    }
 }

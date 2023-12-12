@@ -6,12 +6,12 @@
             <input type="hidden" name="id" id="input-id">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Question</h5>
+                    <h5 class="modal-title">{{__('admin-question.question')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-question-update">
-                        <label for="price" class="col-form-label">Question</label>
+                        <label for="price" class="col-form-label">{{__('admin-question.question')}}</label>
                         <input class="form-control" type="text" id="question" name='question' disabled>
                     </div>
                     <div class="form-group input-answer-update">

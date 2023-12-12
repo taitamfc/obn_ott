@@ -10,9 +10,6 @@
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
-                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
-                            {{ __('sys.add_new') }}
-                        </button>
                     </div>
                 </div>
             </div>
@@ -32,13 +29,11 @@
         </div>
     </div>
 </div>
-@include('admin.settings.sites.edit')
-@include('admin.settings.sites.create')
 @endsection
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('admin.sites.index') }}";
+var indexUrl = "{{ route('admin.orders.index') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.subject-table-results';

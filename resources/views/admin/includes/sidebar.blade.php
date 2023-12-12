@@ -120,6 +120,12 @@
                     <span>{{__('admin-sidebar.class')}}</span>
                 </a>
             </li>
+
+            <li> <a href="{{ route('admin.orders.index') }}">
+                    <i class="feather ft-home"></i>
+                    <span>Order</span>
+                </a>
+            </li>
             <!-- endif -->
             <!-- Themes -->
             <!-- if (Auth::user()->hasPermission('Themes')) -->
@@ -139,15 +145,23 @@
                     <li> <a href="{{ route('admin.themes.homepage-banner') }}">
                             <i class="feather ft-home"></i>
                             <span>{{__('admin-sidebar.homepage-banner')}}</span>
-                        </a></li>
+                        </a>
+                    </li>
                     <li> <a href="{{ route('admin.themes.homepage-sections') }}">
                             <i class="feather ft-home"></i>
                             <span>{{__('admin-sidebar.homepage-sections')}}</span>
-                        </a></li>
+                        </a>
+                    </li>
+                    <li> <a href="{{ route('admin.themes.footer-sections') }}">
+                            <i class="feather ft-home"></i>
+                            <span>Footer Sessions</span>
+                        </a>
+                    </li>
                     <li> <a href="{{route('admin.banners.index')}}">
                             <i class="feather ft-home"></i>
                             <span>{{__('admin-sidebar.settings')}}</span>
-                        </a></li>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <!-- endif -->
@@ -241,7 +255,7 @@
                             <span>{{__('admin-sidebar.popup')}}</span>
                         </a>
                     </li>
-                     <li> <a href="{{ route('admin.sites.index') }}">
+                    <li> <a href="{{ route('admin.sites.index') }}">
                             <i class="feather ft-home"></i>
                             <span>{{__('admin-sidebar.sites')}}</span>
                         </a>

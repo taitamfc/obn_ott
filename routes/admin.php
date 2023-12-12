@@ -86,6 +86,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     //Class
     Route::get('/classes/students',[\App\Http\Controllers\Admin\ClassController::class,'students'])->name('classes.students');
     Route::resource('/classes',\App\Http\Controllers\Admin\ClassController::class);
+
+    // Order
+    Route::resource('/orders',\App\Http\Controllers\Admin\OrderController::class);
+
     
     //Report
     Route::get('/reports/users',[\App\Http\Controllers\Admin\ReportController::class,'users'])->name('report.users');
@@ -96,7 +100,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::get('themes/homepage-banner',[\App\Http\Controllers\Admin\ThemeController::class,'homepageBanner'])->name('themes.homepage-banner');
     Route::get('themes/homepage-sections',[\App\Http\Controllers\Admin\ThemeController::class,'homepageSections'])->name('themes.homepage-sections');
     Route::get('video-advertisement',[\App\Http\Controllers\Admin\VideoController::class,'videoAdvertisement'])->name('videos.video-advertisement');
-    
+    Route::get('themes/footer-sections',[\App\Http\Controllers\Admin\ThemeController::class,'footerSections'])->name('themes.footer-sections');
     
     // Setting
     Route::prefix('settings')->group(function(){

@@ -35,7 +35,9 @@ class Course extends Model
         return $this->hasMany(LessonCourse::class, 'course_id', 'id');
     }
     public function lessons(){
-        return  $this->belongsToMany(Lesson::class, 'lesson_course', 'lesson_id', 'course_id');
+        // return  $this->belongsToMany(Lesson::class, 'lesson_course', 'lesson_id', 'course_id');
+        return $this->hasMany(Lesson::class)->orderBy('position', 'asc');
+
     }
     public function lesson(){
         return $this->belongsTo(Lesson::class);
