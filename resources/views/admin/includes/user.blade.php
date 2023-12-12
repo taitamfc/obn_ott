@@ -2,12 +2,12 @@
     <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img src="{{ asset( $cr_admin->image_url ) }}" alt="" class="img-fluid">
+            <img src="{{ asset( $cr_admin->image_url_fm ) }}" alt="" class="img-fluid">
         </button>
         <div class="dropdown-menu dropdown_user" aria-labelledby="dropdownMenuButton">
             <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="user_img mb-3">
-                    <img src="{{ asset( $cr_admin->image_url ) }}" alt="User Image">
+                    <img src="{{ asset( $cr_admin->image_url_fm ) }}" alt="User Image">
                 </div>
                 <div class="user_bio text-center">
                     <p class="name font-weight-bold mb-0">{{ $cr_admin->name }}</p>

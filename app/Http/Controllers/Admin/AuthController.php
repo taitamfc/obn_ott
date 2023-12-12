@@ -16,7 +16,7 @@ use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Str;
 use Mail;
 use Illuminate\Support\Facades\Session;
-
+use App\Jobs\SendEmail;
 use App\Models\User;
 use App\Models\Site;
 
@@ -117,11 +117,8 @@ class AuthController extends Controller
                     'email' => $item->email,
                     'token' => $token
                 ];
-            Mail::send('admin.auth.mail',compact('data'), function($email) use ($item){
-                $email->subject('Forgot Password');
-                $email->to($item->email, $item->name );
-            });
-            return redirect()->route('login')->with('success','Please check mail to reset password');
+                SendEmail::dispatch($item,$data,'forgot_pass');
+                return redirect()->route('login')->with('success','Please check mail to reset password');
             }
         } catch (\Exception $e) {
             return redirect()->route('admin.forgot')->with('error','Have problem, Please try again late!');
