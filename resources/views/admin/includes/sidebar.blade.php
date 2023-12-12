@@ -241,6 +241,11 @@
                             <span>{{__('admin-sidebar.popup')}}</span>
                         </a>
                     </li>
+                     <li> <a href="{{ route('admin.sites.index') }}">
+                            <i class="feather ft-home"></i>
+                            <span>{{__('admin-sidebar.sites')}}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <!-- endif -->

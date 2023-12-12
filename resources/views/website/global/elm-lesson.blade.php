@@ -1,4 +1,4 @@
-<div class="gridarea__wraper">
+<div class="gridarea__wraper" style="min-height: 150px;">
     <div class="gridarea__img">
         @if(!$lesson->is_bought)
         <a href="{{ route('website.orders.create', ['item_id' => $lesson->course_id, 'type' => 'course', 'site_name' => $site_name]) }}">

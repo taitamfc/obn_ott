@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('header')
+<link rel="stylesheet" href="{{ asset('assets/css/select2.css')}}">
+@endsection
 @section('content')
 <div class="main-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
@@ -33,6 +36,7 @@
 @endsection
 
 @section('footer')
+<script src="{{ asset('assets/js/select2.min.js')}}"></script>
 <script>
 var indexUrl = "{{ route('admin.subscriptions.index') }}";
 var positionUrl = "";
@@ -121,6 +125,8 @@ jQuery(document).ready(function() {
             }
         });
     });
+
+    $('#course').select2();
 });
 </script>
 @endsection

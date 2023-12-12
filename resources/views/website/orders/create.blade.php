@@ -32,7 +32,7 @@
                                 <div class="col-xl-12">
                                     <div class="checkoutarea__inputbox">
                                         <label for="name">{{__('checkout.name')}} *</label>
-                                        <input type="text" id="first__name" name="name" class="info" placeholder="Name"
+                                        <input type="text" id="first__name" name="name" class="info" placeholder="{{__('checkout.name')}}"
                                             value="{{$student->name}}">
                                         @if ($errors->any())
                                         <p style="color:red">{{ $errors->first('name') }}</p>
@@ -43,7 +43,7 @@
                                     <div class="checkoutarea__inputbox">
                                         <label for="company__name">{{__('checkout.email')}} *</label>
                                         <input type="text" id="company__name" name="email" class="info"
-                                            value="{{$student->email}}" placeholder="Email *">
+                                            value="{{$student->email}}" placeholder="{{__('checkout.email')}}">
                                         @if ($errors->any())
                                         <p style="color:red">{{ $errors->first('email') }}</p>
                                         @endif
@@ -53,7 +53,7 @@
                                     <div class="checkoutarea__inputbox">
                                         <label for="email__address">{{__('checkout.phone-number')}} *</label>
                                         <input type="text" id="email__address" name="phone" class="info"
-                                            value="{{$student->phone}}" placeholder="Your email">
+                                            value="{{$student->phone}}" placeholder="{{__('checkout.phone-number')}}">
                                         @if ($errors->any())
                                         <p style="color:red">{{ $errors->first('phone') }}</p>
                                         @endif
@@ -63,7 +63,7 @@
                                     <div class="checkoutarea__inputbox">
                                         <label for="order__note">{{__('checkout.orders-notes')}}</label>
                                         <input type="text" id="order__note" name="note" class="info"
-                                            placeholder="Order Notes">
+                                            placeholder="{{__('checkout.orders-notes')}}">
                                     </div>
                                 </div>
                             </div>

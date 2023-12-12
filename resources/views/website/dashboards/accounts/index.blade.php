@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 @section('title')
-My Profile
+{{__('account.my_page')}}
 @endsection
 @section('content')
 

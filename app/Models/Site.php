@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Site extends Model
 {
     const ACTIVE    = 1;
-    const INACTIVE  = 1;
+    const INACTIVE  = 0;
 
     use HasFactory;
     protected $table = 'sites';
@@ -83,5 +83,12 @@ class Site extends Model
     }
     function plan_order(){
         return $this->hasMany(PlanOrder::class);
+    }
+    function getStatusFmAttribute(){
+        if($this->status == self::INACTIVE){
+            return '<span class="badge badge-warning">In Active</span>';
+        }else{
+            return '<span class="badge badge-success">Active</span>';
+        }
     }
 }

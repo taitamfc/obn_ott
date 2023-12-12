@@ -75,7 +75,6 @@ class Student extends Authenticatable
     function qas(){
         return $this->hasMany(QuestionAnswer::class,'student_id','id');
     }
-
     
     public function subscriptions()
     {
@@ -84,6 +83,11 @@ class Student extends Authenticatable
 
     function studentscriptions(){
         return $this->hasMany(StudentScription::class,'student_id','id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'student_id', 'id');
     }
 }
 

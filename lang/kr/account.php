@@ -33,5 +33,9 @@ return [
     'password' => '비밀번호',
     'plan' => '계획',
     'back' => '뒤쪽에',
-
+    'history' => '연혁',
+    'name' => '이름',
+    'price' => '가격',
+    'payment-method' => '지불',
+    'type' => '유형',
 ];

@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 @section('title')
-All Lesson
+{{__('account.lesson')}}
 @endsection
 @section('content')
 
