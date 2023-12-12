@@ -65,10 +65,16 @@ class User extends Authenticatable
     function plan_order(){
         return $this->hasMany(PlanOrder::class);
     }
-    
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
     //Feature
     public function getGroupNamesAttribute()
     {
-        return $this->groupsite->pluck('group.name')[0];
+        return $this->group ? $this->group->name : '';
+    }
+    public function getImageUrlFmAttribute()
+    {
+        return $this->image_url ? $this->image_url : asset('assets/images/default.png');
     }
 }
