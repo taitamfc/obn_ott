@@ -53,6 +53,7 @@ class ProcessVideoBunny implements ShouldQueue
             ])->post($urlCreate, [
                 'title' => $this->lesson->name,
             ]);
+            Log::info('ProcessVideoBunny - Create Video: '.$response->body());
             if( $response->ok() ){
                 $guid = $response->json('guid');
                 if($guid){
@@ -66,12 +67,13 @@ class ProcessVideoBunny implements ShouldQueue
                         // Handle remove old video
                     }
                     $response = $this->APIcall('PUT', $urlUpload, array('file' => asset($this->lesson->video_url)), 'STREAM');
+                    Log::info('ProcessVideoBunny - Upload Video: '.json_encode($response));
                 }
             }else{
                 throw new \Exception("Can not create video");
             }
         } catch (\Exception $e) {
-            Log::error('Upload video API: '.$e->getMessage());
+            Log::error('ProcessVideoBunny - Error: '.json_encode($e->getMessage()));
         }
     }
 

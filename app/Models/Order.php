@@ -24,7 +24,6 @@ class Order extends Model
     function Transaction(){
         $this->hasMany(Transactions::class);
     }
-  
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
@@ -42,5 +41,8 @@ class Order extends Model
                 break;
         }
         return $name;
+    }
+    function order_grades(){
+        return $this->hasMany(OrderGrade::class);
     }
 }

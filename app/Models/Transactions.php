@@ -9,6 +9,8 @@ class Transactions extends Model
 {
     use HasFactory;
     protected $table = 'transactions';
+    const ACTIVE = 1;
+    const INACTIVE = 0;
     function order(){
         $this->belongsTo(Order::class);
     }

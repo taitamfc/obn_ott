@@ -53,17 +53,23 @@ class CheckVideoBunny implements ShouldQueue
                 $guid = $this->lesson->videoId;
                 $urlUpload = "library/{$this->stream_library_id}/videos/" . $guid;
                 $response = $this->APIcall('GET', $urlUpload,[],'STREAM');
+                Log::info('CheckVideoBunny - Get Video: '.json_encode($response));
                 $this->lesson->encodeProgress = $response['encodeProgress'];
                 $this->lesson->save();
             }else{
                 $disk = 'public';
-                if( Storage::exists($disk . '/' . $this->lesson->video_url) ){
-                    Storage::delete($disk . '/' . $this->lesson->video_url);
+                $video_url = $this->lesson->video_url;
+                $video_url = str_replace($video_url,'storage/','');
+                if( Storage::disk($disk)->exists($video_url) ){
+                    if(Storage::disk($disk)->delete($video_url)){
+                        $this->lesson->video_url = '';
+                        $this->lesson->save();
+                    }
                 }
             }
             
         } catch (\Exception $e) {
-            Log::error('Upload video API: '.$e->getMessage());
+            Log::error('CheckVideoBunny - Error: '.json_encode($e->getMessage()));
         }
     }
 

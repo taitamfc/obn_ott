@@ -62,7 +62,10 @@ class User extends Authenticatable
     public function groups(){
         return $this->belongsToMany(Group::class, 'group_site', 'user_id', 'group_id');
     }
-
+    function plan_order(){
+        return $this->hasMany(PlanOrder::class);
+    }
+    
     //Feature
     public function getGroupNamesAttribute()
     {
