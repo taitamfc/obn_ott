@@ -106,7 +106,7 @@ class Lesson extends Model
     {  
         if ($this->video_url) {
             return 
-            '<video class="col-9" controls>
+            '<video controls>
                 <source src="'.asset($this->video_url).'"  type="video/mp4">
             </video>';
         } else {
