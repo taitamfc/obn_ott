@@ -27,6 +27,7 @@ class ClassController extends AdminController
             if ($request->course) {
                 $query->where('course_id',$request->course);
             }
+            $query->where('lesson_student.site_id',$this->site_id);
             $items = $query->get();
             return view('admin.class.ajax-index',compact('courses','items'));
         }

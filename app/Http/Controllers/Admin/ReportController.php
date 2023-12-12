@@ -33,26 +33,27 @@ class ReportController extends AdminController
         return view('admin.reports.user',compact('items'));
     }
     function sales(Request $request){
-        $query = DB::table('transactions')
-        ->join('courses', 'transactions.course_id', '=', 'courses.id');
-        if ($request->fromDate && $request->toDate && $request->toDate < now()) {
-            $query->select(DB::raw('DATE(created_at) AS time'), DB::raw('COUNT(DISTINCT student_id) as student_count'))
-            ->whereBetween('created_at', [$request->fromDate, $request->toDate])
-            ->groupBy(DB::raw('DATE(created_at)'));
-        }
-        if ($request->monthly || !empty($request)) {
-            $query->select(DB::raw('MONTH(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
-            ->groupBy(DB::raw('MONTH(transactions.created_at)'), 'transactions.course_id', 'courses.name');
-        }
-        if ($request->weekly) {
-            $query->select(DB::raw('WEEK(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
-            ->groupBy(DB::raw('WEEK(transactions.created_at)'), 'transactions.course_id', 'courses.name');
-        }
-        if ($request->daily) {
-            $query->select(DB::raw('DATE(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
-            ->groupBy(DB::raw('DATE(transactions.created_at)'), 'transactions.course_id', 'courses.name');
-        }
-        $items = $query->orderBy('time','ASC')->get();
+        // $query = DB::table('transactions')
+        // ->join('courses', 'transactions.course_id', '=', 'courses.id');
+        // if ($request->fromDate && $request->toDate && $request->toDate < now()) {
+        //     $query->select(DB::raw('DATE(created_at) AS time'), DB::raw('COUNT(DISTINCT student_id) as student_count'))
+        //     ->whereBetween('created_at', [$request->fromDate, $request->toDate])
+        //     ->groupBy(DB::raw('DATE(created_at)'));
+        // }
+        // if ($request->monthly || !empty($request)) {
+        //     $query->select(DB::raw('MONTH(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
+        //     ->groupBy(DB::raw('MONTH(transactions.created_at)'), 'transactions.course_id', 'courses.name');
+        // }
+        // if ($request->weekly) {
+        //     $query->select(DB::raw('WEEK(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
+        //     ->groupBy(DB::raw('WEEK(transactions.created_at)'), 'transactions.course_id', 'courses.name');
+        // }
+        // if ($request->daily) {
+        //     $query->select(DB::raw('DATE(transactions.created_at) AS time'), 'courses.name', DB::raw('COUNT(*) AS sold'), DB::raw('SUM(transactions.price) AS price'))
+        //     ->groupBy(DB::raw('DATE(transactions.created_at)'), 'transactions.course_id', 'courses.name');
+        // }
+        // $items = $query->orderBy('time','ASC')->get();
+        $items = [];
         $items = json_encode($items);
         return view('admin.reports.sale',compact('items'));
     }

@@ -32,15 +32,9 @@ class UserController extends AdminController
 
     function index(Request $request){
         // $this->authorize('User',User::class);
-        $groups = Group::all();
-        $user_site = GroupSite::where('site_id',$this->site_id)->get('user_id');
-        $query = User::query()->where('id',$this->user_id);
-        foreach ($user_site as $item) {
-            $query->orWhere('id',$item->user_id);
-        }
-        $items = $query->with('groups')->get();
+        $groups = Group::where('site_id',$this->site_id)->get();
         if( $request->ajax() ){
-            
+            $items = User::where('site_id',$this->site_id)->get();
             return view('admin.accountmanagements.users.ajax-index',compact('items','groups'));
         }
         return view('admin.accountmanagements.users.index',compact('groups'));

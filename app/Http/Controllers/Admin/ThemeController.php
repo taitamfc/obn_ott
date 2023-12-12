@@ -23,6 +23,8 @@ class ThemeController extends AdminController
         ])->get();
         if($footer_settings){
             $footer_settings = $footer_settings->pluck('setting_value','setting_name')->toArray();
+            $footer_settings['footer_about'] = !empty($footer_settings['footer_about']) ? $footer_settings['footer_about'] : '';
+            $footer_settings['footer_copyright'] = !empty($footer_settings['footer_copyright']) ? $footer_settings['footer_copyright'] : '';
         }else{
             $footer_settings = [
                 'footer_about' => '',
