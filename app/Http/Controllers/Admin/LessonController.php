@@ -107,14 +107,21 @@ class LessonController extends AdminController
     }
     public function storeVideo(Request $request)
     {
-        $video_url = '';
-        if ($request->hasFile('file')) {
+        try {
+            if (!$request->hasFile('file')) {
+                throw new Exception("No file uploaded");
+            }
             $video_url = $this->uploadFile($request->file('file'), 'uploads/'.Auth::id().'/lessons/video');
+            return response()->json([
+                'success'=>true,
+                'video_url'=> $video_url
+            ],200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success'=>false,
+                'msg'=> $e->getMessage()
+            ],200);
         }
-        return response()->json([
-            'success'=>true,
-            'video_url'=> $video_url
-        ],200);
     }
     public function store(StoreLessonRequest $request)
     {
@@ -127,9 +134,9 @@ class LessonController extends AdminController
         $item->status = $request->status;
         $item->site_id = $this->site_id;
         $item->video_url = $request->video;
-        try {
-            DB::beginTransaction();
 
+        DB::beginTransaction();
+        try {
             if ($request->hasFile('video')) {
                 $item->video_url = $this->uploadFile($request->file('video'), 'uploads/'.Auth::id().'/lessons/video');
             }

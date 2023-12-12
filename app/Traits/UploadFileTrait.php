@@ -33,8 +33,20 @@ trait UploadFileTrait
         try {
             if ($fileNames) {
                 foreach ($fileNames as $fileName) {
-                    Storage::delete($disk . '/' . $fileName);
+                    $this->deleteAFile($fileName,$disk);
                 }
+            }
+            return true;
+        } catch (\Exception $e) {
+            report($e);
+            return $e->getMessage();
+        }
+    }
+    public function deleteAFile($fileName, $disk = 'public')
+    {
+        try {
+            if ($fileName) {
+                Storage::delete($disk . '/' . $fileName);
             }
             return true;
         } catch (\Exception $e) {

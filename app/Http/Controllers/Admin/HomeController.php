@@ -39,7 +39,9 @@ class HomeController extends AdminController
         if($grade_id){
             $queryVisistor->where('grade_id',$grade_id);
             $queryImpression->where('grade_id',$grade_id);
-            // $querySale->where('grade_id',$grade_id);
+            $querySale->whereHas('order_grades', function($query) use ($grade_id) {
+                $query->where('grade_id', $grade_id);
+            });
             $queryStudent->join('lesson_student', 'students.id', '=', 'lesson_student.student_id')->where('lesson_student.grade_id',$grade_id);
         }
         $totalVisistor      = $queryVisistor->first() ? $queryVisistor->first()->amount : 0;
