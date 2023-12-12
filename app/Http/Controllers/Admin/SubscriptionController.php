@@ -24,7 +24,7 @@ class SubscriptionController extends AdminController
         $courses = Course::where('site_id',$this->site_id)->where('status',Course::ACTIVE)->pluck('name', 'id');
         $durations = Duration::where('site_id',$this->site_id)->pluck('name', 'id');
         if($request->ajax()){
-            $items = Subscription::with('duration')->get();
+            $items = Subscription::with('duration')->where('site_id',$this->site_id)->get();
             return view('admin.stores.subscriptions.ajax-index',compact('items'));
         }
         return view('admin.stores.subscriptions.index',compact('courses','form','durations'));
