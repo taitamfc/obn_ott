@@ -58,7 +58,7 @@ class Lesson extends Model
     function qas(){
         return $this->hasMany(QuestionAnswer::class);
     }
-
+    
     //is_added_whitlist
     function getIsAddedWhitlistAttribute(){
         $student_id = Auth::guard('students')->id();

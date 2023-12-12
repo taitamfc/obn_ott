@@ -14,6 +14,7 @@ use App\Models\StudentCourse;
 use App\Models\StudentSubscription;
 use App\Models\LessonStudent;
 use App\Models\Transactions;
+use App\Models\OrderGrade;
 use Illuminate\Support\Facades\Log;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -76,9 +77,8 @@ class PaymentController extends MainController
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            DB::beginTransaction();
             try {
-                DB::beginTransaction();
-
                 //Update Order 
                 $order = Order::findOrfail($order_id);
                 $order->status = 'COMPLETED';
@@ -90,6 +90,11 @@ class PaymentController extends MainController
                     $lessons = Lesson::where('course_id',$item->id)->get();
                     // Student And Course
                     foreach ($lessons as $lesson) {
+                        $order_grade = new OrderGrade();
+                        $order_grade->order_id = $order->id;
+                        $order_grade->grade_id = $lesson->grade_id;
+                        $order_grade->save();
+
                         $student_lesson = new LessonStudent();
                         $student_lesson->lesson_id = $lesson->id;
                         $student_lesson->course_id = $lesson->course_id;
@@ -111,6 +116,11 @@ class PaymentController extends MainController
                         $lessons = Lesson::where('course_id',$item->course_id)->get();
                         // Student And Course
                         foreach ($lessons as $lesson) {
+                            $order_grade = new OrderGrade();
+                            $order_grade->order_id = $order->id;
+                            $order_grade->grade_id = $lesson->grade_id;
+                            $order_grade->save();
+
                             $student_lesson = new LessonStudent();
                             $student_lesson->lesson_id = $lesson->id;
                             $student_lesson->grade_id = $lesson->grade_id;
@@ -147,7 +157,7 @@ class PaymentController extends MainController
 
             } catch (\Exception $e) {
                 DB::rollback();
-                Log::error('Bug occurred: ' . $e->getMessage());
+                Log::error('Payment error: ' . $e->getMessage());
 
                 return redirect()
                 ->route('website.orders.fail',['site_name'=>$this->site_name,'order_id'=>$request->order_id])

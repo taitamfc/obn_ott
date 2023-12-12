@@ -121,7 +121,8 @@ jQuery(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         maxFiles: 1,
-        maxFilesize: 10,
+        maxFilesize: 1024,
+        timeout: 1800000,
         acceptedFiles:".mp4,.mkv,.avi",
         sending: function(file, xhr, formData) {
             $('#saveLesson').prop('disabled',true);

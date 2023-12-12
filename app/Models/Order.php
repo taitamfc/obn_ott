@@ -24,4 +24,7 @@ class Order extends Model
     function Transaction(){
         $this->hasMany(Transactions::class);
     }
+    function order_grades(){
+        return $this->hasMany(OrderGrade::class);
+    }
 }
