@@ -16,6 +16,12 @@ class Plan extends Model
     function plan_site(){
         return $this->hasMany(PlanSite::class);
     }
+    function plan_order(){
+        return $this->hasMany(PlanOrder::class);
+    }
+    function duration(){
+        return $this->belongsTo(Duration::class);
+    }
     function getKeyByValue($array, $value)
     {
         foreach ($array as $key => $val) {

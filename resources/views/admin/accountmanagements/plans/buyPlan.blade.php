@@ -26,7 +26,7 @@
             <div id="plan">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card buyPlans-table-results">
+                        <div class="buyPlans-table-results">
                             <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
                         </div>
                     </div>
@@ -55,6 +55,8 @@ jQuery(document).ready(function() {
         var ele = $(this);
         var id = ele.data("id");
         var action = ele.data("action");
+        var price = ele.data("price");
+        var payValue = $('input[name="pay"]:checked').val();
         jQuery.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -63,17 +65,14 @@ jQuery(document).ready(function() {
             type: "POST",
             data: {
                 _token: '{{ csrf_token() }}',
-                data: id
+                data: [id, payValue, price]
             },
             success: function(res) {
                 if (res.error) {
                     showAlertError(res.error);
                 }
                 if (res.redirect) {
-                    showAlertSuccess(res.message);
-                    setTimeout(() => {
-                        window.location.href = res.redirect;
-                    }, 1200);
+                    window.location.href = res.redirect;
                 }
             }
         });

@@ -18,6 +18,11 @@
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','localization'])->group(function(){
+    //Payment
+    Route::get('handle-payment/{order_id}/{price}',[\App\Http\Controllers\Admin\PaymentController::class, 'handlePayment'])->name('admin.make.payment');
+    Route::get('cancel-payment',[\App\Http\Controllers\Admin\PaymentController::class, 'paymentCancel'])->name('admin.cancel.payment');
+    Route::get('payment-success/{order_id}',[\App\Http\Controllers\Admin\PaymentController::class, 'paymentSuccess'])->name('admin.success.payment');
+
     //Home & fullcalender
     Route::get('/',[\App\Http\Controllers\Admin\HomeController::class,'index'])->name('home');
     Route::post('fullcalendar/create',[\App\Http\Controllers\Admin\HomeController::class,'store']);
@@ -37,9 +42,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::resource('/durations',\App\Http\Controllers\Admin\DurationController::class);
 
     //Plan
-    Route::get('/users/plans',[\App\Http\Controllers\Admin\UserController::class,'plan'])->name('users.plans');
-    Route::get('/users/addPlans/{id}',[\App\Http\Controllers\Admin\UserController::class,'addPlan'])->name('users.addPlans');
-    Route::post('/users/storePlans',[\App\Http\Controllers\Admin\UserController::class,'storePlans'])->name('users.storePlans');
+    Route::get('/users/plans',[\App\Http\Controllers\Admin\PlanController::class,'plan'])->name('users.plans');
+    Route::get('/users/addPlans/{id}',[\App\Http\Controllers\Admin\PlanController::class,'addPlan'])->name('users.addPlans');
+    Route::post('/users/storePlans',[\App\Http\Controllers\Admin\PlanController::class,'storePlans'])->name('users.storePlans');
     
     //Update Avatar Users
     Route::post('/users/avatar', [\App\Http\Controllers\Admin\UserController::class, 'avatar'])->name('users.avatar');

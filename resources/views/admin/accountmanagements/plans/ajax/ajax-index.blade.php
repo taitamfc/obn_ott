@@ -19,7 +19,12 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span class="currency">$</span>{{ round($item->price/$item->duration) }}
+                                    <span class="currency">$</span>
+                                    @if($item->duration->numer_days > 0)
+                                    {{ round($item->price / ceil($item->duration->numer_days / 30)) }}
+                                    @else
+                                    1
+                                    @endif
                                 </span>
                                 <span class="per_month">/Month</span>
                             </div>
@@ -49,7 +54,12 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span class="currency">$</span>{{ round($item->price/$item->duration) }}
+                                    <span class="currency">$</span>
+                                    @if($item->duration->numer_days > 0)
+                                    {{ round($item->price / ceil($item->duration->numer_days / 30)) }}
+                                    @else
+                                    1
+                                    @endif
                                 </span>
                                 <span class="per_month">/Month</span>
                             </div>
@@ -80,7 +90,12 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span class="currency">$</span>{{ round($item->price/$item->duration) }}
+                                    <span class="currency">$</span>
+                                    @if($item->duration->numer_days > 0)
+                                    {{ round($item->price / ceil($item->duration->numer_days / 30)) }}
+                                    @else
+                                    1
+                                    @endif
                                 </span>
                                 <span class="per_month">/Month</span>
                             </div>

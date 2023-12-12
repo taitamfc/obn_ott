@@ -81,6 +81,9 @@ class Site extends Model
     function studentscriptions(){
         return $this->hasMany(StudentScription::class);
     }
+    function plan_order(){
+        return $this->hasMany(PlanOrder::class);
+    }
     function getStatusFmAttribute(){
         if($this->status == self::INACTIVE){
             return '<span class="badge badge-warning">In Active</span>';
