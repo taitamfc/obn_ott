@@ -106,7 +106,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     Route::get('themes/homepage-sections',[\App\Http\Controllers\Admin\ThemeController::class,'homepageSections'])->name('themes.homepage-sections');
     Route::get('video-advertisement',[\App\Http\Controllers\Admin\VideoController::class,'videoAdvertisement'])->name('videos.video-advertisement');
     Route::get('themes/footer-sections',[\App\Http\Controllers\Admin\ThemeController::class,'footerSections'])->name('themes.footer-sections');
-    
+    Route::post('/updatefooter',[\App\Http\Controllers\Admin\ThemeController::class,'updateFooter'])->name('settings.updateFooter');
     // Setting
     Route::prefix('settings')->group(function(){
         Route::get('/', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
