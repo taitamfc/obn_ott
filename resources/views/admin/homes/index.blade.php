@@ -19,8 +19,6 @@
 @include('admin.homes.includes.modal-event')
 @endsection
 @section('footer')
-<!-- Sort Table -->
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <!-- Calendar Init -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
     integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
@@ -56,35 +54,12 @@ jQuery(document).ready(function() {
         selectable: true,
         selectHelper: true,
         select: function(start, end, allDay) {
+            var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+            var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
             jQuery('#modalEvent').modal('show');
-            // var title = prompt('Event Title:');
-            title = '';
-            if (title) {
-                var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-                var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-
-                jQuery.ajax({
-                    url: SITEURL + "/fullcalendar/create",
-                    data: {
-                        'title': title,
-                        'start': start,
-                        'end': end
-                    },
-                    type: "POST",
-                    success: function(data) {
-                        showAlertSuccess('Added Success');
-                    }
-                });
-                calendar.fullCalendar('renderEvent', {
-                        title: title,
-                        start: start,
-                        end: end,
-                        allDay: allDay
-                    },
-                    true
-                );
-            }
-            calendar.fullCalendar('unselect');
+            jQuery('#modalEvent').find('#ev-start').val(start);
+            jQuery('#modalEvent').find('#ev-end').val(end); 
+            
         },
 
         eventDrop: function(event, delta) {
@@ -132,6 +107,46 @@ jQuery(document).ready(function() {
         }
 
     });
+
+    jQuery('#save-event').on('click',function(){
+        let formEvent = jQuery(this).closest('#formEvent');
+        formEvent.find('.input-error').empty();
+        var url = formEvent.prop('action');
+        let formData = new FormData($('#formEvent')[0]);
+        jQuery.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            dataType: 'json',
+            success: function(res) {
+                jQuery('#modalEvent').modal('hide');
+                if(res.success){
+                    showAlertSuccess(res.message);
+                    calendar.fullCalendar('renderEvent', {
+                            title: jQuery('#ev-title').val(),
+                            start: jQuery('#ev-start').val(),
+                            end: jQuery('#ev-end').val(),
+                            allDay: true
+                        },
+                        true
+                    );
+                    calendar.fullCalendar('unselect');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                }else{
+                    showAlertError(res.message);
+                }
+                
+            }
+        });
+    });
+
 });
 </script>
 @endsection
