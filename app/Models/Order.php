@@ -24,6 +24,24 @@ class Order extends Model
     function Transaction(){
         $this->hasMany(Transactions::class);
     }
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function getItemNameAttribute()
+    {
+        $name = null;
+        switch ($this->type) {
+            case 'course':
+                $name = $this->course ? $this->course->name : '';
+                break;
+            case 'subscription':
+                $name = $this->subscription ? $this->subscription->name : '';
+                break;
+        }
+        return $name;
+    }
     function order_grades(){
         return $this->hasMany(OrderGrade::class);
     }

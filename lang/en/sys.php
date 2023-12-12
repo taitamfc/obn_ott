@@ -16,5 +16,6 @@ return [
     '404_title' => 'Oops... It looks like you ‘re lost !',
     '404_sub_title' => 'Oops! The page you are looking for does not exist. It might have been moved or deleted',
     'purchase' => 'Purchase',
-    
+    'save-changes' => 'Save Changes',
+    'close' => 'Close',
 ];

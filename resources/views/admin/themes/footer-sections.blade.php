@@ -6,13 +6,10 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">Sites</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">Footer Sessions</h5>
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
-                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
-                            {{ __('sys.add_new') }}
-                        </button>
                     </div>
                 </div>
             </div>
@@ -21,49 +18,28 @@
         <div class="row">
             <!-- Progress Table start -->
             <div class="col-12">
-
-                <div class="card subject-table-results">
-                    <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
+                <div class="logo-table-results">
+                    {{ __('sys.loading_data') }}
                 </div>
-
-
             </div>
             <!-- Progress Table end -->
         </div>
+        @include('admin.settings.logo.edit')
     </div>
 </div>
-@include('admin.settings.sites.edit')
-@include('admin.settings.sites.create')
 @endsection
 
 @section('footer')
 <script>
-var indexUrl = "{{ route('admin.sites.index') }}";
+var indexUrl = "{{ route('admin.settings.logo') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
-var wrapperResults = '.subject-table-results';
+var wrapperResults = '.logo-table-results';
 jQuery(document).ready(function() {
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
 
-    // Handle pagination
-    jQuery('body').on('click', ".page-link", function(e) {
-        e.preventDefault();
-        let url = jQuery(this).attr('href');
-        getAjaxTable(url, wrapperResults, positionUrl);
-    });
-
-    // Handle Delete
-    jQuery('body').on('click', ".delete-item", function(e) {
-        e.preventDefault();
-        var ele = $(this);
-        let action = ele.data('action');
-        if (confirm("Are you sure?")) {
-            handleDelete(action, ele);
-        }
-    });
-
-    // Xu ly them moi
+    // Handle Add Item
     jQuery('body').on('click', ".add-item", function(e) {
         let formCreate = jQuery(this).closest('#formCreate');
         formCreate.find('.input-error').empty();
@@ -82,9 +58,10 @@ jQuery(document).ready(function() {
                 if (res.has_errors) {
                     for (const key in res.errors) {
                         console.log(key);
-                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0
-                        ]);
+                        jQuery('.input-' + key + '-create').find('.input-error').html(res
+                            .errors[key][
+                                0
+                            ]);
                     }
                     showAlertError('Has Problems, Please Try Again!');
                 }
@@ -103,7 +80,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly cap nhat
+    // Handle Update Item
     jQuery('body').on('click', ".edit-item", function(e) {
         let formUpdate = jQuery(this).closest('#formUpdate');
         formUpdate.find('.input-error').empty();
@@ -121,9 +98,10 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.has_errors) {
                     for (const key in res.errors) {
-                        jQuery('.input-' + key).find('.input-error').html(res.errors[key][
-                            0
-                        ]);
+                        jQuery('.input-' + key + '-update').find('.input-error').html(res
+                            .errors[key][
+                                0
+                            ]);
                     }
                     showAlertError('Has Problems, Please Try Again!');
                 }
@@ -139,39 +117,9 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly form edit
+    // Handle Form Edit
     jQuery('body').on('click', ".show-form-edit", function(e) {
-        // Hien thi modal
         jQuery('#modalUpdate').modal('show');
-
-        let formUpdate = jQuery('#formUpdate');
-
-
-        // Lấy dữ liệu
-        let id = jQuery(this).data('id');
-        let action = jQuery(this).data('action');
-
-        jQuery.ajax({
-            url: action,
-            type: "GET",
-            dataType: 'json',
-            success: function(res) {
-                if (res.success) {
-                    let formData = res.data;
-                    formUpdate.prop('action', action);
-                    formUpdate.find('.input-name input').val(formData.name);
-                    formUpdate.find('.input-slug input').val(formData.slug);
-                    formUpdate.find('.input-status input').prop('checked', false);
-                    if (formData.status) {
-                        formUpdate.find('.input-status .input-active').prop('checked',
-                            true);
-                    } else {
-                        formUpdate.find('.input-status .input-inactive').prop('checked',
-                            true);
-                    }
-                }
-            }
-        });
     })
 });
 </script>

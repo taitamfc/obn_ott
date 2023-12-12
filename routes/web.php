@@ -88,9 +88,9 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('notice',[App\Http\Controllers\Website\NoticeController::class,'index'])->name('website.notices');
         Route::get('notice/{id}',[App\Http\Controllers\Website\NoticeController::class,'show'])->name('website.notices.show');
 
-        Route::get('search',[App\Http\Controllers\Website\SearchController::class,'index'])->name('website.search');
-
+        
     });
+    Route::get('search',[App\Http\Controllers\Website\SearchController::class,'index'])->name('website.search');
     // Route::get('/lessons',function($site_name){
     //     return view('website.dashboards.lessons.index',compact('site_name'));
     // })->name('website.lessons');
