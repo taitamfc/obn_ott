@@ -20,6 +20,8 @@ use App\Models\Visitor;
 use App\Models\Impression;
 use App\Models\Order;
 use App\Models\Course;
+use App\Models\LessonStudent;
+use App\Models\Notice;
 
 class HomeController extends AdminController
 {
@@ -79,13 +81,52 @@ class HomeController extends AdminController
     // Create event
     public function store(Request $request)
     {  
-        $insertArr = [ 'title' => $request->title,
-                       'start' => $request->start,
-                       'end' => $request->end,
-                       'site_id' => $this->site_id,
-                    ];
-        $event = Event::insert($insertArr);   
-        return Response::json($event);
+        DB::beginTransaction();
+        try {
+            $event              = new Event();
+            $event->title       = $request->title;
+            $event->content     = $request->content;
+            $event->start       = $request->start;
+            $event->end         = $request->end;
+            $event->course_id   = $request->course_id;
+            $event->site_id     = $this->site_id;
+            if($event->save()){
+                // Send to all students
+                $students = LessonStudent::where('site_id',$this->site_id);
+                if($event->course_id){
+                    $students->where('course_id',$event->course_id);
+                }
+                $students = $students->get();
+                if( $students ){
+                    $student_ids = $students->unique('student_id')->pluck('student_id')->toArray();
+                    foreach($student_ids as $student_id){
+                        $notice = new Notice();
+                        $notice->title       = $request->title;
+                        $notice->content     = $request->content;
+                        $notice->student_id  = $student_id;
+                        $notice->start       = $request->start;
+                        $notice->end         = $request->end;
+                        $notice->site_id     = $this->site_id;
+                        $notice->save();
+                    }
+                }
+            } 
+            DB::commit();
+            return response()->json([
+                'success'=>true,
+                'data' => $event,
+                'message'=> __('sys.store_item_success'),
+            ],200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'success'=>true,
+                'data' => $event,
+                'message'=> __('sys.store_item_error'),
+            ],200);
+        }
+         
+        
     }
 
     // Update Event

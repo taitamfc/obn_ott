@@ -25,9 +25,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
 
     //Home & fullcalender
     Route::get('/',[\App\Http\Controllers\Admin\HomeController::class,'index'])->name('home');
-    Route::post('fullcalendar/create',[\App\Http\Controllers\Admin\HomeController::class,'store']);
-    Route::post('fullcalendar/update',[\App\Http\Controllers\Admin\HomeController::class,'update']);
-    Route::post('fullcalendar/delete',[\App\Http\Controllers\Admin\HomeController::class,'destroy']);
+    Route::post('fullcalendar/create',[\App\Http\Controllers\Admin\HomeController::class,'store'])->name('fullcalendar.store');
+    Route::post('fullcalendar/update',[\App\Http\Controllers\Admin\HomeController::class,'update'])->name('fullcalendar.update');
+    Route::post('fullcalendar/delete',[\App\Http\Controllers\Admin\HomeController::class,'destroy'])->name('fullcalendar.destroy');
     
     //Question
     Route::resource('/questionanswer',\App\Http\Controllers\Admin\QuestionController::class);
