@@ -26,7 +26,6 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>{{__('account.title')}}</th>
                                                 <th>{{__('account.date')}}</th>
                                                 <th></th>
@@ -37,36 +36,30 @@
                                             @foreach($items as $key => $item)
                                             <tr>
                                                 <td>
-                                                    <p>{{ $key +1 }}</p>
-                                                </td>
-
-                                                <td>
                                                     @if(!$item->is_read)
-                                                    <strong>{{ $item->title }}</strong>
+                                                    <a
+                                                        href="{{ route('website.notices.show', ['site_name' => $site_name, 'id' => $item->id]) }}" class="blue-link">
+                                                        <strong>{{ $item->title }}</strong>
+                                                    </a>
                                                     @else
-                                                    <p>{{ $item->title }}</p>
+                                                    <a
+                                                        href="{{ route('website.notices.show', ['site_name' => $site_name, 'id' => $item->id]) }}" class="blue-link">
+                                                        <p>{{ $item->title }}</p>
+                                                    </a>
                                                     @endif
                                                 </td>
-
                                                 <td>
                                                     <p>{{ $item->created_at->format('d/m/Y') }}</p>
-                                                </td>
-
-                                                <td>
-                                                    <a
-                                                        href="{{ route('website.notices.show', ['site_name' => $site_name, 'id' => $item->id]) }}">
-                                                        <i class="icofont-eye" title="Show Details"></i>
-                                                    </a>
                                                 </td>
                                                 </td>
                                             </tr>
                                             @endforeach
                                             @else
-                                                <tr>
-                                                    <td colspan="6" class="text-center">
-                                                        <p>{{__('sys.no_item_found')}}</p>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td colspan="6" class="text-center">
+                                                    <p>{{__('sys.no_item_found')}}</p>
+                                                </td>
+                                            </tr>
                                             @endif
                                         </tbody>
                                     </table>

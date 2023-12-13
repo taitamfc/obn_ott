@@ -15,17 +15,33 @@ Q&A
                         <div class="dashboard__section__title">
                             <h4>{{$item->title}}</h4>
                             <a href="{{ route('website.q-a', ['site_name' => $site_name]) }}"
-								class="btn btn-primary">{{__('account.back')}}</a>
+                                class="btn btn-primary">{{__('account.back')}}</a>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
-                            @if(session('success'))
-								<div class="alert alert-success">
-									{{ session('success') }}
-								</div>
-								@endif
+                                @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                                @endif
                                 <div class="dashboard__table table-responsive">
-                                {!! $item->answer !!}
+                                    <table>
+
+                                        <h5><strong>{{__('account.question')}}</strong></h5>
+                                        <p>{!! $item->question !!}</p>
+                                        
+                                        @if($item->answer)
+                                        <h5><strong>{{__('account.answer')}}</strong></h5>
+                                        <p>{!! $item->answer !!}</p>
+                                        @else
+                                        <tr>
+                                            <td colspan="6" class="text-center">
+                                                <p>{{__('sys.no_item_found')}}</p>
+                                            </td>
+                                        </tr>
+                                        @endif
+
+                                    </table>
                                 </div>
                             </div>
                         </div>

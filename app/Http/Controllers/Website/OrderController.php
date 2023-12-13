@@ -78,9 +78,21 @@ public function order_history()
             $order->type = $request->type;
             $order->save();
 
-            if ($order->payment_method == 'paypal') {
+            if ($order->price > 0 && $order->payment_method == 'paypal') {
                 return redirect()->route('website.make.payment',['site_name' => $this->site_name,'order_id' => $order->id, 'price' => $order->price]);
+            }else{
+                $handle = Order::handlePaymentSuccess($order->id,$this->site_id);
+                if($handle){
+                    return redirect()
+                    ->route('website.orders.success',['site_name'=>$this->site_name,'order_id'=> $order->id])
+                    ->with('success', 'Transaction complete.');
+                }else{
+                    return redirect()
+                    ->route('website.orders.fail',['site_name'=>$this->site_name,'order_id'=> $order->id])
+                    ->with('success', 'Transaction incomplete.');
+                }
             }
+            
         } catch (\Exception $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return redirect()
