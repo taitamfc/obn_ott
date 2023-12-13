@@ -2,26 +2,34 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreBankUserRequest;
+use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\UserBank;
-use App\Models\GroupSite;
 use App\Models\PlanSite;
-use App\Models\Site;
-use App\Traits\UploadFileTrait;
-use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
+use App\Http\Requests\StoreBankUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateAvatarRequest;
+
 use App\Models\Group;
+use App\Models\GroupRole;
+use App\Models\GroupSite;
+use App\Models\Role;
+use App\Models\Site;
+use App\Http\Requests\StoreGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
+use App\Http\Resources\GroupResource;
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use DB;
+use App\Traits\UploadFileTrait;
 
 class UserController extends AdminController
 {
@@ -32,12 +40,20 @@ class UserController extends AdminController
 
     function index(Request $request){
         // $this->authorize('User',User::class);
-        $groups = Group::where('site_id',$this->site_id)->get();
+        $groups = Group::where('site_id',$this->site_id)->orderBy('position','ASC')->get();
+        $users = User::where('site_id',$this->site_id)->orWhere('parent_id',Auth::id())->get();
+        $roles = Role::get();
+        $selected_roles = [];
+        $param = [
+            'groups' => $groups,
+            'users' => $users,
+            'roles' => $roles,
+            'selected_roles' => $selected_roles,
+        ];
         if( $request->ajax() ){
-            $items = User::where('site_id',$this->site_id)->get();
-            return view('admin.accountmanagements.users.ajax-index',compact('items','groups'));
+            return view('admin.accountmanagements.users.ajax-index',$param);
         }
-        return view('admin.accountmanagements.users.index',compact('groups'));
+        return view('admin.accountmanagements.users.index',$param);
     }
     /**
      * Show the form for creating a new resource.
@@ -57,6 +73,7 @@ class UserController extends AdminController
             $item = new User();
             $item->name = $request->name;
             $item->email = $request->email;
+            $item->group_id = $request->group_id;
             $item->password = $request->password;
             $item->parent_id = $this->user_id;
             if ($request->hasFile('image')) {
