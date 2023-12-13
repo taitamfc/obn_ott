@@ -13,13 +13,13 @@
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
                 <!-- Home -->
-                <!-- if (Auth::user()->hasPermission('Home')) -->
+                if (Auth::user()->hasPermission('Home'))
                 <li> <a href="{{ route('admin.home') }}">
                         <i class="feather ft-home"></i>
                         <span>{{__('admin-sidebar.home')}}</span>
                     </a>
                 </li>
-                <!-- endif -->
+                endif
                 <li> <a href="{{ route('admin.questionanswer.index') }}">
                         <i class="feather ft-home"></i>
                         <span>{{__('admin-sidebar.question')}}</span>

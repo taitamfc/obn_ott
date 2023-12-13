@@ -38,4 +38,5 @@ return [
     'price' => 'Price',
     'payment-method' => 'Payment',
     'type' => 'Type',
+    'answer' => 'Answer',
 ];

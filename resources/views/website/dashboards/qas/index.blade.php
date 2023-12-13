@@ -28,7 +28,6 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>{{__('account.title')}}</th>
                                                 <th>{{__('account.author')}}</th>
                                                 <th>{{__('account.date')}}</th>
@@ -41,10 +40,10 @@
                                             @foreach($items as $key => $item)
                                             <tr>
                                                 <td>
-                                                    <p>{{ $key +1 }}</p>
-                                                </td>
-                                                <td>
-                                                    <p>{{ $item->title }}</p>
+                                                    <a href="{{ route('website.q-a.show', ['site_name' => $site_name, 'id' => $item->id]) }}"
+                                                        class="blue-link">
+                                                        <p>{{ $item->title }}</p>
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     <p>{{  $item->student->name  }}</p>
@@ -55,15 +54,6 @@
                                                 </td>
                                                 <td>
                                                     <p>0</p>
-                                                </td>
-
-                                                <td>
-                                                    @if($item->answer)
-                                                    <a
-                                                        href="{{ route('website.q-a.show', ['site_name' => $site_name, 'id' => $item->id]) }}">
-                                                        <i class="icofont-eye" title="Show Details"></i>
-                                                    </a>
-                                                    @endif
                                                 </td>
                                                 </td>
                                             </tr>

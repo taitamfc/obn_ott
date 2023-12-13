@@ -38,4 +38,5 @@ return [
     'price' => '가격',
     'payment-method' => '지불',
     'type' => '유형',
+    'answer' => '답변',
 ];
