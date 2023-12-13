@@ -26,6 +26,7 @@
 <script src="{{ asset('assets/js/init/full-calendar.js') }}"></script>
 <script>
 jQuery(document).ready(function() {
+
     $('#dataTable').DataTable({
         paging: false,
         searching: false,
@@ -41,9 +42,10 @@ jQuery(document).ready(function() {
     // Calendar
     var calendar = $('#calendar').fullCalendar({
         editable: true,
-        events: SITEURL,
+        events: SITEURL, // Đảm bảo rằng SITEURL là một URL hợp lệ hoặc thay thế bằng một mảng các sự kiện
         displayEventTime: true,
-        editable: true,
+        selectable: true,
+        selectHelper: true,
         eventRender: function(event, element, view) {
             if (event.allDay === 'true') {
                 event.allDay = true;
@@ -51,17 +53,13 @@ jQuery(document).ready(function() {
                 event.allDay = false;
             }
         },
-        selectable: true,
-        selectHelper: true,
         select: function(start, end, allDay) {
             var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
             var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
             jQuery('#modalEvent').modal('show');
             jQuery('#modalEvent').find('#ev-start').val(start);
-            jQuery('#modalEvent').find('#ev-end').val(end); 
-            
+            jQuery('#modalEvent').find('#ev-end').val(end);
         },
-
         eventDrop: function(event, delta) {
             var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
             var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
@@ -95,20 +93,15 @@ jQuery(document).ready(function() {
                         }
                     }
                 });
-                calendar.fullCalendar('renderEvent', {
-                        title: title,
-                        start: start,
-                        end: end,
-                        allDay: allDay
-                    },
-                    true
-                );
             }
+        },
+        unselect: function(view, jsEvent) {
+            eventRender();
+            select();
         }
-
     });
 
-    jQuery('#save-event').on('click',function(){
+    jQuery('#save-event').on('click', function() {
         let formEvent = jQuery(this).closest('#formEvent');
         formEvent.find('.input-error').empty();
         var url = formEvent.prop('action');
@@ -124,8 +117,18 @@ jQuery(document).ready(function() {
             type: "POST",
             dataType: 'json',
             success: function(res) {
-                jQuery('#modalEvent').modal('hide');
-                if(res.success){
+                if (res.has_errors) {
+                    for (const key in res.errors) {
+                        console.log(key);
+                        jQuery('.input-' + key).find('.input-error').html(res
+                            .errors[key][
+                                0
+                            ]);
+                    }
+                    showAlertError('Has Problems, Please Try Again!');
+                }
+                if (res.success) {
+                    jQuery('#modalEvent').modal('hide');
                     showAlertSuccess(res.message);
                     calendar.fullCalendar('renderEvent', {
                             title: jQuery('#ev-title').val(),
@@ -136,17 +139,10 @@ jQuery(document).ready(function() {
                         true
                     );
                     calendar.fullCalendar('unselect');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
-                }else{
-                    showAlertError(res.message);
                 }
-                
             }
         });
     });
-
 });
 </script>
 @endsection
