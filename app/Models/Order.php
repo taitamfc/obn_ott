@@ -126,7 +126,7 @@ class Order extends Model
             return true;
         } catch (\Exception $e) {
             DB::rollback();
-            Log::error('Payment error: ' . $e->getMessage());
+            Log::error('Order error: ' . $e->getMessage());
             return false;
         }
     }

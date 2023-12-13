@@ -88,6 +88,7 @@ class PaymentController extends MainController
                 ->with('success', 'Transaction incomplete.');
             }
         } else {
+            Log::error('Payment error: ' . json_encode($response));
             return redirect()
                 ->route('website.orders.fail',['site_name'=>$this->site_name,'order_id'=>$request->order_id])
                 ->with('error', $response['message'] ?? 'Something went wrong.');
