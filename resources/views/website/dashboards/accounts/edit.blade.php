@@ -65,7 +65,8 @@
                                                                 <label>{{__('account.email_address')}}</label>
                                                                 <input type="email" placeholder="email" name="email"
                                                                     value="{{ old('email', $student->email) }}">
-
+                                                                <p style="color:red">{{ $errors->first('email') }}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
