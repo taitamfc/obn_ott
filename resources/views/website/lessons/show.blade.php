@@ -3,10 +3,7 @@
 {{ $item->name }}
 @endsection
 @section('content')
-    @include('website.includes.header.breadcrumb',[
-        'page_title' => $item->name
-    ])
-    <style> .rbtplayer video, .rbtplayer iframe { width: 100%;min-height: 500px } </style>
+    <style> .rbtplayer video, .rbtplayer iframe { width: 100%;min-height: 500px } .header__area.sticky { position: static; } </style>
     <div class="tution sp_bottom_100 sp_top_50">
         <div class="container-fluid full__width__padding">
             <div class="row">
