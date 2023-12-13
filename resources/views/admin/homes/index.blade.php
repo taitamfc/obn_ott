@@ -95,10 +95,6 @@ jQuery(document).ready(function() {
                 });
             }
         },
-        unselect: function(view, jsEvent) {
-            eventRender();
-            select();
-        }
     });
 
     jQuery('#save-event').on('click', function() {
@@ -130,7 +126,7 @@ jQuery(document).ready(function() {
                 if (res.success) {
                     jQuery('#modalEvent').modal('hide');
                     showAlertSuccess(res.message);
-                    calendar.fullCalendar('renderEvent', {
+                    $('#calendar').fullCalendar('renderEvent', {
                             title: jQuery('#ev-title').val(),
                             start: jQuery('#ev-start').val(),
                             end: jQuery('#ev-end').val(),
@@ -138,8 +134,10 @@ jQuery(document).ready(function() {
                         },
                         true
                     );
-                    calendar.fullCalendar('unselect');
                 }
+                setTimeout(() => {
+                    window.location.reload(); // Làm mới trang sau 1 giây
+                }, 1000);
             }
         });
     });

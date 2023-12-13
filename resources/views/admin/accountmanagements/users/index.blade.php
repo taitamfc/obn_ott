@@ -12,7 +12,7 @@
             <!-- Progress Table end -->
         </div>
         @include('admin.accountmanagements.users.create')
-        @include('admin.accountmanagements.users.create')
+        @include('admin.accountmanagements.users.edit')
     </div>
 </div>
 
@@ -125,13 +125,11 @@ jQuery(document).ready(function() {
     jQuery('body').on('click', ".show-form-edit-user", function(e) {
         // Hien thi modal
         jQuery('#modalUpdateUser').modal('show');
-
         let formUpdate = jQuery('#formUpdateUser');
 
         // Lấy dữ liệu
         let id = jQuery(this).data('id');
         let action = jQuery(this).data('action');
-        console.log(action);
         jQuery.ajax({
             url: action,
             type: "GET",
@@ -139,7 +137,6 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.success) {
                     let formData = res.data;
-
                     formUpdate.prop('action', action);
 
                     formUpdate.find('.input-id').val(formData.id);
