@@ -40,29 +40,29 @@
                             </span>
                         </a>
                         <ul class="setting-list">
-                            <!-- if (Auth::user()->hasPermission('Grade')) -->
+                            @if (Auth::user()->hasPermission('Grade'))
                             <li><a href="{{route('admin.grades.index')}}">
                                     <i class="ion-ios-folder-outline"></i>
                                     <span>{{__('admin-sidebar.grade')}}</span>
                                 </a>
                             </li>
-                            <!-- endif -->
-                            <!-- if (Auth::user()->hasPermission('Subject')) -->
+                            @endif
+                            @if (Auth::user()->hasPermission('Subject'))
                             <li>
                                 <a href="{{route('admin.subjects.index')}}">
                                     <i class="ti-pencil-alt"></i>
                                     <span>{{__('admin-sidebar.subject')}}</span>
                                 </a>
                             </li>
-                            <!-- endif -->
-                            <!-- if (Auth::user()->hasPermission('Course')) -->
+                            @endif
+                            @if (Auth::user()->hasPermission('Course'))
                             <li>
                                 <a href="{{ route('admin.courses.index') }}">
                                     <i class="ti-pencil-alt"></i>
                                     <span>{{__('admin-sidebar.course')}}</span>
                                 </a>
                             </li>
-                            <!-- endif -->
+                            @endif
                         </ul>
                 </li>
                 <li>
@@ -74,15 +74,15 @@
             </ul>
             </li>
             <!-- Lesson -->
-            <!-- if (Auth::user()->hasPermission('Lesson')) -->
+            @if (Auth::user()->hasPermission('Lesson'))
             <li> <a href="{{ route('admin.lessons.index') }}">
                     <i class="feather ft-home"></i>
                     <span>{{__('admin-sidebar.lesson-list')}}</span>
                 </a>
             </li>
-            <!-- endif -->
+            @endif
             <!-- Store -->
-            <!-- if (Auth::user()->hasPermission('Store')) -->
+            @if (Auth::user()->hasPermission('Store'))
             <li> <a href="javascript:;">
                     <i class="feather ft-home"></i>
                     <span>{{__('admin-sidebar.store')}}</span>
@@ -92,19 +92,19 @@
                 </a>
 
                 <ul>
-                    <!-- if (Auth::user()->hasPermission('Course')) -->
+                    @if (Auth::user()->hasPermission('Course'))
                     <li> <a href="{{ route('admin.courses.products') }}">
                             <i class="feather ft-home"></i>
                             <span>{{__('admin-sidebar.product-management')}}</span>
                         </a></li>
-                    <!-- endif -->
+                    @endif
                     <li> <a href="{{ route('admin.subscriptions.index') }}">
                             <i class="feather ft-home"></i>
                             <span>{{__('admin-sidebar.subscription-management')}}</span>
                         </a></li>
                 </ul>
             </li>
-            <!-- endif -->
+            @endif
 
             <!-- Duration -->
             <li> <a href="{{ route('admin.durations.index') }}">
@@ -114,7 +114,7 @@
             </li>
 
             <!-- Class -->
-            <!-- if (Auth::user()->hasPermission('Class')) -->
+            @if (Auth::user()->hasPermission('Class'))
             <li> <a href="{{ route('admin.classes.index') }}">
                     <i class="feather ft-home"></i>
                     <span>{{__('admin-sidebar.class')}}</span>
@@ -126,9 +126,9 @@
                     <span>Order</span>
                 </a>
             </li>
-            <!-- endif -->
+            @endif
             <!-- Themes -->
-            <!-- if (Auth::user()->hasPermission('Themes')) -->
+            @if (Auth::user()->hasPermission('Themes'))
             <li> <a href="{{ route('admin.videos.video-advertisement') }}">
                     <i class="feather ft-home"></i>
                     <span>{{__('admin-sidebar.video-advertisement')}}</span>
@@ -164,9 +164,9 @@
                     </li>
                 </ul>
             </li>
-            <!-- endif -->
+            @endif
             <!-- Report -->
-            <!-- if (Auth::user()->hasPermission('Report')) -->
+            @if (Auth::user()->hasPermission('Report'))
             <li> <a href="javascript:;">
                     <i class="feather ft-home"></i>
                     <span>{{__('admin-sidebar.report')}}</span>
@@ -192,9 +192,9 @@
                     </li>
                 </ul>
             </li>
-            <!-- endif -->
+            @endif
             <!-- User -->
-            <!-- if (Auth::user()->hasPermission('User')) -->
+            @if (Auth::user()->hasPermission('User'))
             <li> <a href="javascript:;">
                     <i class="feather ft-home"></i>
                     <span>{{__('admin-sidebar.account-management')}}</span>
@@ -220,17 +220,11 @@
                             <span>{{__('admin-sidebar.admin')}}</span>
                         </a></li>
                     <!-- Group -->
-                    <!-- if (Auth::user()->hasPermission('Group')) -->
-                    <li> <a href="{{route('admin.groups.index')}}">
-                            <i class="feather ft-home"></i>
-                            <span>{{__('admin-sidebar.group')}}</span>
-                        </a></li>
-                    <!-- endif -->
                 </ul>
             </li>
-            <!-- endif -->
+            @endif
             <!-- Setting -->
-            <!-- if (Auth::user()->hasPermission('Setting')) -->
+            @if (Auth::user()->hasPermission('Setting'))
             <li>
                 <a href="{{ route('admin.settings.index') }}">
                     <i class="feather ft-home"></i>
@@ -262,7 +256,7 @@
                     </li>
                 </ul>
             </li>
-            <!-- endif -->
+            @endif
             </ul>
         </div>
         <div class="clearfix"></div>
