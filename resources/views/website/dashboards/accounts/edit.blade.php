@@ -35,8 +35,8 @@
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.full_name')}}</label>
-                                                                <input type="text" placeholder="John" name="name"
-                                                                    id="name" value="{{ $student->name }}">
+                                                                <input type="text" name="name" id="name"
+                                                                    value="{{ old('name', $student->name) }}">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">{{ $errors->first('name') }}
                                                                 </p>
@@ -49,8 +49,8 @@
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.zip_code')}}</label>
-                                                                <input type="text" placeholder="John" name="code"
-                                                                    id="code" value="{{ $student->code }}">
+                                                                <input type="text" name="code" id="code"
+                                                                    value="{{ old('code', $student->code) }}">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">{{ $errors->first('code') }}
                                                                 </p>
@@ -64,7 +64,7 @@
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.email_address')}}</label>
                                                                 <input type="email" placeholder="email" name="email"
-                                                                    value="{{ $student->email }}">
+                                                                    value="{{ old('email', $student->email) }}">
 
                                                             </div>
                                                         </div>
@@ -75,7 +75,8 @@
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.phone_number')}}</label>
                                                                 <input type="text" placeholder="Phone Number"
-                                                                    name="phone" value="{{ $student->phone }}">
+                                                                    name="phone"
+                                                                    value="{{ old('phone', $student->phone) }}">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">{{ $errors->first('phone') }}
                                                                 </p>
@@ -116,7 +117,8 @@
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.address')}}</label>
                                                                 <input type="text" placeholder="John" name="address"
-                                                                    id="address" value="{{ $student->address }}">
+                                                                    id="address"
+                                                                    value="{{ old('address', $student->address) }}">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">{{ $errors->first('address') }}
                                                                 </p>
@@ -129,8 +131,8 @@
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.city')}}</label>
-                                                                <input type="text" placeholder="John" name="city"
-                                                                    id="city" value="{{ $student->city }}">
+                                                                <input type="text" name="city" id="city"
+                                                                    value="{{ old('city', $student->city) }}">
                                                                 @if ($errors->any())
                                                                 <p style="color:red">{{ $errors->first('city') }}
                                                                 </p>
@@ -144,25 +146,28 @@
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.status')}}</label>
                                                                 <select name="status" id="status" class="form-control">
-                                                                <option @selected( $student->status == 0 )
-                                                                    value='0'>Inactive</option>
-                                                                <option @selected( $student->status == 1 ) value='1'>Active
-                                                                </option>
-                                                            </select>
+                                                                    <option value='0'
+                                                                        {{ old('status', $student->status) == 0 ? 'selected' : '' }}>
+                                                                        Inactive</option>
+                                                                    <option value='1'
+                                                                        {{ old('status', $student->status) == 1 ? 'selected' : '' }}>
+                                                                        Active</option>
+                                                                </select>
                                                                 @if ($errors->any())
-                                                                <p style="color:red">{{ $errors->first('status') }}
-                                                                </p>
+                                                                <p style="color:red">{{ $errors->first('status') }}</p>
                                                                 @endif
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
+
                                                     <div class="col-xl-12">
                                                         <div class="dashboard__form__button">
-                                                        <a href="{{ route('website.accounts',['site_name' => $site_name]) }}"
-                                                            class="btn btn-secondary" style="margin: 30px auto 0;"
-                                                            >{{__('account.cancel')}}</a>
-                                                            <button type="submit" class="btn btn-primary" style="margin: 30px auto 0;">{{__('account.save')}}</button>
+                                                            <a href="{{ route('website.accounts',['site_name' => $site_name]) }}"
+                                                                class="btn btn-secondary"
+                                                                style="margin: 30px auto 0;">{{__('account.cancel')}}</a>
+                                                            <button type="submit" class="btn btn-primary"
+                                                                style="margin: 30px auto 0;">{{__('account.save')}}</button>
                                                         </div>
                                                     </div>
 

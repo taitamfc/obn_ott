@@ -82,6 +82,7 @@ jQuery(document).ready(function() {
                 }
                 if (res.success) {
                     $('#formCreate')[0].reset();
+                    $('#course').val([]).trigger('change');
                     showAlertSuccess(res.message);
                     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
                     // setTimeout(() => {

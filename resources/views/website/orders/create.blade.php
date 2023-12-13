@@ -105,11 +105,13 @@
                                         <input type="radio" id="pay-toggle03" name="pay">
                                         <label for="pay-toggle03">Cash on Delivery</label>
                                     </div> -->
+                                    @if($item->price > 0)
                                     <div class="checkoutarea__payment__type">
                                         <input type="radio" id="pay-toggle04" name="pay" checked="checked"
                                             value='paypal'>
                                         <label for="pay-toggle04">{{__('checkout.paypal')}}</label>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="checkoutarea__payment__input__box">
                                     <button class="default__button">{{__('checkout.place-order')}}</button>

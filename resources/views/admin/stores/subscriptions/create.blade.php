@@ -50,7 +50,7 @@
                     </select>
                     <div class="input-error text-danger">@error('courses') {{ $message }} @enderror
                     </div>
-                    <a href="#" class="btn btn-primary mt-4">Add more Courses</a>
+                    <a href="{{route('admin.courses.index')}}" class="btn btn-primary mt-4">Add more Courses</a>
                 </div>
             </div>
         </div>
