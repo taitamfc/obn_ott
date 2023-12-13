@@ -114,12 +114,12 @@
                                         <li class="mr-3">
                                             <a href="javascript:;" data-id="{{ $group->id }}"
                                                 data-action="{{ route('admin.groups.update',$group->id) }}"
-                                                class="text-primary show-form-edit">
+                                                class="btn btn-primary show-form-edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:;" class="text-danger delete-item"
+                                            <a href="javascript:;" class="btn btn-danger delete-item"
                                                 data-id="{{ $group->id }}"
                                                 data-action="{{ route('admin.groups.destroy',$group->id) }}">
                                                 <i class="ti-trash"></i>
