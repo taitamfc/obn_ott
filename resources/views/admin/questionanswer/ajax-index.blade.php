@@ -5,12 +5,10 @@
                 <tr>
                     <td class="w-70">{{__('admin-question.avatar')}}</td>
                     <td class="w-30p">{{__('admin-question.name')}}</td>
-                    <td>{{__('admin-question.student-id')}}</td>
-                    <td>{{__('admin-question.question')}}</td>
+                    <td>{{__('admin-question.title')}}</td>
                     <td>{{__('admin-question.lesson')}}</td>
                     <td>{{__('admin-question.subject')}}</td>
                     <td>{{__('admin-question.teacher')}}</td>
-                    <td>{{__('admin-question.answer')}}</td>
                     <td>{{__('admin-question.date')}}</td>
                     <td class='text-center'>{{__('admin-question.action')}}</td>
                 </tr>
@@ -27,30 +25,23 @@
                     <td class="text-nowrap">
                         <div class="fw-600 ">{{ isset($item->student)?$item->student->name : '' }}</div>
                     </td>
-                    <td>{{ isset($item->student)?$item->student->id : '' }}</td>
-                    <td>{!! $item->question !!}</td>
+                    <td>{!! $item->title !!}</td>
                     <td>{{ $item->lesson_name }}</td>
                     <td>{{ $item->subject_name }}</td>
                     <td>{{ $item->user_name }}</td>
-                    <td>{!! $item->answer !!}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
-                                <a href="javascript:;" data-id="{{ $item->id }}"
-                                    data-action="{{ route('admin.questionanswer.update',$item->id) }}"
-                                    class="btn btn-primary show-form-edit">
+                                <a href="{{ route('admin.questionanswer.edit', ['questionanswer' => $item->id]) }}"
+                                    class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </li>
-                            <li>
-                                <!-- <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $item->id }}"
-                                    data-action="{{ route('admin.questionanswer.destroy',$item->id) }}">
-                                    <i class="ti-trash"></i>
-                                </a>
-                            </li> -->
                         </ul>
                     </td>
+
+
                 </tr>
                 @endforeach
             </tbody>

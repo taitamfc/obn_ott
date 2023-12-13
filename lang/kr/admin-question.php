@@ -10,5 +10,6 @@ return [
     'teacher' => '선생님',
     'answer' => '답변',
     'date' => '날짜',
-    'action' => '동작'
+    'action' => '동작',
+    'title' => '제목',
 ];

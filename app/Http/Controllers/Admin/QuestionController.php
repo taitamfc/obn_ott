@@ -15,12 +15,11 @@ class QuestionController extends AdminController
     public function index(Request $request)
     {
         // $this->authorize('Lesson',Lesson::class);
-        $items = QuestionAnswer::with('user','student', 'lesson', 'subject')->where('site_id',$this->site_id)->paginate(20);
+        $items = QuestionAnswer::with('user','student', 'lesson', 'subject')->where('site_id',$this->site_id)->orderByDesc('updated_at')->paginate(20);
         if( $request->ajax() ){
             return view('admin.questionanswer.ajax-index',compact('items'));
         }
         return view('admin.questionanswer.index');
-
     }
     /**
      * Show the form for creating a new resource.
@@ -50,32 +49,34 @@ class QuestionController extends AdminController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    function edit(String $id){
+        $item = QuestionAnswer::findOrfail($id);
+        return view('admin.questionanswer.edit',compact('item'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateQuestionRequest $request, string $id)
-    {
-        try {
-            $item = QuestionAnswer::findOrfail($id);
-            $item->answer = $request->answer;
-            $item->user_id = $this->user_id;
-            $item->save();
-            return response([
-                'success' => true,
-                'message' => 'Update Answer Success'
-            ]);
-        } catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => 'Update Answer Fail'
-            ]);
-        }
+    public function update(Request $request, string $id)
+{
+    try {
+        $item = QuestionAnswer::findOrFail($id);
+        $item->answer = $request->input('answer');
+        $item->user_id = $this->user_id;
+        $item->save();
+
+        return redirect()->route('admin.questionanswer.index')->with([
+            'success' => true,
+            'message' => 'Update Answer Success',
+        ]);
+    } catch (\Exception $e) {
+        return redirect()->back()->with([
+            'success' => false,
+            'message' => 'Update Answer Fail',
+        ])->withErrors(['error' => $e->getMessage()]);
     }
+}
+
 
     /**
      * Remove the specified resource from storage.

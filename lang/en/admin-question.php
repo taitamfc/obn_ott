@@ -11,4 +11,5 @@ return [
     'answer' => 'Answer',
     'date' => 'Date',
     'action' => 'Action',
+    'title' => 'Title',
 ];
