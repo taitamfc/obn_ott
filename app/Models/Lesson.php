@@ -95,15 +95,32 @@ class Lesson extends Model
     }
     function getImgFmAttribute()
     {  
-        if ($this->image_url) {
+        if( $this->videoId && $this->encodeProgress == 100 ){
+            $image_url = 'https://vz-7c456383-6b4.b-cdn.net/';
+            $image_url .= $this->videoId;
+            $image_url .= '/thumbnail.jpg';
+            return '<img src="'.$image_url.'" alt="">';
+        } elseif ($this->image_url) {
             return '<img class="avatar-md" src="'.asset($this->image_url).'" alt="">';
         } else {
             return '<img src="'.asset('images/default.jpg').'" alt="">';
         }
     }
-    
     function getVideoFmAttribute()
     {  
+        /*
+        <iframe src="https://iframe.mediadelivery.net/embed/91253/b4f2ec3e-bfd3-4e22-8c14-bdb09c7903f8?&preload=true&responsive=true" allowfullscreen="true"></iframe>
+        */
+        if( $this->videoId && $this->encodeProgress == 100 ){
+            $videoId        = $this->videoId;
+            $videoLibraryId = $this->videoLibraryId;
+            return '
+            <iframe 
+                src="https://iframe.mediadelivery.net/embed/'.$videoLibraryId.'/'.$videoId.'?&preload=true&responsive=true" 
+                allowfullscreen="true">
+            </iframe>
+            ';
+        }
         if ($this->video_url) {
             return 
             '<video controls>
