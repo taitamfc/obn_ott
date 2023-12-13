@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\Models\QuestionAnswer;
+use App\Http\Requests\StoreEventRequest;
 
 use App\Models\Student;
 use App\Models\Visitor;
@@ -79,7 +80,7 @@ class HomeController extends AdminController
         return view('admin.homes.index',$params);
     }
     // Create event
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {  
         DB::beginTransaction();
         try {
