@@ -23,7 +23,7 @@ class SubjectController extends AdminController
     function index(Request $request){
         // $this->authorize('Subject',Subject::class);
         $grades = Grade::where('site_id',$this->site_id)->get();
-        $items = Subject::with('grade')->where('site_id',$this->site_id)->orderBy('position','ASC')->paginate(20);
+        $items = Subject::with('grade')->where('site_id',$this->site_id)->orderBy('name', 'ASC')->paginate(20);
         if( $request->ajax() )
         {
             return view('admin.contents.setting.subjects.ajax-index',compact('items','grades'));

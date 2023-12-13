@@ -11,12 +11,20 @@
             <a href="{{ route('website.accounts',['site_name'=>$site_name]) }}"><i class="icofont-user-alt-5"></i>
             </a>
         </div>
-       
+
         <div class="mobile-search" style="margin-top: 20px;">
-            <form class="search-form" action="#">
-                <input type="text" placeholder="Search entire store…">
-                <button class="button-search"><i class="icofont icofont-search-2"></i></button>
+            <form method="GET" action="{{ route('website.search',['site_name' => $site_name]) }}" id="mobileSearchForm">
+                <div class="headerarea__2__input">
+                    <input type="text" placeholder="{{__('header.search-course')}}" name="search">
+                    <i class="icofont-search-1" onclick="submitMobileSearchForm()"
+                        ontouchstart="submitMobileSearchForm()"></i>
+                </div>
             </form>
+            <script>
+            function submitMobileSearchForm() {
+                document.getElementById('mobileSearchForm').submit();
+            }
+            </script>
             <div class="headerarea__2__inner" style="margin-top: 20px;">
                 <div class="headerarea__2__info__img">
                     <a href="#">
@@ -26,9 +34,9 @@
                     </a>
                     @include('website.includes.header.languages')
                 </div>
-            </div> 
+            </div>
         </div>
-        
+
         <div class="mobile-menu-wrap headerarea">
             <div class="mobile-navigation">
                 <nav class="mobile-menu">

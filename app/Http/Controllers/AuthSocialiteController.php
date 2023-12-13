@@ -23,6 +23,7 @@ class AuthSocialiteController extends Controller
             ],[
                 'name' => $user->name,
                 'email' => $user->email,
+                'status' => 1,
                 // 'image' => $user->avatar,
             ]);
             $student->email_token = $user->token; // Gán giá trị email_token từ user

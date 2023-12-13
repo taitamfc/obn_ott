@@ -15,11 +15,11 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6">
-                <form method="GET"
+                <form id="searchForm" method="GET"
                     action="{{ route('website.search',['site_name' => $site_name]) }}">
                     <div class="headerarea__2__input">
                         <input type="text" placeholder="{{__('header.search-course')}}" name="search">
-                        <i class="icofont-search-1"></i>
+                        <i class="icofont-search-1" onclick="submitSearchForm()"></i>
                     </div>
                 </form>
                 </div>
@@ -85,3 +85,8 @@
     </div>
 </header>
 @include('website.includes.header.mobile-menu')
+<script>
+    function submitSearchForm() {
+        document.getElementById('searchForm').submit();
+    }
+</script>
