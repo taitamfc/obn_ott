@@ -63,7 +63,7 @@
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.email_address')}}</label>
-                                                                <input type="email" placeholder="email" name="email"
+                                                                <input type="email" name="email"
                                                                     value="{{ old('email', $student->email) }}">
                                                                 <p style="color:red">{{ $errors->first('email') }}
                                                                 </p>
@@ -75,7 +75,7 @@
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.phone_number')}}</label>
-                                                                <input type="text" placeholder="Phone Number"
+                                                                <input type="text"
                                                                     name="phone"
                                                                     value="{{ old('phone', $student->phone) }}">
                                                                 @if ($errors->any())
@@ -117,7 +117,7 @@
                                                         <div class="dashboard__form__wraper">
                                                             <div class="dashboard__form__input">
                                                                 <label>{{__('account.address')}}</label>
-                                                                <input type="text" placeholder="John" name="address"
+                                                                <input type="text" name="address"
                                                                     id="address"
                                                                     value="{{ old('address', $student->address) }}">
                                                                 @if ($errors->any())
