@@ -25,6 +25,9 @@
                         <label for="description" class="col-form-label">Class</label>
                         <select class="form-control" name="course_id" id="ev-course_id">
                             <option value=""> All Classes </option>
+                            @foreach( $courses as $course )
+                            <option value="{{ $course->id }}"> {{ $course->name }} </option>
+                            @endforeach
                         </select>
                         <!-- <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div> -->
                     </div>

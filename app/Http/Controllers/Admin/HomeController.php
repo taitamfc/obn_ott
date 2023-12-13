@@ -30,6 +30,7 @@ class HomeController extends AdminController
     {
         $grade_id = $request->grade;
 
+        $courses = Course::getActiveItems($this->site_id);
         $grades = Grade::where('site_id',$this->site_id)
         ->where('status',Grade::ACTIVE)
         ->get();
@@ -75,7 +76,8 @@ class HomeController extends AdminController
             'totalImpression'   => $totalImpression,
             'totalSales'        => $totalSales,
             'totalStudents'     => $totalStudents,
-            'totalClasses'      => $totalClasses
+            'totalClasses'      => $totalClasses,
+            'courses'           => $courses,
         ];
         return view('admin.homes.index',$params);
     }
