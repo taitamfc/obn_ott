@@ -14,7 +14,11 @@
                 </div>
             </div>
         </div>
-
+        @if(session('success'))
+        <div class="alert alert-{{ session('success') ? 'success' : 'danger' }}">
+            {{ session('message') }}
+        </div>
+        @endif
         <div class="row">
             <!-- Progress Table start -->
             <div class="col-12">
@@ -24,7 +28,7 @@
             </div>
             <!-- Progress Table end -->
         </div>
-        @include('admin.questionanswer.edit')
+
     </div>
 </div>
 
@@ -155,10 +159,15 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.success) {
                     let formData = res.data;
+                    console.log(formData);
                     formUpdate.prop('action', action);
                     formUpdate.find('.input-id').val(formData.id);
-                    formUpdate.find('.input-question-update input').val(formData.question);
-                    formUpdate.find('.input-answer-update input').val(formData.answer);
+                    // Loại bỏ thẻ HTML từ formData.question và đặt giá trị
+                    let questionInput = formUpdate.find('.input-question-update input');
+                    let tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = formData.question;
+                    let textContent = tempDiv.textContent || tempDiv.innerText;
+                    questionInput.val(textContent);
                 }
             }
         });
