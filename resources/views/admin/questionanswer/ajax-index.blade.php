@@ -3,7 +3,7 @@
         <table class="table table-hover progress-table text-left ">
             <thead>
                 <tr>
-                    <td class="w-70">{{__('admin-question.avatar')}}</td>
+                    <!-- <td class="w-70">{{__('admin-question.avatar')}}</td> -->
                     <td class="w-30p">{{__('admin-question.name')}}</td>
                     <td>{{__('admin-question.title')}}</td>
                     <td>{{__('admin-question.lesson')}}</td>
@@ -16,12 +16,12 @@
             <tbody>
                 @foreach($items as $item)
                 <tr>
-                    <td>
+                    <!-- <td>
                         <div class="avatar avatar-md">
                             <img src="https://rtsolutz.com/vizzstudio/demo-falr/falr/assets/images/author/author-img1.jpg"
                                 alt="Image" class="img-responsive">
                         </div>
-                    </td>
+                    </td> -->
                     <td class="text-nowrap">
                         <div class="fw-600 ">{{ isset($item->student)?$item->student->name : '' }}</div>
                     </td>
