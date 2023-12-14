@@ -32,6 +32,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ route('website.accounts',['site_name'=>$site_name]) }}">{{__('header.profile')}}</a></li>
+                                <li><a class="dropdown-item" href="{{ route('website.lessons',['site_name'=>$site_name]) }}"> {{__('account.all_lessons')}}</a></li>
                                 <li><a class="dropdown-item" href="{{ route('website.logout',['site_name'=>$site_name]) }}">{{__('header.logout')}}</a></li>
                             </ul>
                         </div>

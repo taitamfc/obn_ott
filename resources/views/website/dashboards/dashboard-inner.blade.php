@@ -4,6 +4,7 @@ $currentRouteName = Route::currentRouteName();
 
 @php
 $unreadCount = app('App\Http\Controllers\Website\NoticeController')->unreadCount();
+$unreadCount1 = app('App\Http\Controllers\Website\QuestionAnswerController')->unreadCount();
 @endphp
 <div class="col-xl-3 col-lg-3 col-md-12">
     <div class="dashboard__inner sticky-top">
@@ -53,9 +54,12 @@ $unreadCount = app('App\Http\Controllers\Website\NoticeController')->unreadCount
                 <li class="@if($currentRouteName == 'website.q-a') active @endif">
                     <a href="{{ route('website.q-a',['site_name'=>$site_name]) }}">
                         <i class="icofont-question-circle"></i>
-                        {{__('account.qas')}}</a>
+                        {{__('account.qas')}}
+                        @if($unreadCount1 > 0)
+                            <span class="dashboard__label">{{ $unreadCount1 }}</span>
+                        @endif
+                    </a>
                 </li>
-
                 
                 <li class="@if($currentRouteName == 'website.orders.history') active @endif">
                     <a href="{{ route('website.orders.history',['site_name'=>$site_name]) }}">
