@@ -12,7 +12,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">Edit Lesson: {{ $item->name }}</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-lesson.edit-lesson')}}: {{ $item->name }}</h5>
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
@@ -34,15 +34,15 @@
 
                                     <a class="nav-link active" id="v-lesson-setting-tab" data-toggle="pill"
                                         href="#v-lesson-setting" role="tab" aria-controls="v-lesson-setting"
-                                        aria-selected="true"><i class="fa fa-cog mr-1"></i> Lesson Setting </a>
+                                        aria-selected="true"><i class="fa fa-cog mr-1"></i> {{__('admin-lesson.lesson-setting')}}</a>
 
                                     <a class="nav-link" id="v-video-setting-tab" data-toggle="pill"
                                         href="#v-video-setting" role="tab" aria-controls="v-video-setting"
-                                        aria-selected="false"><i class="fa fa-youtube-play"></i> Video Setting</a>
+                                        aria-selected="false"><i class="fa fa-youtube-play"></i> {{__('admin-lesson.video-setting')}}</a>
 
                                     <a class="nav-link" id="v-image-setting-tab" data-toggle="pill"
                                         href="#v-image-setting" role="tab" aria-controls="v-image-setting"
-                                        aria-selected="false"><i class="fa fa-picture-o"></i> Thumbnail</a>
+                                        aria-selected="false"><i class="fa fa-picture-o"></i> {{__('admin-lesson.thumbnail')}}</a>
                                 </div>
                                 <div class="tab-content col-lg-9" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-lesson-setting" role="tabpanel"
@@ -59,11 +59,10 @@
                                         @include('admin.lessons.tabs.image-setting')
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button id="saveLesson" type="button" class='btn btn-primary update-item float-right'>Save</button>
+                            <button id="saveLesson" type="button" class='btn btn-primary update-item float-right'>{{__('sys.save')}}</button>
                         </div>
                     </div>
                 </form>

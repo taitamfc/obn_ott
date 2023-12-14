@@ -47,7 +47,7 @@ class SiteController extends AdminController
         $request->slug = $request->slug ? $request->slug : $request->name;
         $slug = $maybe_slug = Str::slug($request->slug);
         $next = 2;
-        while (Site::where('slug', $slug)->first()) {
+        while (Site::where('slug', $slug)->where('id','!=',$this->site_id)->first()) {
             $slug = "{$maybe_slug}-{$next}";
             $next++;
         }

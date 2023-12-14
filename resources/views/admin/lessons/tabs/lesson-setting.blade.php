@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="lesson-header">
-            <h4>Lesson Video Information</h4>
+            <h4>{{__('admin-lesson.lesson-video-information')}}</h4>
         </div>
     </div>
     <div class="col-lg-12">
         <div class="form-group input-name">
-            <label for="" class="col-form-label">Name <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.name')}} <span>*</span></label>
             <input type="text" class="form-control" name="name" id="name"
                 value="{{ old('name') ? old('name') : $item->name  }}">
             <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
@@ -14,7 +14,7 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group input-subject_id">
-            <label for="" class="col-form-label">Subject <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.subject')}} <span>*</span></label>
             <div class="form-floating">
                 <select name="subject_id" id="subject_id" class="form-control">
                     <option value="">Select subject</option>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="form-group input-course_id">
-            <label for="" class="col-form-label">Course <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.course')}} <span>*</span></label>
             <div class="form-floating">
                 <select name="course_id" id="course_id" class="form-control">
                     <option value="">Select course</option>
@@ -42,10 +42,10 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <label for="" class="col-form-label">Grade <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.grade')}} <span>*</span></label>
             <div class="form-floating input-grade_id">
                 <select name="grade_id" id="grade_id" class="form-control">
-                    <option selected>Select grade</option>
+                    <option selected>{{__('admin-lesson.select-grade')}}</option>
                     @foreach($grades as $grade)
                     <option @selected( $item->grade_id == $grade->id ) value='{{ $grade->id }}'>{{ $grade->name }}
                     </option>
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="" class="col-form-label">Status <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.status')}} <span>*</span></label>
             <div class="form-floating input-status">
                 <select name="status" id="status" class="form-control">
                     <option @selected( $item->status == 0 ) value='0'>Inactive</option>
@@ -67,7 +67,7 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group input-description">
-            <label for="" class="col-form-label">Description </label>
+            <label for="" class="col-form-label">{{__('admin-lesson.description')}} </label>
             <textarea id="description" name='description' cols="30" rows="5"
                 class="form-control">{{ old('description') ? old('description') : $item->description  }}</textarea>
         </div>

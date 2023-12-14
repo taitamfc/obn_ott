@@ -18,4 +18,7 @@ return [
     'purchase' => 'Purchase',
     'save-changes' => 'Save Changes',
     'close' => 'Close',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'save' => 'Save',
 ];

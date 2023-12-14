@@ -35,9 +35,26 @@ class QuestionAnswerController extends MainController
         return redirect()->route('website.q-a',['site_name'=>$this->site_name])->with('success', 'Question-Answer created successfully');
     }
 
-    public function show($site_name,$id)
+    public function show($site_name, $id)
     {
         $item = QuestionAnswer::find($id);
+
+        if (!$item->is_read) {
+            $item->is_read = 1;
+            $item->save();
+        }
+
         return view('website.dashboards.qas.show', ['item' => $item]);
     }
+
+    public function unreadCount()
+{
+    $unreadCount = QuestionAnswer::where('student_id', auth()->guard('students')->id())
+        ->whereNotNull('answer')
+        ->where('is_read', false)
+        ->count();
+
+    return $unreadCount;
+}
+
 }

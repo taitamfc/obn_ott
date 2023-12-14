@@ -17,5 +17,8 @@ return [
     '404_sub_title' => '이런! 찾으시는 페이지가 존재하지 않습니다. 이동되었거나 삭제되었을 수 있습니다.',
     'purchase' => '구입',
     'save-changes' => '변경 사항 저장',
-    'close' => '닫기'
+    'close' => '닫기',
+    'active' => '활성',
+    'inactive' => '비활성',
+    'save' => '저장',
 ];

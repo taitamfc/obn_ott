@@ -34,6 +34,13 @@ class HomeController extends AdminController
         $grades = Grade::where('site_id',$this->site_id)
         ->where('status',Grade::ACTIVE)
         ->get();
+
+        $grade_selected = "";
+        foreach ($grades as $grade){
+            if($grade->id == $grade_id){
+                $grade_selected = $grade->name;
+            }
+        }
         // Reports
         $queryVisistor      = Visitor::where('site_id',$this->site_id);
         $queryImpression    = Impression::where('site_id',$this->site_id);
@@ -72,6 +79,7 @@ class HomeController extends AdminController
         $params = [
             'qas'               => $qas,
             'grades'            => $grades,
+            'grade_selected'    => $grade_selected,
             'totalVisistor'     => $totalVisistor,
             'totalImpression'   => $totalImpression,
             'totalSales'        => $totalSales,
