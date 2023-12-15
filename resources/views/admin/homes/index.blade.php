@@ -32,7 +32,7 @@ jQuery(document).ready(function() {
         searching: false,
         info: false
     });
-    var SITEURL = "{{url('/admin/')}}";
+    var SITEURL = "{{ route('admin.home') }}";
     jQuery.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
             var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
             var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
             jQuery.ajax({
-                url: SITEURL + '/fullcalendar/update',
+                url: "{{ route('admin.fullcalendar.update') }}",
                 data: {
                     'title': event.title,
                     'start': start,
@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
             if (deleteMsg) {
                 jQuery.ajax({
                     type: "POST",
-                    url: SITEURL + '/fullcalendar/delete',
+                    url: "{{ route('admin.fullcalendar.destroy') }}",
                     data: {
                         'id': event.id
                     },
@@ -137,7 +137,7 @@ jQuery(document).ready(function() {
                         window.location.reload(); // Làm mới trang sau 1 giây
                     }, 1000);
                 }
-                
+
             }
         });
     });
