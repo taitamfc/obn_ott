@@ -8,6 +8,7 @@ use App\Http\Requests\StoreOrderRequest;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\Notification;
 use App\Models\Subscription;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
@@ -68,16 +69,28 @@ public function order_history()
     }
 
     function store(StoreOrderRequest $request){
+        DB::beginTransaction();
         try {
+           
+            $student_id = Auth::guard('students')->id();
             $order = new Order();
             $order->item_id = $request->item_id;
             $order->site_id = $this->site_id;
-            $order->student_id = Auth::guard('students')->id();
+            $order->student_id = $student_id;
             $order->price = $request->price;
             $order->payment_method = $request->pay;
             $order->type = $request->type;
-            $order->save();
-
+            if($order->save()){
+                $notice = new Notification();
+                $notice->student_id = $student_id;
+                $notice->site_id = $this->site_id;
+                $notice->type = 'new_order';
+                $notice->action = 'system_to_site';
+                $notice->is_read = 0;
+                $notice->item_id = $order->id;
+                $notice->save();
+            }
+            DB::commit();
             if ($order->price > 0 && $order->payment_method == 'paypal') {
                 return redirect()->route('website.make.payment',['site_name' => $this->site_name,'order_id' => $order->id, 'price' => $order->price]);
             }else{

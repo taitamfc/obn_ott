@@ -1062,7 +1062,7 @@ Header Area
   color: var(--blackColor);
   position: relative;
 }
-.headerarea__right .header__cart > a::before {
+.hihi {
   font-size: 10px;
   font-weight: 500;
   line-height: 15px;
@@ -1072,7 +1072,6 @@ Header Area
   width: 15px;
   height: 15px;
   padding: 0 4px;
-  content: "3";
   text-align: center;
   border-radius: 100%;
   background: var(--secondaryColor);

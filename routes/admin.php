@@ -31,6 +31,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     
     //Question
     Route::resource('/questionanswer',\App\Http\Controllers\Admin\QuestionController::class);
+    Route::resource('/notices',\App\Http\Controllers\Admin\NoticeController::class);
     
     //Payment
     Route::get('payment',[\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payment');

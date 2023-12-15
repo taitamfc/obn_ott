@@ -21,6 +21,7 @@ class NoticeController extends MainController
 
     public function show($site_name,$id)
     {
+        // dd($id);
         $item = Notice::find($id);
 
         if(!$item->is_read){

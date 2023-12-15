@@ -45,6 +45,8 @@ a.blue-link  {
     height: auto; 
 }
 
-
+p.badge.bg-danger.rounded-pill {
+    background-color: #EB2784 !important;
+}
 
 
