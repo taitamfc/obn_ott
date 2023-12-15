@@ -44,8 +44,8 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group input-subject_id">
-            <label for="" class="col-form-label">{{__('admin-lesson.sub')}} <span>*</span></label>
-            <div class="form-floating">s
+            <label for="" class="col-form-label">{{__('admin-lesson.subject')}} <span>*</span></label>
+            <div class="form-floating">
                 <select name="subject_id" id="subject_id" class="form-control">
                     <option value="">{{__('admin-lesson.select-sub')}}</option>
                 </select>
