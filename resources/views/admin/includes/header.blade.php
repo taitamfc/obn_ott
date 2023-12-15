@@ -34,7 +34,7 @@
                 </li>
                 @include('admin.includes.sites')
                 @include('admin.includes.languages')
-                <!--@include('admin.includes.notifications')-->
+                @include('admin.includes.notifications')
                 <!--@include('admin.includes.email')-->
                 @include('admin.includes.user')
             </ul>

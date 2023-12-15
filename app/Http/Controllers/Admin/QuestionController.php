@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\QuestionAnswer;
+use App\Models\Notification;
+use DB;
 use App\Http\Resources\QuestionResource;
 use App\Http\Requests\UpdateQuestionRequest;
 class QuestionController extends AdminController
@@ -49,7 +51,11 @@ class QuestionController extends AdminController
     /**
      * Show the form for editing the specified resource.
      */
-    function edit(String $id){
+    function edit(String $id, Request $request){
+        $notiid = $request->notiid;
+        if($notiid){
+            Notification::deleteNotification($notiid);
+        }
         $item = QuestionAnswer::findOrfail($id);
         return view('admin.questionanswer.edit',compact('item'));
     }
@@ -58,24 +64,35 @@ class QuestionController extends AdminController
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    try {
-        $item = QuestionAnswer::findOrFail($id);
-        $item->answer = $request->input('answer');
-        $item->user_id = $this->user_id;
-        $item->save();
+    {
+            DB::beginTransaction();
+        try {
+            $item = QuestionAnswer::findOrFail($id);
+            $item->answer = $request->input('answer');
+            $item->user_id = $this->user_id;
+            if($item->save()){
+                $replyNotice = new Notification();
+                $replyNotice->student_id = $item->student_id;
+                $replyNotice->site_id = $this->site_id;
+                $replyNotice->type = 'reply_faq';
+                $replyNotice->action = 'site_to_student';
+                $replyNotice->is_read = 0;
+                $replyNotice->item_id = $item->id;
+                $replyNotice->save();
+            }
+            DB::commit();
 
-        return redirect()->route('admin.questionanswer.index')->with([
-            'success' => true,
-            'message' => 'Update Answer Success',
-        ]);
-    } catch (\Exception $e) {
-        return redirect()->back()->with([
-            'success' => false,
-            'message' => 'Update Answer Fail',
-        ])->withErrors(['error' => $e->getMessage()]);
+            return redirect()->route('admin.questionanswer.index')->with([
+                'success' => true,
+                'message' => 'Update Answer Success',
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with([
+                'success' => false,
+                'message' => 'Update Answer Fail',
+            ])->withErrors(['error' => $e->getMessage()]);
+        }
     }
-}
 
 
     /**

@@ -9,6 +9,7 @@ class Notice extends Model
 {
     use HasFactory;
     protected $table = 'notices';
+    protected $fillable = ['student_id', 'site_id', 'type', 'action', 'is_read', 'item_id'];
     // RelationShip
     function student(){
         return $this->belongsTo(Student::class,'student_id','id');
@@ -35,5 +36,21 @@ class Notice extends Model
     }
     function GetSubjectNameAttribute(){
         return isset($this->subject) ? $this->subject->name : '';
+    }
+    function getItemNameAttribute(){
+        $item_name = '';
+        switch ($this->type) {
+            case 'new_faq':
+                $item_name = 'New faq';
+                break;
+            case 'new_order':
+                $item_name = 'New order';
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        return $item_name;
     }
 }

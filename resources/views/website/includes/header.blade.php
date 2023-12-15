@@ -23,9 +23,11 @@
                     </div>
                 </form>
                 </div>
+
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
-                    @if(auth('students')->check())
+                        @if(auth('students')->check())
+                        @include('website.includes.header.cart')
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{__('header.hi')}}, {{ auth('students')->user()->name }}
@@ -46,6 +48,7 @@
 
                     </div>
                 </div>
+
             </div>
             <div class="row">
                 <!-- <div class="col-xl-2 col-lg-2 col-md-6">
