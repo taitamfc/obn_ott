@@ -19,6 +19,7 @@
                     </button>
                     <form action="" method="get">
                         <div class="dropdown-menu" aria-labelledby="select-grade-dropdown" id="dropdownMenu">
+                            <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('admin-dashboard.select_grade') }}</a>
                             @foreach($grades as $grade)
                             <a class="dropdown-item"
                                 href="{{ route('admin.home') }}?grade={{$grade->id}}">{{ $grade->name }}</a>
