@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Session;
 use App\Jobs\SendEmail;
 use App\Models\User;
 use App\Models\Site;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -36,7 +37,52 @@ class AuthController extends Controller
     public function postLogin(StoreLoginRequest $request){
         try {
             $dataUser = $request->only('email','password');
-            if(Auth::attempt($dataUser)){
+            $email      = $request->email;
+            $password   = $request->password;
+            $check = User::where('email',$email)->where('role','site_owner')->first();
+            $canLogin = false;
+            if( $check ){
+                if (Hash::check($password, $check->password)) {
+                    $canLogin = true;
+                }
+            }
+            if($canLogin && Auth::attempt($dataUser)){
+                $user = Auth::user();
+                session()->put('site_id',$user->site_id);
+                return redirect()->route('admin.home')->with('success',__('auth.login_success'));
+            }else {
+                return redirect()->back()->with('error',__('auth.login_error'));
+            }
+        } catch (Exception $e) {
+            Log::error('Bug error : '.$e->getMessage());
+            return redirect()->route('login')->with('error','Has Problems, Please Try Again');
+        }
+    }
+
+    public function loginSite (){
+        if (Auth::check()) {
+            return redirect()->route('cms');
+        } else {
+            $site_name = request()->route('site_name');
+            return view('admin.auth.loginSite',compact('site_name'));
+        }
+    }
+
+    public function postLoginSite(StoreLoginRequest $request){
+        try {
+            $dataUser = $request->only('email','password');
+            $email      = $request->email;
+            $password   = $request->password;
+            $check = User::where('email',$email)->where('role','site_manager')->first();
+            $canLogin = false;
+            if( $check ){
+                if (Hash::check($password, $check->password)) {
+                    $canLogin = true;
+                }
+            }
+            if($canLogin && Auth::attempt($dataUser)){
+                $user = Auth::user();
+                session()->put('site_id',$user->site_id);
                 return redirect()->route('admin.home')->with('success',__('auth.login_success'));
             }else {
                 return redirect()->back()->with('error',__('auth.login_error'));
@@ -49,8 +95,14 @@ class AuthController extends Controller
 
     public function logout(Request $request){
         session()->forget('site_id');
+        $user = Auth::user();
         Auth::logout();
-        return redirect()->route('login');
+        if( $user->role == 'site_owner' ){
+            return redirect()->route('login');
+        }else{
+            $site_name = $user->defaultsite->slug;
+            return redirect()->route('cms',['site_name'=>$site_name]);
+        }
     }
     
     public function register(){
@@ -76,6 +128,7 @@ class AuthController extends Controller
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->group_id = env('DEFAULT_ADMIN_GROUP',1);
+            $user->role = 'site_owner';
             // Register sites
             if($user->save()){
                 $site = new Site();

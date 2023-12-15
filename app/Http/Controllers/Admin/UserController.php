@@ -41,7 +41,7 @@ class UserController extends AdminController
     function index(Request $request){
         // $this->authorize('User',User::class);
         $groups = Group::where('site_id',$this->site_id)->orderBy('position','ASC')->get();
-        $users = User::where('site_id',$this->site_id)->orWhere('parent_id',Auth::id())->get();
+        $users = User::where('site_id',$this->site_id)->get();
         $roles = Role::get();
         $selected_roles = [];
         $param = [
@@ -77,6 +77,7 @@ class UserController extends AdminController
             $item->password = $request->password;
             $item->parent_id = $this->user_id;
             $item->site_id = $this->site_id;
+            $item->role = 'site_manager';
             if ($request->hasFile('image')) {
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             }else {
