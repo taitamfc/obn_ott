@@ -95,7 +95,7 @@ class LessonController extends AdminController
             ]);
         }
     }
-    public function create()
+    public function create(Request $request)
     {
         // $this->authorize('Lesson',Lesson::class);
         $grades = Grade::getActiveItems($this->site_id);
@@ -289,6 +289,20 @@ class LessonController extends AdminController
             return response([
                 'success' => false,
                 'message' => __('sys.destroy_item_error'),
+            ],200);
+            Log::error('Bug occurred: ' . $e->getMessage());
+        }
+    }
+    function getSubject(Request $request){
+        try {
+            $items = Subject::where('grade_id',$request->grade_id)->get();
+            return response([
+                'success' => true,
+                'data' => $items
+            ],200);
+        } catch (QueryException $e) {
+            return response([
+                'success' => false,
             ],200);
             Log::error('Bug occurred: ' . $e->getMessage());
         }

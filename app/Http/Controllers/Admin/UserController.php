@@ -76,6 +76,7 @@ class UserController extends AdminController
             $item->group_id = $request->group_id;
             $item->password = $request->password;
             $item->parent_id = $this->user_id;
+            $item->site_id = $this->site_id;
             if ($request->hasFile('image')) {
                 $item->image_url = $this->uploadFile($request->file('image'), 'uploads/'.$this->user_id.'/users');
             }else {
@@ -87,15 +88,6 @@ class UserController extends AdminController
                     $user_site->user_id = $item->id;
                     $user_site->site_id = $this->site_id;
                     $user_site->save();
-
-                    $site = new Site();
-                    $site->name = $item->name;
-                    $site->slug = Str::slug($item->name);
-                    $site->user_id = $item->id;
-                    $site->status = 1;
-                    $site->save();
-                    $item->site_id = $site->id;
-                    $item->save();
                 }
             DB::commit();
             return response()->json([

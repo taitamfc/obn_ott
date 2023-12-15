@@ -1,5 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
+        <input type="hidden" id="ajax_grade_id" value="{{$item->grade_id}}">
+        <input type="hidden" id="ajax_subject_id" value="{{$item->subject_id}}">
         <div class="lesson-header">
             <h4>Lesson Video Information</h4>
         </div>
@@ -13,20 +15,20 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <div class="form-group input-subject_id">
-            <label for="" class="col-form-label">Subject <span>*</span></label>
+        <div class="form-grou input-grade_id">
+            <label for="" class="col-form-label">Grade <span>*</span></label>
             <div class="form-floating">
-                <select name="subject_id" id="subject_id" class="form-control">
-                    <option value="">Select subject</option>
-                    @foreach($subjects as $subject)
-                    <option @selected( $item->subject_id == $subject->id )
-                        value='{{ $subject->id }}'>{{ $subject->name }} </option>
+                <select name="grade_id" id="grade_id" class="form-control">
+                    <option selected>Select grade</option>
+                    @foreach($grades as $grade)
+                    <option @selected( $item->grade_id == $grade->id ) value='{{ $grade->id }}'>{{ $grade->name }}
+                    </option>
                     @endforeach
                 </select>
-                <div class="input-error text-danger">@error('subject_id') {{ $message }} @enderror</div>
+                <div class="input-error text-danger">@error('grade_id') {{ $message }} @enderror</div>
             </div>
         </div>
-        <div class="form-group input-course_id">
+        <div class="form-group input-course_id mt-3">
             <label for="" class="col-form-label">Course <span>*</span></label>
             <div class="form-floating">
                 <select name="course_id" id="course_id" class="form-control">
@@ -41,22 +43,18 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <div class="form-group">
-            <label for="" class="col-form-label">Grade <span>*</span></label>
-            <div class="form-floating input-grade_id">
-                <select name="grade_id" id="grade_id" class="form-control">
-                    <option selected>Select grade</option>
-                    @foreach($grades as $grade)
-                    <option @selected( $item->grade_id == $grade->id ) value='{{ $grade->id }}'>{{ $grade->name }}
-                    </option>
-                    @endforeach
+        <div class="form-group input-subject_id">
+            <label for="" class="col-form-label">Subject <span>*</span></label>
+            <div class="form-floating">
+                <select name="subject_id" id="subject_id" class="form-control">
+                    <option value="">Select subject</option>
                 </select>
-                <div class="input-error text-danger">@error('grade_id') {{ $message }} @enderror</div>
+                <div class="input-error text-danger">@error('subject_id') {{ $message }} @enderror</div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group input-status">
             <label for="" class="col-form-label">Status <span>*</span></label>
-            <div class="form-floating input-status">
+            <div class="form-floating">
                 <select name="status" id="status" class="form-control">
                     <option @selected( $item->status == 0 ) value='0'>Inactive</option>
                     <option @selected( $item->status == 1 ) value='1'>Active</option>
@@ -74,6 +72,53 @@
     </div>
 </div>
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 CKEDITOR.replace('description');
+var url = "{{ route('admin.lessons.getSubject') }}";
+$(document).ready(function() {
+    $('body').on('change', "#grade_id", function() {
+        var grade_id = $(this).val();
+        if (grade_id) {
+            getSubjects(grade_id);
+        }
+    });
+
+    if ($('#ajax_grade_id').val()) {
+        var ajax_grade_id = $('#ajax_grade_id').val();
+        var ajax_subject_id = $('#ajax_subject_id').val();
+        getSubjects(ajax_grade_id, ajax_subject_id)
+    }
+
+    function getSubjects(grade_id, selected = 0) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: url,
+            method: 'post',
+            dataType: "json",
+            data: {
+                grade_id: grade_id
+            },
+            success: function(res) {
+                $('#subject_id').empty();
+                $.each(res.data, function(i, subject) {
+                    // Change 'data' to 'res.data'
+                    var option = $('<option>', {
+                        value: subject.id,
+                        text: subject.name
+                    });
+
+                    // Check if subject.id is equal to selected
+                    if (subject.id == selected) {
+                        option.attr('selected', 'selected');
+                    }
+
+                    $('#subject_id').append(option);
+                });
+            }
+        });
+    }
+});
 </script>
