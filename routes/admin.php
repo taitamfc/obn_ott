@@ -69,7 +69,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
     
     //Lessons
     Route::post('lessons/storeVideo/{id?}', [\App\Http\Controllers\Admin\LessonController::class, 'storeVideo'])->name('lessons.storeVideo');
-    Route::resource('lessons', \App\Http\Controllers\Admin\LessonController::class);
+    Route::post('lessons/getSubject', [\App\Http\Controllers\Admin\LessonController::class, 'getSubject'])->name('lessons.getSubject');
+    Route::resource('lessonsc', \App\Http\Controllers\Admin\LessonController::class);
     
     //Banners
     Route::resource('banners', \App\Http\Controllers\Admin\BannerController::class);
