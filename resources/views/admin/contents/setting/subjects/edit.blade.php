@@ -6,17 +6,17 @@
             <input type="hidden" name="id" id="input-id">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update</h5>
+                    <h5 class="modal-title">{{__('admin-grade.update')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">{{__('admin-grade.name')}}</label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
                     <div class="form-group input-grade">
-                        <label for="grade" class="col-form-label">Grade</label>
+                        <label for="grade" class="col-form-label">{{__('admin-grade.grade')}}</label>
                         <select name="grade_id" class="form-control">
                             @foreach($grades as $grade)
                             <option value="{{ $grade->id }}">{{  $grade->name }}</option>
@@ -25,14 +25,14 @@
                         <div class="input-error text-danger">@error('grade_id') {{ $message }} @enderror</div>
                     </div>
                     <div class="form-group ">
-                        <label for="image" class="col-form-label">Banner</label>
+                        <label for="image" class="col-form-label">{{__('admin-grade.banner')}}</label>
                         <input class="form-control" type="file" name='image' id="image">
                         <div class="input-error text-danger">@error('image') {{ $message }} @enderror</div>
                         <img src="" class="input-img" alt="" style="display:none;">
                     </div>
 
                     <div class="form-group input-status">
-						<label for="status" class="col-form-label">Status</label>
+						<label for="status" class="col-form-label">{{__('admin-grade.status')}}</label>
 						<div style="display: flex">
 							<div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
 								<input type="radio" checked id="e-active" name="status" class="custom-control-input input-active"
@@ -48,8 +48,8 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary edit-item" type='button'>Save changes</button>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary edit-item" type='button'>{{__('sys.save-changes')}}</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{__('sys.save-close')}}</button>
                 </div>
             </div>
         </div>

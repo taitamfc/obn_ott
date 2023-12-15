@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="lesson-header">
-            <h4>Select A Thumbnail</h4>
+            <h4>{{__('admin-lesson.select-a-thumbnail')}}</h4>
         </div>
         <div class="form-group">
-            <label for="" class="form-label">Thumb Image</label>
+            <label for="" class="form-label">{{__('admin-lesson.thumb-image')}}</label>
             <input type="file" class="form-control" name="image" id="image" onchange="previewImage(event)">
         </div>
         @if( $item->image )

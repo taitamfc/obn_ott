@@ -52,14 +52,14 @@
             <thead class="text-uppercase">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Grade</th>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">View</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">{{__('admin-lesson.name')}}</th>
+                    <th scope="col">{{__('admin-lesson.grade')}}</th>
+                    <th scope="col">{{__('admin-lesson.subject')}}</th>
+                    <th scope="col">{{__('admin-lesson.course')}}</th>
+                    <th scope="col">{{__('admin-lesson.view')}}</th>
+                    <th scope="col">{{__('admin-lesson.date')}}</th>
+                    <th scope="col">{{__('admin-lesson.status')}}</th>
+                    <th scope="col">{{__('admin-lesson.action')}}</th>
                 </tr>
             </thead>
             <tbody class="sortable-table ">
@@ -76,6 +76,13 @@
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
+                                <a 
+                                    href="{{ route('website.lessons.show',['id'=> $item->id,'site_name'=> $site_name]) }}?preview_token={{ $item->preview_token }}" 
+                                    class="btn btn-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3">
                                 <a href="{{ route('admin.lessons.edit',$item->id) }}" class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
@@ -86,6 +93,7 @@
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>
+                       
                         </ul>
                     </td>
                 </tr>

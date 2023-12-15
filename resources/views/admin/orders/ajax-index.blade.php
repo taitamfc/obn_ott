@@ -4,13 +4,13 @@
             <thead class="text-uppercase">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Item ID</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Payment Method</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Student ID</th>
+                    <th scope="col">{{__('admin-order.item')}}</th>
+                    <th scope="col">{{__('admin-order.price')}}</th>
+                    <th scope="col">{{__('admin-order.payment-method')}}</th>
+                    <th scope="col">{{__('admin-order.type')}}</th>
+                    <th scope="col">{{__('admin-order.date')}}</th>
+                    <th scope="col">{{__('admin-order.status')}}</th>
+                    <th scope="col">{{__('admin-order.student')}}</th>
                 </tr>
             </thead>
             <tbody class="sortable-table ">

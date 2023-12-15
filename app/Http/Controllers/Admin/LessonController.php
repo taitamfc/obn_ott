@@ -26,67 +26,68 @@ class LessonController extends AdminController
     public function index(Request $request)
     {
         try {
-        // $this->authorize('Lesson',Lesson::class);
-        if($request->ajax()){
-            $grades = Grade::getActiveItems($this->site_id);
-            $subjects = Subject::getActiveItems($this->site_id);
-            $courses = Course::getActiveItems($this->site_id);
-            $query = Lesson::where('site_id',$this->site_id)->withCount('lessonstudent');
-            if($request->name){
-                $query->where('name','LIKE','%'.$request->name.'%');
-            }
-            if($request->grade_id){
-                $query->where('grade_id',$request->grade_id);
-            }
-            if($request->subject_id){
-                $query->where('subject_id',$request->subject_id);
-            }
-            if($request->course_id){
-                $query->where('course_id',$request->course_id);
-            }
-            switch ($request->sortBy) {
-                // Sort grade 
-                case 'grade_desc':
-                    $query->with(['grade' => function ($q) {
-                        $q->orderBy('name', 'desc');
-                    }]);
-                    break;
-                case 'grade_asc':
-                    $query->with(['grade' => function ($q) {
-                        $q->orderBy('name', 'asc');
-                    }]);
-                    break;
-                // Sort Subject
-                case 'subject_desc':
-                    $query->with(['subject' => function ($q) {
-                        $q->orderBy('name', 'desc');
-                    }]);
-                    break;
-                case 'subject_asc':
-                    $query->with(['subject' => function ($q) {
-                        $q->orderBy('name', 'asc');
-                    }]);
-                    break;
-                // Sort Course
-                case 'course_desc':
-                    $query->with(['course' => function ($q) {
-                        $q->orderBy('name', 'desc');
-                    }]);
-                    break;
-                case 'course_asc':
-                    $query->with(['course' => function ($q) {
-                        $q->orderBy('name', 'asc');
-                    }]);
-                    break;
-                default : 
-                    $query->orderBy('id','desc');
-                    break;
+            // $this->authorize('Lesson',Lesson::class);
+            if($request->ajax()){
+                $grades = Grade::getActiveItems($this->site_id);
+                $subjects = Subject::getActiveItems($this->site_id);
+                $courses = Course::getActiveItems($this->site_id);
+                $query = Lesson::where('site_id',$this->site_id)->withCount('lessonstudent');
+                if($request->name){
+                    $query->where('name','LIKE','%'.$request->name.'%');
                 }
-            $query->with('grade', 'subject', 'course');
-            $items = $query->paginate(20);
-            return view('admin.lessons.ajax-index',compact('items','grades','subjects','courses'));
-        }
-        return view('admin.lessons.index');
+                if($request->grade_id){
+                    $query->where('grade_id',$request->grade_id);
+                }
+                if($request->subject_id){
+                    $query->where('subject_id',$request->subject_id);
+                }
+                if($request->course_id){
+                    $query->where('course_id',$request->course_id);
+                }
+                switch ($request->sortBy) {
+                    // Sort grade 
+                    case 'grade_desc':
+                        $query->with(['grade' => function ($q) {
+                            $q->orderBy('name', 'desc');
+                        }]);
+                        break;
+                    case 'grade_asc':
+                        $query->with(['grade' => function ($q) {
+                            $q->orderBy('name', 'asc');
+                        }]);
+                        break;
+                    // Sort Subject
+                    case 'subject_desc':
+                        $query->with(['subject' => function ($q) {
+                            $q->orderBy('name', 'desc');
+                        }]);
+                        break;
+                    case 'subject_asc':
+                        $query->with(['subject' => function ($q) {
+                            $q->orderBy('name', 'asc');
+                        }]);
+                        break;
+                    // Sort Course
+                    case 'course_desc':
+                        $query->with(['course' => function ($q) {
+                            $q->orderBy('name', 'desc');
+                        }]);
+                        break;
+                    case 'course_asc':
+                        $query->with(['course' => function ($q) {
+                            $q->orderBy('name', 'asc');
+                        }]);
+                        break;
+                    default : 
+                        $query->orderBy('id','desc');
+                        break;
+                    }
+                $query->with('grade', 'subject', 'course');
+                $items = $query->paginate(20);
+                $site_name = $this->site_name;
+                return view('admin.lessons.ajax-index',compact('items','grades','subjects','courses','site_name'));
+            }
+            return view('admin.lessons.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return response([
@@ -134,6 +135,7 @@ class LessonController extends AdminController
         $item->status = $request->status;
         $item->site_id = $this->site_id;
         $item->video_url = $request->video;
+        $item->preview_token = md5(time());
 
         DB::beginTransaction();
         try {
@@ -211,6 +213,7 @@ class LessonController extends AdminController
             $item->description = $request->description;
             $item->status = $request->status;
             $item->site_id = $this->site_id; 
+            $item->preview_token = md5(time());
 
             // Upload new video
             if($request->video){

@@ -3,23 +3,23 @@
         <input type="hidden" id="ajax_grade_id" value="{{$item->grade_id}}">
         <input type="hidden" id="ajax_subject_id" value="{{$item->subject_id}}">
         <div class="lesson-header">
-            <h4>Lesson Video Information</h4>
+            <h4>{{__('admin-lesson.lesson-video-information')}}</h4>
         </div>
     </div>
     <div class="col-lg-12">
         <div class="form-group input-name">
-            <label for="" class="col-form-label">Name <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.name')}} <span>*</span></label>
             <input type="text" class="form-control" name="name" id="name"
                 value="{{ old('name') ? old('name') : $item->name  }}">
             <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
         </div>
     </div>
     <div class="col-lg-6">
-        <div class="form-grou input-grade_id">
-            <label for="" class="col-form-label">Grade <span>*</span></label>
+        <div class="form-group input-grade_id">
+            <label for="" class="col-form-label">{{__('admin-lesson.grade')}} <span>*</span></label>
             <div class="form-floating">
                 <select name="grade_id" id="grade_id" class="form-control">
-                    <option selected>Select grade</option>
+                    <option selected>{{__('admin-lesson.select-grade')}}</option>
                     @foreach($grades as $grade)
                     <option @selected( $item->grade_id == $grade->id ) value='{{ $grade->id }}'>{{ $grade->name }}
                     </option>
@@ -29,10 +29,10 @@
             </div>
         </div>
         <div class="form-group input-course_id mt-3">
-            <label for="" class="col-form-label">Course <span>*</span></label>
+            <label for="" class="col-form-label">{{__('admin-lesson.course')}}<span>*</span></label>
             <div class="form-floating">
                 <select name="course_id" id="course_id" class="form-control">
-                    <option value="">Select course</option>
+                    <option value="">{{__('admin-lesson.select-course')}}</option>
                     @foreach($courses as $course)
                     <option @selected( $item->course_id == $course->id ) value='{{ $course->id }}'>{{ $course->name }}
                     </option>
@@ -44,17 +44,18 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group input-subject_id">
-            <label for="" class="col-form-label">Subject <span>*</span></label>
-            <div class="form-floating">
+            <label for="" class="col-form-label">{{__('admin-lesson.sub')}} <span>*</span></label>
+            <div class="form-floating">s
                 <select name="subject_id" id="subject_id" class="form-control">
-                    <option value="">Select subject</option>
+                    <option value="">{{__('admin-lesson.select-sub')}}</option>
                 </select>
                 <div class="input-error text-danger">@error('subject_id') {{ $message }} @enderror</div>
             </div>
         </div>
-        <div class="form-group input-status">
-            <label for="" class="col-form-label">Status <span>*</span></label>
-            <div class="form-floating">
+
+        <div class="form-group">
+            <label for="" class="col-form-label">{{__('admin-lesson.status')}} <span>*</span></label>
+            <div class="form-floating input-status">
                 <select name="status" id="status" class="form-control">
                     <option @selected( $item->status == 0 ) value='0'>Inactive</option>
                     <option @selected( $item->status == 1 ) value='1'>Active</option>
@@ -65,7 +66,7 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group input-description">
-            <label for="" class="col-form-label">Description </label>
+            <label for="" class="col-form-label">{{__('admin-lesson.description')}} </label>
             <textarea id="description" name='description' cols="30" rows="5"
                 class="form-control">{{ old('description') ? old('description') : $item->description  }}</textarea>
         </div>

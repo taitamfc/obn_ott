@@ -6,4 +6,5 @@ return [
     'sales' => '판매',
     'students' => '학생',
     'classes' => '수업',
+    'contents-manager-home' => '콘텐츠 관리 홈',
 ];

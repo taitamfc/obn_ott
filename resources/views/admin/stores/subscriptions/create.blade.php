@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group input-name">
-                    <label for="name" class="col-form-label">Name <span>*</span></label>
+                    <label for="name" class="col-form-label">{{__('admin-course.name')}} <span>*</span></label>
                     <input class="form-control" type="text" name="name" value="" id="name">
                     <div class="input-error text-danger">@error('name') {{ $message }} @enderror
                     </div>
@@ -12,7 +12,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group input-price">
-                    <label for="price" class="col-form-label">Price <span>*</span></label>
+                    <label for="price" class="col-form-label">{{__('admin-course.price')}} <span>*</span></label>
                     <input class="form-control" type="text" name="price" value="" id="price">
                     <div class="input-error text-danger">@error('price') {{ $message }} @enderror
                     </div>
@@ -22,9 +22,9 @@
             
             <div class="col-sm-6">
                 <div class="form-group input-duration">
-                    <label for="duration" class="col-form-label">Duration <span>*</span></label>
+                    <label for="duration" class="col-form-label">{{__('admin-course.duration')}} <span>*</span></label>
                     <select name="duration" id="duration" class="form-control">
-                        <option value="">Select Duration</option>
+                        <option value="">{{__('admin-course.select-duration')}}</option>
                         @foreach ($durations as $id => $durationName)
                         <option value="{{ $id }}">{{ $durationName }}</option>
                         @endforeach
@@ -42,7 +42,7 @@
 
             <div class="col-sm-6">
                 <div class="form-group input-course">
-                    <label for="course" class="col-form-label">Course <span>*</span></label>
+                    <label for="course" class="col-form-label">{{__('admin-course.course')}} <span>*</span></label>
                     <select name="course[]" id="course" class="form-control" multiple>
                         @foreach ($courses as $id => $courseName)
                         <option value="{{ $id }}">{{ $courseName }}</option>
@@ -50,10 +50,10 @@
                     </select>
                     <div class="input-error text-danger">@error('courses') {{ $message }} @enderror
                     </div>
-                    <a href="{{route('admin.courses.index')}}" class="btn btn-primary mt-4">Add more Courses</a>
+                    <a href="{{route('admin.courses.index')}}" class="btn btn-primary mt-4">{{__('admin-course.add-more-courses')}}</a>
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary add-item float-right" type='button'>Save changes</button>
+        <button class="btn btn-primary add-item float-right" type='button'>{{__('sys.save-changes')}}</button>
     </form>
 </div>

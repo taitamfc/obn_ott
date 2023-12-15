@@ -6,4 +6,5 @@ return [
     'sales' => 'Sales',
     'students' => 'Students',
     'classes' => 'Classes',
+    'contents-manager-home' => 'Contents Manager Home',
 ];

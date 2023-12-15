@@ -3,9 +3,9 @@
         <table class="table table-hover progress-table">
             <thead class="text-uppercase">
                 <tr>
-                    <th scope="col">COURSE</th>
-                    <th scope="col">PRICE </th>
-                    <th scope="col">ACTION</th>
+                    <th scope="col">{{__('admin-course.course')}}</th>
+                    <th scope="col">{{__('admin-course.price')}} </th>
+                    <th scope="col">{{__('admin-course.action')}}</th>
                 </tr>
             </thead>
             <tbody>
