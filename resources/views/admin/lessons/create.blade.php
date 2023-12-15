@@ -39,15 +39,15 @@
 
                                     <a class="nav-link active" id="v-lesson-setting-tab" data-toggle="pill"
                                         href="#v-lesson-setting" role="tab" aria-controls="v-lesson-setting"
-                                        aria-selected="true"><i class="fa fa-cog mr-1"></i> Lesson Setting </a>
+                                        aria-selected="true"><i class="fa fa-cog mr-1"></i>{{__('admin-lesson.lesson-setting')}}</a>
 
                                     <a class="nav-link" id="v-video-setting-tab" data-toggle="pill"
                                         href="#v-video-setting" role="tab" aria-controls="v-video-setting"
-                                        aria-selected="false"><i class="fa fa-youtube-play"></i> Video Setting</a>
+                                        aria-selected="false"><i class="fa fa-youtube-play"></i>{{__('admin-lesson.video-setting')}}</a>
 
                                     <a class="nav-link" id="v-image-setting-tab" data-toggle="pill"
                                         href="#v-image-setting" role="tab" aria-controls="v-image-setting"
-                                        aria-selected="false"><i class="fa fa-picture-o"></i> Thumbnail</a>
+                                        aria-selected="false"><i class="fa fa-picture-o"></i>{{__('admin-lesson.thumbnail')}}</a>
                                 </div>
                                 <div class="tab-content col-lg-9" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-lesson-setting" role="tabpanel"
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button id="saveLesson" type="button" class='btn btn-primary add-item float-right'>Submit</button>
+                            <button id="saveLesson" type="button" class='btn btn-primary add-item float-right'>{{__('sys.submit')}}</button>
                         </div>
                     </div>
                 </form>

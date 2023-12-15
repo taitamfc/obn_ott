@@ -3,9 +3,9 @@
         <table class="table table-hover progress-table text-left ">
             <thead>
                 <tr>
-                    <td class="w-30p">Name</td>
-                    <td class="w-30p">Number Day</td>
-                    <td class='text-center'>Action</td>
+                    <td class="w-30p">{{ __('admin-duration.name') }}</td>
+                    <td class="w-30p">{{ __('admin-duration.number-day') }}</td>
+                    <td class='text-center'>{{ __('admin-duration.action') }}</td>
                 </tr>
             </thead>
             <tbody>

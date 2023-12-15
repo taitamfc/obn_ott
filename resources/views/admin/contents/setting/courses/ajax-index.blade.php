@@ -4,10 +4,10 @@
             <thead class="text-uppercase">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" class="text-center">Action</th>
+                    <th scope="col">{{__('admin-grade.name')}}</th>
+                    <th scope="col">{{__('admin-grade.image')}}</th>
+                    <th scope="col">{{__('admin-grade.status')}}</th>
+                    <th scope="col" class="text-center">{{__('admin-grade.action')}}</th>
                 </tr>
             </thead>
             <tbody class="sortable-table ">

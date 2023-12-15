@@ -13,11 +13,11 @@ select.form-control:not([size]):not([multiple]) {
             <div class="col-md-12 grid-margin">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">My Class</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-class.my-class')}}</h5>
                         <div class="d-flex align-items-baseline dashboard-breadcrumb">
-                            <p class="text-muted mb-0 mr-1 hover-cursor">OTT</p>
+                            <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-class.ott')}}</p>
                             <i class="mdi mdi-chevron-right mr-1 text-primary"></i>
-                            <p class="text-muted mb-0 mr-1 hover-cursor">My Class</p>
+                            <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-class.my-class')}}</p>
                         </div>
                     </div>
                     <div class="buttons d-flex">
@@ -38,7 +38,7 @@ select.form-control:not([size]):not([multiple]) {
                                             <form action="{{ route('admin.classes.students') }}" method='get'
                                                 class='d-flex justify-content-center align-items-center'>
                                                 <input class="form-control mr-3" type="text" name="searchName"
-                                                    placeholder="Search student">
+                                                    placeholder="{{__('admin-class.search-student')}}">
                                                 <button type='submit'><i class="ti-search"></i>
                                                 </button>
                                             </form>
@@ -47,14 +47,14 @@ select.form-control:not([size]):not([multiple]) {
                                             <div class="form-group">
                                                 <form action="{{ route('admin.classes.students') }}" method='get'>
                                                     <input type="hidden" name="viewAll" value='viewAll'>
-                                                    <button class="btn btn-primary">View All</button>
+                                                    <button class="btn btn-primary">{{__('admin-class.view-all')}}</button>
                                                 </form>
                                             </div>
                                         </div>
                                         <form class="col-sm-4" action="" method="get">
                                             <select class="form-control" onchange="this.form.submit()" name='course'
                                                 id='course'>
-                                                <option>Select course</option>
+                                                <option>{{__('admin-class.select-course')}}</option>
                                                 @foreach($courses as $course)
                                                 <option value='{{ $course->id }}'>{{ $course->name }}</option>
                                                 @endforeach

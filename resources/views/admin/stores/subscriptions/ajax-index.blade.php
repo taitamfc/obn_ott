@@ -1,16 +1,16 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card_title">Current subscriptions</h4>
+        <h4 class="card_title">{{__('admin-course.current-subscriptions')}}</h4>
         <div class="single-table">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">PRICE</th>
-                            <th scope="col">DURATION</th>
-                            <th scope="col">ACTION</th>
+                            <th scope="col">{{__('admin-course.name')}}</th>
+                            <th scope="col">{{__('admin-course.price')}}</th>
+                            <th scope="col">{{__('admin-course.duration')}}</th>
+                            <th scope="col">{{__('admin-course.action')}}</th>
                         </tr>
                     </thead>
                     <tbody>

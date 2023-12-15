@@ -21,4 +21,7 @@ return [
     'active' => '활성',
     'inactive' => '비활성',
     'save' => '저장',
+    'submit' => '제출',
+    'update' => '업데이트',
+    'create-new' => '새로 만들기',
 ];

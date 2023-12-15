@@ -76,6 +76,13 @@
                     <td>
                         <ul class="d-flex justify-content-center">
                             <li class="mr-3">
+                                <a 
+                                    href="{{ route('website.lessons.show',['id'=> $item->id,'site_name'=> $site_name]) }}?preview_token={{ $item->preview_token }}" 
+                                    class="btn btn-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3">
                                 <a href="{{ route('admin.lessons.edit',$item->id) }}" class="btn btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
@@ -86,6 +93,7 @@
                                     <i class="ti-trash"></i>
                                 </a>
                             </li>
+                       
                         </ul>
                     </td>
                 </tr>

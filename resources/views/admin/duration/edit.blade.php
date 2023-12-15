@@ -6,26 +6,26 @@
             <input type="hidden" name="id" id="input-id">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update</h5>
+                    <h5 class="modal-title">{{ __('sys.update') }}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-name-update">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">{{ __('admin-duration.name') }}</label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
                     
                     <div class="form-group input-number_days-update">
-                        <label for="number_days" class="col-form-label">Number Day</label>
+                        <label for="number_days" class="col-form-label">{{ __('admin-duration.number-day') }}</label>
                         <input class="form-control" type="number" id="number_days" name='number_days'>
                         <div class="input-error text-danger">@error('number_days') {{ $message }} @enderror</div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-primary edit-item" type='button'>Save changes</button>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary edit-item" type='button'>{{ __('sys.save-changes') }}</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('sys.close') }}</button>
                 </div>
             </div>
         </div>
