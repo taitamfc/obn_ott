@@ -2,6 +2,10 @@
     Route::middleware(['localization'])->group(function(){
     // Login
     Route::get('/login',[\App\Http\Controllers\Admin\AuthController::class,'login'])->name('login');
+    Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->group(function(){
+        Route::get('admin/login',[\App\Http\Controllers\Admin\AuthController::class,'loginSite'])->name('site.login');
+        Route::post('admin/postLoginSite',[\App\Http\Controllers\Admin\AuthController::class,'postLoginSite'])->name('site.postLogin');
+    });
     Route::post('/postLogin',[\App\Http\Controllers\Admin\AuthController::class,'postLogin'])->name('admin.postLogin');
     Route::get('/logout',[\App\Http\Controllers\Admin\AuthController::class,'logout'])->name('admin.logout');
 
