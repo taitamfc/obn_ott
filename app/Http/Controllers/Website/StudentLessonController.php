@@ -6,6 +6,8 @@ use App\Http\Controllers\MainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StudentWhitlist;
+use App\Models\StudentCourse;
+use App\Models\LessonStudent;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 class StudentLessonController extends MainController
@@ -65,6 +67,31 @@ class StudentLessonController extends MainController
         }
     }
 
+    public function progress(){ 
+        $student_id = Auth::guard('students')->id();
+        $student_courses = StudentCourse::where('site_id',$this->site_id)
+        ->where('student_id',$student_id)
+        ->get();
+        $courses = [];
+        foreach($student_courses as $key => $student_course){
+            //course_id
+            $complete_lessons = LessonStudent::where('site_id',$this->site_id)
+            ->where('student_id',$student_id)
+            ->where('course_id',$student_course->course_id)
+            ->where('is_complete',1)
+            ->count();
 
+            $total_lessons = LessonStudent::where('site_id',$this->site_id)
+            ->where('student_id',$student_id)
+            ->where('course_id',$student_course->course_id)
+            ->count();
+
+            $courses[$key]['course'] = $student_course;
+            $courses[$key]['complete'] = $complete_lessons;
+            $courses[$key]['total'] = $total_lessons;
+        }
+
+        return view('website.dashboards.progress.index',['courses'=>$courses]);
+    }
 
 }
