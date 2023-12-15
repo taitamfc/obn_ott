@@ -31,9 +31,7 @@ class HomeController extends AdminController
         $grade_id = $request->grade;
 
         $courses = Course::getActiveItems($this->site_id);
-        $grades = Grade::where('site_id',$this->site_id)
-        ->where('status',Grade::ACTIVE)
-        ->get();
+        $grades = Grade::getActiveItems($this->site_id);
 
         $grade_selected = "";
         foreach ($grades as $grade){
