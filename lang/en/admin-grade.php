@@ -6,9 +6,10 @@ return [
     'action' => 'Action',
     'my-grades' => 'My Grades',
     'my-subjects' => 'My Subjects',
+    'my-courses' => 'My Courses',
     'grade' => 'Grade',
-    'update' => 'Update',
     'title' => 'Title',
     'banner' => 'Banner',
+    'update' => 'Update',
     'create-new' => 'Create New',
 ];

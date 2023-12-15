@@ -6,13 +6,13 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Student ID</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col" class="text-center">Action</th>
+                            <th scope="col">{{__('admin-class.name')}}</th>
+                            <th scope="col">{{__('admin-class.student')}}</th>
+                            <th scope="col">{{__('admin-class.email')}}</th>
+                            <th scope="col">{{__('admin-class.course')}}</th>
+                            <th scope="col">{{__('admin-class.date')}}</th>
+                            <th scope="col">{{__('admin-class.status')}}</th>
+                            <th scope="col" class="text-center">{{__('admin-class.action')}}</th>
                         </tr>
                     </thead>
                     <tbody>

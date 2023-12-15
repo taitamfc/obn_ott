@@ -13,6 +13,7 @@ class AdminController extends Controller
     protected $user_id;
     protected $site;
     protected $site_id;
+    protected $site_name;
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,6 +22,7 @@ class AdminController extends Controller
             $this->user_id  = Auth::id();
             $this->site_id  = session()->get('site_id',$this->user->site_id);
             $this->site     = Site::find($this->site_id);
+            $this->site_name     = $this->site->slug;
             return $next($request);
         });
     }  

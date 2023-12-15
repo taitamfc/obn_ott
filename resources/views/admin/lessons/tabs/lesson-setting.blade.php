@@ -17,7 +17,7 @@
             <label for="" class="col-form-label">{{__('admin-lesson.subject')}} <span>*</span></label>
             <div class="form-floating">
                 <select name="subject_id" id="subject_id" class="form-control">
-                    <option value="">Select subject</option>
+                    <option value="">{{__('admin-lesson.select-sub')}}</option>
                     @foreach($subjects as $subject)
                     <option @selected( $item->subject_id == $subject->id )
                         value='{{ $subject->id }}'>{{ $subject->name }} </option>
@@ -30,7 +30,7 @@
             <label for="" class="col-form-label">{{__('admin-lesson.course')}} <span>*</span></label>
             <div class="form-floating">
                 <select name="course_id" id="course_id" class="form-control">
-                    <option value="">Select course</option>
+                    <option value="">{{__('admin-lesson.select-course')}}</option>
                     @foreach($courses as $course)
                     <option @selected( $item->course_id == $course->id ) value='{{ $course->id }}'>{{ $course->name }}
                     </option>

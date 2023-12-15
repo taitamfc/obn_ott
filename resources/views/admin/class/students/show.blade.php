@@ -18,11 +18,11 @@ $informationStudent = $items['informationStudent'];
             <div class="col-md-12 grid-margin">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">My Class</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-class.my-class')}}</h5>
                         <div class="d-flex align-items-baseline dashboard-breadcrumb">
-                            <p class="text-muted mb-0 mr-1 hover-cursor">OTT</p>
+                            <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-class.ott')}}</p>
                             <i class="mdi mdi-chevron-right mr-1 text-primary"></i>
-                            <p class="text-muted mb-0 mr-1 hover-cursor">My Class</p>
+                            <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-class.my-class')}}</p>
                         </div>
                     </div>
                     <div class="buttons d-flex">
@@ -36,25 +36,25 @@ $informationStudent = $items['informationStudent'];
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            Information History
+                        {{__('admin-class.information-history')}}
                         </div>
                         <div class="card-body">
                             <div class="single-table">
                                 <div class="table-responsive">
                                     <table class="table table-hover progress-table text-left ">
                                         <tr>
-                                            <th>Student ID : </th>
+                                            <th>{{__('admin-class.student')}} : </th>
                                             <td>{{ $informationStudent->id }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Name : </th>
+                                            <th>{{__('admin-class.name')}} : </th>
                                             <td>{{ $informationStudent->name }}</td>
                                         <tr>
-                                            <th>Email :</th>
+                                            <th>{{__('admin-class.email')}} :</th>
                                             <td>{{ $informationStudent->email }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Phone : </th>
+                                            <th>{{__('admin-class.phone')}} : </th>
                                             <td>{{ $informationStudent->phone }}</td>
                                         </tr>
                                     </table>
@@ -66,16 +66,16 @@ $informationStudent = $items['informationStudent'];
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            Transaction History
+                        {{__('admin-class.transaction-history')}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover progress-table text-left ">
                                     <thead class="text-uppercase">
                                         <tr>
-                                            <th>Date</th>
-                                            <th>Course</th>
-                                            <th>Amount</th>
+                                            <th>{{__('admin-class.date')}}</th>
+                                            <th>{{__('admin-class.course')}}</th>
+                                            <th>{{__('admin-class.amount')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,7 +99,7 @@ $informationStudent = $items['informationStudent'];
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            Viewing History
+                            {{__('admin-class.viewing-history')}}
                         </div>
                         <div class="card-body">
                             <div class="single-table">
@@ -108,10 +108,10 @@ $informationStudent = $items['informationStudent'];
                                         <thead class="text-uppercase">
                                             <tr>
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Last view</th>
-                                                <th scope="col">Lesson</th>
-                                                <th scope="col">Course</th>
-                                                <th scope="col">Complete</th>
+                                                <th scope="col">{{__('admin-class.last-view')}}</th>
+                                                <th scope="col">{{__('admin-class.lesson')}}</th>
+                                                <th scope="col">{{__('admin-class.course')}}</th>
+                                                <th scope="col">{{__('admin-class.complete')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -21,4 +21,7 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'save' => 'Save',
+    'submit' => 'Submit',
+    'update' => 'Update',
+    'create-new' => 'Create New',
 ];

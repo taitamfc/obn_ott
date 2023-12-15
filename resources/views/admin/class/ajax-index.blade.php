@@ -5,9 +5,9 @@
                 <table class="table table-hover progress-table text-left ">
                     <thead class="text-uppercase">
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col" class='text-center'>Course view count</th>
-                            <th scope="col" class='text-center'>Last view</th>
+                            <th scope="col">{{__('admin-class.name')}}</th>
+                            <th scope="col" class='text-center'>{{__('admin-class.course-view-count')}}</th>
+                            <th scope="col" class='text-center'>{{__('admin-class.last-view')}}</th>
                         </tr>
                     </thead>
                     <tbody>
