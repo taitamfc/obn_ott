@@ -77,4 +77,7 @@ class User extends Authenticatable
     {
         return $this->image_url ? $this->image_url : asset('assets/images/default.png');
     }
+    public function defaultsite(){
+        return $this->belongsTo(Site::class,'site_id','id');
+    }
 }

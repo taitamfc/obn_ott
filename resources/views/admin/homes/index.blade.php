@@ -115,6 +115,7 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.has_errors) {
                     for (const key in res.errors) {
+                        console.log(key);
                         jQuery('.input-' + key).find('.input-error').html(res
                             .errors[key][
                                 0
@@ -125,14 +126,14 @@ jQuery(document).ready(function() {
                 if (res.success) {
                     jQuery('#modalEvent').modal('hide');
                     showAlertSuccess(res.message);
-                    $('#calendar').fullCalendar('renderEvent', {
-                            title: jQuery('#ev-title').val(),
-                            start: jQuery('#ev-start').val(),
-                            end: jQuery('#ev-end').val(),
-                            allDay: true
-                        },
-                        true
-                    );
+                    // $('#calendar').fullCalendar('renderEvent', {
+                    //         title: jQuery('#ev-title').val(),
+                    //         start: jQuery('#ev-start').val(),
+                    //         end: jQuery('#ev-end').val(),
+                    //         allDay: true
+                    //     },
+                    //     true
+                    // );
                     setTimeout(() => {
                         window.location.reload(); // Làm mới trang sau 1 giây
                     }, 1000);

@@ -74,7 +74,6 @@ This is the file you need to edit to change the look of the theme.
 *:focus {
   outline: 0;
 }
-
 html {
   -webkit-font-smoothing: antialiased;
   position: relative;

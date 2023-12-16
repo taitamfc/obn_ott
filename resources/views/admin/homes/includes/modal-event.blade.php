@@ -18,9 +18,10 @@
                     </div>
                     <div class="form-group input-description">
                         <label for="description" class="col-form-label">{{__('home.content')}}</label>
+
                         <textarea class="form-control" type="text" name='content' id="ev-content"></textarea>
+                        <div class="input-error text-danger">@error('content') {{ $message }} @enderror</div>
                     </div>
-                    <div class="input-error text-danger">@error('content') {{ $message }} @enderror</div>
                     <div class="form-group input-course_id">
                         <label for="description" class="col-form-label">{{__('home.class')}}</label>
                         <select class="form-control" name="course_id" id="ev-course_id">
