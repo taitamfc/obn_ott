@@ -11,5 +11,5 @@ return [
     'duration' => 'Duration',
     'select-duration' => 'Select Duration',
     'add-more-courses' => 'Add more Courses',
-    'back-to-list' => 'Bach To List',
+    'back-to-list' => 'Back To List',
 ];
