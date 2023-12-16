@@ -12,14 +12,15 @@
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         id="select-grade-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @if($grade_selected)
-                            {{ $grade_selected }}
+                        {{ $grade_selected }}
                         @else
-                            {{ __('admin-dashboard.select_grade') }}
+                        {{ __('admin-dashboard.select_grade') }}
                         @endif
                     </button>
                     <form action="" method="get">
                         <div class="dropdown-menu" aria-labelledby="select-grade-dropdown" id="dropdownMenu">
-                            <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('admin-dashboard.select_grade') }}</a>
+                            <a class="dropdown-item"
+                                href="{{ route('admin.home') }}">{{ __('admin-dashboard.select_grade') }}</a>
                             @foreach($grades as $grade)
                             <a class="dropdown-item"
                                 href="{{ route('admin.home') }}?grade={{$grade->id}}">{{ $grade->name }}</a>

@@ -42,6 +42,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <style>
+    .primary_card_bg {
+        background: linear-gradient(to right, #0eadfb, #007bff);
+    }
+    </style>
     @yield('header')
 </head>
 

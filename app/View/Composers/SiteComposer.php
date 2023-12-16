@@ -52,7 +52,7 @@ class SiteComposer
             $view->with('site_name', $site->slug);
             $view->with('site_setting', $setting);
 
-            $site_pages = Page::where('site_id',$site->id)->get();
+            $site_pages = Page::where('site_id',$site->id)->where('status',1)->get();
             $site_courses = Course::where('site_id',$site->id)->get();
             $site_subscriptions = Subscription::where('site_id',$site->id)->get();
             
