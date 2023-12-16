@@ -30,6 +30,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use DB;
 use App\Traits\UploadFileTrait;
+use App\Jobs\SendEmail;
 
 class UserController extends AdminController
 {
@@ -89,6 +90,12 @@ class UserController extends AdminController
                     $user_site->user_id = $item->id;
                     $user_site->site_id = $this->site_id;
                     $user_site->save();
+                    $data = [
+                        'name' => $item->name,
+                        'email' => $item->email,
+                        'password' => $request->password
+                    ];
+                    SendEmail::dispatch($item,$data,'store_member');
                 }
             DB::commit();
             return response()->json([
