@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Duration;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\DurationResource;
@@ -103,14 +104,23 @@ class DurationController extends AdminController
     public function destroy(string $id)
     {
         try {
-            $item =  Duration::where('site_id',$this->site_id)->find($id);
-            // Delete old file
-            $item->delete();
-
-            return response()->json([
-                'success'=>true,
-                'message'=> __('sys.destroy_item_success'),
-            ],200);
+            $sub = Subscription::where('duration_id',$id)->get();
+            if ($sub) {
+                return response()->json([
+                    'success'=>false,
+                    'message'=> __('sys.change_item_before_delete'),
+                    'data'=> $sub,
+                ],200);
+            }else{
+                $item =  Duration::where('site_id',$this->site_id)->find($id);
+                // Delete old file
+                $item->delete();
+                
+                return response()->json([
+                    'success'=>true,
+                    'message'=> __('sys.destroy_item_success'),
+                ],200);
+            }
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([

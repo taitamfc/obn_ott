@@ -24,4 +24,5 @@ return [
     'submit' => 'Submit',
     'update' => 'Update',
     'create-new' => 'Create New',
+    'change_item_before_delete' => 'Duration in used !'
 ];
