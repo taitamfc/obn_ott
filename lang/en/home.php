@@ -6,4 +6,8 @@ return [
     'lessons' => 'Lessons',
     'courses' => 'Courses',
     'subjects' => 'Subjects',
+    'add-event' => 'Add event',
+    'Title' => 'Title',
+    'content' => 'Content',
+    'class' => 'Class',
 ];

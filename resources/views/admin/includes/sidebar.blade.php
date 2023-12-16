@@ -123,7 +123,7 @@
 
             <li> <a href="{{ route('admin.orders.index') }}">
                     <i class="feather ft-home"></i>
-                    <span>Order</span>
+                    <span>{{__('admin-sidebar.order')}}</span>
                 </a>
             </li>
             @endif
@@ -154,7 +154,7 @@
                     </li>
                     <li> <a href="{{ route('admin.themes.footer-sections') }}">
                             <i class="feather ft-home"></i>
-                            <span>Footer Sessions</span>
+                            <span>{{__('admin-sidebar.footer-sessions')}}</span>
                         </a>
                     </li>
                     <li> <a href="{{route('admin.banners.index')}}">

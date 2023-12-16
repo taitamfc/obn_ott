@@ -38,8 +38,7 @@
                                 </ul>
                             </div>
                             <div class="choose_plan_btn">
-                                <a href='javascript:;' class='btn btn-light'>Current
-                                    Plan</a>
+                                <a href='javascript:;' class='btn btn-light'>Current Plan</a>
                             </div>
                         </div>
                     </div>

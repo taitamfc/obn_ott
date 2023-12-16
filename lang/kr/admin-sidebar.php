@@ -31,4 +31,8 @@ return [
     'pages' => '페이지',
     'popup' => '팝업',
     'sites' => '사이트',
+    'order' => '주문',
+    'footer-sessions' => '푸터 세션',
+    'history' => '역사',
+    'banner' => '배너',
 ];

@@ -4,11 +4,11 @@
     <div class="col-md-12 grid-margin">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                <h5 class="mr-4 mb-0 font-weight-bold">My Admin</h5>
+                <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-account.my-admin')}}</h5>
                 <div class="d-flex align-items-baseline dashboard-breadcrumb">
-                    <p class="text-muted mb-0 mr-1 hover-cursor">OTT</p>
+                    <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-themes.ott')}}</p>
                     <i class="mdi mdi-chevron-right mr-1 text-primary"></i>
-                    <p class="text-muted mb-0 mr-1 hover-cursor">My Admin</p>
+                    <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-account.my-admin')}}</p>
                 </div>
             </div>
             <div class="buttons">
@@ -29,10 +29,10 @@
                         <thead class="text-uppercase">
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Account Type</th>
-                                <th scope="col" class="text-center">Action</th>
+                                <th scope="col">{{__('admin-account.name')}}</th>
+                                <th scope="col">{{__('admin-account.email')}}</th>
+                                <th scope="col">{{__('admin-account.account-type')}}</th>
+                                <th scope="col" class="text-center">{{__('admin-account.action')}}</th>
                             </tr>
                         </thead>
                         <tbody class="sortable-table ">
@@ -78,11 +78,11 @@
     <div class="col-md-12 grid-margin">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                <h5 class="mr-4 mb-0 font-weight-bold">My Role</h5>
+                <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-account.my-role')}}</h5>
                 <div class="d-flex align-items-baseline dashboard-breadcrumb">
-                    <p class="text-muted mb-0 mr-1 hover-cursor">OTT</p>
+                    <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-themes.ott')}}</p>
                     <i class="mdi mdi-chevron-right mr-1 text-primary"></i>
-                    <p class="text-muted mb-0 mr-1 hover-cursor">My Role</p>
+                    <p class="text-muted mb-0 mr-1 hover-cursor">{{__('admin-account.my-role')}}</p>
                 </div>
             </div>
             <div class="buttons">
@@ -101,8 +101,8 @@
                     <table class="table table-hover progress-table text-left ">
                         <thead class="text-uppercase">
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col" class="text-center">Action</th>
+                                <th scope="col">{{__('admin-account.name')}}</th>
+                                <th scope="col" class="text-center">{{__('admin-account.action')}}</th>
                             </tr>
                         </thead>
                         <tbody class="sortable-table ">

@@ -1,7 +1,7 @@
 <?php
 return [
     'my-products' => 'My Products',
-    'name' => 'name',
+    'name' => 'Name',
     'course' => 'Course',
     'price' => 'Price',
     'action' => 'Action',

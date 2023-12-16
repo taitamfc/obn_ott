@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.product-management') }}
+@endsection
 @section('content')
 <div class="main-content">
     <div class="main-content-inner">

@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <h6>Auth Page Background Image</h6>
+                            <h6>{{__('admin-themes.auth-page-background-image')}}</h6>
                         </div>
                         <div class="card-body">
                             <input type="file" class="form-control" name="auth_page_background_image"
@@ -21,7 +21,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h6>Body Background Color</h6>
+                                    <h6>{{__('admin-themes.body-background-color')}}</h6>
                                     <input type="color" class="form-control" name="auth_page_body_background_color"
                                         value="{{ $settings['auth_page_body_background_color'] }}">
                                 </div>
@@ -30,7 +30,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h6>Footer Background Color</h6>
+                                    <h6>{{__('admin-themes.footer-background-color')}}</h6>
                                     <input type="color" class="form-control" name="auth_page_footer_background_color"
                                         value="{{ $settings['auth_page_footer_background_color'] }}">
                                 </div>
@@ -41,7 +41,7 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                            <h6>Plan Page Background Image</h6>
+                            <h6>{{__('admin-themes.plan-page-background-image')}}</h6>
                         </div>
                         <div class="card-body">
                             <input type="file" class="form-control" name="plan_page_background_image"
@@ -55,7 +55,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h6>Body Background Color</h6>
+                                    <h6>{{__('admin-themes.body-background-color')}}</h6>
                                     <input type="color" class="form-control" name="plan_page_header_background_color"
                                         value="{{ $settings['plan_page_header_background_color'] }}">
                                 </div>
@@ -64,7 +64,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">
-                                    <h6>Footer Background Color</h6>
+                                    <h6>{{__('admin-themes.footer-background-color')}}</h6>
                                     <input type="color" class="form-control"
                                         name="plan_page_event_section_background_color"
                                         value="{{ $settings['plan_page_event_section_background_color'] }}">
@@ -77,7 +77,7 @@
             </div>
             <div class="row mt-4 ">
                 <div class="col-sm-12">
-                    <button id="saveButton" class="btn btn-primary float-right">Save</button>
+                    <button id="saveButton" class="btn btn-primary float-right">{{__('admin-themes.save')}}</button>
                 </div>
             </div>
         </div>

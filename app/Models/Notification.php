@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory;
+
     protected $fillable = ['student_id', 'site_id', 'type', 'action', 'is_read', 'item_id'];
     // RelationShip
     function student(){

@@ -1,0 +1,22 @@
+<?php
+return [
+    'logo' => '로고',
+    'update' => '업데이트',
+    'pages' => '페이지',
+    'action' => '동작',
+    'title' => '제목',
+    'status' => '상태',
+    'page-detail' => '페이지 세부 정보',
+    'slug' => '슬러그',
+    'popup' => '팝업',
+    'sites' => '사이트',
+    'name' => '이름',
+    'description' => '설명',
+    'update-page' => '페이지 업데이트',
+    'create-page' => '페이지 생성',    
+    'update-logo' => '로고 업데이트',
+    'save' => '저장',
+    'update-popup' => '팝업 업데이트',
+    'create-new' => '새로 만들기',
+    'notice' => '공지',
+];

@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.class') }}
+@endsection
 @section('header')
 <style>
 select.form-control:not([size]):not([multiple]) {
