@@ -38,9 +38,8 @@
                     </div>
                     <div class="blog_card_description col-8">
                         <div class="blog_data">
-                            <h3>There are many variations of passages of Lorem</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standardbook.</p>
+                            <p>Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience.
+                                if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
                         </div>
                     </div>
                 </div>
@@ -50,9 +49,8 @@
                     </div>
                     <div class="blog_card_description col-8">
                         <div class="blog_data">
-                            <h3>There are many variations of passages of Lorem</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standardbook.</p>
+                            <p>Note: You can add, delete, or change the name Subject at any time to accommodate changes in your content or audience.
+                                if you want to add/delete or edit please click here (jump to Subject section) or click subject on left top side of the menu.</p>
                         </div>
                     </div>
                 </div>
@@ -62,9 +60,8 @@
                     </div>
                     <div class="blog_card_description col-8">
                         <div class="blog_data">
-                            <h3>There are many variations of passages of Lorem</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standardbook.</p>
+                            <p>Note: You can add, delete, or change the name Subject at any time to accommodate changes in your content or audience.
+                                if you want to add/delete or edit please click here (jump to Subject section) or click subject on left top side of the menu.</p>
                         </div>
                     </div>
                 </div>
@@ -74,9 +71,8 @@
                     </div>
                     <div class="blog_card_description col-8">
                         <div class="blog_data">
-                            <h3>There are many variations of passages of Lorem</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standardbook.</p>
+                            <p>Note: You can add, delete, or change the name Subject at any time to accommodate changes in your content or audience.
+                                if you want to add/delete or edit please click here (jump to Subject section) or click subject on left top side of the menu.</p>
                         </div>
                     </div>
                 </div>
