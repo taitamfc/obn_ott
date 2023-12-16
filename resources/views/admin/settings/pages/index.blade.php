@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.pages') }}
+@endsection
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
@@ -6,7 +9,7 @@
             <div class="col-md-12 mb-4">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">Pages</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-setting.pages')}}</h5>
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>

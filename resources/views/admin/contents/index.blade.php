@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.setting') }}
+@endsection
 @section('header')
 <style>
 .blog_card_date {

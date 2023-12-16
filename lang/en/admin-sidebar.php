@@ -31,4 +31,8 @@ return [
     'pages' => 'Pages',
     'popup' => 'Popup',
     'sites' => 'Sites',
+    'order' => 'Order',
+    'history' => 'History',
+    'banner' => 'Banner',
+    'footer-sessions' => 'Footer Sessions',
 ];

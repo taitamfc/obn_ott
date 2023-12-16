@@ -4,9 +4,9 @@
             <thead class="text-uppercase">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" class="text-center">Action</th>
+                    <th scope="col">{{__('admin-setting.title')}}</th>
+                    <th scope="col">{{__('admin-setting.status')}}</th>
+                    <th scope="col" class="text-center">{{__('admin-setting.action')}}</th>
                 </tr>
             </thead>
             <tbody>

@@ -21,7 +21,7 @@
                                 <div class="pull-right cover-btn">
                                     <a class="btn btn-light show-form-edit-avatar"
                                         data-action="{{ route('admin.users.avatar') }}">
-                                        <i class="icofont icofont-ui-messaging"></i> Avatar</a>
+                                        <i class="icofont icofont-ui-messaging"></i> {{__('admin-account.avatar')}}</a>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
     <!-- Account Information -->
     <div class="card-header d-flex justify">
         <div class="col-sm-6">
-            <h4>Current Account Information</h4>
+            <h4>{{__('admin-account.current-account-information')}}</h4>
         </div>
         <div class="col-sm-6 text-right" style="float:right">
             <a href="javascript:;" data-id="{{ $item->id }}" data-action="{{ route('admin.users.update',$item->id) }}"
@@ -51,13 +51,13 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th class="col-sm-4">
-                                Name
+                            {{__('admin-account.name')}}
                             </th>
                             <th class="col-sm-4">
-                                Email Address
+                            {{__('admin-account.email-address')}}
                             </th>
                             <th class="col-sm-4">
-                                Phone Number
+                            {{__('admin-account.phone-number')}}
                             </th>
                         </tr>
                     </thead>
@@ -75,7 +75,7 @@
     <!-- Current Plan -->
     <div class="card-header d-flex justify">
         <div class="col-sm-6">
-            <h4>Current Plan</h4>
+            <h4> {{__('admin-account.current-plan')}}</h4>
         </div>
         <div class="col-sm-6 text-right">
             <a href="{{ route('admin.users.plans') }}"><i class="fa fa-edit"></i></a>
@@ -89,16 +89,16 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th class='col-sm-3'>
-                                Name
+                            {{__('admin-account.name')}}
                             </th>
                             <th class='col-sm-3'>
-                                Price
+                            {{__('admin-account.price')}}
                             </th>
                             <th class='col-sm-3'>
-                                Start date
+                            {{__('admin-account.start-date')}}
                             </th>
                             <th class='col-sm-3'>
-                                Expiration date
+                            {{__('admin-account.expiration-date')}}
                             </th>
                         </tr>
                     </thead>
@@ -118,7 +118,7 @@
     <!-- Billing Information -->
     <div class="card-header d-flex justify">
         <div class="col-sm-6">
-            <h4>Current Account Information</h4>
+            <h4>{{__('admin-account.current-account-information')}}</h4>
         </div>
         <div class="col-sm-6 text-right" style="float:right">
             <a href="{{ route('admin.userbank.index') }}"><i class="fa fa-edit"></i></a>
@@ -132,16 +132,16 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th class='col-sm-3'>
-                                Name
+                            {{__('admin-account.name')}}
                             </th>
                             <th class='col-sm-3'>
-                                Bank
+                            {{__('admin-account.bank')}}
                             </th>
                             <th class='col-sm-3'>
-                                Bank Number
+                            {{__('admin-account.bank-number')}}
                             </th>
                             <th class='col-sm-3'>
-                                Address
+                            {{__('admin-account.address')}}
                             </th>
                         </tr>
                     </thead>

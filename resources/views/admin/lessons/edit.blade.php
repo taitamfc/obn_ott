@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
-
+@section('title')
+{{ __('admin-sidebar.lesson-list') }}
+@endsection
 @section('header')
 <link rel="stylesheet" href="{{ asset('assets/vendors/dropzone/css/dropzone.css') }}">
 

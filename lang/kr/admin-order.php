@@ -8,5 +8,6 @@ return [
     'date' => '날짜',
     'status' => '상태',
     'student' => '학생',
+    'video' =>'비디오',
 ];
 

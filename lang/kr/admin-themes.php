@@ -1,0 +1,23 @@
+<?php
+return [
+    'homepage-banner' => '홈페이지 배너',
+    'homepages-sections' => '홈페이지 섹션',
+    'footer-sections' => '푸터 섹션',
+    'about-us' => '우리에 관하여',
+    'copyright' => '저작권',
+    'update-footer' => '푸터 업데이트',
+    'setting' => '설정',
+    'title' => '제목',
+    'description' => '설명',
+    'link' => '링크',
+    'status' => '상태',
+    'save' => '저장',
+    'my-plan' => '나의 계획',
+    'ott' => '수달',
+    'banner' => '배너',
+    'media-file' => '미디어 파일',
+    'footer-background-color' => '푸터 배경색',
+    'body-background-color' => '바디 배경색',
+    'plan-page-background-image' => '계획 페이지 배경 이미지',
+    'auth-page-background-image' => '인증 페이지 배경 이미지',
+];

@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
-
+@section('title')
+{{ __('admin-sidebar.popup') }}
+@endsection
 @section('header')
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 @endsection
@@ -11,7 +13,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">Popup</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-setting.popup')}}</h5>
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>

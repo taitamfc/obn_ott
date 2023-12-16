@@ -1,7 +1,7 @@
 <div class="card mt-4">
     <div class="card-header d-flex justify">
         <div class="col-sm-6">
-            <h4>CREDIT CARD INFO</h4>
+            <h4>{{__('admin-account.credit-card-info')}}</h4>
         </div>
     </div>
     <div class="card-body">
@@ -10,11 +10,11 @@
                 <thead class="text-uppercase">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Bank Name</th>
-                        <th scope="col">Bank Number</th>
-                        <th scope="col">Bank Owner</th>
-                        <th scope="col">STREET ADDRESS</th>
-                        <th scope="col" class="text-center">Action</th>
+                        <th scope="col">{{__('admin-account.bank-name')}}</th>
+                        <th scope="col">{{__('admin-account.bank-number')}}</th>
+                        <th scope="col">{{__('admin-account.bank-owner')}}</th>
+                        <th scope="col">{{__('admin-account.street-address')}}</th>
+                        <th scope="col" class="text-center">{{__('admin-account.action')}}</th>
                     </tr>
                 </thead>
                 <tbody class="sortable-table ">

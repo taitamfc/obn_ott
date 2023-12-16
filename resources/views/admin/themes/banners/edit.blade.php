@@ -6,31 +6,31 @@
             <input type="hidden" name="id" id="input-id">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update</h5>
+                    <h5 class="modal-title">{{__('admin-setting.update')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Title</label>
+                        <label for="name" class="col-form-label">{{__('admin-themes.title')}}</label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group textarea-description">
-                        <label for="description" class="col-label">Description</label>
+                        <label for="description" class="col-label">{{__('admin-themes.description')}}</label>
                         <textarea class="form-control" name="description" id="description" cols="30"
                             rows="5"></textarea>
                         <div class="input-error text-danger">@error('description') {{ $message }} @enderror</div>
                     </div>
                     <div class="form-group input-link">
-                        <label for="link" class="col-form-label">Link</label>
+                        <label for="link" class="col-form-label">{{__('admin-themes.link')}}</label>
                         <input class="form-control" type="text" id="link" name='link'>
                         <div class="input-error text-danger">@error('link') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group input-status">
-                        <label for="status" class="col-form-label">Status</label>
+                        <label for="status" class="col-form-label">{{__('admin-themes.status')}}</label>
                         <div style="display: flex">
                             <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
                                 <input type="radio" checked id="e-active" name="status"
@@ -46,8 +46,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary edit-item" type='button'>Save changes</button>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary edit-item" type='button'>{{__('sys.save-changes')}}</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{__('sys.close')}}</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.subscription-management') }}
+@endsection
 @section('header')
 <link rel="stylesheet" href="{{ asset('assets/css/select2.css')}}">
 @endsection
