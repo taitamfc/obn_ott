@@ -56,9 +56,6 @@ function handleDelete(url,targetElm, parentElm = '.item'){
                 showAlertError(res.message);
                 // getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
                 // targetElm.closest(parentElm).remove(); // Xóa phần tử khỏi DOM
-                res.data.forEach(ele => {
-                    showAlertError( ele.id + ' : ' + ele.name);
-                });
             }
         }
     });

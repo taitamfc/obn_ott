@@ -18,7 +18,7 @@ class DurationController extends AdminController
      */
     public function index(Request $request)
     {
-        $items = Duration::where('site_id',$this->site_id)->paginate(5);
+        $items = Duration::where('site_id',$this->site_id)->withCount('subscriptions')->paginate(5);
         if ($request->ajax()) {
             return view('admin.duration.ajax-index',compact('items'));
         }
