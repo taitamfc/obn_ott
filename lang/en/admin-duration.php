@@ -4,4 +4,5 @@ return [
     'name' => 'Name',
     'number-day' => 'Number Day',
     'action' => 'Action',
+    'subscription-count' => 'Subscription Used'
 ];
