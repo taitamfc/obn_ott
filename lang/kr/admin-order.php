@@ -9,5 +9,6 @@ return [
     'status' => '상태',
     'student' => '학생',
     'video' =>'비디오',
+    'success' =>'성공',
+    'fail' =>'실패하다',
 ];
-

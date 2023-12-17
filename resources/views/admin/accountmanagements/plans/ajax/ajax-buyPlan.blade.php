@@ -23,7 +23,7 @@
                                     <div class="form-group input-duration">
                                         <label for="name" class="col-form-label">Duration</label>
                                         <input class="form-control" type="text" name="duration"
-                                            value="{{ $item->duration->name }}" id="duration" disabled>
+                                            value="{{ $item->duration }}" id="duration" disabled>
                                     </div>
                                     <div class="form-group input-date">
                                         <label for="name" class="col-form-label">Expiration Date</label>
@@ -55,10 +55,9 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span
-                                        class="currency">$</span>{{ round($item->price/$item->duration->number_days) }}
+                                    <span class="currency">${{ $item->price }}</span>
                                 </span>
-                                <span class="per_month">/Month</span>
+                                <span class="per_month">/{{ $item->duration }}</span>
                             </div>
                             <div class="price_listing">
                                 <ul>

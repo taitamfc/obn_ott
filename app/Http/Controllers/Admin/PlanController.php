@@ -28,7 +28,7 @@ class PlanController extends AdminController
         if ($request->ajax()) {
             $item = Plan::findOrfail($id);
             $current_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',1)->value('expiration_date');
-            $date = Carbon::now()->addDays(intval($item->duration->number_days));
+            $date = Carbon::now()->addDays(intval($item->number_days));
             $param = [
                 'item' => $item,
                 'current_plan' => $current_plan,
@@ -51,9 +51,6 @@ class PlanController extends AdminController
             $order->user_id = Auth::id();
             $order->price = $price;
             $order->payment_method = $pay;
-            // return response([
-            //     'data' => $order,
-            // ]);
             $order->save();
             DB::commit();
             if ($order->payment_method == 'paypal') {

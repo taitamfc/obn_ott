@@ -91,7 +91,7 @@ class PaymentController extends AdminController
                 $order->save();
 
                 // Plan
-                $plan = Plan::with('duration')->findOrfail($order->plan_id);
+                $plan = Plan::findOrfail($order->plan_id);
 
                 // Relationship Plan and Site
                 $plan_site = new PlanSite();
@@ -103,12 +103,12 @@ class PaymentController extends AdminController
                     $current_plan_date = Carbon::parse($current_plan_date);
                     $plan_site->is_current = 0;
                     $plan_site->created_at = $current_plan_date;
-                    $plan_site->expiration_date = $current_plan_date->addDays($plan->duration->number_days);
+                    $plan_site->expiration_date = $current_plan_date->addDays($plan->number_days);
                 // if user don't have plan
                 }else {
                     $plan_site->is_current = 1;
                     $plan_site->created_at = $currentDateTime;
-                    $plan_site->expiration_date = $currentDateTime->addDays($plan->duration->number_days);
+                    $plan_site->expiration_date = $currentDateTime->addDays($plan->number_days);
                 }
                 $plan_site->save();
 

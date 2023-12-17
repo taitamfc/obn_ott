@@ -19,14 +19,9 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span class="currency">$</span>
-                                    @if($item->duration && $item->duration->numer_days > 0)
-                                    {{ round($item->price / ceil($item->duration->numer_days / 30)) }}
-                                    @else
-                                    1
-                                    @endif
+                                    <span class="currency">${{ $item->price}}</span>
                                 </span>
-                                <span class="per_month">/Month</span>
+                                <span class="per_month">/{{ $item->duration }}</span>
                             </div>
                             <div class="price_listing">
                                 <ul>
@@ -53,14 +48,9 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span class="currency">$</span>
-                                    @if($item->duration->numer_days > 0)
-                                    {{ round($item->price / ceil($item->duration->numer_days / 30)) }}
-                                    @else
-                                    1
-                                    @endif
+                                    <span class="currency">${{ $item->price}}</span>
                                 </span>
-                                <span class="per_month">/Month</span>
+                                <span class="per_month">/{{ $item->duration }}</span>
                             </div>
                             <div class="price_listing">
                                 <ul>
@@ -89,14 +79,9 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span class="currency">$</span>
-                                    @if($item->duration->numer_days > 0)
-                                    {{ round($item->price / ceil($item->duration->numer_days / 30)) }}
-                                    @else
-                                    1
-                                    @endif
+                                    <span class="currency">${{ $item->price }}</span>
                                 </span>
-                                <span class="per_month">/Month</span>
+                                <span class="per_month">/{{ $item->duration }}</span>
                             </div>
                             <div class="price_listing">
                                 <ul>

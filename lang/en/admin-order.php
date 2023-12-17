@@ -9,4 +9,6 @@ return [
     'status' => 'Status',
     'student' =>'Student',
     'video' =>'Video AD',
+    'success' =>'Success',
+    'fail' =>'Fail',
 ];
