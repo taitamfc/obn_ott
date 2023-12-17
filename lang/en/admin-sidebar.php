@@ -13,6 +13,7 @@ return [
     'product-management' => 'Product Management',
     'subscription-management' => 'Subscription Management',
     'duration' => 'Duration',
+    'order' => 'Order',
     'class' => 'Class',
     'video-advertisement' => 'Video Advertisement',
     'themes' => 'Themes',

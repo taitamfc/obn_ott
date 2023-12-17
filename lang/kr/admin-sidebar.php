@@ -13,6 +13,7 @@ return [
     'product-management' => '제품 관리',
     'subscription-management' => '구독 관리',
     'duration' => '기간',
+    'order' => '주문하다',
     'class' => '수업',
     'video-advertisement' => '비디오 광고',
     'themes' => '테마',
