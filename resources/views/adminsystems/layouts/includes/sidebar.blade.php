@@ -33,7 +33,7 @@
                                 <span>users</span>
                             </a>
                         </li>
-                        <li> <a href="{{ route('adminsystem.plans.index') }}">
+                        <li> <a href="{{ route('plans.index') }}">
                                 <i class="feather ft-home"></i>
                                 <span>plans</span>
                             </a>

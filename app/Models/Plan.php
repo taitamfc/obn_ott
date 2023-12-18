@@ -9,6 +9,14 @@ use Carbon\Carbon;
 class Plan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'price',
+        'duration',
+        'number_days'
+    ];
+
     protected $table = 'plans';
     function site(){
         return $this->belongsToMany(Site::class,'plan_site');
