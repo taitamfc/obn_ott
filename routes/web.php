@@ -24,6 +24,7 @@ Route::prefix('adminsystem')->group(function () {
     Route::get('sites',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
     Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
     Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
+    Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
 });
 
 
