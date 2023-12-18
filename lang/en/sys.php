@@ -23,6 +23,7 @@ return [
     'save' => 'Save',
     'submit' => 'Submit',
     'update' => 'Update',
+    'complete' => 'Complete',
     'create-new' => 'Create New',
     'change_item_before_delete' => 'Duration in used !'
 ];

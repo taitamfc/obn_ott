@@ -36,52 +36,50 @@
         <div class="row">
             <div class="card_with_image m-5">
                 <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4 mt-3 ml-3">
-                        <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
+                    <div class="card text-white bg-card-primary">
+                        <div class="card-body">
+                            <h4 class="">Grade</h4>
+                            <hr>
+                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <a href="{{ route('admin.grades.index') }}" class="btn btn-light">
+                                Learn More
+                            </a>
+                        </div>
                     </div>
-                    <div class="blog_card_description col-8">
-                        <div class="blog_data">
-                            <p>Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience.
-                                if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                    <div class="card text-white bg-card-secondary mt-3">
+                        <div class="card-body">
+                            <h4 class="">Subject</h4>
+                            <hr>
+                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <a href="{{ route('admin.subjects.index') }}" class="btn btn-light">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-card-primary mt-3">
+                        <div class="card-body">
+                            <h4 class="">Course</h4>
+                            <hr>
+                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <a href="{{ route('admin.courses.index') }}" class="btn btn-light">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card text-white bg-card-secondary mt-3">
+                        <div class="card-body">
+                            <h4 class="">Lesson</h4>
+                            <hr>
+                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <a href="{{ route('admin.lessons.index') }}" class="btn btn-light">
+                                Learn More
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4 mt-3 ml-3">
-                        <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
-                    </div>
-                    <div class="blog_card_description col-8">
-                        <div class="blog_data">
-                            <p>Note: You can add, delete, or change the name Subject at any time to accommodate changes in your content or audience.
-                                if you want to add/delete or edit please click here (jump to Subject section) or click subject on left top side of the menu.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4 mt-3 ml-3">
-                        <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
-                    </div>
-                    <div class="blog_card_description col-8">
-                        <div class="blog_data">
-                            <p>Note: You can add, delete, or change the name Subject at any time to accommodate changes in your content or audience.
-                                if you want to add/delete or edit please click here (jump to Subject section) or click subject on left top side of the menu.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="rt_post_data col-12">
-                    <div class="blog_card_date col-4 mt-3 ml-3">
-                        <img src="{{ asset('assets/images/grades.PNG') }}" alt="grades">
-                    </div>
-                    <div class="blog_card_description col-8">
-                        <div class="blog_data">
-                            <p>Note: You can add, delete, or change the name Subject at any time to accommodate changes in your content or audience.
-                                if you want to add/delete or edit please click here (jump to Subject section) or click subject on left top side of the menu.</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
-
 @endsection
