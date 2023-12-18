@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card_title">Plan</h4>
+        <h4 class="card_title">{{__('admin-account.plan')}}</h4>
         <div id="mt_pricing">
             <div class="container">
                 <div class="row">
@@ -8,7 +8,7 @@
                     @if(!empty($current_plan) && $item->id == $current_plan->plan_id)
                     <div class="col-lg-4">
                         <div class='form-control text-center' style='color:black'>
-                            Expiration : {{ $current_plan->expiration_date }}
+                        {{__('admin-account.expiration')}} : {{ $current_plan->expiration_date }}
                         </div>
                         <div class="main_pricing_conatiner highlight_pricing wow fadeInUpBig" data-wow-delay="0.6s">
                             <div class="price">
@@ -25,15 +25,15 @@
                             </div>
                             <div class="price_listing">
                                 <ul>
-                                    <li>Latin words, consectetur.</li>
-                                    <li>All the Lorem Ipsum.</li>
-                                    <li>It has survived not only</li>
-                                    <li>Labore et dolore magna ali.</li>
-                                    <li>Nor again is there anyone.</li>
+                                    <li>{{__('admin-account.latin-words-consectetur')}}</li>
+                                    <li>{{__('admin-account.all-the-lorem-ipsum')}}</li>
+                                    <li>{{__('admin-account.it-has-survived-not-only')}}</li>
+                                    <li>{{__('admin-account.labore-et-dolore-magna-ali')}}</li>
+                                    <li>{{__('admin-account.nor-again-is-there-anyone')}}</li>
                                 </ul>
                             </div>
                             <div class="choose_plan_btn">
-                                <a href='javascript:;' class='btn btn-light'>Current Plan</a>
+                                <a href='javascript:;' class='btn btn-light'>{{__('admin-account.current-plan')}}</a>
                             </div>
                         </div>
                     </div>
@@ -54,16 +54,15 @@
                             </div>
                             <div class="price_listing">
                                 <ul>
-                                    <li>Latin words, consectetur.</li>
-                                    <li>All the Lorem Ipsum.</li>
-                                    <li>It has survived not only</li>
-                                    <li>Labore et dolore magna ali.</li>
-                                    <li>Nor again is there anyone.</li>
+                                    <li>{{__('admin-account.latin-words-consectetur')}}</li>
+                                    <li>{{__('admin-account.all-the-lorem-ipsum')}}</li>
+                                    <li>{{__('admin-account.it-has-survived-not-only')}}</li>
+                                    <li>{{__('admin-account.labore-et-dolore-magna-ali')}}</li>
+                                    <li>{{__('admin-account.nor-again-is-there-anyone')}}</li>
                                 </ul>
                             </div>
                             <div class="choose_plan_btn">
-                                <a href="javascript:;" class='btn btn-secondary'>Will be start
-                                    on {{ $item->getKeyByValue($next_plan_data,$item->id)->format('Y-m-d') }}
+                                <a href="javascript:;" class='btn btn-secondary'>{{__('admin-account.new-plan-will-start-on')}} {{ $item->getKeyByValue($next_plan_data,$item->id)->format('Y-m-d') }}
                                 </a>
                             </div>
                         </div>
@@ -85,16 +84,15 @@
                             </div>
                             <div class="price_listing">
                                 <ul>
-                                    <li>Latin words, consectetur.</li>
-                                    <li>All the Lorem Ipsum.</li>
-                                    <li>It has survived not only</li>
-                                    <li>Labore et dolore magna ali.</li>
-                                    <li>Nor again is there anyone.</li>
+                                    <li>{{__('admin-account.latin-words-consectetur')}}</li>
+                                    <li>{{__('admin-account.all-the-lorem-ipsum')}}</li>
+                                    <li>{{__('admin-account.it-has-survived-not-only')}}</li>
+                                    <li>{{__('admin-account.labore-et-dolore-magna-ali')}}</li>
+                                    <li>{{__('admin-account.nor-again-is-there-anyone')}}</li>
                                 </ul>
                             </div>
                             <div class="choose_plan_btn">
-                                <a href="{{ route('admin.users.addPlans',$item->id) }}" class='btn btn-primary'>CHOOSE
-                                    PLAN</a>
+                                <a href="{{ route('admin.users.addPlans',$item->id) }}" class='btn btn-primary'>{{__('admin-account.choose-plan')}}</a>
                             </div>
                         </div>
                     </div>
