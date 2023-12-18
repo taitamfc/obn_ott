@@ -1,4 +1,7 @@
 @extends('website.layouts.master')
+@section('title')
+{{__('success.fail')}}
+@endsection
 @section('content')
 @include('website.includes.header.breadcrumb',[
 'page_title' => 'Failed'
@@ -11,17 +14,17 @@
                 <div class="col-xl-8 col-lg-10 col-sm-12 col-12 m-auto">
                     <div class="errorarea__inner aos-init aos-animate" data-aos="fade-up">
                         <div class="error__text">
-                            <h3>Order failed</h3>
-                            <p>Please try again</p>
+                            <h3>{{__('success.order-failed')}}</h3>
+                            <p>{{__('success.please-try-again')}}</p>
                         </div>
                         <div class="order-checkout-info">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Item ID</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Payment Method</th>
+                                        <th scope="col">{{__('success.item')}}</th>
+                                        <th scope="col">{{__('success.price')}}</th>
+                                        <th scope="col">{{__('success.payment-method')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +38,7 @@
                             </table>
                         </div>
                         <div class="error__button">
-                            <a class="default__button" href="{{ route('cms', ['site_name' => $site_name]) }}">Back To Home
+                            <a class="default__button" href="{{ route('cms', ['site_name' => $site_name]) }}">{{__('success.back-to-home')}}
                                 <i class="icofont-simple-right"></i>
                             </a>
                         </div>

@@ -38,41 +38,41 @@
                 <div class="rt_post_data col-12">
                     <div class="card text-white bg-card-primary">
                         <div class="card-body">
-                            <h4 class="">Grade</h4>
+                            <h4 class="">{{__('admin-content.grade')}}</h4>
                             <hr>
-                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <p class="card-text">{{__('admin-content.text')}}</p>
                             <a href="{{ route('admin.grades.index') }}" class="btn btn-light">
-                                Learn More
+                                {{__('admin-content.learn-more')}}
                             </a>
                         </div>
                     </div>
                     <div class="card text-white bg-card-secondary mt-3">
                         <div class="card-body">
-                            <h4 class="">Subject</h4>
+                            <h4 class="">{{__('admin-content.subject')}}</h4>
                             <hr>
-                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <p class="card-text">{{__('admin-content.text')}}</p>
                             <a href="{{ route('admin.subjects.index') }}" class="btn btn-light">
-                                Learn More
+                                {{__('admin-content.learn-more')}}
                             </a>
                         </div>
                     </div>
                     <div class="card text-white bg-card-primary mt-3">
                         <div class="card-body">
-                            <h4 class="">Course</h4>
+                            <h4 class="">{{__('admin-content.course')}}</h4>
                             <hr>
-                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <p class="card-text">{{__('admin-content.text')}}</p>
                             <a href="{{ route('admin.courses.index') }}" class="btn btn-light">
-                                Learn More
+                                {{__('admin-content.learn-more')}}
                             </a>
                         </div>
                     </div>
                     <div class="card text-white bg-card-secondary mt-3">
                         <div class="card-body">
-                            <h4 class="">Lesson</h4>
+                            <h4 class="">{{__('admin-content.lesson')}}</h4>
                             <hr>
-                            <p class="card-text">Note: You can add, delete, or change the name grade levels and orders at any time to accommodate changes in your content or audience. if you want to add/delete or edit please click here (jump to grade section) or click grade on left top side of the menu.</p>
+                            <p class="card-text">{{__('admin-content.text')}}</p>
                             <a href="{{ route('admin.lessons.index') }}" class="btn btn-light">
-                                Learn More
+                                {{__('admin-content.learn-more')}}
                             </a>
                         </div>
                     </div>
