@@ -38,9 +38,9 @@
                                 <span>plans</span>
                             </a>
                         </li>
-                        <li> <a href="{{ route('admin.sites.index') }}">
+                        <li> <a href="{{ route('admins.index') }}">
                                 <i class="feather ft-home"></i>
-                                <span>{{ __('admin-sidebar.sites') }}</span>
+                                <span>Admin</span>
                             </a>
                         </li>
                     </ul>
