@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-area">
-        <p>&copy; Copyright 2023. All right reserved. <span id="time"></span></p>
+        <p>&copy; {{__('footer.copyright-2023.-all-right-reserved.')}}<span id="time"></span></p>
     </div>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

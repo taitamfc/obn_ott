@@ -67,7 +67,7 @@
                 <div class="lesson__content__main">
                     <div class="lesson__content__wrap">
                         <h3>{{ $item->name }}</h3>
-                        <span><a href="{{ route('website.lessons',['site_name' => $site_name]) }}">Close</a></span>
+                        <span><a href="{{ route('website.lessons',['site_name' => $site_name]) }}">{{__('sys.close')}}</a></span>
                     </div>
                     <div class="plyr__video-embed rbtplayer">
                         {!! $item->video_fm !!}

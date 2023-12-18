@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Falr - Bootstrap 4 Admin Dashboard Template">
-    <title>Sign In | Falr - Bootstrap 4 Admin Dashboard Template</title>
+    <title>@yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -32,9 +32,8 @@
                 <div class="login-bg">
                     <div class="login-overlay"></div>
                     <div class="login-left">
-                        <h1 class="text-white">OTT Platform</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tellus elit.</p>
-                        <!-- <a href="javascript:void(0);" class="btn btn-primary">Learn More</a> -->
+                        <h1 class="text-white">{{__('login.ott-platform')}}</h1>
+                        <p>{{__('login.lorem-ipsum-dolor-sit-amet,-consectetur-adipiscing-elit.-nullam-tellus-elit.')}}</p>
                     </div>
                 </div>
                 @yield('content')
