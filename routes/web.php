@@ -19,6 +19,15 @@ use Laravel\Socialite\Facades\Socialite;
 */
 include 'admin.php';
 
+//Adminsystem
+Route::prefix('adminsystem')->group(function () {
+    Route::get('sites',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
+    Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
+    Route::get('plans',[\App\Http\Controllers\Adminsystem\PlanController::class,'plan'])->name('adminsystem.plans.index');
+});
+
+
+
 // login by social
 Route::get('/google/callback',[App\Http\Controllers\AuthSocialiteController::class,'GoogleCallBack']);
 Route::get('/facebook/callback',[App\Http\Controllers\AuthSocialiteController::class,'FacebookCallBack']);
