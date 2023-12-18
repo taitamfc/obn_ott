@@ -10,6 +10,7 @@ use App\Models\PlanSite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Resources\PlanResource;
 use Carbon\Carbon;
 use DB;
 use App\Http\Controllers\Admin\AdminController;
@@ -17,61 +18,81 @@ use App\Http\Controllers\Admin\AdminController;
 
 class PlanController extends AdminController
 {
-    function plan(Request $request){
+    function index(Request $request){
         if ($request->ajax()) {
             $items = Plan::paginate(3);
-            $next_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',0)->get();
-            $next_plan_data = $next_plan->pluck('plan_id', 'created_at')->toArray();
-            $current_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',1)->first();
-            return view('admin.accountmanagements.plans.ajax.ajax-index',compact('items','current_plan','next_plan_data'));
+            return view('adminsystems.plans.ajax-index',compact('items'));
         }
-        return view('admin.accountmanagements.plans.index');
+        return view('adminsystems.plans.index');
     }
-    function addPlan(Request $request, String $id){
-        if ($request->ajax()) {
-            $item = Plan::findOrfail($id);
-            $current_plan = PlanSite::where('site_id',$this->site_id)->where('is_current',1)->value('expiration_date');
-            $date = Carbon::now()->addDays(intval($item->duration->number_days));
-            $param = [
-                'item' => $item,
-                'current_plan' => $current_plan,
-                'date' => $date,
-            ];
-            return view('admin.accountmanagements.plans.ajax.ajax-buyPlan',$param);
-        }
-        return view('admin.accountmanagements.plans.buyPlan');
-    }
-    function storePlans(Request $request){
+    function store(Request $request){
+        $item = new Plan();
+        $item->name = $request->name;
+        $item->price = $request->price;
+        $item->duration = $request->duration;
+        $item->number_days = $request->number_days;
         try {
-            DB::beginTransaction();
-            $data = $_REQUEST['data'];
-            $plan_id = intval($data[0]);
-            $pay = $data[1];
-            $price = intval($data[2]);
-            $order = new PlanOrder();
-            $order->plan_id = $plan_id;
-            $order->site_id = $this->site_id;
-            $order->user_id = Auth::id();
-            $order->price = $price;
-            $order->payment_method = $pay;
-            // return response([
-            //     'data' => $order,
-            // ]);
-            $order->save();
-            DB::commit();
-            if ($order->payment_method == 'paypal') {
-                return response([
-                    'success' => true,
-                    'redirect' => route('admin.make.payment',['order_id' => $order->id, 'price' => $order->price])
-                ]);
-            }
-        } catch (\Exception $e) {
-            DB::rollback();
+            $item->save();
+            return response()->json([
+                'success'=>true,
+                'message'=> __('sys.store_item_success'),
+                'data'=> $item
+            ],200);
+        } catch (QueryException  $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
-            return response([
-                'success' => false,
-                'message' => __('sys.store_item_error'),
-            ]);
+            return response()->json([
+                'success'=>false,
+                'message'=> __('sys.store_item_error'),
+            ],200);
         }
     }
+
+    public function show(string $id)
+    {
+        $item = Plan::find($id);
+        return new PlanResource($item);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $item = Plan::find($id);
+        $item->name = $request->name;
+        $item->price = $request->price;
+        $item->duration = $request->duration;
+        $item->number_days = $request->number_days;
+        try {
+            $item->save();
+            return response()->json([
+                'success'=>true,
+                'message'=> __('sys.update_item_success'),
+                'data'=> $item
+            ],200);
+        } catch (QueryException  $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> __('sys.update_item_error'),
+            ],200);
+        }
+    }
+
+    public function destroy(string $id)
+    {
+        try {
+            $item =  Plan::find($id);
+            $item->delete();
+
+            return response()->json([
+                'success'=>true,
+                'message'=> __('sys.destroy_item_success'),
+            ],200);
+        } catch (QueryException $e) {
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response()->json([
+                'success'=>false,
+                'message'=> __('sys.destroy_item_error'),
+            ],200);
+        }
+    }
+    
 }

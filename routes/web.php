@@ -23,9 +23,8 @@ include 'admin.php';
 Route::prefix('adminsystem')->group(function () {
     Route::get('sites',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
     Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
-    Route::get('plans',[\App\Http\Controllers\Adminsystem\PlanController::class,'plan'])->name('adminsystem.plans.index');
+    Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
 });
-
 
 
 // login by social
