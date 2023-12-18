@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/swiper-bundle.min.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/custom.css')}}">
+    @yield('header')
 </head>
 
 
@@ -48,6 +49,7 @@
     <script src="{{ asset('website/js/swiper-bundle.min.js')}}"></script>
     <script src="{{ asset('website/js/main.js')}}"></script>
     <script src="{{ asset('website/js/custom.js')}}"></script>
+    @yield('footer')
     <script>
     $(document).ready(function() {
         $('#searchIcon').click(function() {

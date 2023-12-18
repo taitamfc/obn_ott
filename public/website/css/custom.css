@@ -49,4 +49,6 @@ p.badge.bg-danger.rounded-pill {
     background-color: #EB2784 !important;
 }
 
-
+i.icofont-tick-mark {
+    margin-left: 10px;
+}

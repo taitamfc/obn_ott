@@ -50,6 +50,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
         Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
         Route::get('saved',[App\Http\Controllers\Website\StudentLessonController::class,'whitlist'])->name('website.saved');
+        Route::post('complete-lesson',[App\Http\Controllers\Website\StudentLessonController::class,'completeLesson'])->name('website.complete-lesson');
 
         Route::get('saved-whitlist/{id}',[App\Http\Controllers\Website\StudentLessonController::class,'saved_whitlist'])->name('website.saved_whitlist');
 

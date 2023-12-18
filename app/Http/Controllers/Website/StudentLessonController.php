@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\StudentWhitlist;
 use App\Models\StudentCourse;
+use App\Models\Lesson;
 use App\Models\LessonStudent;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
@@ -94,4 +95,39 @@ class StudentLessonController extends MainController
         return view('website.dashboards.progress.index',['courses'=>$courses]);
     }
 
+
+    public function completeLesson(Request $request) {
+        $student_id = Auth::guard('students')->id();
+        $lesson_id = $request->input('lessonId');
+        try {
+            $complete_lessons = LessonStudent::where('site_id', $this->site_id)
+                ->where('student_id', $student_id)
+                ->where('lesson_id', $lesson_id)
+                ->first();
+            if ($complete_lessons) {
+                $complete_lessons->update(['is_complete' => 1]);
+                $nextLesson = Lesson::where('site_id', $this->site_id)
+                    ->where('course_id', $complete_lessons->lesson->course_id)
+                    ->where('id', '!=', $lesson_id)
+                    ->where('position', '>', $complete_lessons->lesson->position)
+                    ->orderBy('position', 'asc')
+                    ->first();
+                    
+                $return = [
+                    'success' => true,
+                    'message'=> __('sys.update_item_success'),
+                ];
+                if($nextLesson){
+                    $nextLessonId = $nextLesson->id;
+                    $return['next_lesson_id'] = $nextLessonId;
+                }
+                return response()->json($return);
+            } else {
+                return response()->json(['success' => false, 'message' => 'No corresponding record found']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error in completeLesson: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'An error occurred during processing'], 500);
+        }
+    }
 }
