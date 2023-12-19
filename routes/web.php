@@ -19,6 +19,11 @@ use Laravel\Socialite\Facades\Socialite;
 */
 include 'admin.php';
 
+// home page
+Route::get('/',[\App\Http\Controllers\HomePageController::class,'index']);
+
+
+
 //Adminsystem
 Route::prefix('adminsystem')->group(function () {
     Route::get('sites',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
@@ -26,6 +31,10 @@ Route::prefix('adminsystem')->group(function () {
     Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
     Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
 });
+
+// login admin
+Route::get('/adminsystemlogin', [App\Http\Controllers\AuthAdminController::class,'login'])->name('adminsystem.login');
+Route::post('/adminsystemlogin', [App\Http\Controllers\AuthAdminController::class,'postLogin'])->name('adminsystem.postLogin');
 
 
 // login by social

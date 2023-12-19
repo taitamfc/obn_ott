@@ -32,7 +32,12 @@
                         </button>
                     </span>
                 </li>
+                @if (auth()->guard('students')->check())
                 @include('admin.includes.sites')
+                @endif
+                @if (auth()->guard('admins')->check())
+                    @include('adminsystems.admins.siteAdminHeader')
+                @endif
                 @include('admin.includes.languages')
                 @include('admin.includes.notifications')
                 <!--@include('admin.includes.email')-->

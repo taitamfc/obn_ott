@@ -12,6 +12,10 @@ use App\Http\Resources\AdminResource;
 use Carbon\Carbon;
 use DB;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Requests\UpdateAdminRequest;
+use App\Http\Requests\StorePlanRequest;
+
+
 
 
 class AdminsystemController extends AdminController
@@ -23,14 +27,14 @@ class AdminsystemController extends AdminController
         }
         return view('adminsystems.admins.index');
     }
-    function store(Request $request){
+    function store(StoreAdminRequest $request){
         $item = new Admin();
         $item->name = $request->name;
         $item->code = $request->code;
         $item->email = $request->email;
         $item->phone = $request->phone;
         $item->status = $request->status;
-        $item->password = $request->password;
+        $item->password = bcrypt($request->password);
         $item->address = $request->address;
         try {
             $item->save();
@@ -54,7 +58,7 @@ class AdminsystemController extends AdminController
         return new AdminResource($item);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateAdminRequest $request, string $id)
     {
         $item = Admin::find($id);
         $item->name = $request->name;
@@ -62,7 +66,7 @@ class AdminsystemController extends AdminController
         $item->email = $request->email;
         $item->phone = $request->phone;
         $item->status = $request->status;
-        $item->password = $request->password;
+        $item->password = bcrypt($request->password);
         $item->address = $request->address;
         try {
             $item->save();

@@ -14,7 +14,8 @@ use App\Http\Resources\PlanResource;
 use Carbon\Carbon;
 use DB;
 use App\Http\Controllers\Admin\AdminController;
-
+use App\Http\Requests\UpdatePlanRequest;
+use App\Http\Requests\StorePlanRequest;
 
 class PlanController extends AdminController
 {
@@ -25,7 +26,7 @@ class PlanController extends AdminController
         }
         return view('adminsystems.plans.index');
     }
-    function store(Request $request){
+    function store(StorePlanRequest $request){
         $item = new Plan();
         $item->name = $request->name;
         $item->price = $request->price;
@@ -53,7 +54,7 @@ class PlanController extends AdminController
         return new PlanResource($item);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdatePlanRequest $request, string $id)
     {
         $item = Plan::find($id);
         $item->name = $request->name;
