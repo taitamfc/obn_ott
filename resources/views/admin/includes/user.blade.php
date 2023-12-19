@@ -16,11 +16,11 @@
                 </div>
             </div>
             <a class="dropdown-item" href="{{ route('admin.account.index') }}"><i class="ti-user"></i>
-                Profile</a>
+                {{__('site.profile')}}</a>
             <a class="dropdown-item" href="{{ route('cms',['site_name'=>$cr_site->slug]) }}"><i
-                    class="ti-home"></i> View website</a>
+                    class="ti-home"></i>{{__('site.view-website')}}</a>
             <span role="separator" class="divider"></span>
-            <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="ti-power-off"></i>Logout</a>
+            <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="ti-power-off"></i>{{__('site.logout')}}</a>
         </div>
     </div>
 </li>
