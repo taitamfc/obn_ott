@@ -90,10 +90,16 @@ class UserController extends AdminController
                     $user_site->user_id = $item->id;
                     $user_site->site_id = $this->site_id;
                     $user_site->save();
+
+                    $site_link_login = route('website.login',['site_name'=>$this->site_name]);
+                    $site_title      = $this->site->name;
+                    
                     $data = [
                         'name' => $item->name,
                         'email' => $item->email,
-                        'password' => $request->password
+                        'password' => $request->password,
+                        'site_link_login'   => $site_link_login,
+                        'site_title'        => $site_title,
                     ];
                     SendEmail::dispatch($item,$data,'store_member');
                 }
