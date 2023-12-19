@@ -28,7 +28,7 @@
                             <td>
                                 <ul class="d-flex justify-content-center">
                                     <li class="mr-3">
-                                        <a href="{{ route('admin.classes.show',$item->id) }}"><i class="ti-eye"></i>
+                                        <a href="{{ route('admin.classes.detail',$item->id) }}"><i class="ti-eye"></i>
                                         </a>
                                     </li>
                                     <li>

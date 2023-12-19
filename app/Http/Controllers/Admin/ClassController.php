@@ -20,15 +20,14 @@ class ClassController extends AdminController
     function index(Request $request){
         $courses = Course::where('site_id',$this->site_id)->get();
         if ($request->ajax()) {
-            $query = DB::table('lesson_student')
-            ->join('students', 'students.id', '=', 'lesson_student.student_id')
-            ->select('students.id', 'students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
-            ->groupBy('students.id','students.name');
+            $query = StudentCourse::with('student','course')->where('site_id',$this->site_id);
+            $items = $query->get();
+            foreach($items as $item) {
+                $item->view_count = $item->course->lessonstudent()->where('is_complete',1)->count(); 
+            }
             if ($request->course) {
                 $query->where('course_id',$request->course);
             }
-            $query->where('lesson_student.site_id',$this->site_id);
-            $items = $query->get();
             return view('admin.class.ajax-index',compact('courses','items'));
         }
         return view('admin.class.index',compact('courses'));
@@ -57,14 +56,7 @@ class ClassController extends AdminController
     }
 
     function show(String $id){
-        $lessonHistory = LessonStudent::with('lesson','course')->where('student_id',$id)->paginate(5);
-        // $transactionHistory = DB::table('transactions')
-        // ->join('courses', 'courses.id', '=', 'transactions.course_id')
-        // ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
-        // ->where('transactions.site_id', '=', $this->site_id)
-        // ->where('student_id', '=',$id)
-        // ->groupBy('course_id', 'date')
-        // ->get();
+        $lessonHistory = LessonStudent::with('lesson','course')->where('student_id',$id)->orderBy('last_view','DESC')->paginate(5);
         $transactionHistory = Order::where('site_id',$this->site_id)->where('student_id',$id)->get();
         foreach($transactionHistory as $transactionHis){
             if($transactionHis->type == 'course'){

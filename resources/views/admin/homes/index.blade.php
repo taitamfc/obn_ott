@@ -9,8 +9,16 @@
 <div class="main-content page-content">
     <div class="main-content-inner">
         @include('admin.homes.includes.report')
-        <div class="row mt-3 p-3">
-            <div class="col-lg-12 bg-white">
+        <div class="row mt-3 pt-3">
+            <div class="col-lg-4">
+                <div class="card overflow_visible">
+                    <div class="card-body">
+                        <h4 class="card_title">Events</h4>
+                        <div id="list-events"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 bg-white">
                 <div id='calendar' class="pt-3 pb-3"></div>
             </div>
         </div>
@@ -39,6 +47,7 @@ jQuery(document).ready(function() {
         }
     });
 
+    var list_events = [];
     // Calendar
     var calendar = $('#calendar').fullCalendar({
         editable: true,
@@ -52,6 +61,15 @@ jQuery(document).ready(function() {
             } else {
                 event.allDay = false;
             }
+            list_events.push(event.title);
+            let event_html = '<ul class="list-group">';
+            for (let index = 0; index < list_events.length; index++) {
+                event_html += '<li class="list-group-item">';
+                event_html += list_events[index];
+                event_html += '</li>';
+            }
+            event_html += '</ul>';
+            $('#list-events').html(event_html);
         },
         select: function(start, end, allDay) {
             var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");

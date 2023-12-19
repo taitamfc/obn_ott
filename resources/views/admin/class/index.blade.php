@@ -46,18 +46,19 @@ select.form-control:not([size]):not([multiple]) {
                                                 </button>
                                             </form>
                                         </div>
-                                        <div class="col-sm-4 text-center">
-                                            <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <div class="form-group text-center">
                                                 <form action="{{ route('admin.classes.students') }}" method='get'>
                                                     <input type="hidden" name="viewAll" value='viewAll'>
-                                                    <button class="btn btn-primary">{{__('admin-class.view-all')}}</button>
+                                                    <button
+                                                        class="btn bg-white border">{{__('admin-class.view-all')}}</button>
                                                 </form>
                                             </div>
                                         </div>
-                                        <form class="col-sm-4" action="" method="get">
-                                            <select class="form-control" onchange="this.form.submit()" name='course'
-                                                id='course'>
-                                                <option>{{__('admin-class.select-course')}}</option>
+                                        <form class="col-sm-4 text-right" action="" method="get">
+                                            <select class="btn btn-primary w-50" onchange="this.form.submit()"
+                                                name='course' id='course'>
+                                                <option selected disabled>{{__('admin-class.select-course')}}</option>
                                                 @foreach($courses as $course)
                                                 <option value='{{ $course->id }}'>{{ $course->name }}</option>
                                                 @endforeach
