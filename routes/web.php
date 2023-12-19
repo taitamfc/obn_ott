@@ -21,6 +21,10 @@ include 'admin.php';
 
 // home page
 Route::get('/',[\App\Http\Controllers\HomePageController::class,'index']);
+Route::get('/plan',[\App\Http\Controllers\PlanPageController::class,'index'])->name('planpage.index');
+Route::get('/add-plan/{id}',[\App\Http\Controllers\PlanPageController::class,'addPlan'])->name('planpage.addPlan');
+Route::get('/store-plan',[\App\Http\Controllers\PlanPageController::class,'storePlans'])->name('planpage.storePlan');
+
 
 
 
@@ -32,7 +36,7 @@ Route::prefix('adminsystem')->group(function () {
     Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
 });
 
-// login admin
+// login admins
 Route::get('/adminsystemlogin', [App\Http\Controllers\AuthAdminController::class,'login'])->name('adminsystem.login');
 Route::post('/adminsystemlogin', [App\Http\Controllers\AuthAdminController::class,'postLogin'])->name('adminsystem.postLogin');
 
