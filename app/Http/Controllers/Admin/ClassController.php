@@ -19,14 +19,27 @@ class ClassController extends AdminController
 
     function index(Request $request){
         $courses = Course::where('site_id',$this->site_id)->get();
+        // $query = DB::table('student_course')
+        //     ->leftJoin('lesson_student', function ($join) {
+        //         $join->on('student_course.student_id', '=', 'lesson_student.student_id')
+        //             ->on('student_course.course_id', '=', 'lesson_student.course_id')
+        //             ->where('lesson_student.is_complete', '=', 1);
+        //     })
+        //     ->select('student_course.student_id', 'student_course.course_id', DB::raw('SUM(IF(lesson_student.is_complete = 1, 1, 0)) as count'))
+        //     ->groupBy('student_course.student_id', 'student_course.course_id')
+        //     ->join('students','students.id','=','student_course.student_id')
+        //     ->join('courses','courses.id','=','student_course.student_id')
+        //     ->select('students.id','students.name as student_name', 'courses.name as course_name', DB::raw('SUM(IF(lesson_student.is_complete = 1, 1, 0)) as count'));
         if ($request->ajax()) {
-            $query = DB::table('student_course')
-            ->join('student_course', 'student_course.student_id', '=', 'lesson_student.student_id' && 'student_course.course_id', '=', 'lesson_student.course_id');
+            $query = StudentCourse::with('student','course')->where('site_id',$this->site_id);
+            $items = $query->get();
+            foreach($items as $item) {
+                $item->view_count = $item->course->lessonstudent()->where('is_complete',1)->count(); 
+            }
             if ($request->course) {
                 $query->where('course_id',$request->course);
             }
             $query->where('lesson_student.site_id',$this->site_id);
-            $items = $query->get();
             return view('admin.class.ajax-index',compact('courses','items'));
         }
         return view('admin.class.index',compact('courses'));
