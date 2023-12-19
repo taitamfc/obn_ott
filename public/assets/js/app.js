@@ -48,9 +48,15 @@ function handleDelete(url,targetElm, parentElm = '.item'){
             _method: 'DELETE',
         },
         success: function (res) {
-            showAlertSuccess(res.message);
-            // getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
-            targetElm.closest(parentElm).remove(); // Xóa phần tử khỏi DOM
+            if (res.success == true) {
+                showAlertSuccess(res.message);
+                // getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+                targetElm.closest(parentElm).remove(); // Xóa phần tử khỏi DOM
+            }else if(res.success == false) {
+                showAlertError(res.message);
+                // getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+                // targetElm.closest(parentElm).remove(); // Xóa phần tử khỏi DOM
+            }
         }
     });
 }

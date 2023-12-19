@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <h6>Setting</h6>
+        <h6>{{__('admin-themes.setting')}}</h6>
     </div>
     <div class="card-body">
         <div class="row">

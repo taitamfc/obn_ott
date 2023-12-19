@@ -19,6 +19,15 @@ use Laravel\Socialite\Facades\Socialite;
 */
 include 'admin.php';
 
+//Adminsystem
+Route::prefix('adminsystem')->group(function () {
+    Route::get('sites',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
+    Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
+    Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
+    Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
+});
+
+
 // login by social
 Route::get('/google/callback',[App\Http\Controllers\AuthSocialiteController::class,'GoogleCallBack']);
 Route::get('/facebook/callback',[App\Http\Controllers\AuthSocialiteController::class,'FacebookCallBack']);
@@ -50,6 +59,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('lessons',[App\Http\Controllers\Website\StudentLessonController::class,'index'])->name('website.lessons');
         Route::get('currently-watching',[App\Http\Controllers\Website\StudentLessonController::class,'watching'])->name('website.currently-watching');
         Route::get('saved',[App\Http\Controllers\Website\StudentLessonController::class,'whitlist'])->name('website.saved');
+        Route::post('complete-lesson',[App\Http\Controllers\Website\StudentLessonController::class,'completeLesson'])->name('website.complete-lesson');
 
         Route::get('saved-whitlist/{id}',[App\Http\Controllers\Website\StudentLessonController::class,'saved_whitlist'])->name('website.saved_whitlist');
 

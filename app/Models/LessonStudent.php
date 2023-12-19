@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class LessonStudent extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'is_complete',
+    ];
     protected $table = 'lesson_student';
     function lesson(){
         return $this->belongsTo(Lesson::class,'lesson_id','id');

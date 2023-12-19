@@ -5,6 +5,7 @@
                 <tr>
                     <td class="w-30p">{{ __('admin-duration.name') }}</td>
                     <td class="w-30p">{{ __('admin-duration.number-day') }}</td>
+                    <td class="w-30p">{{ __('admin-duration.subscription-count') }}</td>
                     <td class='text-center'>{{ __('admin-duration.action') }}</td>
                 </tr>
             </thead>
@@ -16,6 +17,9 @@
                     </td>
                     <td class="text-nowrap">
                         <div class="fw-600 ">{{ $item->number_days }}</div>
+                    </td>
+                    <td class="text-nowrap">
+                        <div class="fw-600 ">{{ $item->subscriptions_count }}</div>
                     </td>
                     <td>
                         <ul class="d-flex justify-content-center">

@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;

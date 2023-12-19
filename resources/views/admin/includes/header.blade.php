@@ -2,7 +2,7 @@
     <div class="header-area-left">
         <a href="{{ route('admin.home') }}" class="logo">
             <span>
-                OTT Platform
+                {{__('login.ott-platform')}}
             </span>
             <i>
                 <img src="{{ asset('assets/images/logo-collapsed.svg')}}" alt="" height="22">

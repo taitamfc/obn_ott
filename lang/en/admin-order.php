@@ -1,6 +1,6 @@
 <?php
 return [
-    'Sites' => 'Sites',
+    'sites' => 'Sites',
     'item' => 'Item',
     'price' => 'Price',
     'payment-method' => 'Payment Method',
@@ -8,4 +8,7 @@ return [
     'date' => 'Date',
     'status' => 'Status',
     'student' =>'Student',
+    'video' =>'Video AD',
+    'success' =>'Success',
+    'fail' =>'Fail',
 ];

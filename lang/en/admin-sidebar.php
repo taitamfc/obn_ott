@@ -13,6 +13,7 @@ return [
     'product-management' => 'Product Management',
     'subscription-management' => 'Subscription Management',
     'duration' => 'Duration',
+    'order' => 'Order',
     'class' => 'Class',
     'video-advertisement' => 'Video Advertisement',
     'themes' => 'Themes',
@@ -31,4 +32,8 @@ return [
     'pages' => 'Pages',
     'popup' => 'Popup',
     'sites' => 'Sites',
+    'order' => 'Order',
+    'history' => 'History',
+    'banner' => 'Banner',
+    'footer-sessions' => 'Footer Sessions',
 ];

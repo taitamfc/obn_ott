@@ -1,7 +1,7 @@
 @extends('website.layouts.auth')
 
 @section('title')
-Login
+404
 @endsection
 
 @section('content')

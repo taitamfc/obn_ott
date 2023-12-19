@@ -1,7 +1,7 @@
 @extends('website.layouts.auth')
 
 @section('title')
-Reset Password
+{{__('login.forgot-password')}}
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@ Reset Password
     <div class="col-xl-8 col-md-8 offset-md-2">
         <div class="loginarea__wraper">
             <div class="login__heading">
-                <h5 class="login__title">Forgot Password</h5>
-                <p class="login__description">Don't have an account yet?
-                    <a href="{{ route('website.register',['site_name'=>$site_name]) }}">Sign up for free</a>
+                <h5 class="login__title">{{__('login.forgot-password')}}</h5>
+                <p class="login__description">{{__('login.dont-have-an-account-yet?')}}
+                    <a href="{{ route('website.register',['site_name'=>$site_name]) }}">{{__('login.sign-up-for-free')}}</a>
                 </p>
                 <p>
-                    <a href="{{ route('cms',['site_name'=>$site_name]) }}">Back to home</a>
+                    <a href="{{ route('cms',['site_name'=>$site_name]) }}">{{__('login.back-to-home')}}</a>
                 </p>
             </div>
             <form
@@ -27,8 +27,8 @@ Reset Password
                 @endif
                 @csrf
                 <div class="login__form">
-                    <label class="form__label">Password</label>
-                    <input class="common__login__input" type="password" placeholder="password" name="password"
+                    <label class="form__label">{{__('login.password')}}</label>
+                    <input class="common__login__input" type="password" name="password"
                         value="{{ old('password') }}">
                     @if ($errors->any())
                     <p style="color:red">{{ $errors->first('password') }}</p>
@@ -36,15 +36,15 @@ Reset Password
                 </div>
 
                 <div class="login__form">
-                    <label class="form__label">Confirm Password</label>
-                    <input class="common__login__input" type="password" placeholder="Confirm Password"
+                    <label class="form__label">{{__('login.confirm-password')}}</label>
+                    <input class="common__login__input" type="password"
                         name="confirmpassword" value="{{ old('confirmpassword') }}" >
                     @if ($errors->any())
                     <p style="color:red">{{ $errors->first('confirmpassword') }}</p>
                     @endif
                 </div>
                 <div class="submit-btn-area">
-                    <button id="form_submit" type="submit" class="default__button" style="display: block; margin: 30px auto 0;">Submit <i
+                    <button id="form_submit" type="submit" class="default__button" style="display: block; margin: 30px auto 0;">{{__('login.submit')}} <i
                             class="ti-arrow-right"></i></button>
                 </div>
             </form>

@@ -1,0 +1,23 @@
+<?php
+return [
+    'homepage-banner' => 'Homepage Banner',
+    'homepages-sections' => 'Homepage Sections',
+    'footer-sections' => 'Footer Sections',
+    'about-us' => 'About us',
+    'copyright' => 'Copyright',
+    'update-footer' => 'Update Footer',
+    'setting' => 'Setting',
+    'title' => 'Title',
+    'description' => 'Description',
+    'link' => 'Link',
+    'status' => 'Status',
+    'banner' => 'Banner',
+    'media-file' => 'Media File',
+    'save' => 'Save',
+    'my-plan' => 'My Plan',
+    'ott' => 'OTT',
+    'footer-background-color' => 'Footer Background Color',
+    'body-background-color' => 'Body Background Color',
+    'plan-page-background-image' => 'Plan Page Background Image',
+    'auth-page-background-image' => 'Auth Page Background Image',
+];

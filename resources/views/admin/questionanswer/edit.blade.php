@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.question') }}
+@endsection
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
@@ -46,7 +49,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary edit-item" type='submit'>Save changes</button>
+                            <button class="btn btn-primary edit-item" type='submit'>{{ __('sys.save-changes') }}</button>
                         </div>
                     </div>
                 </form>

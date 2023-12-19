@@ -4,25 +4,25 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create New</h5>
+                    <h5 class="modal-title">{{__('admin-setting.create-new')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">{{__('admin-setting.name')}}</label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
 
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Slug</label>
+                        <label for="name" class="col-form-label">{{__('admin-setting.slug')}}</label>
                         <input class="form-control" type="text" id="slug" name='slug'>
                         <div class="input-error text-danger">@error('slug') {{ $message }} @enderror</div>
                     </div>
                    
                     <div class="form-group">
-                        <label for="status" class="col-form-label">Status</label>
+                        <label for="status" class="col-form-label">{{__('admin-setting.status')}}</label>
                         <div style="display: flex">
                             <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
                                 <input type="radio" checked id="c-active" name="status" class="custom-control-input"
@@ -39,8 +39,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary add-item" type='button'>Save changes</button>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary add-item" type='button'>{{__('sys.save-changes')}}</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{__('sys.close')}}</button>
                 </div>
             </div>
         </div>

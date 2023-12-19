@@ -24,4 +24,6 @@ return [
     'submit' => '제출',
     'update' => '업데이트',
     'create-new' => '새로 만들기',
+    'complete' => '완료',
+    'change_item_before_delete' => '중고 기간!'
 ];

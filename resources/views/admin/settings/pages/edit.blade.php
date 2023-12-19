@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.pages') }}
+@endsection
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
@@ -6,7 +9,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">Update Page</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-setting.update-page')}}</h5>
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ route('admin.pages.index') }}">{{ __('sys.back') }}</a>
@@ -23,20 +26,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group input-title-update">
-                                <label for="title" class="col-form-label">Title</label>
+                                <label for="title" class="col-form-label">{{__('admin-setting.title')}}</label>
                                 <input class="form-control" type="text" id="title" name='title'
                                     value="{{ old('title') ? old('title') : $item->title }}">
                                 <div class="input-error text-danger">@error('title') {{ $message }} @enderror</div>
                             </div>
                             <div class="form-group input-description-update">
-                                <label for="description" class="col-form-label">Description</label>
+                                <label for="description" class="col-form-label">{{__('admin-setting.description')}}</label>
                                 <textarea class="form-control" type="text" id="description"
                                     name='description'>{!! old('description') ? old('description') : $item->description !!}</textarea>
                                 <div class="input-error text-danger">@error('description') {{ $message }} @enderror
                                 </div>
                             </div>
                             <div class="form-group input-status-update">
-                                <label for="status" class="col-form-label">Status</label>
+                                <label for="status" class="col-form-label">{{__('admin-setting.status')}}</label>
                                 <div style="display: flex">
                                     <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
                                         <input type="radio" checked id="e-active" name="status"
@@ -52,7 +55,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class='btn btn-primary update-item float-right'>Save</button>
+                            <button type="button" class='btn btn-primary update-item float-right'>{{__('admin-setting.save')}}</button>
                         </div>
                     </div>
                 </form>

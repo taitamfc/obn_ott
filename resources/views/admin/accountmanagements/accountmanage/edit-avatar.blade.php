@@ -5,19 +5,19 @@
             <input type="hidden" name="id" id="input-id">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update</h5>
+                    <h5 class="modal-title"> {{__('admin-account.update')}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-image">
-                        <label for="image" class="col-form-label">Avatar<span>*</span></label>
+                        <label for="image" class="col-form-label"> {{__('admin-account.avatar')}}<span>*</span></label>
                         <input class="form-control" type="file" id="image" name='image'>
                         <div class="input-error text-danger">@error('image') {{ $message }} @enderror</div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary edit-avatar" type='button'>Save changes</button>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary edit-avatar" type='button'> {{__('sys.save-changes')}}</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{__('sys.close')}}</button>
                 </div>
             </div>
         </div>

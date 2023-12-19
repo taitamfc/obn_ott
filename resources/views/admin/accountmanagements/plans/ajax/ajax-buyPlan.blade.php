@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card_title">Plan</h4>
+        <h4 class="card_title">{{__('admin-account.plan')}}</h4>
         <div id="mt_pricing">
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-center">
@@ -11,31 +11,31 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group input-name">
-                                        <label for="name" class="col-form-label">Name</label>
+                                        <label for="name" class="col-form-label">{{__('admin-account.name')}}</label>
                                         <input class="form-control" type="text" name="name" value="{{ $item->name }}"
                                             id="name" disabled>
                                     </div>
                                     <div class="form-group input-price">
-                                        <label for="name" class="col-form-label">Price</label>
+                                        <label for="name" class="col-form-label">{{__('admin-account.price')}}</label>
                                         <input class="form-control" type="text" name="price"
                                             value="${{  $item->price }}" id="price" disabled>
                                     </div>
                                     <div class="form-group input-duration">
-                                        <label for="name" class="col-form-label">Duration</label>
+                                        <label for="name" class="col-form-label">{{__('admin-account.duration')}}</label>
                                         <input class="form-control" type="text" name="duration"
-                                            value="{{ $item->duration->name }}" id="duration" disabled>
+                                            value="{{ $item->duration }}" id="duration" disabled>
                                     </div>
                                     <div class="form-group input-date">
-                                        <label for="name" class="col-form-label">Expiration Date</label>
+                                        <label for="name" class="col-form-label">{{__('admin-account.expiration-date')}}</label>
                                         <input class="form-control" type="text" name="date"
                                             value="{{ $date->format('d-m-y') }}" id="date" disabled>
                                     </div>
                                     <div class="form-group input-pay">
-                                        <label for="pay" class="col-form-label">Pay Method</label>
+                                        <label for="pay" class="col-form-label">{{__('admin-account.pay-method')}}</label>
                                         <div class="form-inline">
                                             <input class="form-check-input mr-2" type="radio" name="pay" value="paypal"
                                                 id="pay-01">
-                                            <label class="form-check-label" for="pay-01">Paypal</label>
+                                            <label class="form-check-label" for="pay-01">{{__('admin-account.paypal')}}</label>
                                         </div>
                                         <div class="input-error text-danger">@error('pay') {{ $message }} @enderror
                                         </div>
@@ -55,29 +55,28 @@
                                     {{ $item->name }}
                                 </h2>
                                 <span class="price_tag">
-                                    <span
-                                        class="currency">$</span>{{ round($item->price/$item->duration->number_days) }}
+                                    <span class="currency">${{ $item->price }}</span>
                                 </span>
-                                <span class="per_month">/Month</span>
+                                <span class="per_month">/{{ $item->duration }}</span>
                             </div>
                             <div class="price_listing">
                                 <ul>
-                                    <li>Latin words, consectetur.</li>
-                                    <li>All the Lorem Ipsum.</li>
-                                    <li>It has survived not only</li>
-                                    <li>Labore et dolore magna ali.</li>
-                                    <li>Nor again is there anyone.</li>
+                                    <li>{{__('admin-account.latin-words-consectetur')}}</li>
+                                    <li>{{__('admin-account.all-the-lorem-ipsum')}}</li>
+                                    <li>{{__('admin-account.it-has-survived-not-only')}}</li>
+                                    <li>{{__('admin-account.labore-et-dolore-magna-ali')}}</li>
+                                    <li>{{__('admin-account.nor-again-is-there-anyone')}}</li>
                                 </ul>
                             </div>
                             <div class="choose_plan_btn">
                                 @if($current_plan)
                                 <div class='form-control text-center bg-secondary' style='color:white;border:none'>
-                                    New plan will start on : {{ $current_plan }}
+                                {{__('admin-account.new-plan-will-start-on')}} : {{ $current_plan }}
                                 </div>
                                 @endif
                                 <a href='javascript:;' class='btn btn-light add-item' data-id="{{ $item->id }}"
                                     data-action="{{ route('admin.users.storePlans') }}"
-                                    data-price="{{ $item->price }}">Confirm</a>
+                                    data-price="{{ $item->price }}">{{__('admin-account.confirm')}}</a>
                             </div>
                         </div>
                     </div>

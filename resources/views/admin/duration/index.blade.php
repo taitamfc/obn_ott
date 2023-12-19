@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('title')
+{{ __('admin-sidebar.duration') }}
+@endsection
 @section('content')
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
@@ -162,7 +165,8 @@ jQuery(document).ready(function() {
                     let formData = res.data;
                     formUpdate.prop('action', action);
                     formUpdate.find('.input-name-update input').val(formData.name);
-                    formUpdate.find('.input-number_days-update input').val(formData.number_days);
+                    formUpdate.find('.input-number_days-update input').val(formData
+                        .number_days);
                 }
             }
         });
