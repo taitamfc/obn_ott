@@ -33,9 +33,28 @@ class SendEmail implements ShouldQueue
     {
         $item = $this->item;
         $data = $this->data;
-        Mail::send('admin.auth.mail',compact('data'), function($email) use ($item){
-            $email->subject('Forgot Password');
-            $email->to($item->email, $item->name );
-        });
+        $type = $this->type;
+        switch ($type) {
+            case 'store-member':
+                try {
+                    Mail::send('admin.includes.mailMember',compact('data'), function($email) use ($item){
+                        $email->subject('Store Member');
+                        $email->to($item->email, $item->name );
+                    });
+                } catch (\Exception $e) {
+                    Log::error('Bug send email error : '.$e->getMessage());
+                }
+                break;
+            case 'forgot_pass':
+                try {
+                    Mail::send('admin.includes.mailForgot',compact('data'), function($email) use ($item){
+                        $email->subject('Forgot Password');
+                        $email->to($item->email, $item->name );
+                    });
+                } catch (\Exception $e) {
+                    Log::error('Bug send email error : '.$e->getMessage());
+                }
+                break;
+        }
     }
 }

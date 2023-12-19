@@ -5,7 +5,9 @@
     <p>{{__('login.click-link-to-reset-password')}}</p>
     <b>{{__('login.your-email')}} {{ $data['email'] }}<br></b>
     <p>{{__('login.remember')}} {{__('login.link-has-active-once-time-on-click')}}</p>
-    <a href="{{ route('admin.postReset',[ 'user'=> $data['id'], 'token' => $data['token'] ]) }}">{{__('login.reset-password')}}</a>
-    <p><br>{{__('login.if-you-do not-take-any-action')}} <br> {{__('login.please-contact-the-administrator-via-email')}}<a href="gmail.com">
+    <a
+        href="{{ route('admin.postReset',[ 'user'=> $data['id'], 'token' => $data['token'] ]) }}">{{__('login.reset-password')}}</a>
+    <p><br>{{__('login.if-you-do not-take-any-action')}} <br>
+        {{__('login.please-contact-the-administrator-via-email')}}<a href="gmail.com">
             nguyenhuukhuong27102000@gmail.com</a></p>
 </div>

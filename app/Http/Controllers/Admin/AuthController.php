@@ -61,7 +61,7 @@ class AuthController extends Controller
 
     public function loginSite (){
         if (Auth::check()) {
-            return redirect()->route('cms');
+            return redirect()->route('cms',['site_name' => $site_name]);
         } else {
             $site_name = request()->route('site_name');
             return view('admin.auth.loginSite',compact('site_name'));
