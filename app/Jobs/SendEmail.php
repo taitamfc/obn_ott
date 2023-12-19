@@ -35,7 +35,7 @@ class SendEmail implements ShouldQueue
         $data = $this->data;
         $type = $this->type;
         switch ($type) {
-            case 'store-member':
+            case 'store_member':
                 try {
                     Mail::send('admin.includes.mailMember',compact('data'), function($email) use ($item){
                         $email->subject('Store Member');
