@@ -20,10 +20,8 @@ class ClassController extends AdminController
     function index(Request $request){
         $courses = Course::where('site_id',$this->site_id)->get();
         if ($request->ajax()) {
-            $query = DB::table('lesson_student')
-            ->join('students', 'students.id', '=', 'lesson_student.student_id')
-            ->select('students.id', 'students.name', DB::raw('COUNT(DISTINCT CONCAT(lesson_id, "-", course_id)) as total_lessons'), DB::raw('MAX(last_view) as last_view'))
-            ->groupBy('students.id','students.name');
+            $query = DB::table('student_course')
+            ->join('student_course', 'student_course.student_id', '=', 'lesson_student.student_id' && 'student_course.course_id', '=', 'lesson_student.course_id');
             if ($request->course) {
                 $query->where('course_id',$request->course);
             }
