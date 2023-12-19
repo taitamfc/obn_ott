@@ -96,6 +96,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','preventhistory','loc
 
     //Class
     Route::get('/classes/students',[\App\Http\Controllers\Admin\ClassController::class,'students'])->name('classes.students');
+    Route::get('/classes/students/{id}',[\App\Http\Controllers\Admin\ClassController::class,'show'])->name('classes.detail');
     Route::resource('/classes',\App\Http\Controllers\Admin\ClassController::class);
 
     // Order

@@ -19,17 +19,6 @@ class ClassController extends AdminController
 
     function index(Request $request){
         $courses = Course::where('site_id',$this->site_id)->get();
-        // $query = DB::table('student_course')
-        //     ->leftJoin('lesson_student', function ($join) {
-        //         $join->on('student_course.student_id', '=', 'lesson_student.student_id')
-        //             ->on('student_course.course_id', '=', 'lesson_student.course_id')
-        //             ->where('lesson_student.is_complete', '=', 1);
-        //     })
-        //     ->select('student_course.student_id', 'student_course.course_id', DB::raw('SUM(IF(lesson_student.is_complete = 1, 1, 0)) as count'))
-        //     ->groupBy('student_course.student_id', 'student_course.course_id')
-        //     ->join('students','students.id','=','student_course.student_id')
-        //     ->join('courses','courses.id','=','student_course.student_id')
-        //     ->select('students.id','students.name as student_name', 'courses.name as course_name', DB::raw('SUM(IF(lesson_student.is_complete = 1, 1, 0)) as count'));
         if ($request->ajax()) {
             $query = StudentCourse::with('student','course')->where('site_id',$this->site_id);
             $items = $query->get();
@@ -39,7 +28,6 @@ class ClassController extends AdminController
             if ($request->course) {
                 $query->where('course_id',$request->course);
             }
-            $query->where('lesson_student.site_id',$this->site_id);
             return view('admin.class.ajax-index',compact('courses','items'));
         }
         return view('admin.class.index',compact('courses'));
@@ -68,14 +56,7 @@ class ClassController extends AdminController
     }
 
     function show(String $id){
-        $lessonHistory = LessonStudent::with('lesson','course')->where('student_id',$id)->paginate(5);
-        // $transactionHistory = DB::table('transactions')
-        // ->join('courses', 'courses.id', '=', 'transactions.course_id')
-        // ->select('courses.name', DB::raw('DATE(transactions.created_at) as date'), DB::raw('COUNT(*) as total_sales'))
-        // ->where('transactions.site_id', '=', $this->site_id)
-        // ->where('student_id', '=',$id)
-        // ->groupBy('course_id', 'date')
-        // ->get();
+        $lessonHistory = LessonStudent::with('lesson','course')->where('student_id',$id)->orderBy('last_view','DESC')->paginate(5);
         $transactionHistory = Order::where('site_id',$this->site_id)->where('student_id',$id)->get();
         foreach($transactionHistory as $transactionHis){
             if($transactionHis->type == 'course'){

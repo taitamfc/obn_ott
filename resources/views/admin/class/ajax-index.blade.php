@@ -5,16 +5,16 @@
                 <table class="table table-hover progress-table text-left ">
                     <thead class="text-uppercase">
                         <tr>
-                            <th scope="col" class='text-center'>{{__('admin-class.course-view-count')}}</th>
+                            <th scope="col" class='text-center'>{{__('admin-class.student')}}</th>
                             <th scope="col" class='text-center'>{{__('admin-class.course')}}</th>
-                            <th scope="col" class='text-center'>{{__('admin-class.lesson-complete')}}</th>
+                            <th scope="col" class='text-center'>{{__('admin-class.complete')}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($items as $item)
                         <tr>
-                            <td>
-                                <a href="{{ route('admin.classes.show',$item->id) }}"
+                            <td class="text-center">
+                                <a href="{{ route('admin.classes.detail',$item->id) }}"
                                     style='color:black'>{{ $item->student->name }}
                                 </a>
                             </td>
