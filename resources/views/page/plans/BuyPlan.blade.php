@@ -5,8 +5,8 @@
 @section('content')
     <div class="main-content page-content">
         <!--==================================*
-                       Main Section
-            *====================================-->
+                           Main Section
+                *====================================-->
         <div class="main-content-inner" style="max-width: 100% !important;">
             {{-- <div class="row mb-4">
             <div class="col-md-12 grid-margin">
@@ -43,51 +43,49 @@
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
-                                                                    <div class="form-group input-name">
-                                                                        <label for="name"
-                                                                            class="col-form-label">{{ __('admin-account.name') }}</label>
-                                                                        <input class="form-control" type="text"
-                                                                            name="name" value="{{ $item->name }}"
-                                                                            id="name" disabled>
-                                                                    </div>
-                                                                    <div class="form-group input-price">
-                                                                        <label for="name"
-                                                                            class="col-form-label">{{ __('admin-account.price') }}</label>
-                                                                        <input class="form-control" type="text"
-                                                                            name="price" value="${{ $item->price }}"
-                                                                            id="price" disabled>
-                                                                    </div>
-                                                                    <div class="form-group input-duration">
-                                                                        <label for="name"
-                                                                            class="col-form-label">{{ __('admin-account.duration') }}</label>
-                                                                        <input class="form-control" type="text"
-                                                                            name="duration" value="{{ $item->duration }}"
-                                                                            id="duration" disabled>
-                                                                    </div>
-                                                                    <div class="form-group input-date">
-                                                                        <label for="name"
-                                                                            class="col-form-label">{{ __('admin-account.expiration-date') }}</label>
-                                                                        <input class="form-control" type="text"
-                                                                            name="date"
-                                                                            value="{{ $date->format('d-m-y') }}"
-                                                                            id="date" disabled>
-                                                                    </div>
-                                                                    <div class="form-group input-pay">
-                                                                        <label for="pay"
-                                                                            class="col-form-label">{{ __('admin-account.pay-method') }}</label>
+                                                                    <form action="{{ route('planpage.storePlan') }}" method="post">
+                                                                        @csrf
+                                                                        
+                                                                        <input style="display: none;" class="form-control" type="number" name="plan_id" value="{{ $item->id }}" id="plan_id" readonly>
+                                                                    
+                                                                        <label for="name" class="col-form-label">{{ __('admin-account.name') }}</label>
+                                                                        <input class="form-control" type="text" name="name" value="{{ $item->name }}" id="name" readonly>
+                                                                    
+                                                                        <label for="name" class="col-form-label">{{ __('admin-account.price') }}($)</label>
+                                                                        <input class="form-control" type="text" name="price" value="{{ $item->price }}" id="price" readonly>
+                                                                    
+                                                                        <label for="name" class="col-form-label">{{ __('admin-account.duration') }}</label>
+                                                                        <input class="form-control" type="text" name="duration" value="{{ $item->duration }}" id="duration" readonly>
+                                                                    
+                                                                        <label for="name" class="col-form-label">{{ __('admin-account.expiration-date') }}</label>
+                                                                        <input class="form-control" type="text" name="date" value="{{ $date->format('d-m-y') }}" id="date" readonly>
+                                                                    
+                                                                        <label for="nameuser" class="col-form-label">ADD NAME</Em></label>
+                                                                        <input class="form-control" type="text" name="nameuser"  id="nameuser">
+
+                                                                        <label for="email" class="col-form-label">ADD EMAIL</Em></label>
+                                                                        <input class="form-control" type="text" name="email"  id="email">
+
+                                                                        <label for="phone" class="col-form-label">ADD PHONE</Em></label>
+                                                                        <input class="form-control" type="text" name="phone"  id="phone">
+
+
+                                                                        <label for="pay" class="col-form-label">{{ __('admin-account.pay-method') }}</label>
                                                                         <div class="form-inline">
-                                                                            <input class="form-check-input mr-2"
-                                                                                type="radio" name="pay" value="paypal"
-                                                                                id="pay-01">
-                                                                            <label class="form-check-label"
-                                                                                for="pay-01">{{ __('admin-account.paypal') }}</label>
+                                                                            <input class="form-check-input mr-2" type="radio" name="pay" value="paypal" id="pay-01" checked>
+                                                                            <label class="form-check-label" for="pay-01">{{ __('admin-account.paypal') }}</label>
                                                                         </div>
                                                                         <div class="input-error text-danger">
                                                                             @error('pay')
                                                                                 {{ $message }}
                                                                             @enderror
                                                                         </div>
-                                                                    </div>
+                                                                    
+                                                                        <button style="color: white;
+                                                                                        background-color: #1515e0;
+                                                                                        border-radius: 5px;
+                                                                                        border: none;" type="submit">buy</button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -120,12 +118,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div class="choose_plan_btn">
-                                                                <a href='{{ route('planpage.storePlan') }}'
+                                                            {{-- <div class="choose_plan_btn">
+                                                                <a href='{{ route('planpage.storePlan', [$item->id, $item->price]) }}'
                                                                     class='btn btn-light add-item'
                                                                     data-id="{{ $item->id }}" data-action=""
                                                                     data-price="{{ $item->price }}">{{ __('admin-account.confirm') }}</a>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-2">
