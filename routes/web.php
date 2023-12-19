@@ -23,7 +23,10 @@ include 'admin.php';
 Route::get('/',[\App\Http\Controllers\HomePageController::class,'index']);
 Route::get('/plan',[\App\Http\Controllers\PlanPageController::class,'index'])->name('planpage.index');
 Route::get('/add-plan/{id}',[\App\Http\Controllers\PlanPageController::class,'addPlan'])->name('planpage.addPlan');
-Route::get('/store-plan',[\App\Http\Controllers\PlanPageController::class,'storePlans'])->name('planpage.storePlan');
+Route::post('/store-plan',[\App\Http\Controllers\PlanPageController::class,'storePlans'])->name('planpage.storePlan');
+Route::get('handle-payment',[\App\Http\Controllers\PaymentController::class, 'handlePayment'])->name('make.payment');
+Route::get('cancel-payment',[\App\Http\Controllers\PaymentController::class, 'paymentCancel'])->name('cancel.payment');
+Route::get('payment-success',[\App\Http\Controllers\PaymentController::class, 'paymentSuccess'])->name('success.payment');
 
 
 
@@ -77,7 +80,7 @@ Route::prefix('{site_name}')->middleware(['preventhistory','localization'])->gro
         Route::get('saved-whitlist/{id}',[App\Http\Controllers\Website\StudentLessonController::class,'saved_whitlist'])->name('website.saved_whitlist');
 
         //Payment
-        Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
+        // Route::get('payment',[\App\Http\Controllers\Website\PaymentController::class, 'index'])->name('payment');
         Route::get('handle-payment/{order_id}/{price}',[\App\Http\Controllers\Website\PaymentController::class, 'handlePayment'])->name('website.make.payment');
         Route::get('cancel-payment',[\App\Http\Controllers\Website\PaymentController::class, 'paymentCancel'])->name('website.cancel.payment');
         Route::get('payment-success/{order_id}',[\App\Http\Controllers\Website\PaymentController::class, 'paymentSuccess'])->name('website.success.payment');
