@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <h4 class="">{{__('admin-content.grade')}}</h4>
                             <hr>
-                            <p class="card-text">{{__('admin-content.text')}}</p>
+                            <p class="card-text">{{__('admin-content.text_grade')}}</p>
                             <a href="{{ route('admin.grades.index') }}" class="btn btn-light">
                                 {{__('admin-content.learn-more')}}
                             </a>
@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <h4 class="">{{__('admin-content.subject')}}</h4>
                             <hr>
-                            <p class="card-text">{{__('admin-content.text')}}</p>
+                            <p class="card-text">{{__('admin-content.text_subject')}}</p>
                             <a href="{{ route('admin.subjects.index') }}" class="btn btn-light">
                                 {{__('admin-content.learn-more')}}
                             </a>
@@ -60,7 +60,7 @@
                         <div class="card-body">
                             <h4 class="">{{__('admin-content.course')}}</h4>
                             <hr>
-                            <p class="card-text">{{__('admin-content.text')}}</p>
+                            <p class="card-text">{{__('admin-content.text_course')}}</p>
                             <a href="{{ route('admin.courses.index') }}" class="btn btn-light">
                                 {{__('admin-content.learn-more')}}
                             </a>
@@ -70,7 +70,7 @@
                         <div class="card-body">
                             <h4 class="">{{__('admin-content.lesson')}}</h4>
                             <hr>
-                            <p class="card-text">{{__('admin-content.text')}}</p>
+                            <p class="card-text">{{__('admin-content.text_lesson')}}</p>
                             <a href="{{ route('admin.lessons.index') }}" class="btn btn-light">
                                 {{__('admin-content.learn-more')}}
                             </a>
