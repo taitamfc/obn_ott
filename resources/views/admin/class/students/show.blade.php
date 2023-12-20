@@ -4,8 +4,13 @@
 @endsection
 @section('header')
 <style>
-select.form-control:not([size]):not([multiple]) {
-    height: auto;
+.table td,
+.table th {
+    border: 1 px solid;
+}
+
+.card-header {
+    border: none;
 }
 </style>
 @endsection
@@ -17,8 +22,8 @@ $informationStudent = $items['informationStudent'];
 @endphp
 <div class="main-content page-content">
     <div class="main-content-inner" style="max-width: 100% !important;">
-        <div class="row mb-4">
-            <div class="col-md-12 grid-margin">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
                         <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-class.my-class')}}</h5>
@@ -34,106 +39,114 @@ $informationStudent = $items['informationStudent'];
                 </div>
             </div>
         </div>
-        <div class="" style="padding: 20px">
-            <div class="row">
+        <div class="card">
+            <!-- Information -->
+            <div class="card-header d-flex justify">
                 <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                        {{__('admin-class.information-history')}}
-                        </div>
-                        <div class="card-body">
-                            <div class="single-table">
-                                <div class="table-responsive">
-                                    <table class="table table-hover progress-table text-left ">
-                                        <tr>
-                                            <th>{{__('admin-class.student')}} : </th>
-                                            <td>{{ $informationStudent->id }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>{{__('admin-class.name')}} : </th>
-                                            <td>{{ $informationStudent->name }}</td>
-                                        <tr>
-                                            <th>{{__('admin-class.email')}} :</th>
-                                            <td>{{ $informationStudent->email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>{{__('admin-class.phone')}} : </th>
-                                            <td>{{ $informationStudent->phone }}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h4>{{__('admin-class.information-history')}}</h4>
                 </div>
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                        {{__('admin-class.transaction-history')}}
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover progress-table text-left ">
-                                    <thead class="text-uppercase">
-                                        <tr>
-                                            <th>{{__('admin-class.date')}}</th>
-                                            <th>{{__('admin-class.course')}}</th>
-                                            <th>{{__('admin-class.amount')}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($transactionHistory as $item)
-                                        <tr>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->price }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+            </div>
+            <div class="card-body ml-4">
+                <div class="billing_info">
+                    <div class="row">
+                        <table class="table table-hover progress-table text-left ">
+                            <thead class="text-uppercase">
+                                <tr>
+                                    <th scope="col">
+                                        {{__('admin-class.student')}}
+                                    </th>
+                                    <th scope="col">
+                                        {{__('admin-class.name')}}
+                                    </th>
+                                    <th scope="col">
+                                        {{__('admin-class.email')}}
+                                    </th>
+                                    <th scope="col">
+                                        {{__('admin-class.phone')}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">{{ $informationStudent->id }}</td>
+                                    <td>{{ $informationStudent->name }}</td>
+                                    <td>{{ $informationStudent->email }}</td>
+                                    <td>{{ $informationStudent->phone }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="" style="padding: 20px">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            {{__('admin-class.viewing-history')}}
-                        </div>
-                        <div class="card-body">
-                            <div class="single-table">
-                                <div class="table-responsive">
-                                    <table class="table table-hover progress-table text-left ">
-                                        <thead class="text-uppercase">
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">{{__('admin-class.last-view')}}</th>
-                                                <th scope="col">{{__('admin-class.lesson')}}</th>
-                                                <th scope="col">{{__('admin-class.course')}}</th>
-                                                <th scope="col">{{__('admin-class.complete')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($lessonHistory as $item)
-                                            <tr class="item" id='item-{{ $item->id}}'>
-                                                <th scope="row">{{ $item->id }}</th>
-                                                <td>{{ $item->last_view }}</td>
-                                                <td>{{ isset($item->lesson)? $item->lesson->name : '' }}</td>
-                                                <td>{{ isset($item->course)? $item->course->name : '' }}</td>
-                                                <td>{!! $item->is_complete() !!}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    <div class="pagination" style="float:right">
-                                        {{ $lessonHistory->appends(request()->query())->links('pagination::bootstrap-4') }}
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Transaction History -->
+            <div class="card-header d-flex justify">
+                <div class="col-sm-6">
+                    <h4> {{__('admin-class.transaction-history')}}</h4>
+                </div>
+            </div>
+            <div class="card-body ml-4">
+                <div class="billing_info">
+                    <div class="row">
+                        <table class="table table-hover progress-table text-left ">
+                            <thead class="text-uppercase">
+                                <tr>
+                                    <th scope='col'>
+                                        {{__('admin-class.date')}}
+                                    </th>
+                                    <th scope='col'>
+                                        {{__('admin-class.course')}}
+                                    </th>
+                                    <th scope='col'>
+                                        {{__('admin-class.amount')}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($transactionHistory as $item)
+                                <tr>
+                                    <td scope="row">{{ $item->created_at }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->price }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Viewing History -->
+            <div class="card-header d-flex justify">
+                <div class="col-sm-6">
+                    <h4>{{__('admin-class.viewing-history')}}</h4>
+                </div>
+            </div>
+            <div class="card-body ml-4">
+                <div class="billing_info">
+                    <div class="row">
+                        <table class="table table-hover progress-table text-left ">
+                            <thead class="text-uppercase">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">{{__('admin-class.last-view')}}</th>
+                                    <th scope="col">{{__('admin-class.lesson')}}</th>
+                                    <th scope="col">{{__('admin-class.course')}}</th>
+                                    <th scope="col">{{__('admin-class.complete')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($lessonHistory as $item)
+                                <tr class="item" id='item-{{ $item->id}}'>
+                                    <th scope="row">{{ $item->id }}</th>
+                                    <td>{{ $item->last_view }}</td>
+                                    <td>{{ isset($item->lesson)? $item->lesson->name : '' }}</td>
+                                    <td>{{ isset($item->course)? $item->course->name : '' }}</td>
+                                    <td>{!! $item->is_complete() !!}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="pagination" style="float:right">
+                            {{ $lessonHistory->appends(request()->query())->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
