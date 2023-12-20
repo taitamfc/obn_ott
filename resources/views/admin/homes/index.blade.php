@@ -62,6 +62,8 @@ jQuery(document).ready(function() {
                 event.allDay = false;
             }
             list_events.push(event.title);
+            // console.log('event start' + event.start._i);
+            // console.log('event end' + event.end._i);
             let event_html = '<ul class="list-group">';
             for (let index = 0; index < list_events.length; index++) {
                 event_html += '<li class="list-group-item">';

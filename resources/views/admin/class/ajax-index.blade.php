@@ -14,7 +14,7 @@
                         @foreach($items as $item)
                         <tr>
                             <td class="text-center">
-                                <a href="{{ route('admin.classes.detail',$item->id) }}"
+                                <a href="{{ route('admin.classes.detail',$item->student_id) }}"
                                     style='color:black'>{{ $item->student->name }}
                                 </a>
                             </td>
