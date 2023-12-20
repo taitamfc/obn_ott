@@ -75,7 +75,19 @@
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-CKEDITOR.replace('description');
+var postImg = "{{ route('admin.lessons.store') }}";
+CKEDITOR.replace('description', {
+    startupFocus: true,
+    toolbar: [
+        ['ajaxsave'],
+        ['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
+        ['Cut', 'Copy', 'Paste', 'PasteText'],
+        ['Undo', 'Redo', '-', 'RemoveFormat'],
+        ['TextColor', 'BGColor'],
+        ['Maximize', 'Image']
+    ],
+    filebrowserUploadUrl: postImg
+});
 var url = "{{ route('admin.lessons.getSubject') }}";
 $(document).ready(function() {
     $('body').on('change', "#grade_id", function() {
