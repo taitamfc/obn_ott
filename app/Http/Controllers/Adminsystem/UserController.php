@@ -12,6 +12,7 @@ use App\Http\Requests\StoreBankUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateAvatarRequest;
+use App\Http\Controllers\Controller;
 
 use App\Models\Group;
 use App\Models\GroupRole;
@@ -30,27 +31,19 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use DB;
 use App\Traits\UploadFileTrait;
-use App\Http\Controllers\Admin\AdminController;
 
-
-class UserController extends AdminController
+class UserController extends Controller
 {
     use UploadFileTrait;
     /**
      * Display a listing of the resource.
      */
-
+    
     function index(Request $request){
-        // $this->authorize('User',User::class);
-        $groups = Group::where('site_id',$this->site_id)->orderBy('position','ASC')->get();
-        $users = User::where('site_id',$this->site_id)->get();
-        $roles = Role::get();
-        $selected_roles = [];
+        
+        $users = User::paginate(5);
         $param = [
-            'groups' => $groups,
             'users' => $users,
-            'roles' => $roles,
-            'selected_roles' => $selected_roles,
         ];
         if( $request->ajax() ){
             return view('adminsystems.users.ajax-index',$param);

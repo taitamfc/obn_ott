@@ -11,14 +11,12 @@ use Illuminate\Database\QueryException;
 use App\Http\Resources\SiteResource;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Http\Requests\StoreSiteRequest;
-use App\Http\Controllers\Admin\AdminController;
-
-class SiteController extends AdminController
+class SiteController extends Controller
 {
 
     function index(Request $request){
         if( $request->ajax() ){
-            $items = Site::where('user_id',$this->user_id)->paginate(20);
+            $items = Site::paginate(5);
             return view('adminsystems.sites.ajax-index',compact('items'));
         } 
         return view('adminsystems.sites.index');

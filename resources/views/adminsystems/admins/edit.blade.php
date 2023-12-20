@@ -25,7 +25,7 @@
 
 					<div class="form-group input-email">
 						<label for="email" class="col-form-label">Email</label>
-						<input class="form-control" type="text" id="email" name='email'>
+						<input class="form-control" type="email" id="email" name='email'>
 						<div class="input-error text-danger">@error('email') {{ $message }} @enderror</div>
 					</div>
 
@@ -37,7 +37,7 @@
 
 					<div class="form-group input-status">
 						<label for="status" class="col-form-label">Status</label>
-						<input class="form-control" type="text" id="status" name='status'>
+						<input class="form-control" type="number" id="status" name='status'>
 						<div class="input-error text-danger">@error('status') {{ $message }} @enderror</div>
 					</div>
 

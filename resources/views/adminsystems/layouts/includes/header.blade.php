@@ -32,8 +32,6 @@
                         </button>
                     </span>
                 </li>
-                @include('admin.includes.languages')
-                @include('admin.includes.notifications')
             </ul>
         </div>
     </div>

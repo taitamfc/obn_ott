@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
 
         'api' => [
@@ -54,6 +55,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+        'auth.adminsystem' => \App\Http\Middleware\AuthenticateAdmin::class,
         'auth.student' => \App\Http\Middleware\StudentAuthenticate::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
@@ -69,4 +71,5 @@ class Kernel extends HttpKernel
         'preventhistory' => \App\Http\Middleware\PreventBackHistory::class,
         'localization' => \App\Http\Middleware\Localization::class,
     ];
+
 }
