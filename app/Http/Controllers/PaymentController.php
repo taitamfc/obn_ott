@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;     
 use App\Models\Site;
-
+use App\Jobs\SendEmail;
 
 
 
@@ -83,8 +83,8 @@ class PaymentController extends Controller
         $response = $provider->capturePaymentOrder($request['token']);
         $order = PlanOrder::findOrfail($order_id);
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            DB::beginTransaction();
             try {
-                DB::beginTransaction();
                 $currentDateTime = Carbon::now();
                 // create account
                 
@@ -99,6 +99,7 @@ class PaymentController extends Controller
                     $user = new User();
                     $user->name = $order->name;
                     $user->email = $order->email;
+                    $user->role = 'site_owner';
                     $user->password = bcrypt(123456);
                     // Register sites
                     if($user->save()){
@@ -114,6 +115,18 @@ class PaymentController extends Controller
                             $user->site_id = $site->id;
                             $user->save();
                         }
+                        $site_link       = route('cms',['site_name'=>$order->name]);
+                        $site_link_login = route('login');
+                        $site_title      = $order->name;
+                        $data = [
+                            'name' => $order->name,
+                            'email' => $order->email,
+                            'password' => 123456,
+                            'site_link'         => $site_link,
+                            'site_link_login'   => $site_link_login,
+                            'site_title'        => $site_title,
+                        ];
+                        SendEmail::dispatch($user,$data,'store_member');
                     }
                     DB::commit();
                    
@@ -128,8 +141,8 @@ class PaymentController extends Controller
                 // Relationship Plan and Site
                 $plan_site = new PlanSite();
                 $plan_site->plan_id = $plan->id;
-                $plan_site->site_id = $this->site_id;
-                $current_plan_date = PlanSite::where('site_id',$this->site_id)->latest('created_at')->value('expiration_date');
+                $plan_site->site_id = $site->id;
+                $current_plan_date = PlanSite::where('site_id',$site->id)->latest('created_at')->value('expiration_date');
                 // if user has current plan
                 if (!empty($current_plan_date)) {
                     $current_plan_date = Carbon::parse($current_plan_date);
@@ -153,7 +166,7 @@ class PaymentController extends Controller
                 $bill->save();
 
                 DB::commit();
-                return view('page.homepage.HomePage',compact('order'));
+                return view('page.plans.sendEmail',compact('order'));
             } catch (\Exception $e) {
                 DB::rollback();
                 Log::error('Bug occurred: ' . $e->getMessage());

@@ -49,7 +49,7 @@
                         class="ti-arrow-right"></i></button>
             </div>
             <div class="form-footer text-center mt-5">
-                <p class="text-muted">{{__('login.dont-have-an-account-yet?')}} <a href="{{ route('admin.register') }}" class="text-primary">{{__('login.sing-up')}} </a>
+                <p class="text-muted">{{__('login.dont-have-an-account-yet?')}} <a href="{{ route('planpage.index') }}" class="text-primary">{{__('login.sing-up')}} </a>
                 </p>
             </div>
         </div>
