@@ -14,6 +14,11 @@ class Plan extends Model
         'name',
         'price',
         'duration',
+        'number_course',
+        'number_student',
+        'number_grade',
+        'number_subject',
+        'number_lesson',
         'number_days'
     ];
 

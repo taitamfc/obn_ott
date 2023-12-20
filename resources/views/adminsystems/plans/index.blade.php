@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-setting.sites')}}</h5>
+                        <h5 class="mr-4 mb-0 font-weight-bold">Plans</h5>
                     </div>
                     <div class="buttons d-flex">
                         <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
@@ -167,6 +167,11 @@ jQuery(document).ready(function() {
                     formUpdate.find('.input-price input').val(formData.price);
                     formUpdate.find('.input-duration input').val(formData.duration);
                     formUpdate.find('.input-number_days input').val(formData.number_days);
+                    formUpdate.find('.input-number_course input').val(formData.number_course);
+                    formUpdate.find('.input-number_student input').val(formData.number_student);
+                    formUpdate.find('.input-number_grade input').val(formData.number_grade);
+                    formUpdate.find('.input-number_subject input').val(formData.number_subject);
+                    formUpdate.find('.input-number_lesson input').val(formData.number_lesson);
                     
                 }
             }

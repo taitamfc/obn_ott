@@ -10,43 +10,43 @@
 				<div class="modal-body">
 
 					<div class="form-group input-name">
-						<label for="name" class="col-form-label">name</label>
+						<label for="name" class="col-form-label">Name</label>
 						<input class="form-control" type="text" id="name" name='name'>
 						<div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
 					</div>
 
 					<div class="form-group input-code">
-						<label for="code" class="col-form-label">code</label>
+						<label for="code" class="col-form-label">Code</label>
 						<input class="form-control" type="text" id="code" name='code'>
 						<div class="input-error text-danger">@error('code') {{ $message }} @enderror</div>
 					</div>
 
 					<div class="form-group input-email">
-						<label for="email" class="col-form-label">email</label>
+						<label for="email" class="col-form-label">Email</label>
 						<input class="form-control" type="text" id="email" name='email'>
 						<div class="input-error text-danger">@error('email') {{ $message }} @enderror</div>
 					</div>
 
 					<div class="form-group input-phone">
-						<label for="phone" class="col-form-label">phone</label>
+						<label for="phone" class="col-form-label">Phone</label>
 						<input class="form-control" type="text" id="phone" name='phone'>
 						<div class="input-error text-danger">@error('phone') {{ $message }} @enderror</div>
 					</div>
 
 					<div class="form-group input-status">
-						<label for="status" class="col-form-label">status</label>
+						<label for="status" class="col-form-label">Status</label>
 						<input class="form-control" type="text" id="status" name='status'>
 						<div class="input-error text-danger">@error('status') {{ $message }} @enderror</div>
 					</div>
 
 					<div class="form-group input-password">
-						<label for="password" class="col-form-label">password</label>
+						<label for="password" class="col-form-label">Password</label>
 						<input class="form-control" type="text" id="password" name='password'>
 						<div class="input-error text-danger">@error('password') {{ $message }} @enderror</div>
 					</div>
 
 					<div class="form-group input-address">
-						<label for="address" class="col-form-label">address</label>
+						<label for="address" class="col-form-label">Address</label>
 						<input class="form-control" type="text" id="address" name='address'>
 						<div class="input-error text-danger">@error('address') {{ $message }} @enderror</div>
 					</div>
