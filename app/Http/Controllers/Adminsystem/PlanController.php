@@ -31,6 +31,11 @@ class PlanController extends AdminController
         $item->name = $request->name;
         $item->price = $request->price;
         $item->duration = $request->duration;
+        $item->number_course = $request->number_course;
+        $item->number_student = $request->number_student;
+        $item->number_grade = $request->number_grade;
+        $item->number_subject = $request->number_subject;
+        $item->number_lesson = $request->number_lesson;
         $item->number_days = $request->number_days;
         try {
             $item->save();
@@ -60,6 +65,11 @@ class PlanController extends AdminController
         $item->name = $request->name;
         $item->price = $request->price;
         $item->duration = $request->duration;
+        $item->number_course = $request->number_course;
+        $item->number_student = $request->number_student;
+        $item->number_grade = $request->number_grade;
+        $item->number_subject = $request->number_subject;
+        $item->number_lesson = $request->number_lesson;
         $item->number_days = $request->number_days;
         try {
             $item->save();

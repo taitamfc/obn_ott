@@ -34,20 +34,25 @@
                                                 </p>
                                             </div>
                                             <div class="aboutarea__list">
-                                                <ul>
-                                                    <li>
-                                                        <i class="icofont-check"></i> Explore a variety of fresh educational
-                                                        teach
+                                                <ul style="display: block;">
+                                                    <li  style="display: block;">
+                                                        <i class="icofont-check"></i> Number Course : {{$plan->number_course}}
                                                     </li>
 
-                                                    <li>
-                                                        <i class="icofont-check"></i> Explore a variety of fresh educational
-                                                        teach
+                                                    <li  style="display: block;">
+                                                        <i class="icofont-check"></i> Number Student : {{$plan->number_student}}
+                                                    </li  style="display: block;">
+
+                                                    <li  style="display: block;">
+                                                        <i class="icofont-check"></i> Number Grade : {{$plan->number_grade}}
+                                                    </li  style="display: block;">
+
+                                                    <li  style="display: block;">
+                                                        <i class="icofont-check"></i> Number Subject : {{$plan->number_subject}}
                                                     </li>
 
-                                                    <li>
-                                                        <i class="icofont-check"></i> Explore a variety of fresh educational
-                                                        teach
+                                                    <li  style="display: block;">
+                                                        <i class="icofont-check"></i> Number Lesson : {{$plan->number_lesson}}
                                                     </li>
                                                 </ul>
                                             </div>
