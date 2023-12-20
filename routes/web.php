@@ -18,8 +18,9 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 include 'admin.php';
+include 'adminsystem.php';
 
-// home page
+// home page  
 Route::get('/',[\App\Http\Controllers\HomePageController::class,'index']);
 Route::get('/plan',[\App\Http\Controllers\PlanPageController::class,'index'])->name('planpage.index');
 Route::get('/add-plan/{id}',[\App\Http\Controllers\PlanPageController::class,'addPlan'])->name('planpage.addPlan');
@@ -31,18 +32,10 @@ Route::get('payment-success',[\App\Http\Controllers\PaymentController::class, 'p
 
 
 
-//Adminsystem
-    Route::prefix('adminsystem')->middleware('auth')->group(function () {
-        Route::get('sites',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
-        Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
-        Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
-        Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
-    });
 
 
-// login admins
-Route::get('/adminsystemlogin', [App\Http\Controllers\AuthAdminController::class,'login'])->name('adminsystem.login');
-Route::post('/adminsystemlogin', [App\Http\Controllers\AuthAdminController::class,'postLogin'])->name('adminsystem.postLogin');
+
+
 
 
 // login by social

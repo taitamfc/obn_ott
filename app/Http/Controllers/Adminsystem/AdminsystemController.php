@@ -11,14 +11,13 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\AdminResource;
 use Carbon\Carbon;
 use DB;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Http\Requests\StorePlanRequest;
+use App\Http\Controllers\Controller;
 
 
 
-
-class AdminsystemController extends AdminController
+class AdminsystemController extends Controller
 {
     function index(Request $request){
         if ($request->ajax()) {

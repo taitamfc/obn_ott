@@ -13,7 +13,6 @@
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
             <!-- Setting -->
-            @if (Auth::user()->hasPermission('Setting'))
                 <li>
                     <a href="{{ route('adminsystem.sites.index') }}">
                         <i class="feather ft-home"></i>
@@ -43,9 +42,13 @@
                                 <span>Admin</span>
                             </a>
                         </li>
+                        <li> <a href="{{ route('adminsystem.logout') }}">
+                            <i class="feather ft-home"></i>
+                            <span>LogOut</span>
+                        </a>
+                    </li>
                     </ul>
                 </li>
-            @endif
             </ul>
         </div>
         <div class="clearfix"></div>

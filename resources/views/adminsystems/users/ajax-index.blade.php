@@ -39,6 +39,9 @@
                     </table>
                 </div>
             </div>
+            <div class="card-footer">
+                {{ $users->appends(request()->query())->links() }}
+            </div>
         </div>
     </div>
 </div>
