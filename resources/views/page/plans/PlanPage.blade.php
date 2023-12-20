@@ -19,39 +19,44 @@
                             <div style="
                                             margin-left: 20px;
                                             margin-right: 20px;
-                                        " class="row">
-                                @foreach ($plans as $plan => $value)
-                                <div class="col-lg-4">
-                                        <div style="
-                                        margin-top: 20px;
-                                        margin-bottom: 20px;
-                                        background-color: #F7F7F7;
-                                        border-radius: 8px;
-                                        " class="wrapper">
-                                            <div class="main_pricing_conatiner wow fadeInLeftBig" data-wow-delay="0.3">
-                                                <div class="price">
-                                                    <h2>
-                                                        <span class="price_icon">
-                                                            <i class="fa fa-money"></i>
-                                                        </span>
-                                                        {{$value->name}}
-                                                    </h2>
-                                                    <span class="price_tag">
-                                                        <span class="currency">{{$value->price}}</span>
-                                                    </span>
-                                                    <span class="per_month">/{{$value->duration}}</span>
-                                                </div>
-                                                <div class="price_listing">
-                                                    <span>{{$value->number_days}}</span>
-                                                </div>
-                                                <div class="headerarea__button">
-                                                    <a href="{{ route('planpage.addPlan',$value->id) }}" class="btn btn-secondary">
-                                                        Buy Plan
-                                                    </a>
-                                                </div>
+                                        "
+                                class="row">
+                                @foreach ($plans as $plan)
+                                    <div class="col-lg-4 mb-5">
+                                        <div class="aboutarea__content__wraper px-0">
+
+                                            <div class="aboutarea__headding heading__underline">
+                                                <h2>{{ $plan->name }}</h2>
+                                            </div>
+                                            <div class="aboutarea__para">
+                                                <p>
+                                                    ${{$plan->price}}
+                                                </p>
+                                            </div>
+                                            <div class="aboutarea__list">
+                                                <ul>
+                                                    <li>
+                                                        <i class="icofont-check"></i> Explore a variety of fresh educational
+                                                        teach
+                                                    </li>
+
+                                                    <li>
+                                                        <i class="icofont-check"></i> Explore a variety of fresh educational
+                                                        teach
+                                                    </li>
+
+                                                    <li>
+                                                        <i class="icofont-check"></i> Explore a variety of fresh educational
+                                                        teach
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="aboutarea__bottom__button">
+                                                <a class="default__button" href="{{ route('planpage.addPlan',$plan->id) }}">Buy Plan
+                                                </a>
                                             </div>
                                         </div>
-                                </div>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>

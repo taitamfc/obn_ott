@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use DB;
+use App\Http\Requests\StorePlanBuyRequest;
 
 class PlanPageController extends Controller
 {
@@ -24,7 +25,7 @@ class PlanPageController extends Controller
             $date = Carbon::now()->addDays(intval($item->number_days));
             return view('page.plans.BuyPlan',compact(['item','date']));
     }
-    public function storePlans(Request $request){
+    public function storePlans(StorePlanBuyRequest $request){
         try {
             DB::beginTransaction();
             $order = new PlanOrder();
