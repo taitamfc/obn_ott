@@ -45,6 +45,7 @@ var indexUrl = "{{ route('admins.index') }}";
 var positionUrl = "";
 var params = <?= json_encode(request()->query()); ?>;
 var wrapperResults = '.subject-table-results';
+
 jQuery(document).ready(function() {
     // Get all items
     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);

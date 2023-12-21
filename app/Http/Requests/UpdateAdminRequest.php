@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateAdminRequest extends FormRequest
 {
@@ -23,25 +25,30 @@ class UpdateAdminRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'code' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required',
-            'status' => 'required',
-            'password' => 'required',
-            'address' => 'required',
+            'status' => 'required|numeric',
+            'password' => 'required'
         ];
     }
 
     public function messages()
     {
-        return  [
-                'name.required' => 'The name field is required',
-                'code.required' => 'The email field is required',
-                'email.required' => 'The password field is required',
-                'phone.required' => 'The password field is required',
-                'status.required' => 'The password field is required',
-                'password.required' => 'The password field is required',
-                'address.required' => 'The password field is required'
-            ];
+        return [
+            'name.required' => 'The name field is required',
+            'email.required' => 'The email field is required',
+            'phone.required' => 'The phone field is required',
+            'status.required' => 'The status field is required',
+            'password.required' => 'The password field is required',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'errors' => $validator->errors(),
+            'success' => false,
+            'has_errors' => true,
+        ], 200));
     }
 }

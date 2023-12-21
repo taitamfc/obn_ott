@@ -13,15 +13,6 @@
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
             <!-- Setting -->
-                <li>
-                    <a href="{{ route('adminsystem.sites.index') }}">
-                        <i class="feather ft-home"></i>
-                        <span>Adminsystem</span>
-                        <span class="float-right arrow">
-                            <i class="ion ion-chevron-down"></i>
-                        </span>
-                    </a>
-                    <ul>
                         <li> <a href="{{ route('adminsystem.sites.index') }}">
                                 <i class="feather ft-home"></i>
                                 <span>Sites</span>
@@ -47,8 +38,6 @@
                             <span>LogOut</span>
                         </a>
                     </li>
-                    </ul>
-                </li>
             </ul>
         </div>
         <div class="clearfix"></div>

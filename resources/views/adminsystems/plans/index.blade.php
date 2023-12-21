@@ -84,7 +84,6 @@ jQuery(document).ready(function() {
             success: function(res) {
                 if (res.has_errors) {
                     for (const key in res.errors) {
-                        console.log(key);
                         jQuery('.input-' + key).find('.input-error').html(res.errors[key][
                             0
                         ]);
@@ -151,7 +150,6 @@ jQuery(document).ready(function() {
 
 
         // Lấy dữ liệu
-        console.log(123);
         let id = jQuery(this).data('id');
         let action = jQuery(this).data('action');
 

@@ -12,7 +12,7 @@ use App\Http\Resources\AdminResource;
 use Carbon\Carbon;
 use DB;
 use App\Http\Requests\UpdateAdminRequest;
-use App\Http\Requests\StorePlanRequest;
+use App\Http\Requests\StoreAdminRequest;
 use App\Http\Controllers\Controller;
 
 
@@ -29,12 +29,10 @@ class AdminsystemController extends Controller
     function store(StoreAdminRequest $request){
         $item = new Admin();
         $item->name = $request->name;
-        $item->code = $request->code;
         $item->email = $request->email;
         $item->phone = $request->phone;
         $item->status = $request->status;
         $item->password = bcrypt($request->password);
-        $item->address = $request->address;
         try {
             $item->save();
             return response()->json([
@@ -61,12 +59,10 @@ class AdminsystemController extends Controller
     {
         $item = Admin::find($id);
         $item->name = $request->name;
-        $item->code = $request->code;
         $item->email = $request->email;
         $item->phone = $request->phone;
         $item->status = $request->status;
         $item->password = bcrypt($request->password);
-        $item->address = $request->address;
         try {
             $item->save();
             return response()->json([

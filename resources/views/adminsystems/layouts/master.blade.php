@@ -57,9 +57,6 @@
             @yield('content')
             @include('admin.includes.footer')
         </div>
-        <div>
-            Do not have permission to access the website!
-        </div>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- <script src="{{ asset('assets/vendors/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/vendors/fullcalendar/dist/fullcalendar.min.js') }}"></script>

@@ -1,53 +1,83 @@
 @extends('adminsystems.layouts.master')
 @section('title')
-{{ __('admin-sidebar.sites') }}
+    {{ __('admin-sidebar.sites') }}
 @endsection
 @section('content')
-<div class="main-content page-content">
-    <div class="main-content-inner" style="max-width: 100% !important;">
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="d-flex justify-content-between flex-wrap">
-                    <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
-                        <h5 class="mr-4 mb-0 font-weight-bold">{{__('admin-setting.sites')}}</h5>
-                    </div>
-                    <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Progress Table start -->
-            <div class="col-12">
-                @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+    <div class="main-content page-content">
+        <div class="main-content-inner" style="max-width: 100% !important;">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
+                            <h5 class="mr-4 mb-0 font-weight-bold">Show Site</h5>
                         </div>
-                        <script>
-                            setTimeout(function() {
-                                var successAlert = document.getElementById('success-alert');
-                                if (successAlert) {
-                                    successAlert.style.display = 'none';
-                                }
-                            }, 3000); // 3 giây
-                        </script>
-                    @endif
-                <div class="card subject-table-results">
-                    <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
+                        <div class="buttons d-flex">
+                            <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
-            <!-- Progress Table end -->
+
+            <div class="row">
+                <!-- Progress Table start -->
+                <div class="col-12">
+                    <div class="card subject-table-results">
+                        <div class="text-center pt-5 pb-5">
+                            <div style="
+                            justify-content: center;
+                            align-content: center;
+                            align-items: center;
+                            display: flex;
+                        " class="card-body">
+                                <div class="col-lg-6">
+                                    <form action="{{route('adminsystem.site.updateSitePlan')}}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                          <label style="display:flex;" for="name">Site Name</label>
+                                          <input type="hidden" class="form-control" name="site_id" id="site_id" value="{{$SiteResource->id}}" readonly>
+                                          <input type="text" class="form-control" name="name" id="name" value="{{$SiteResource->name}}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                          <label style="display:flex;" for="slug">Slug</label>
+                                          <input type="text" class="form-control" name="slug" id="slug" value="{{$SiteResource->slug}}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="display:flex;" for="user">User</label>
+                                            <input type="text" class="form-control" name="user" id="user" value="{{$SiteResource->user->name}}" readonly>
+                                            <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{$SiteResource->user->id}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="display:flex;" for="status">Status</label>
+                                            <select class="form-control" name="status" id="">
+                                                <option  value="1"><span class="badge badge-success">Active</span></option>
+                                                <option value="0"><span class="badge badge-danger">InActive</span></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="display:flex;" for="plan">Plans</label>
+                                            <select class="form-control" name="plan_id" id="">
+                                                @foreach ($planName as $plan )
+                                                    <option @selected($current_Plan == $plan['id']) value="{{$plan['id']}}">{{$plan['name']}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- Progress Table end -->
+            </div>
         </div>
     </div>
-</div>
-{{-- @include('admin.settings.sites.edit')
-@include('admin.settings.sites.create') --}}
 @endsection
 
+@section('footer')
+@endsection
 @section('footer')
 <script>
 var indexUrl = "{{ route('adminsystem.sites.index') }}";
