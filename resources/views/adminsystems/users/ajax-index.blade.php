@@ -1,6 +1,6 @@
 @if( count($users) )
 <!-- User -->
-<div class="row mb-4">
+{{-- <div class="row mb-4">
     <div class="col-md-12 grid-margin">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
@@ -11,10 +11,10 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
+</div> --}}
+{{-- <div class="row"> --}}
     <!-- Progress Table start -->
-    <div class="col-12 mt-4">
+    {{-- <div class="col-12 mt-4"> --}}
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,7 +26,7 @@
                                 <th scope="col">{{__('admin-account.email')}}</th>
                             </tr>
                         </thead>
-                        <tbody class="sortable-table ">
+                        <tbody class="">
                             @foreach($users as $user)
                             <tr class="item draggable" id='item-{{ $user->id}}'>
                                 <th scope="row">{{ $user->id }}</th>
@@ -43,8 +43,8 @@
                 {{ $users->appends(request()->query())->links() }}
             </div>
         </div>
-    </div>
-</div>
+    {{-- </div> --}}
+{{-- </div> --}}
 @else
 <div class="text-center pt-5 pb-5">{{ __('sys.no_data') }}</div>
 @endif

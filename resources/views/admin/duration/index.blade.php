@@ -102,6 +102,9 @@ jQuery(document).ready(function() {
                     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
                 }
 
+            },
+            errors: function(res){
+                console.log(res);
             }
         });
     });

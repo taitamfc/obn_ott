@@ -11,7 +11,7 @@
                     <th scope="col">ACTION</th>
                 </tr>
             </thead>
-            <tbody class="sortable-table ">
+            <tbody class="">
                 @if( count($items) )
                 @foreach($items as $item)
                 <tr class="item draggable" id='item-{{ $item->id}}'>

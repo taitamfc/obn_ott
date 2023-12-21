@@ -62,9 +62,9 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     function store(StoreUserRequest $request){
+        DB::beginTransaction();
         try {
             // $this->authorize('User',User::class);
-            DB::beginTransaction();
             $item = new User();
             $item->name = $request->name;
             $item->email = $request->email;

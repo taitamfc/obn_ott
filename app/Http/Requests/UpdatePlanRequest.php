@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdatePlanRequest extends FormRequest
 {
@@ -23,9 +25,14 @@ class UpdatePlanRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'duration' => 'required',
-            'number_days' => 'required',
+            'number_days' => 'required|numeric',
+            'number_course' => 'required|numeric',
+            'number_student' => 'required|numeric',
+            'number_grade' => 'required|numeric',
+            'number_subject' => 'required|numeric',
+            'number_lesson' => 'required|numeric',
         ];
     }
 
@@ -33,9 +40,22 @@ class UpdatePlanRequest extends FormRequest
     {
         return  [
                 'name.required' => 'The name field is required',
-                'price.required' => 'The email field is required',
-                'duration.required' => 'The password field is required',
-                'number_days.required' => 'The password field is required'
+                'price.required' => 'The price field is required',
+                'duration.required' => 'The duration field is required',
+                'number_days.required' => 'The number days field is required',
+                'number_course.required' => 'The number course field is required',
+                'number_student.required' => 'The number student field is required',
+                'number_grade.required' => 'The number grade field is required',
+                'number_subject.required' => 'The number subject field is required',
+                'number_lesson.required' => 'The number lesson field is required'
             ];
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'errors' => $validator->errors(),
+            'success' => false,
+            'has_errors' => true,
+        ], 200));
     }
 }

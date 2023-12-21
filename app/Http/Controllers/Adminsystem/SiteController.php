@@ -5,12 +5,18 @@ namespace App\Http\Controllers\Adminsystem;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Site;
+use App\Models\Plan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\SiteResource;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Http\Requests\StoreSiteRequest;
+use App\Models\PlanSite;
+use Carbon\Carbon;
+use DB;
+
+
 class SiteController extends Controller
 {
 
@@ -23,9 +29,19 @@ class SiteController extends Controller
     }
     public function show(string $id)
     {
-        $item = Site::where('user_id', auth()->user()->id)->find($id);
+        $item = Site::find($id);
+        $SiteResource = new SiteResource($item);
+        $current_Plan = PlanSite::where('site_id', $id)->value('plan_id');
+        $plans = Plan::all();
+        $planName = [];
+        foreach ($plans as $plan) {
+            $planName[] = [
+                'id' => $plan->id,
+                'name' => $plan->name
+                ];
+        }
 
-        return new SiteResource($item);
+        return view('adminsystems.sites.show',compact(['SiteResource','planName','current_Plan'])); 
     }
 
     /**
@@ -116,5 +132,50 @@ class SiteController extends Controller
     public function changeSite($site_id){
         session()->put('site_id',$site_id);
         return redirect()->back();
+    }
+
+    public function updateSitePlan(Request $request){
+
+        DB::beginTransaction();
+        try {
+            $currentDateTime = Carbon::now();
+
+            $site_id = $request->site_id;
+            $plan_id = $request->plan_id;
+            $plan = Plan::findOrfail($plan_id);
+            $currentPlanId = PlanSite::where('site_id',$site_id)->where('is_current',1)->value('plan_id');
+    
+            if ($plan_id != $currentPlanId) {
+                 // Relationship Plan and Site
+                $plan_site = new PlanSite();
+                $plan_site->plan_id = $plan->id;
+                $plan_site->site_id = $site_id;
+                $current_plan_date = PlanSite::where('site_id',$site_id)->latest('created_at')->value('expiration_date');
+                // if user has current plan
+                if (!empty($current_plan_date)) {
+                    $current_plan_date = Carbon::parse($current_plan_date);
+                    $plan_site->is_current = 0;
+                    $plan_site->created_at = $current_plan_date;
+                    $plan_site->expiration_date = $current_plan_date->addDays($plan->number_days);
+                // if user don't have plan
+                }else {
+                    $plan_site->is_current = 1;
+                    $plan_site->created_at = $currentDateTime;
+                    $plan_site->expiration_date = $currentDateTime->addDays($plan->number_days);
+                }
+                $plan_site->save();
+                DB::commit();
+                return redirect()->route('adminsystem.sites.index')->with('success', __('sys.update_item_success'));
+            }else{
+                return redirect()->route('adminsystem.sites.index');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Bug occurred: ' . $e->getMessage());
+            return response([
+                'success' => false,
+                'message' => __('sys.update_item_error'),
+            ]);
+        }
     }
 }

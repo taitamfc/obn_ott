@@ -6,27 +6,26 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">NAME</th>
-                    <th scope="col">code</th>
                     <th scope="col">email</th>
                     <th scope="col">phone</th>
                     <th scope="col">status</th>
-                    <th scope="col">password</th>
-                    <th scope="col">address</th>
                     <th scope="col">ACTION</th>
                 </tr>
             </thead>
-            <tbody class="sortable-table ">
+            <tbody class="">
                 @if( count($items) )
                 @foreach($items as $item)
                 <tr class="item draggable" id='item-{{ $item->id}}'>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
-                    <td>{!! $item->code !!}</td>
                     <td>{!! $item->email !!}</td>
                     <td>{!! $item->phone !!}</td>
-                    <td>{!! $item->status !!}</td>
-                    <td>{!! $item->password !!}</td>
-                    <td>{!! $item->address !!}</td>
+                    @if ($item->status == 1) 
+                    <td>{!! '<span class="badge badge-success">Active</span>' !!}</td>
+                    @endif
+                    @if ($item->status == 0) 
+                    <td>{!! '<span class="badge badge-danger">Inactive</span>' !!}</td>
+                    @endif
                     <td>
                         <ul class="d-flex">
                             <li class="mr-3">
