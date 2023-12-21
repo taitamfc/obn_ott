@@ -142,9 +142,16 @@ class SiteController extends Controller
 
             $site_id = $request->site_id;
             $plan_id = $request->plan_id;
+            $status = $request->status;
             $plan = Plan::findOrfail($plan_id);
             $currentPlanId = PlanSite::where('site_id',$site_id)->where('is_current',1)->value('plan_id');
-    
+            $currentStatusSite = Site::where('id',$site_id)->value('status');
+            if($currentStatusSite != $status){
+                $item = Site::find($site_id);
+                $item->status = $status;
+                $item->save();
+                DB::commit();
+            }
             if ($plan_id != $currentPlanId) {
                  // Relationship Plan and Site
                 $plan_site = new PlanSite();
