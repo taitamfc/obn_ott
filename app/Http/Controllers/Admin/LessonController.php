@@ -137,6 +137,13 @@ class LessonController extends AdminController
         $item->video_url = $request->video;
         $item->preview_token = md5(time());
 
+        // Lấy position lớn nhất trong bảng với điều kiện cùng khóa học
+        $maxPosition = Lesson::where('site_id', $this->site_id)
+        ->where('course_id', $request->course_id)
+        ->max('position');
+
+        // Gán giá trị mới cho position
+        $item->position = $maxPosition + 1;
         DB::beginTransaction();
         try {
             if ($request->hasFile('video')) {
