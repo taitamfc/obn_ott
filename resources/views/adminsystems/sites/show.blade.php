@@ -49,8 +49,8 @@
                                         <div class="form-group">
                                             <label style="display:flex;" for="status">Status</label>
                                             <select class="form-control" name="status" id="">
-                                                <option  value="1"><span class="badge badge-success">Active</span></option>
-                                                <option value="0"><span class="badge badge-danger">InActive</span></option>
+                                                <option @selected($SiteResource->status == 1)  value="1"><span class="badge badge-success">Active</span></option>
+                                                <option @selected($SiteResource->status == 0) value="0"><span class="badge badge-danger">InActive</span></option>
                                             </select>
                                         </div>
                                         <div class="form-group">
