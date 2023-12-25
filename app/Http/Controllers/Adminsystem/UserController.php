@@ -41,7 +41,7 @@ class UserController extends Controller
     
     function index(Request $request){
         
-        $users = User::with('plansite')->paginate(5);
+        $users = User::with('plansite')->where('role','site_owner')->paginate(5);
         $param = [
             'users' => $users,
         ];

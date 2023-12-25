@@ -74,7 +74,10 @@ class User extends Authenticatable
     public function plansite(){
         return $this->hasMany(PlanSite::class);
     }
-    //Feature
+   // Feature
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+    
     public function getGroupNamesAttribute()
     {
         return $this->group ? $this->group->name : '';
@@ -90,5 +93,19 @@ class User extends Authenticatable
     public function getPlanExpirationAttribute()
     {
         return $this->plansite->first() ? $this->plansite->first()->expiration_date : '';
+    }
+     // status_fm 
+    public function getStatusFmAttribute()
+    {
+        $html = '<select class="form-control" name="status">';
+        if ($this->status == self::INACTIVE) {
+            $html .= '<option class="badge badge-warning" selected>In Active</option>';
+            $html .= '<option class="badge badge-success">Active</option>';
+        } else {
+            $html .= '<option class="badge badge-warning">In Active</option>';
+            $html .= '<option class="badge badge-success" selected>Active</option>';
+        }
+        $html .= '</select>';
+        return $html;
     }
 }
