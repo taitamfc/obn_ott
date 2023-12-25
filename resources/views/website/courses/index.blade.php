@@ -6,7 +6,7 @@
 
 @section('content')
 @include('website.includes.header.breadcrumb',[
-'page_title' => 'Plan'
+'page_title' => 'Store'
 ])
 
 <div class="coursearea sp_top_100 sp_bottom_100">

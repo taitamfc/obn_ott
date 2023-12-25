@@ -79,7 +79,7 @@
                     <div class="headerarea__right">
                         <div class="headerarea__button">
                             <a
-                                href="{{ route('website.courses.index',['site_name'=>$site_name]) }}">{{__('account.plan')}}</a>
+                                href="{{ route('website.courses.index',['site_name'=>$site_name]) }}">{{__('account.store')}}</a>
                         </div>
                     </div>
                 </div>

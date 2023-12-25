@@ -39,4 +39,5 @@ return [
     'payment-method' => 'Payment',
     'type' => 'Type',
     'answer' => 'Answer',
+    'store' => 'Store',
 ];

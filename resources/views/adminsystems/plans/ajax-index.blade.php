@@ -6,8 +6,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">NAME</th>
                     <th scope="col">price</th>
-                    <th scope="col">duration</th>
-                    <th scope="col">number days</th>
+                    <th scope="col">Number Admin</th>
+                    <th scope="col">number Course</th>
                     <th scope="col">ACTION</th>
                 </tr>
             </thead>
@@ -18,8 +18,8 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
                     <td>{!! $item->price !!}</td>
-                    <td>{!! $item->duration !!}</td>
-                    <td>{!! $item->number_days !!}</td>
+                    <td>{!! $item->number_admin !!}</td>
+                    <td>{!! $item->number_course !!}</td>
                     <td>
                         <ul class="d-flex">
                             <li class="mr-3">

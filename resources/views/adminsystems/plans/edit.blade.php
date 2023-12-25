@@ -12,24 +12,70 @@
                 <div class="modal-body">
 
                     <div class="form-group input-name">
-                        <label for="name" class="col-form-label">Name</label>
+                        <label for="name" class="col-form-label">Plan Name (*)</label>
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
+                    <div class="form-group input-price">
+                        <label for="price" class="col-form-label">Price (*)</label>
+                        <input class="form-control" type="number" id="price" name='price'>
+                        <div class="input-error text-danger">
+                            @error('price')
+                            {{ $message }}
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group input-number_course">
+                        <label for="number_course" class="col-form-label">Number Courses (*)</label>
+                        <input class="form-control" type="number" id="number_course" name='number_course'>
+                        <div class="input-error text-danger">@error('number_course') {{ $message }} @enderror
+                        </div>
+                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group input-price">
-                                <label for="price" class="col-form-label">Price</label>
-                                <input class="form-control" type="number" id="price" name='price'>
-                                <div class="input-error text-danger">
-                                    @error('price')
-                                    {{ $message }}
-                                    @enderror
-                                </div>
+                    <div class="form-group input-number_admin">
+                        <label for="number_admin" class="col-form-label">Number Admin (*)</label>
+                        <input class="form-control" type="number" id="number_admin" name='number_admin'>
+                        <div class="input-error text-danger">@error('number_admin') {{ $message }} @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group input-description">
+                        <label for="description" class="col-form-label">Description (*)</label>
+                        <textarea class="form-control" id="description" name='description'></textarea>
+                        <div class="input-error text-danger">
+                            @error('description')
+                            {{ $message }}
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group input-price form-check">
+                        <input class="form-check-input" type="checkbox" id="contactByEmail" name="is_contact">
+                        <label class="form-check-label" for="contactByEmail">Enable Contact By Email</label>
+                        <div class="input-error text-danger">
+                            @error('is_contact')
+                            {{ $message }}
+                            @enderror
+                        </div>
+                    </div> -->
+                    <div class="form-group input-is_contact">
+                        <label for="is_contact" class="col-form-label">Enable Contact By Email</label>
+                        <div style="display: flex">
+                            <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
+                                <input type="radio" checked id="e-active" name="is_contact"
+                                    class="custom-control-input input-active" value='1'>
+                                <label class="custom-control-label" for="e-active">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
+                                <input type="radio" id="e-inactive" name="is_contact"
+                                    class="custom-control-input input-inactive" value='0'>
+                                <label class="custom-control-label" for="e-inactive">Inactive</label>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                    </div>
+
+
+                    <!-- <div class="col-lg-6">
                             <div class="form-group input-duration">
                                 <label for="duration" class="col-form-label">Duration</label>
                                 <input class="form-control" type="text" id="duration" name='duration'>
@@ -39,10 +85,10 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> -->
 
-                    <div class="row">
+
+                    <!-- <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group input-number_days">
                                 <label for="number_days" class="col-form-label">Number Days</label>
@@ -97,7 +143,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary edit-item" type='button'>{{__('sys.save-changes')}}</button>

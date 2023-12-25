@@ -30,13 +30,15 @@ class PlanController extends Controller
         $item = new Plan();
         $item->name = $request->name;
         $item->price = $request->price;
-        $item->duration = $request->duration;
         $item->number_course = $request->number_course;
-        $item->number_student = $request->number_student;
-        $item->number_grade = $request->number_grade;
-        $item->number_subject = $request->number_subject;
-        $item->number_lesson = $request->number_lesson;
-        $item->number_days = $request->number_days;
+        $item->number_admin = $request->number_admin;
+        $item->description = $request->description;
+        $item->is_contact = $request->is_contact;
+        // $item->number_grade = $request->number_grade;
+        // $item->duration = $request->duration;
+        // $item->number_subject = $request->number_subject;
+        // $item->number_lesson = $request->number_lesson;
+        // $item->number_days = $request->number_days;
         try {
             $item->save();
             return response()->json([
@@ -64,13 +66,16 @@ class PlanController extends Controller
         $item = Plan::find($id);
         $item->name = $request->name;
         $item->price = $request->price;
-        $item->duration = $request->duration;
         $item->number_course = $request->number_course;
-        $item->number_student = $request->number_student;
-        $item->number_grade = $request->number_grade;
-        $item->number_subject = $request->number_subject;
-        $item->number_lesson = $request->number_lesson;
-        $item->number_days = $request->number_days;
+        $item->number_admin = $request->number_admin;
+        $item->description = $request->description;
+        $item->is_contact = $request->is_contact;
+        // $item->duration = $request->duration;
+        // $item->number_grade = $request->number_grade;
+        // $item->number_subject = $request->number_subject;
+        // $item->number_lesson = $request->number_lesson;
+        // $item->number_days = $request->number_days;
+        // dd($item);
         try {
             $item->save();
             return response()->json([
