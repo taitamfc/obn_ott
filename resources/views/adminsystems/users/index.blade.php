@@ -169,11 +169,13 @@ jQuery(document).ready(function() {
     })
 
     //Handle switch plan
-    jQuery('body').on('change', "#select_plan", function(e) {
-        var selectedValue = jQuery(this).val();
-        var planNameElement = jQuery("#plan_name");
+    jQuery('body').on('change', ".select_plan", function(e) {
+        var plan_id = jQuery(this).val();
+        var user_id = jQuery(this).data('user_id');
+        var planNameElement = jQuery(this).closest('.plan-item');
         var data = {
-            id: selectedValue
+            plan_id: plan_id,
+            user_id: user_id
         };
         jQuery.ajax({
             url: "{{ route('adminsystem.users.getPlanSite')}}",
@@ -181,12 +183,11 @@ jQuery(document).ready(function() {
             data: data,
             success: function(res) {
                 var plansite = res.data;
-                console.log(plansite['plan_name']);
                 if (plansite !== '') {
-                    planNameElement.html(plansite['plan_name'] +
+                    planNameElement.find('.plan_name').html(plansite['plan_name'] +
                         "<br>Expired: " + plansite['plan_expiration']);
                 } else {
-                    planNameElement.html(""); // Xóa nội dung nếu không có giá trị được chọn
+                    planNameElement.find('.plan_name').html("");
                 }
             }
         });

@@ -101,7 +101,7 @@ class PaymentController extends AdminController
                 $plan_site->plan_id = $plan->id;
                 $plan_site->site_id = $this->site_id;
                 $plan_site->user_id = $this->user_id;
-                $current_plan_date = PlanSite::where('site_id',$this->site_id)->latest('created_at')->value('expiration_date');
+                $current_plan_date = PlanSite::where('user_id',$this->user_id)->where('is_current',1)->value('expiration_date');
                 // if user has current plan
                 if (!empty($current_plan_date)) {
                     $current_plan_date = Carbon::parse($current_plan_date);

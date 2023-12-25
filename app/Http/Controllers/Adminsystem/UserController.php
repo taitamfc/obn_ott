@@ -57,16 +57,54 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      */
     public function getPlanSite(Request $request){
-        if($request->ajax()){
-            $id = $request->input('id');
-            $plansite = PlanSite::findOrFail($id);
-            $plan_name = $plansite->plan->name;
-            $plan_expiration = $plansite->expiration_date;
+        if($request->ajax() || true){
+            $user_id            = $request->input('user_id');
+            $plan_id            = $request->input('plan_id');
+            $plan               = Plan::findOrFail($plan_id);
+            $user               = User::findOrFail($user_id);
+            $currentDateTime    = Carbon::now();
+
+            $plan_name          = '';
+            $plan_expiration    = '';
+            // If plan id not equal current plan
+            if($user->activePlan && $user->activePlan->plan_id == $plan_id){
+                //No change
+            }else{
+                $current_plan = PlanSite::where('user_id',$user_id)->where('is_current',1)->first();
+
+                // Handle add plan for user
+                $plan_site = PlanSite::where('plan_id',$plan_id)->where('user_id',$user_id)->first();
+                if(!$plan_site){
+                    $plan_site = new PlanSite();
+                }
+                if (!empty($current_plan)) {
+                    $current_plan_date = Carbon::createFromFormat('Y-m-d', $current_plan->expiration_date);
+                    $plan_site->expiration_date = $current_plan_date->addDays($plan->number_days);
+                }else {
+                    $plan_site->expiration_date = $currentDateTime->addDays($plan->number_days);
+                }
+                $plan_site->plan_id = $plan_id;
+                $plan_site->site_id = $user->site_id;
+                $plan_site->user_id = $user->id;
+                $plan_site->is_current = 1;
+
+                // Remove current plan
+                if (!empty($current_plan)) {
+                    $current_plan->is_current = 0;
+                    $current_plan->save();
+                }
+                $plan_site->save();
+
+                $plan_name          = $plan->name;
+                $plan_expiration    = date('d-m-Y',strtotime($plan_site->expiration_date));
+            }
+
+            
             $data = [
                 'plan_name' => $plan_name,
                 'plan_expiration' => $plan_expiration,
             ];
-            return response(['data' => $data]);
+            return response()->json(['data' => $data]);
         }
     }
 
