@@ -1650,9 +1650,6 @@ blockquote span:before {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.metismenu li li a i {
-  display: none;
-}
 
 .metismenu li li a {
   padding: 8px 20px;

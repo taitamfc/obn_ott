@@ -17,7 +17,7 @@ class MainController extends Controller
     {
         $this->site_name    = request()->route('site_name');
         $this->site         = Site::where('slug',$this->site_name)->first();
-        if(!$this->site){
+        if(!$this->site || !$this->site->user->status){
             abort(404);
         }
         $this->site_id      = $this->site->id;

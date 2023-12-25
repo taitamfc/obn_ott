@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
 use App\Models\Site;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -26,4 +28,29 @@ class AdminController extends Controller
             return $next($request);
         });
     }  
+
+    public function checkCanStore($type = 'number_course'){
+        $user_site_ids = Site::where('user_id',$this->user_id)->pluck('id')->toArray();
+
+        if($type == 'number_course'){
+            $user_number_course = Course::whereIn('site_id',$user_site_ids)->count();
+            $plan_number_course = $this->user->activePlan->plan->number_course;
+            if($plan_number_course != -1){
+                if( $user_number_course >= $plan_number_course ){
+                    return false;
+                }
+            }
+        }
+
+        if($type == 'number_admin'){
+            $user_number_admin = User::whereIn('site_id',$user_site_ids)->where('role','site_manager')->count();
+            $plan_number_admin = $this->user->activePlan->plan->number_admin;
+            if($plan_number_admin != -1){
+                if( $user_number_admin >= $plan_number_admin ){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
