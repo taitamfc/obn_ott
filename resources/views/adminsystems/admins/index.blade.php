@@ -169,9 +169,8 @@ jQuery(document).ready(function() {
                     formUpdate.find('.input-email input').val(formData.email);
                     formUpdate.find('.input-phone input').val(formData.phone);
                     formUpdate.find('.input-status input').val(formData.status);
-                    formUpdate.find('.input-password input').val(formData.password);
                     formUpdate.find('.input-address input').val(formData.address);
-                    
+
                 }
             }
         });

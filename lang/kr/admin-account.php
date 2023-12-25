@@ -46,4 +46,8 @@ return [
     'role' => '역할',
     'credit-card-info' => '신용 카드 정보',
     'expiration' => '만료',
+    'created_at' => '생성된 날짜',
+    'information' => '정보',
+    'plan_type' => '계획 유형',
+    'status' => '상태',
 ];
