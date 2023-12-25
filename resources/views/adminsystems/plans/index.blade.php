@@ -163,15 +163,24 @@ jQuery(document).ready(function() {
                     formUpdate.prop('action', action);
                     formUpdate.find('.input-name input').val(formData.name);
                     formUpdate.find('.input-price input').val(formData.price);
-                    formUpdate.find('.input-number_course input').val(formData.number_course);
+                    formUpdate.find('.input-number_course input').val(formData
+                        .number_course);
                     formUpdate.find('.input-number_admin input').val(formData.number_admin);
-                    formUpdate.find('.input-description textarea').val(formData.description);
+                    formUpdate.find('.input-description textarea').val(formData
+                    .description);
+                    if (formData.is_contact == 1) {
+                        formUpdate.find('#e-active').prop('checked', true);
+                        formUpdate.find('#e-inactive').prop('checked', false);
+                    } else {
+                        formUpdate.find('#e-active').prop('checked', false);
+                        formUpdate.find('#e-inactive').prop('checked', true);
+                    }
                     // formUpdate.find('.input-number_days input').val(formData.number_days);
                     // formUpdate.find('.input-duration input').val(formData.duration);
                     // formUpdate.find('.input-number_grade input').val(formData.number_grade);
                     // formUpdate.find('.input-number_subject input').val(formData.number_subject);
                     // formUpdate.find('.input-number_lesson input').val(formData.number_lesson);
-                    
+
                 }
             }
         });
