@@ -8,6 +8,7 @@
         Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
         Route::delete('users/destroy/{id}',[\App\Http\Controllers\Adminsystem\UserController::class,'destroy'])->name('adminsystem.users.destroy');
         Route::get('users/getPlanSite',[\App\Http\Controllers\Adminsystem\UserController::class,'getPlanSite'])->name('adminsystem.users.getPlanSite');
+        Route::get('users/changeStatus',[\App\Http\Controllers\Adminsystem\UserController::class,'changeStatus'])->name('adminsystem.users.changeStatus');
         Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
         Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
     });

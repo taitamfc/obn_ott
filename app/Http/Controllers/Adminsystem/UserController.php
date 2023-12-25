@@ -56,8 +56,18 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function changeStatus(Request $request){
+        if($request->ajax()){
+            $user_id            = $request->input('user_id');
+            $status            = $request->input('status');
+            User::where('id',$user_id)->update([
+                'status' => $status
+            ]);
+            return response()->json(['success' => true]);
+        }
+    }
     public function getPlanSite(Request $request){
-        if($request->ajax() || true){
+        if($request->ajax()){
             $user_id            = $request->input('user_id');
             $plan_id            = $request->input('plan_id');
             $plan               = Plan::findOrFail($plan_id);

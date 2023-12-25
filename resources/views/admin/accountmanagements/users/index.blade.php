@@ -82,6 +82,10 @@ jQuery(document).ready(function() {
                     jQuery('#modalCreateUser').modal('hide');
                     // Recall items
                     getAjaxTable(indexUrl, wrapperResults, positionUrl, params);
+                }else{
+                    if(res.message){
+                        showAlertError(res.message);
+                    }
                 }
 
             }

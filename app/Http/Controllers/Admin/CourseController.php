@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Traits\UploadFileTrait;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Site;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
@@ -29,6 +30,14 @@ class CourseController extends AdminController
     }
 
     function store(StoreCourseRequest $request){
+
+        if( !$this->checkCanStore('number_course') ){
+            return response()->json([
+                'success'=>false,
+                'message'=> __('Please buy plan to add more courses'),
+            ],200);
+        }
+
         $item = new Course();
         $item->site_id = $this->site_id;
         $item->name = $request->name;
