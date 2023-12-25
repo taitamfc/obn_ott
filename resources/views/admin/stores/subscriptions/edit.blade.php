@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
- 
+
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="course" class="col-form-label">{{__('admin-course.course')}}</label>
@@ -46,12 +46,13 @@
                         </option>
                         @endforeach
                     </select>
-                    <span class="btn btn-primary mt-4">{{__('admin-course.add-more-courses')}}</span>
+                    <!-- <span class="btn btn-primary mt-4">{{__('admin-course.add-more-courses')}}</span> -->
                 </div>
             </div>
 
         </div>
-        <a class="btn btn-secondary mr-3 float-left" href="{{ route('admin.subscriptions.index') }}">{{__('admin-course.back-to-list')}}</a>
+        <a class="btn btn-secondary mr-3 float-left"
+            href="{{ route('admin.subscriptions.index') }}">{{__('admin-course.back-to-list')}}</a>
         <button class="btn btn-primary edit-item float-right" type='button'>{{__('sys.save-changes')}}</button>
     </form>
 </div>

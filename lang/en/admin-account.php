@@ -46,4 +46,8 @@ return [
     'role' => 'Role',
     'expiration' => 'Expiration',
     'credit-card-info' => 'CREDIT CARD INFO',
+    'created_at' => 'CREATED AT',
+    'information' => 'INFORMATION',
+    'plan_type' => 'PLAN TYPE',
+    'status' => 'STATUS',
 ];

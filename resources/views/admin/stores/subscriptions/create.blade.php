@@ -19,7 +19,7 @@
 
                 </div>
             </div>
-            
+
             <div class="col-sm-6">
                 <div class="form-group input-duration">
                     <label for="duration" class="col-form-label">{{__('admin-course.duration')}} <span>*</span></label>
@@ -30,7 +30,7 @@
                         @endforeach
                     </select>
                     <div class="input-error text-danger">@error('duration') {{ $message }} @enderror</div>
-                   
+
                     <!-- <div class="buttons d-flex" style="margin-top: 20px">
                         <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
                             Add more Duration
@@ -50,7 +50,7 @@
                     </select>
                     <div class="input-error text-danger">@error('courses') {{ $message }} @enderror
                     </div>
-                    <a href="{{route('admin.courses.index')}}" class="btn btn-primary mt-4">{{__('admin-course.add-more-courses')}}</a>
+                    <!-- <a href="{{route('admin.courses.index')}}" class="btn btn-primary mt-4">{{__('admin-course.add-more-courses')}}</a> -->
                 </div>
             </div>
         </div>

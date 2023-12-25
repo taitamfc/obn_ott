@@ -29,6 +29,7 @@ Plan Page
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                         @endforeach
                     </div>

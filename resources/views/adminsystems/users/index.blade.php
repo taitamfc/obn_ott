@@ -22,9 +22,9 @@
         </div>
         <div class="row">
             <!-- Progress Table start -->
-            
+
             <div class="col-12">
-                
+
                 <div class="admin-table-results">
                     <div class="text-center pt-5 pb-5">{{ __('sys.loading_data') }}</div>
                 </div>
@@ -287,6 +287,30 @@ jQuery(document).ready(function() {
             }
         });
     })
+
+    //Handle switch plan
+    jQuery('body').on('change', "#select_plan", function(e) {
+        var selectedValue = jQuery(this).val();
+        var planNameElement = jQuery("#plan_name");
+        var data = {
+            id: selectedValue
+        };
+        jQuery.ajax({
+            url: "{{ route('adminsystem.users.getPlanSite')}}",
+            type: "GET",
+            data: data,
+            success: function(res) {
+                var plansite = res.data;
+                console.log(plansite['plan_name']);
+                if (plansite !== '') {
+                    planNameElement.html(plansite['plan_name'] +
+                        "<br>Expired: " + plansite['plan_expiration']);
+                } else {
+                    planNameElement.html(""); // Xóa nội dung nếu không có giá trị được chọn
+                }
+            }
+        });
+    });
 });
 </script>
 @endsection
