@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\User;
 
 class StorePlanBuyRequest extends FormRequest
 {
@@ -21,17 +22,26 @@ class StorePlanBuyRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        // dd($this);
+        $roles = [
             'nameuser' => 'required',
-            'email' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
             'phone' => 'required',
         ];
+        $checkExist = User::where('email',$this->email)->where('role','site_owner')->first();
+        if($checkExist){
+            $roles['email'] = 'required|email|unique:users';
+        }
+        return $roles; 
+
     }
 
     public function messages()
     {
         return  [
                 'nameuser.required' => 'The name field is empty!',
+                'email.required' => 'The email field is empty!',
                 'email.required' => 'The email field is empty!',
                 'phone.required' => 'The phone field is empty!'
             ];

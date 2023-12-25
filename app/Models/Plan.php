@@ -26,7 +26,7 @@ class Plan extends Model
     function site(){
         return $this->belongsToMany(Site::class,'plan_site');
     }
-    function plan_site(){
+    function plansite(){
         return $this->hasMany(PlanSite::class);
     }
     function plan_order(){

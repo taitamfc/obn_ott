@@ -68,6 +68,12 @@ class User extends Authenticatable
     public function group(){
         return $this->belongsTo(Group::class);
     }
+    public function defaultsite(){
+        return $this->belongsTo(Site::class,'site_id','id');
+    }
+    public function plansite(){
+        return $this->hasMany(PlanSite::class);
+    }
     //Feature
     public function getGroupNamesAttribute()
     {
@@ -77,7 +83,12 @@ class User extends Authenticatable
     {
         return $this->image_url ? $this->image_url : asset('assets/images/default.png');
     }
-    public function defaultsite(){
-        return $this->belongsTo(Site::class,'site_id','id');
+    public function getPlanNameAttribute()
+    {
+        return $this->plansite->first() ? $this->plansite->first()->plan->name : '';
+    }
+    public function getPlanExpirationAttribute()
+    {
+        return $this->plansite->first() ? $this->plansite->first()->expiration_date : '';
     }
 }

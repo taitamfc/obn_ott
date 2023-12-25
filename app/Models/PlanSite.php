@@ -15,4 +15,7 @@ class PlanSite extends Model
     function plan(){
         return $this->belongsTo(Plan::class,'plan_id','id');
     }
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

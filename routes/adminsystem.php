@@ -5,6 +5,7 @@
         Route::post('site/update',[\App\Http\Controllers\Adminsystem\SiteController::class,'updateSitePlan'])->name('adminsystem.site.updateSitePlan');
         Route::get('/site/{id}',[\App\Http\Controllers\Adminsystem\SiteController::class,'show'])->name('adminsystem.sites.show');
         Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
+        Route::get('users/getPlanSite',[\App\Http\Controllers\Adminsystem\UserController::class,'getPlanSite'])->name('adminsystem.users.getPlanSite');
         Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
         Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
     });

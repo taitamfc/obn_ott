@@ -16,8 +16,6 @@
                         <input class="form-control" type="text" id="name" name='name'>
                         <div class="input-error text-danger">@error('name') {{ $message }} @enderror</div>
                     </div>
-
-
                     <div class="form-group input-price">
                         <label for="price" class="col-form-label">Price (*)</label>
                         <input class="form-control" type="number" id="price" name='price'>
@@ -146,6 +144,7 @@
                             </div>
                         </div>
                     </div> -->
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary edit-item" type='button'>{{__('sys.save-changes')}}</button>

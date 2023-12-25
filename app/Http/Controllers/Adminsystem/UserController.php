@@ -41,7 +41,7 @@ class UserController extends Controller
     
     function index(Request $request){
         
-        $users = User::paginate(5);
+        $users = User::with('plansite')->paginate(5);
         $param = [
             'users' => $users,
         ];
@@ -53,9 +53,18 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function getPlanSite(Request $request){
+        if($request->ajax()){
+            $id = $request->input('id');
+            $plansite = PlanSite::findOrFail($id);
+            $plan_name = $plansite->plan->name;
+            $plan_expiration = $plansite->expiration_date;
+            $data = [
+                'plan_name' => $plan_name,
+                'plan_expiration' => $plan_expiration,
+            ];
+            return response(['data' => $data]);
+        }
     }
 
     /**
