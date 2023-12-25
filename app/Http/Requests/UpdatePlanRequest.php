@@ -26,13 +26,15 @@ class UpdatePlanRequest extends FormRequest
         return [
             'name' => 'required',
             'price' => 'required|numeric',
-            'duration' => 'required',
-            'number_days' => 'required|numeric',
             'number_course' => 'required|numeric',
-            'number_student' => 'required|numeric',
-            'number_grade' => 'required|numeric',
-            'number_subject' => 'required|numeric',
-            'number_lesson' => 'required|numeric',
+            'number_admin' => 'required|numeric',
+            'description' => 'required',
+            // 'is_contact' => 'required',
+            // 'duration' => 'required',
+            // 'number_days' => 'required|numeric',
+            // 'number_grade' => 'required|numeric',
+            // 'number_subject' => 'required|numeric',
+            // 'number_lesson' => 'required|numeric',
         ];
     }
 
