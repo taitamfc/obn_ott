@@ -74,6 +74,9 @@ class User extends Authenticatable
     public function plansite(){
         return $this->hasMany(PlanSite::class);
     }
+    public function activePlan(){
+        return $this->hasOne(PlanSite::class,'user_id','id')->where('is_current',1);
+    }
    // Feature
     const ACTIVE = 1;
     const INACTIVE = 0;

@@ -40,18 +40,24 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td id="plan_name">
-                            @if($user->plan_name)
-                            {{ $user->plan_name }}</br>Expired : {{ $user->plan_expiration }}
+                            @if($user->activePlan)
+                            {{ $user->activePlan->plan->name }}</br>Expired : {{ date('Y-m-d',strtotime($user->expiration_date)) }}
                             @endif
                         </td>
                         <td>
                             <select id="select_plan_" class="form-control" onchange=" return confirm('Are you sure?')">
-                                @foreach($user->plansite as $plansite)
-                                <option value="{{$plansite->id}}">{{$plansite->plan->name}}</option>
+                                <option value="">No Plan</option>
+                                @foreach($plans as $plan)
+                                <option @selected(@$user->activePlan->plan_id == $plan->id) value="{{$plan->id}}">{{$plan->name}}</option>
                                 @endforeach
                             </select>
                         </td>
-                        <td>{!! $user->status_fm !!}</td>
+                        <td>
+                            <select class="form-control" name="status">
+                                <option @selected($user->status == \App\Models\User::ACTIVE) value="{{ \App\Models\User::ACTIVE }}">Active</option>
+                                <option @selected($user->status == \App\Models\User::INACTIVE) value="{{ \App\Models\User::INACTIVE }}">InActive</option>
+                            </select>
+                        </td>
                         <td>
                             <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $user->id }}"
                                 data-action="{{ route('adminsystem.users.destroy',$user->id) }}">
