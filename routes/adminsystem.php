@@ -11,6 +11,7 @@
         Route::get('users/changeStatus',[\App\Http\Controllers\Adminsystem\UserController::class,'changeStatus'])->name('adminsystem.users.changeStatus');
         Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
         Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
+        Route::resource('notices',\App\Http\Controllers\Adminsystem\NoticeController::class);
     });
 
 
