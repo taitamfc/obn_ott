@@ -19,6 +19,7 @@ use App\Models\GroupRole;
 use App\Models\GroupSite;
 use App\Models\Role;
 use App\Models\Site;
+use App\Models\Plan;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Http\Resources\GroupResource;
@@ -41,9 +42,11 @@ class UserController extends Controller
     
     function index(Request $request){
         
-        $users = User::with('plansite')->where('role','site_owner')->paginate(5);
+        $users = User::with(['plansite','activePlan'])->where('role','site_owner')->paginate(5);
+        $plans = Plan::all();
         $param = [
             'users' => $users,
+            'plans' => $plans,
         ];
         if( $request->ajax() ){
             return view('adminsystems.users.ajax-index',$param);
