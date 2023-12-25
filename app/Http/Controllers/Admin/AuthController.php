@@ -39,7 +39,7 @@ class AuthController extends Controller
             $dataUser = $request->only('email','password');
             $email      = $request->email;
             $password   = $request->password;
-            $check = User::where('email',$email)->where('role','site_owner')->first();
+            $check = User::where('email',$email)->where('role','site_owner')->where('status',1)->first();
             $canLogin = false;
             if( $check ){
                 if (Hash::check($password, $check->password)) {
@@ -73,7 +73,7 @@ class AuthController extends Controller
             $dataUser = $request->only('email','password');
             $email      = $request->email;
             $password   = $request->password;
-            $check = User::where('email',$email)->where('role','site_manager')->first();
+            $check = User::where('email',$email)->where('role','site_manager')->where('status',1)->first();
             $canLogin = false;
             if( $check ){
                 if (Hash::check($password, $check->password)) {

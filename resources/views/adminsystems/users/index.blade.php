@@ -11,12 +11,7 @@
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
                         <h5 class="mr-4 mb-0 font-weight-bold">Users</h5>
                     </div>
-                    <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
-                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
-                            {{ __('sys.add_new') }}
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -169,6 +164,27 @@ jQuery(document).ready(function() {
     })
 
     //Handle switch plan
+    jQuery('body').on('change', ".select_status", function(e) {
+        var user_id = jQuery(this).data('user_id');
+        var status = jQuery(this).val();
+        jQuery.ajax({
+            url: "{{ route('adminsystem.users.changeStatus')}}",
+            type: "GET",
+            data: {
+                user_id: user_id,
+                status: status,
+            },
+            success: function(res) {
+                var plansite = res.data;
+                if (plansite !== '') {
+                    planNameElement.find('.plan_name').html(plansite['plan_name'] +
+                        "<br>Expired: " + plansite['plan_expiration']);
+                } else {
+                    planNameElement.find('.plan_name').html("");
+                }
+            }
+        });
+    });
     jQuery('body').on('change', ".select_plan", function(e) {
         var plan_id = jQuery(this).val();
         var user_id = jQuery(this).data('user_id');

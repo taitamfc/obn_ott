@@ -68,9 +68,16 @@ class UserController extends AdminController
      * Store a newly created resource in storage.
      */
     function store(StoreUserRequest $request){
+        DB::beginTransaction();
+        if( !$this->checkCanStore('number_admin') ){
+            return response()->json([
+                'success'=>false,
+                'message'=> __('Please buy plan to add more user'),
+            ],200);
+        }
+
         try {
             // $this->authorize('User',User::class);
-            DB::beginTransaction();
             $item = new User();
             $item->name = $request->name;
             $item->email = $request->email;

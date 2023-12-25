@@ -53,7 +53,7 @@
                             </select>
                         </td>
                         <td>
-                            <select class="form-control" name="status">
+                            <select data-user_id="{{ $user->id }}" class="form-control select_status" name="status">
                                 <option @selected($user->status == \App\Models\User::ACTIVE) value="{{ \App\Models\User::ACTIVE }}">Active</option>
                                 <option @selected($user->status == \App\Models\User::INACTIVE) value="{{ \App\Models\User::INACTIVE }}">InActive</option>
                             </select>

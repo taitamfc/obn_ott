@@ -53,7 +53,14 @@
                         <div class="col-lg-6">
                             <div class="form-group input-status">
                                 <label for="status" class="col-form-label">Status</label>
-                                <input class="form-control" type="number" id="status" name='status'>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="active" value="1">
+                                    <label class="form-check-label" for="active">Active</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
+                                    <label class="form-check-label" for="inactive">Inactive</label>
+                                </div>
                                 <div class="input-error text-danger">
                                     @error('status')
                                         {{ $message }}
