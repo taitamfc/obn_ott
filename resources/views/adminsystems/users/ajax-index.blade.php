@@ -41,7 +41,7 @@
                         <td>{{ $user->created_at }}</td>
                         <td id="plan_name">
                             @if($user->activePlan)
-                            {{ $user->activePlan->plan->name }}</br>Expired : {{ date('Y-m-d',strtotime($user->expiration_date)) }}
+                            {{ $user->activePlan->plan->name }}</br>Expired : {{ date('Y-m-d',strtotime($user->activePlan->expiration_date)) }}
                             @endif
                         </td>
                         <td>
