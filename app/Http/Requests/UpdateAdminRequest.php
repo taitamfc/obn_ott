@@ -28,7 +28,7 @@ class UpdateAdminRequest extends FormRequest
             'email' => 'required|email',
             'phone' => 'required',
             'status' => 'required|numeric',
-            'password' => 'required'
+            // 'password' => 'required'
         ];
     }
 

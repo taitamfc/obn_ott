@@ -34,6 +34,7 @@ class PlanPageController extends Controller
             $order->name = $request->nameuser;
             $order->email = $request->email;
             $order->phone = $request->phone;
+            $order->password = bcrypt($request->password);
             $order->payment_method = $request->pay;
             $order->save();
             DB::commit();

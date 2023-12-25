@@ -4,65 +4,39 @@ Plan Page
 @endsection
 @section('content')
 <div class="main-content page-content">
-    <div class="main-content-inner" style="max-width: 100% !important;">
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="d-flex justify-content-between flex-wrap">
-
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card lesson-table-results">
-                    <div class="text-center pt-5 pb-5">
-                        <div style="
-                                            margin-left: 20px;
-                                            margin-right: 20px;
-                                        " class="row">
-                            @foreach ($plans as $plan)
-                            <div class="col-lg-4 mb-5">
-                                <div class="aboutarea__content__wraper px-0">
-                                    <div class="aboutarea__headding heading__underline">
-                                        <h2>{{ $plan->name }}</h2>
+    <div class="main-content-inner mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        @foreach ($plans as $plan)
+                        <div class="col-lg-4 mb-5">
+                            <div class="card-deck mb-3 text-center">
+                                <div class="card mb-4 box-shadow">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">{{ $plan->name }}</h4>
                                     </div>
-                                    <div class="aboutarea__para">
-                                        <p>
-                                            ${{$plan->price}}
-                                        </p>
-                                    </div>
-                                    <div class="aboutarea__list">
-                                        <ul>
-                                            <li style="display: block;">
-                                                <i class="icofont-check"></i> Number Course : {{$plan->number_course}}
-                                            </li>
-                                            <li style="display: block;">
-                                                <i class="icofont-check"></i> Number Student : {{$plan->number_student}}
-                                            </li>
-                                            <li style="display: block;">
-                                                <i class="icofont-check"></i> Number Grade : {{$plan->number_grade}}
-                                            </li>
-                                            <li style="display: block;">
-                                                <i class="icofont-check"></i> Number Subject : {{$plan->number_subject}}
-                                            </li>
-                                            <li style="display: block;">
-                                                <i class="icofont-check"></i> Number Lesson : {{$plan->number_lesson}}
-                                            </li>
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title">
+                                        $ {{$plan->price}} <small class="text-muted">/mo</small></h1>
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <li class="d-block">{{ $plan->number_course }} courses sell</li>
+                                            <li class="d-block">{{ @$plan->number_admin ?? 0 }} admin accounts</li>
                                         </ul>
-                                    </div>
-                                    <div class="aboutarea__bottom__button">
-                                        <a class="default__button" href="{{ route('planpage.addPlan',$plan->id) }}">Buy
-                                            Plan
+                                        <a href="{{ route('planpage.addPlan',$plan->id) }}" class="btn btn-lg btn-block btn-outline-primary">
+                                            Buy Plan    
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 @endsection

@@ -19,8 +19,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="headerarea__right">
                         <div class="headerarea__button">
-                            <a
-                                href="{{route('adminsystem.login')}}">Login</a>
+                            <a href="{{route('login')}}">Login</a>
                         </div>
                     </div>
                 </div>
