@@ -100,7 +100,7 @@ class PaymentController extends Controller
                     $user->name = $order->name;
                     $user->email = $order->email;
                     $user->role = 'site_owner';
-                    $user->password = bcrypt(123456);
+                    $user->password = bcrypt($order->password);
                     // Register sites
                     if($user->save()){
                         $site = new Site();
@@ -142,6 +142,7 @@ class PaymentController extends Controller
                 $plan_site = new PlanSite();
                 $plan_site->plan_id = $plan->id;
                 $plan_site->site_id = $site->id;
+                $plan_site->user_id = $user->id;
                 $current_plan_date = PlanSite::where('site_id',$site->id)->latest('created_at')->value('expiration_date');
                 // if user has current plan
                 if (!empty($current_plan_date)) {

@@ -56,6 +56,16 @@ class SendEmail implements ShouldQueue
                     Log::error('Bug send email error : '.$e->getMessage());
                 }
                 break;
+            case 'order_new':
+                try {
+                    Mail::send('admin.includes.mailForgot',compact('data'), function($email) use ($item){
+                        $email->subject('Forgot Password');
+                        $email->to($item->email, $item->name );
+                    });
+                } catch (\Exception $e) {
+                    Log::error('Bug send email error : '.$e->getMessage());
+                }
+                break;
         }
     }
 }
