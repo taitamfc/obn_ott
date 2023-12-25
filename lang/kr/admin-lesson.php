@@ -5,6 +5,7 @@ return [
     'grade' => '학년',
     'subject' => '과목',
     'course' => '코스',
+    'upload' => '업로드',
     'lesson' => '레슨',
     'view' => '보기',
     'date' => '날짜',

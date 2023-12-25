@@ -5,6 +5,7 @@ return [
     'grade' => 'Grade',
     'subject' => 'Subject',
     'course' => 'Course',
+    'upload' => 'Upload',
     'lesson' => 'Lesson',
     'view' => 'View',
     'date' => 'Date',

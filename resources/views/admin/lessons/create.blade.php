@@ -45,7 +45,7 @@
 
                                     <a class="nav-link" id="v-video-setting-tab" data-toggle="pill"
                                         href="#v-video-setting" role="tab" aria-controls="v-video-setting"
-                                        aria-selected="false"><i class="fa fa-youtube-play"></i>{{__('admin-lesson.video-setting')}}</a>
+                                        aria-selected="false"><i class="fa fa-youtube-play"></i>{{__('admin-lesson.upload')}}</a>
 
                                     <a class="nav-link" id="v-image-setting-tab" data-toggle="pill"
                                         href="#v-image-setting" role="tab" aria-controls="v-image-setting"
