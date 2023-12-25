@@ -219,6 +219,16 @@ class UserController extends Controller
         try {
             // $this->authorize('User',User::class);
             $item =  User::findOrfail($id);
+
+            $item->userbank()->delete();
+            $item->site()->delete();
+            $item->groupsite()->delete();
+            $item->groups()->delete();
+            $item->plan_order()->delete();
+            $item->group()->delete();
+            $item->defaultsite()->delete();
+            $item->plansite()->delete();
+            $item->activePlan()->delete();
             // Delete old file
             $this->deleteFile([$item->image_url]);
             $item->delete();

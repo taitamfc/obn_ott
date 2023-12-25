@@ -26,15 +26,15 @@
                         </div>
                     </div>
                     <div class="form-group input-number_course">
-                        <label for="number_course" class="col-form-label">Number Courses (*)</label>
-                        <input class="form-control" type="number" id="number_course" name='number_course'>
+                        <label for="number_course" class="col-form-label">Number Courses (*)<br>(Value -1 means unlimit)</label>
+                        <input class="form-control" min="-1" type="number" id="number_course" name='number_course'>
                         <div class="input-error text-danger">@error('number_course') {{ $message }} @enderror
                         </div>
                     </div>
 
                     <div class="form-group input-number_admin">
-                        <label for="number_admin" class="col-form-label">Number Admin (*)</label>
-                        <input class="form-control" type="number" id="number_admin" name='number_admin'>
+                        <label for="number_admin" class="col-form-label">Number Admin (*)<br>(Value -1 means unlimit)</label>
+                        <input class="form-control" min="-1" type="number" id="number_admin" name='number_admin'>
                         <div class="input-error text-danger">@error('number_admin') {{ $message }} @enderror
                         </div>
                     </div>

@@ -13,11 +13,6 @@
         <div id="sidebar-menu">
             <ul class="metismenu" id="sidebar_menu">
             <!-- Setting -->
-                        <li> <a href="{{ route('adminsystem.sites.index') }}">
-                                <i class="feather ft-home"></i>
-                                <span>Sites</span>
-                            </a>
-                        </li>
                         <li> <a href="{{ route('adminsystem.users.index') }}">
                                 <i class="feather ft-home"></i>
                                 <span>users</span>
