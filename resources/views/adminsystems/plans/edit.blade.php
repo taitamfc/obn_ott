@@ -64,12 +64,12 @@
                             <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
                                 <input type="radio" checked id="e-active" name="is_contact"
                                     class="custom-control-input input-active" value='1'>
-                                <label class="custom-control-label" for="e-active">Active</label>
+                                <label class="custom-control-label" for="e-active">Yes</label>
                             </div>
                             <div class="custom-control custom-radio primary-radio custom-control-inline mb-2">
                                 <input type="radio" id="e-inactive" name="is_contact"
                                     class="custom-control-input input-inactive" value='0'>
-                                <label class="custom-control-label" for="e-inactive">Inactive</label>
+                                <label class="custom-control-label" for="e-inactive">No</label>
                             </div>
                         </div>
                     </div>
