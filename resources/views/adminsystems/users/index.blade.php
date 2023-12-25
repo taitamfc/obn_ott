@@ -11,12 +11,7 @@
                     <div class="d-flex align-items-center dashboard-header flex-wrap mb-3 mb-sm-0">
                         <h5 class="mr-4 mb-0 font-weight-bold">Users</h5>
                     </div>
-                    <div class="buttons d-flex">
-                        <a class="btn btn-dark mr-1" href="{{ url()->previous() }}">{{ __('sys.back') }}</a>
-                        <button data-toggle="modal" data-target="#modalCreate" class="btn btn-primary">
-                            {{ __('sys.add_new') }}
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

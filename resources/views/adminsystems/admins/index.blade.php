@@ -143,38 +143,39 @@ jQuery(document).ready(function() {
         });
     });
 
-    // Xu ly form edit
-    jQuery('body').on('click', ".show-form-edit", function(e) {
-        // Hien thi modal
-        jQuery('#modalUpdate').modal('show');
+   // Xu ly form edit
+jQuery('body').on('click', ".show-form-edit", function(e) {
+    // Hien thi modal
+    jQuery('#modalUpdate').modal('show');
 
-        let formUpdate = jQuery('#formUpdate');
+    let formUpdate = jQuery('#formUpdate');
 
+    // Lấy dữ liệu
+    console.log(123);
+    let id = jQuery(this).data('id');
+    let action = jQuery(this).data('action');
 
-        // Lấy dữ liệu
-        console.log(123);
-        let id = jQuery(this).data('id');
-        let action = jQuery(this).data('action');
+    jQuery.ajax({
+        url: action,
+        type: "GET",
+        dataType: 'json',
+        success: function(res) {
+            if (res.success) {
+                let formData = res.data;
+                formUpdate.prop('action', action);
+                formUpdate.find('.input-name input').val(formData.name);
+                formUpdate.find('.input-code input').val(formData.code);
+                formUpdate.find('.input-email input').val(formData.email);
+                formUpdate.find('.input-phone input').val(formData.phone);
+                formUpdate.find('.input-address input').val(formData.address);
 
-        jQuery.ajax({
-            url: action,
-            type: "GET",
-            dataType: 'json',
-            success: function(res) {
-                if (res.success) {
-                    let formData = res.data;
-                    formUpdate.prop('action', action);
-                    formUpdate.find('.input-name input').val(formData.name);
-                    formUpdate.find('.input-code input').val(formData.code);
-                    formUpdate.find('.input-email input').val(formData.email);
-                    formUpdate.find('.input-phone input').val(formData.phone);
-                    formUpdate.find('.input-status input').val(formData.status);
-                    formUpdate.find('.input-address input').val(formData.address);
-
-                }
+                // Bắt giá trị của input radio "status"
+                let status = formData.status;
+                formUpdate.find('input[name="status"][value="' + status + '"]').prop('checked', true);
             }
-        });
-    })
+        }
+    });
+});
 });
 </script>
 @endsection

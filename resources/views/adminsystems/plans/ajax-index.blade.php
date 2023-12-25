@@ -17,7 +17,7 @@
                 <tr class="item draggable" id='item-{{ $item->id}}'>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
-                    <td>{!! $item->price !!}</td>
+                    <td>$ {!! number_format($item->price, 0, '.', ',') !!}</td>
                     <td>{!! $item->number_admin !!}</td>
                     <td>{!! $item->number_course !!}</td>
                     <td>

@@ -1,10 +1,10 @@
 <?php
     //Adminsystem
     Route::prefix('adminsystem')->middleware(['auth.adminsystem'])->group(function () {
-        Route::get('/',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
+        Route::get('site',[\App\Http\Controllers\Adminsystem\SiteController::class,'index'])->name('adminsystem.sites.index');
         Route::post('site/update',[\App\Http\Controllers\Adminsystem\SiteController::class,'updateSitePlan'])->name('adminsystem.site.updateSitePlan');
         Route::get('/site/{id}',[\App\Http\Controllers\Adminsystem\SiteController::class,'show'])->name('adminsystem.sites.show');
-        Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
+        Route::get('/',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
         Route::get('users',[\App\Http\Controllers\Adminsystem\UserController::class,'index'])->name('adminsystem.users.index');
         Route::delete('users/destroy/{id}',[\App\Http\Controllers\Adminsystem\UserController::class,'destroy'])->name('adminsystem.users.destroy');
         Route::get('users/getPlanSite',[\App\Http\Controllers\Adminsystem\UserController::class,'getPlanSite'])->name('adminsystem.users.getPlanSite');

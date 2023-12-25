@@ -96,18 +96,29 @@ class PlanController extends Controller
     {
         try {
             $item =  Plan::find($id);
+
+            // Kiểm tra xem Plan có đang là khóa ngoại của bảng khác không
+            $isUsed = $item->site()->exists() || $item->plansite()->exists() || $item->plan_order()->exists() || $item->duration()->exists();
+
+            if ($isUsed) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'plan is in use, cannot be deleted!',
+                ], 200);
+            }
+
             $item->delete();
 
             return response()->json([
-                'success'=>true,
-                'message'=> __('sys.destroy_item_success'),
-            ],200);
+                'success' => true,
+                'message' => __('sys.destroy_item_success'),
+            ], 200);
         } catch (QueryException $e) {
             Log::error('Bug occurred: ' . $e->getMessage());
             return response()->json([
-                'success'=>false,
-                'message'=> __('sys.destroy_item_error'),
-            ],200);
+                'success' => false,
+                'message' => __('sys.destroy_item_error'),
+            ], 200);
         }
     }
     

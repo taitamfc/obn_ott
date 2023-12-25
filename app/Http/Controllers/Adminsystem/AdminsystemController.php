@@ -82,22 +82,31 @@ class AdminsystemController extends Controller
     }
 
     public function destroy(string $id)
-    {
-        try {
-            $item =  Admin::find($id);
-            $item->delete();
+{
+    try {
+        $item =  Admin::find($id);
 
+        // Kiểm tra xem tài khoản cần xóa có phải là tài khoản đăng nhập hiện tại không
+        if ($item->id === Auth::guard('admins')->user()->id) {
             return response()->json([
-                'success'=>true,
-                'message'=> __('sys.destroy_item_success'),
-            ],200);
-        } catch (QueryException $e) {
-            Log::error('Bug occurred: ' . $e->getMessage());
-            return response()->json([
-                'success'=>false,
-                'message'=> __('sys.destroy_item_error'),
-            ],200);
+                'success' => false,
+                'message' => 'You cannot delete the current user account.',
+            ], 200);
         }
+
+        $item->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('sys.destroy_item_success'),
+        ], 200);
+    } catch (QueryException $e) {
+        Log::error('Bug occurred: ' . $e->getMessage());
+        return response()->json([
+            'success' => false,
+            'message' => __('sys.destroy_item_error'),
+        ], 200);
     }
+}
     
 }
