@@ -33,11 +33,8 @@
 
                     <div class="form-group input-password">
                         <label for="password" class="col-form-label">Password</label>
-                        <input class="form-control" type="text" id="password" name='password'>
+                        <input class="form-control" type="password" id="password" name='password'>
                         <div class="input-error text-danger">
-                            @error('password')
-                                {{ $message }}
-                            @enderror
                         </div>
                     </div>
                     <div class="row">

@@ -55,7 +55,7 @@
             @include('adminsystems.layouts.includes.header')
             @include('adminsystems.layouts.includes.sidebar')
             @yield('content')
-            @include('admin.includes.footer')
+            @include('adminsystems.layouts.includes.footer')
         </div>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- <script src="{{ asset('assets/vendors/moment/moment.js') }}"></script>

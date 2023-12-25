@@ -62,7 +62,9 @@ class AdminsystemController extends Controller
         $item->email = $request->email;
         $item->phone = $request->phone;
         $item->status = $request->status;
-        $item->password = bcrypt($request->password);
+        if($request->input('password')){
+            $item->password = bcrypt($request->input('password'));
+        }
         try {
             $item->save();
             return response()->json([
