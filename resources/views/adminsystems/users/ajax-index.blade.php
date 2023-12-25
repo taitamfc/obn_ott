@@ -31,7 +31,7 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody class="">
+                <tbody class="item">
                     @foreach($users as $user)
                     <tr class="item draggable" id='item-{{ $user->id}}'>
                         <th scope="row">{{ $user->id }}</th>
@@ -45,13 +45,19 @@
                             @endif
                         </td>
                         <td>
-                            <select id="select_plan" class="form-control" onchange=" return confirm('Are you sure?')">
+                            <select id="select_plan_" class="form-control" onchange=" return confirm('Are you sure?')">
                                 @foreach($user->plansite as $plansite)
                                 <option value="{{$plansite->id}}">{{$plansite->plan->name}}</option>
                                 @endforeach
                             </select>
                         </td>
-                        <td></td>
+                        <td>{!! $user->status_fm !!}</td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-danger delete-item" data-id="{{ $user->id }}"
+                                data-action="{{ route('adminsystem.users.destroy',$user->id) }}">
+                                <i class="ti-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
