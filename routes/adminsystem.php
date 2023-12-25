@@ -10,6 +10,7 @@
         Route::get('users/getPlanSite',[\App\Http\Controllers\Adminsystem\UserController::class,'getPlanSite'])->name('adminsystem.users.getPlanSite');
         Route::resource('plans',\App\Http\Controllers\Adminsystem\PlanController::class);
         Route::resource('admins',\App\Http\Controllers\Adminsystem\AdminsystemController::class);
+        Route::resource('notices',\App\Http\Controllers\Adminsystem\NoticeController::class);
     });
 
 
