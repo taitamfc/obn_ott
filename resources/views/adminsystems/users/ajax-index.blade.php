@@ -33,19 +33,19 @@
                 </thead>
                 <tbody class="item">
                     @foreach($users as $user)
-                    <tr class="item draggable" id='item-{{ $user->id}}'>
+                    <tr class="item plan-item draggable" id='item-{{ $user->id}}'>
                         <th scope="row">{{ $user->id }}</th>
                         <td><img class="avatar-md img-thumbnail mr-2" src="{{ asset($user->image_url_fm) }} "
                                 alt="AVT">{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
-                        <td id="plan_name">
+                        <td class="plan_name">
                             @if($user->activePlan)
-                            {{ $user->activePlan->plan->name }}</br>Expired : {{ date('Y-m-d',strtotime($user->activePlan->expiration_date)) }}
+                            {{ $user->activePlan->plan->name }}</br>Expired : {{ date('d-m-Y',strtotime($user->activePlan->expiration_date)) }}
                             @endif
                         </td>
                         <td>
-                            <select id="select_plan_" class="form-control" onchange=" return confirm('Are you sure?')">
+                            <select data-user_id="{{ $user->id }}" class="form-control select_plan" onchange=" return confirm('Are you sure?')">
                                 <option value="">No Plan</option>
                                 @foreach($plans as $plan)
                                 <option @selected(@$user->activePlan->plan_id == $plan->id) value="{{$plan->id}}">{{$plan->name}}</option>
