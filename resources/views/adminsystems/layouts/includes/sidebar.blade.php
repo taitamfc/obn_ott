@@ -38,6 +38,11 @@
                         <span>Notices</span>
                     </a>
                 </li>
+                <!-- <li> <a href="{{ route('adminsystem.report') }}">
+                        <i class="feather ft-home"></i>
+                        <span>Reports</span>
+                    </a>
+                </li> -->
                 <li> <a href="{{ route('adminsystem.logout') }}">
                         <i class="feather ft-home"></i>
                         <span>LogOut</span>
